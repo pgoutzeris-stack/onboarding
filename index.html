@@ -37,6 +37,10 @@
       --shadow-lg:     0 12px 40px rgba(15,23,42,.14);
       --radius-dash:   14px;
       --shadow-dash:   0 4px 16px rgba(15,23,42,.08);
+      --app-bg:        #f4f7fb;
+      --app-max-w:     1400px;
+      --app-side-pad:  1.5rem;
+      --app-shell-w:   min(var(--app-max-w), calc(100% - 2 * var(--app-side-pad)));
     }
 
     @media (prefers-color-scheme: dark) {
@@ -207,13 +211,22 @@
     .ob-nav .btn-primary { flex: 2; margin-top: 0; }
 
     /* ── Dashboard ───────── */
-    #screen-dashboard { display: none; min-height: 100vh; }
+    #screen-dashboard { display: none; min-height: 100vh; background: var(--app-bg); }
+    body.body-dashboard { background: var(--app-bg); }
+    #screen-dashboard .sop-header,
+    #screen-dashboard .dash-main {
+      width: var(--app-shell-w);
+      max-width: var(--app-max-w);
+      margin-left: auto;
+      margin-right: auto;
+      box-sizing: border-box;
+    }
     .sop-header {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0.75rem 1.25rem; min-height: 64px;
+      padding: 0.8rem 1.5rem; min-height: 64px;
       background: var(--bg); border: 1px solid var(--line);
       border-radius: var(--radius); box-shadow: var(--shadow);
-      gap: 14px; margin: 1.5rem 1.5rem 1rem;
+      gap: 14px; margin-top: 1rem; margin-bottom: 1rem;
       position: relative; z-index: 50;
     }
     .header-left { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
@@ -228,11 +241,11 @@
     .btn-logout { height: 36px; padding: 0 14px; font-size: 0.88rem; font-family: inherit; font-weight: 500; display: inline-flex; align-items: center; gap: 7px; background: var(--bg); border: 1px solid var(--line); color: var(--ink); border-radius: 999px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
     .btn-logout:hover { background: var(--brand); color: #fff; border-color: var(--brand); }
     @media (max-width: 768px) {
-      .sop-header { margin: 0.75rem; min-height: 56px; flex-wrap: wrap; }
+      #screen-dashboard .sop-header { margin-top: 0.75rem; min-height: 56px; flex-wrap: wrap; }
       .header-left { width: 100%; }
       .header-right { width: 100%; justify-content: flex-end; }
     }
-    .dash-main{padding:2rem 2rem 4rem;max-width:1280px;margin:0 auto;animation:fadeIn .4s ease}
+    .dash-main{padding:0 0 4rem;animation:fadeIn .4s ease}
     .greeting{margin-bottom:2rem}
     .greeting h1{font-size:1.8rem;font-weight:700;margin-bottom:.3rem}
     .greeting p{color:var(--muted);font-size:1rem}
