@@ -1,0 +1,2863 @@
+
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login & Onboarding – ROOTS Brand Strategy Consultants</title>
+
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/circular-std" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous"></script>
+
+  <style>
+    :root {
+      --brand:         #206efb;
+      --brand-dark:    #165fd9;
+      --brand-light:   #eff6ff;
+      --ink:           #0f172a;
+      --muted:         #475569;
+      --bg:            #ffffff;
+      --line:          #e2e8f0;
+      --status-bg:     #f8fafc;
+      --disabled-bg:   #cbd5e1;
+      --disabled-text: #64748b;
+      --radius:        16px;
+      --radius-pill:   999px;
+      --shadow:        0 6px 20px rgba(15,23,42,.08);
+      --shadow-modal:  0 20px 50px rgba(0,0,0,.2);
+      --shadow-focus:  0 0 0 3px rgba(32,110,251,.15);
+      --surface:       #f8fafc;
+      --success:       var(--brand);
+      --success-light: var(--brand-light);
+      --warn:          var(--ink);
+      --warn-light:    var(--status-bg);
+      --shadow-lg:     0 12px 40px rgba(15,23,42,.14);
+      --radius-dash:   14px;
+      --shadow-dash:   0 4px 16px rgba(15,23,42,.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%; font-family: 'Circular Std', system-ui, sans-serif;
+      color: var(--ink); background: var(--status-bg); -webkit-font-smoothing: antialiased;
+    }
+    body.body-dashboard { background: var(--surface); }
+
+    .page { min-height: 100vh;  align-items: center; justify-content: center; padding: 2rem 1rem; }
+
+    .card {
+      background: var(--bg); border-radius: var(--radius); box-shadow: var(--shadow-modal);
+      width: 100%; max-width: 440px; padding: 3rem 2.5rem;
+    }
+
+    .logo-wrap { text-align: center; margin-bottom: 2rem; }
+    .logo-wrap img { height: 32px; }
+    .card-title { font-size: 1.5rem; font-weight: 700; text-align: center; margin-bottom: .4rem; }
+    .card-sub   { font-size: .95rem; color: var(--muted); text-align: center; margin-bottom: 2rem; }
+
+    .divider { display: flex; align-items: center; gap: 1rem; margin: 1.5rem 0; color: var(--muted); font-size: .85rem; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+    .form-group { margin-bottom: 1.25rem; }
+    label { display: block; font-size: .875rem; font-weight: 500; color: var(--muted); margin-bottom: .4rem; }
+    .input-wrap { position: relative; }
+    .input-wrap .icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: .875rem; pointer-events: none; }
+    input[type="email"], input[type="password"], input[type="number"] {
+      width: 100%; height: 44px; padding: 0 12px 0 38px;
+      border: 1px solid var(--line); border-radius: 8px;
+      font-family: inherit; font-size: .95rem; color: var(--ink); background: var(--bg);
+      outline: none; transition: border-color .2s, box-shadow .2s; -webkit-appearance: none; appearance: none;
+    }
+    input:focus { border-color: var(--brand); box-shadow: var(--shadow-focus); }
+    .toggle-pw { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--muted); font-size: .875rem; padding: 4px; }
+    .toggle-pw:hover { color: var(--brand); }
+
+    .forgot-row { display: flex; justify-content: flex-end; margin-top: -.5rem; margin-bottom: 1.5rem; }
+    .link { font-size: .85rem; color: var(--brand); text-decoration: none; background: none; border: none; cursor: pointer; font-family: inherit; padding: 0; }
+    .link:hover { color: var(--brand-dark); text-decoration: underline; }
+
+    .btn-primary {
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+      width: 100%; padding: .8rem 1.6rem; background: var(--brand); color: #fff;
+      border: none; border-radius: var(--radius-pill); font-family: inherit; font-size: 1rem;
+      font-weight: 500; cursor: pointer; box-shadow: var(--shadow); transition: all .3s; margin-top: .25rem;
+    }
+    .btn-primary:hover { background: var(--brand-dark); transform: translateY(-2px); }
+    .btn-primary:disabled { background: var(--disabled-bg); color: var(--disabled-text); box-shadow: none; transform: none; cursor: not-allowed; pointer-events: none; }
+
+    .alert { border-radius: 8px; padding: .85rem 1rem; font-size: .9rem; display: none; align-items: flex-start; gap: .6rem; margin-bottom: 1.25rem; }
+    .alert.visible { display: flex; }
+    .alert-error   { background: var(--status-bg); border-left: 4px solid var(--ink); color: var(--ink); }
+    .alert-success { background: var(--brand-light); border-left: 4px solid var(--brand); color: var(--brand-dark); }
+
+    .card-footer { margin-top: 1.75rem; text-align: center; font-size: .85rem; color: var(--muted); }
+
+    @keyframes spin    { to { transform: rotate(360deg); } }
+    @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .fa-spin-custom { animation: spin .8s linear infinite; }
+
+    #view-forgot { display: none; }
+    #view-login  { display: block; }
+
+    /* ── Toasts (Live-Logs) ─────────────────────────── */
+    #toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 99999; display: flex; flex-direction: column; gap: 12px; pointer-events: none; }
+    .toast {
+      background: var(--bg); color: var(--ink); padding: 14px 20px; border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.1); display: flex; align-items: center; gap: 12px;
+      font-size: 0.9rem; font-weight: 500; border-left: 4px solid var(--brand);
+      animation: toastSlideIn 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+    .toast.error { border-left-color: var(--warn); }
+    .toast.success { border-left-color: var(--success); }
+    .toast.fade-out { animation: toastFadeOut 0.3s ease forwards; }
+    @keyframes toastSlideIn { from { opacity: 0; transform: translateX(40px) scale(0.95); } to { opacity: 1; transform: translateX(0) scale(1); } }
+    @keyframes toastFadeOut { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.95); } }
+
+    /* ── Onboarding Overlay ─────────────────────────── */
+    #onboarding-overlay {
+      display: none; position: fixed; inset: 0; z-index: 2147483000;
+      background: rgba(15,23,42,.65); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center; padding: 1rem;
+      animation: fadeIn .3s ease;
+    }
+    #onboarding-overlay.visible { display: flex !important; }
+
+    .ob-card {
+      background: var(--bg); border-radius: 24px;
+      box-shadow: 0 32px 80px rgba(0,0,0,.25);
+      width: 100%; max-width: 560px; padding: 2.75rem 2.5rem;
+      animation: slideUp .35s cubic-bezier(.22,.68,0,1.2);
+    }
+
+    .ob-header { text-align: center; margin-bottom: 2rem; }
+    .ob-icon {
+      width: 56px; height: 56px; border-radius: 16px;
+      background: var(--brand-light); color: var(--brand); font-size: 1.5rem;
+      display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1rem;
+    }
+    .ob-title { font-size: 1.4rem; font-weight: 700; margin-bottom: .35rem; }
+    .ob-sub   { font-size: .95rem; color: var(--muted); }
+
+    .ob-steps { display: flex; justify-content: center; gap: .5rem; margin-bottom: 2.25rem; }
+    .ob-step-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); transition: all .3s; }
+    .ob-step-dot.active { background: var(--brand); width: 24px; border-radius: 4px; }
+    .ob-step-dot.done   { background: var(--brand); opacity: .4; }
+
+    .ob-step { display: none; }
+    .ob-step.active { display: block; animation: slideUp .25s ease; }
+    .ob-section-label { font-weight: 600; font-size: .95rem; margin-bottom: .85rem; display: block; }
+
+    .position-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-bottom: 1.75rem; }
+    .pos-card {
+      border: 2px solid var(--line); border-radius: 12px; padding: 1rem 1.1rem;
+      cursor: pointer; transition: all .2s; background: var(--bg);
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .pos-card:hover { border-color: var(--brand); background: var(--brand-light); }
+    .pos-card.selected { border-color: var(--brand); background: var(--brand-light); box-shadow: var(--shadow-focus); }
+    .pos-icon {
+      width: 20px; display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: var(--muted); flex-shrink: 0; transition: color .2s;
+    }
+    .pos-card.selected .pos-icon { color: var(--brand); }
+    .pos-label { font-size: .9rem; font-weight: 500; line-height: 1.3; }
+    .pos-sub   { font-size: .75rem; color: var(--muted); margin-top: 2px; }
+
+    .input-num-wrap { position: relative; margin-bottom: 1.75rem; }
+    .input-num-wrap input[type="number"] { padding-left: 14px; padding-right: 52px; font-size: 1.15rem; height: 52px; font-weight: 600; }
+    .input-num-suffix { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: .9rem; color: var(--muted); font-weight: 500; pointer-events: none; }
+    .input-hint { font-size: .8rem; color: var(--muted); margin-top: .5rem; }
+
+    .ob-summary { background: var(--status-bg); border-radius: 12px; padding: 1.1rem 1.25rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: .6rem; }
+    .ob-summary-row { display: flex; justify-content: space-between; align-items: center; font-size: .9rem; }
+    .ob-summary-row span:first-child { color: var(--muted); }
+    .ob-summary-row span:last-child  { font-weight: 600; }
+
+    .ob-nav { display: flex; gap: .75rem; margin-top: .5rem; }
+    .btn-secondary {
+      flex: 1; padding: .75rem; background: var(--status-bg); border: 1px solid var(--line);
+      border-radius: var(--radius-pill); font-family: inherit; font-size: .95rem;
+      font-weight: 500; color: var(--muted); cursor: pointer; transition: all .2s;
+    }
+    .btn-secondary:hover { border-color: var(--brand); color: var(--brand); }
+    .ob-nav .btn-primary { flex: 2; margin-top: 0; }
+
+    /* ── Dashboard ───────── */
+    #screen-dashboard { display: none; min-height: 100vh; }
+    .topbar{position:sticky;top:.75rem;z-index:100;background:var(--bg);border-radius:16px;box-shadow:var(--shadow);margin:.75rem 1.5rem 0;padding:.8rem 1.5rem;display:flex;align-items:center;gap:1.5rem}
+    .topbar img{height:28px}
+    .topbar-sep{flex:1}
+    .topbar-user{display:flex;align-items:center;gap:.75rem;font-size:.9rem;color:var(--muted)}
+    .dash-avatar{width:34px;height:34px;border-radius:50%;background:var(--brand-light);color:var(--brand);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem}
+    .btn-logout{padding:.45rem 1rem;background:none;border:1px solid var(--line);border-radius:999px;font-family:inherit;font-size:.85rem;color:var(--muted);cursor:pointer;transition:all .2s}
+    .btn-logout:hover{border-color:var(--brand);color:var(--brand)}
+    .dash-main{padding:2rem 2rem 4rem;max-width:1280px;margin:0 auto;animation:fadeIn .4s ease}
+    .greeting{margin-bottom:2rem}
+    .greeting h1{font-size:1.8rem;font-weight:700;margin-bottom:.3rem}
+    .greeting p{color:var(--muted);font-size:1rem}
+    .progress-card{background:var(--bg);border-radius:var(--radius-dash);padding:1.4rem 1.75rem;box-shadow:var(--shadow-dash);margin-bottom:2rem;display:flex;align-items:center;gap:1.5rem}
+    .prog-info{flex:1}
+    .prog-label{font-size:.85rem;color:var(--muted);margin-bottom:.4rem}
+    .prog-title{font-size:1.05rem;font-weight:600;margin-bottom:.75rem}
+    .prog-bar-wrap{background:var(--line);border-radius:999px;height:8px;overflow:hidden}
+    .prog-bar{height:100%;border-radius:999px;background:var(--brand);transition:width .6s ease}
+    .prog-pct{font-size:1.5rem;font-weight:700;color:var(--brand);white-space:nowrap}
+    .week-header{display:flex;align-items:center;gap:.75rem;margin:2rem 0 1rem}
+    .week-badge{padding:.3rem .85rem;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:.01em}
+    .week-badge--orga{background:var(--brand-light);color:var(--brand)}
+    .week-badge--path{background:var(--brand-light);color:var(--brand)}
+    .week-badge--project{background:var(--brand-light);color:var(--brand)}
+    .modal-scroll-inner{padding-right:2rem}
+    .dash-modal--fixed .mod-modal-scroll,.dash-modal--fixed .module-tab-panel.modal-scroll{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:0 0 0 2rem;box-sizing:border-box}
+    .dash-modal--fixed .dash-modal-body>.mod-modal-scroll{flex:1;min-height:0}
+    .orga-mod-panel{padding-top:.25rem;padding-bottom:1.5rem}
+    .orga-mod-panel .mod-section summary{align-items:center;gap:.75rem}
+    .orga-mod-panel .mod-section summary .sub-accordion-title{flex:1;min-width:0}
+    .orga-mod-panel .orga-mod-check{flex-shrink:0;display:flex;align-items:center}
+    .orga-mod-check input[type="checkbox"],.handover-doc td.handover-td-check input[type="checkbox"]{
+      -webkit-appearance:none;appearance:none;width:18px;height:18px;margin:0;flex-shrink:0;
+      border:1.5px solid var(--line);border-radius:50%;background:var(--bg);cursor:pointer;vertical-align:middle;
+      transition:border-color .2s ease,background .2s ease,box-shadow .2s ease
+    }
+    .orga-mod-check input[type="checkbox"]:hover,.handover-doc td.handover-td-check input[type="checkbox"]:hover{border-color:var(--brand)}
+    .orga-mod-check input[type="checkbox"]:focus-visible,.handover-doc td.handover-td-check input[type="checkbox"]:focus-visible{outline:none;box-shadow:0 0 0 3px var(--brand-light)}
+    .orga-mod-check input[type="checkbox"]:checked,.handover-doc td.handover-td-check input[type="checkbox"]:checked{
+      border-color:var(--brand);background-color:var(--brand);
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 8.2 6.4 11l6.1-6.5' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;background-position:center;background-size:11px 11px
+    }
+    .orga-mod-panel .mod-section.is-done .sub-accordion-title{color:var(--muted);text-decoration:line-through}
+    .orga-mod-panel .mod-section-body .orga-link-muted{font-size:.9rem;color:var(--muted)}
+    .orga-mod-panel .mod-section-body .orga-handover-meta p{margin:.25rem 0;font-size:.9rem;color:var(--muted)}
+    .orga-mod-panel .mod-section-body .orga-handover-note{font-size:.88rem;color:var(--muted);font-style:italic;margin-top:1rem}
+    .handover-intro{font-size:.88rem;color:var(--muted);margin:0 0 1rem;line-height:1.6}
+    .handover-toolbar{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem}
+    .handover-btn{padding:.5rem 1rem;border-radius:999px;border:1px solid var(--brand);background:var(--brand);color:#fff;font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s}
+    .handover-btn:hover{background:var(--brand-dark);border-color:var(--brand-dark)}
+    .handover-btn--ghost{background:transparent;color:var(--brand)}
+    .handover-btn--ghost:hover{background:var(--brand-light)}
+    .handover-doc{background:#fff;border:1px solid var(--line);border-radius:4px;padding:2rem 2.25rem;max-width:210mm;margin:0 auto;box-shadow:0 2px 12px rgba(15,23,42,.06);color:var(--ink);font-size:.85rem;line-height:1.55}
+    .handover-doc{background:#fff}
+    .handover-doc__header{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:3px solid var(--brand)}
+    .handover-doc__header-text{flex:1;min-width:0}
+    .handover-doc__brand{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brand);margin-bottom:.4rem}
+    .handover-doc__title{font-size:1.35rem;font-weight:700;color:var(--ink);margin:0;line-height:1.2;letter-spacing:-.01em}
+    .handover-doc__logo{height:42px;max-height:42px;width:140px;max-width:140px;object-fit:contain;object-position:right center;flex:0 0 140px;display:block}
+    .handover-doc__section-title{font-size:.8rem;font-weight:700;margin:1.25rem 0 .5rem;color:var(--brand);text-transform:uppercase;letter-spacing:.06em}
+    .handover-doc th{background:var(--brand-light);color:var(--brand);font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.04em;border-color:var(--brand-light)!important}
+    .handover-doc__footer{margin-top:1.5rem;padding-top:1rem;border-top:2px solid var(--brand-light);font-size:.78rem;color:var(--muted);font-style:italic}
+    .handover-doc__meta{display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.5rem;margin-bottom:1.25rem}
+    .handover-field label{display:block;font-size:.72rem;font-weight:600;color:var(--muted);margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.04em}
+    .handover-field input,.handover-field input[type=date]{width:100%;border:none;border-bottom:1px solid var(--line);padding:.35rem 0;font-family:inherit;font-size:.9rem;color:var(--ink);background:transparent;border-radius:0}
+    .handover-field input:focus{outline:none;border-bottom-color:var(--brand)}
+    .handover-doc table{width:100%;border-collapse:collapse;margin:0 0 1.25rem;font-size:.82rem}
+    .handover-doc th,.handover-doc td{border:1px solid var(--line);padding:.45rem .55rem;text-align:left;vertical-align:middle}
+    .handover-doc td input[type=text]{width:100%;border:none;padding:.2rem 0;font-family:inherit;font-size:.82rem;background:transparent}
+    .handover-doc td input[type=text]:focus{outline:none;box-shadow:0 1px 0 var(--brand)}
+    .handover-doc td.handover-td-check{text-align:center;width:4.5rem}
+    .handover-doc__hints{margin:0 0 1rem;padding-left:1.1rem;font-size:.8rem;color:var(--ink)}
+    .handover-doc__hints li{margin-bottom:.25rem}
+    .handover-signatures{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1rem}
+    .handover-sign-block label{display:block;font-size:.72rem;font-weight:600;color:var(--muted);margin-bottom:.35rem}
+    .handover-sign-canvas-wrap{position:relative;border:1px solid var(--line);border-radius:4px;background:#fff;height:72px;margin-bottom:.5rem;touch-action:none}
+    .sig-copy-wrap{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:1rem}
+    .sig-preview-frame{padding:1rem 1.25rem;background:#fff;font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;line-height:1.4;max-height:320px;overflow-y:auto;outline:none;cursor:text}
+    .sig-preview-frame:focus{box-shadow:inset 0 0 0 2px var(--brand)}
+    .sig-preview-frame p{margin:0 0 2px}
+    .sig-preview-frame img{display:block;margin:4px 0}
+    .sig-copy-bar{padding:.65rem 1rem;border-top:1px solid var(--line);background:var(--surface);display:flex;align-items:center;justify-content:flex-end;gap:.75rem}
+    .sig-copy-btn{padding:.45rem .9rem;background:var(--brand);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:.83rem;font-weight:600;display:flex;align-items:center;gap:.35rem;white-space:nowrap;font-family:inherit}
+    .sig-copy-btn:hover{background:var(--brand-dark)}
+    .sig-copy-hint{font-size:.77rem;color:var(--muted);flex:1;min-width:0}
+    .handover-sign-canvas{display:block;width:100%;height:72px;cursor:crosshair}
+    .handover-sign-clear{position:absolute;top:4px;right:4px;padding:.2rem .45rem;font-size:.65rem;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--muted);cursor:pointer;font-family:inherit}
+    .handover-sign-clear:hover{border-color:var(--brand);color:var(--brand)}
+    .handover-sign-meta{display:grid;gap:.5rem}
+    @media(max-width:640px){.handover-doc{padding:1.25rem 1rem}.handover-doc__meta,.handover-signatures{grid-template-columns:1fr}}
+    #handover-print-root{display:none}
+    body.body-handover-print #handover-print-root{display:block;position:fixed;inset:0;background:#fff;z-index:2147483647;padding:14mm;overflow:auto}
+    body.body-handover-print #handover-print-root .handover-doc{box-shadow:none;border:none;max-width:none;margin:0;padding:0}
+    body.body-handover-print #handover-print-root .handover-sign-clear{display:none}
+    @media print{
+      body.body-handover-print>*:not(#handover-print-root){display:none!important;visibility:hidden!important}
+      body.body-handover-print #handover-print-root{display:block!important;position:static!important;padding:0!important;overflow:visible!important;z-index:auto!important}
+      body.body-handover-print #handover-print-root .handover-doc{box-shadow:none!important;border:none!important;max-width:none!important;margin:0!important;padding:0!important}
+      body.body-handover-print #handover-print-root .handover-sign-clear{display:none!important}
+      @page{size:A4;margin:14mm}
+    }
+    .week-title{font-size:1.1rem;font-weight:700}
+    .week-prog{margin-left:auto;font-size:.85rem;color:var(--muted)}
+    .module-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+    .tile{background:var(--bg);border-radius:var(--radius-dash);box-shadow:var(--shadow-dash);padding:1.4rem;cursor:pointer;transition:all .25s;border:2px solid transparent;position:relative;overflow:hidden}
+    .tile::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+    .tile:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);border-color:var(--brand-light)}
+    .tile:hover::before{transform:scaleX(1)}
+    /* Tile – nicht erledigt: grau/gedämpft */
+    .tile-icon{color:var(--muted);font-size:1.25rem;margin-bottom:.85rem;line-height:1;transition:color .25s}
+    .tile-title{font-size:.95rem;font-weight:600;margin-bottom:.35rem}
+    .tile-sub{font-size:.8rem;color:var(--muted);margin-bottom:.85rem;line-height:1.5}
+    .tile-progress{display:flex;align-items:center;gap:.6rem}
+    .tile-prog-bar{flex:1;height:5px;background:var(--line);border-radius:999px;overflow:hidden}
+    .tile-prog-fill{height:100%;border-radius:999px;background:var(--line);transition:width .5s}
+    .tile-prog-pct{font-size:.75rem;color:var(--muted);min-width:28px;text-align:right}
+    .tile-badge{position:absolute;top:.85rem;right:.85rem;padding:.2rem .55rem;border-radius:999px;font-size:.7rem;font-weight:600}
+    .tile-badge.new{background:var(--line);color:var(--muted)}
+    /* Tile – erledigt: voll blau */
+    .tile.done{border-color:var(--brand-light)}
+    .tile.done::before{background:var(--brand);transform:scaleX(1)}
+    .tile.done .tile-icon{color:var(--brand)}
+    .tile.done .tile-prog-fill{background:var(--brand)}
+    .tile.done .tile-prog-pct{color:var(--brand)}
+    .tile-badge.done{background:var(--brand-light);color:var(--brand)}
+    .dash-modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(15,23,42,.55);backdrop-filter:blur(4px);align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto}
+    .dash-modal-overlay.open{display:flex;animation:fadeIn .2s ease}
+    .dash-modal{background:var(--bg);border-radius:20px;box-shadow:0 24px 64px rgba(0,0,0,.2);width:100%;max-width:720px;margin:auto;animation:slideUp .25s ease}
+    .dash-modal-head{padding:1.75rem 2rem 1.25rem;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:1rem}
+    .dash-modal-head-icon{width:44px;height:44px;border-radius:12px;background:var(--brand-light);color:var(--brand);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+    .dash-modal-head-text h2{font-size:1.2rem;font-weight:700}
+    .dash-modal-head-text p{font-size:.85rem;color:var(--muted);margin-top:.15rem}
+    .dash-modal-head-actions{display:flex;align-items:center;gap:.4rem;margin-left:auto;flex-shrink:0}
+    .dash-modal-icon-btn,.dash-modal-close{width:36px;height:36px;border-radius:50%;background:var(--surface);border:1px solid var(--line);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;color:var(--muted);transition:all .2s;flex-shrink:0}
+    .dash-modal-icon-btn:hover,.dash-modal-close:hover{border-color:var(--brand);color:var(--brand);background:var(--brand-light)}
+    .modal-scroll,.dash-modal--fixed .mod-modal-scroll,.dash-modal--fixed .module-tab-panel,.ob-timeline-wrap{scrollbar-width:thin;scrollbar-color:rgba(32,110,251,.5) transparent}
+    .modal-scroll::-webkit-scrollbar,.dash-modal--fixed .mod-modal-scroll::-webkit-scrollbar,.dash-modal--fixed .module-tab-panel::-webkit-scrollbar,.ob-timeline-wrap::-webkit-scrollbar{width:3px}
+    .modal-scroll::-webkit-scrollbar-track,.dash-modal--fixed .mod-modal-scroll::-webkit-scrollbar-track,.dash-modal--fixed .module-tab-panel::-webkit-scrollbar-track,.ob-timeline-wrap::-webkit-scrollbar-track{background:transparent}
+    .modal-scroll::-webkit-scrollbar-thumb,.dash-modal--fixed .mod-modal-scroll::-webkit-scrollbar-thumb,.dash-modal--fixed .module-tab-panel::-webkit-scrollbar-thumb,.ob-timeline-wrap::-webkit-scrollbar-thumb{background:rgba(32,110,251,.5);border-radius:0}
+    .modal-scroll::-webkit-scrollbar-thumb:hover,.dash-modal--fixed .mod-modal-scroll::-webkit-scrollbar-thumb:hover,.dash-modal--fixed .module-tab-panel::-webkit-scrollbar-thumb:hover,.ob-timeline-wrap::-webkit-scrollbar-thumb:hover{background:var(--brand)}
+    .dash-modal--fixed .dash-modal-body{padding:1.15rem 0 1.25rem}
+    .dash-modal--fixed .module-tab-bar{flex-shrink:0;margin-bottom:1rem;padding:0 2rem}
+    .dash-modal--fixed .module-tab-panels{flex:1;min-height:0;position:relative;overflow:hidden}
+    .dash-modal--fixed .module-tab-panel{position:absolute;inset:0;margin:0;display:none}
+    .dash-modal--fixed .module-tab-panel.active{display:block}
+    .mod-section summary,.sub-accordion summary{padding-right:.5rem}
+    .mod-section-chevron,.sub-accordion-chevron{margin-right:0;flex-shrink:0}
+    .mod-setup-block{margin:0 0 1.15rem}
+    .mod-setup-block:last-child{margin-bottom:0}
+    .mod-setup-block h3{font-size:.9rem;font-weight:600;color:var(--ink);margin:0 0 .45rem}
+    .mod-setup-block p{margin:0 0 .5rem;font-size:.92rem;line-height:1.65;color:var(--ink)}
+    .mod-setup-block p:last-child{margin-bottom:0}
+    .dash-modal-body h3{font-size:1rem;font-weight:700;margin:1.25rem 0 .5rem;color:var(--ink)}
+    .dash-modal-body h3:first-child{margin-top:0}
+    .dash-modal-body p,.dash-modal-body li{font-size:.9rem;color:var(--muted);line-height:1.7;margin-bottom:.35rem}
+    .dash-modal-body ul,.dash-modal-body ol{padding-left:1.2rem;margin-bottom:.75rem}
+    .dash-modal-body .highlight{background:var(--brand-light);border-left:3px solid var(--brand);padding:.75rem 1rem;border-radius:0 8px 8px 0;margin:.75rem 0}
+    .dash-modal-body .highlight p{color:var(--ink);margin:0}
+    .dash-modal-body table{width:100%;border-collapse:collapse;font-size:.85rem;margin:.75rem 0}
+    .dash-modal-body th{background:var(--surface);padding:.6rem .85rem;text-align:left;font-weight:600;border:1px solid var(--line)}
+    .dash-modal-body td{padding:.55rem .85rem;border:1px solid var(--line)}
+    .dash-modal-body .org-person{display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;background:var(--surface);border-radius:8px;margin:.3rem 0;font-size:.875rem}
+    .dash-modal-body .org-person .dot{width:8px;height:8px;border-radius:50%;background:var(--brand);flex-shrink:0}
+    .dash-modal-body .org-indent{margin-left:1.5rem;border-left:2px solid var(--line);padding-left:.75rem}
+    .dash-modal-foot{padding:1rem 2rem 1.5rem;display:flex;justify-content:flex-end;gap:.75rem}
+    .btn-done-module{padding:.65rem 1.4rem;background:var(--brand);color:#fff;border:none;border-radius:999px;font-family:inherit;font-size:.9rem;font-weight:500;cursor:pointer;transition:all .2s}
+    .btn-done-module:hover{background:var(--brand-dark);transform:translateY(-1px)}
+    .btn-close-modal{padding:.65rem 1.4rem;background:var(--surface);border:1px solid var(--line);border-radius:999px;font-family:inherit;font-size:.9rem;color:var(--muted);cursor:pointer;transition:all .2s}
+    .btn-close-modal:hover{border-color:var(--brand);color:var(--brand)}
+    .dash-modal{max-width:900px;transition:max-width .25s ease,border-radius .25s ease,min-height .25s ease}
+    .dash-modal-overlay.is-modal-fullscreen{padding:0;align-items:stretch}
+    .dash-modal-overlay.is-modal-fullscreen .dash-modal{max-width:none;width:100%;min-height:100vh;margin:0;border-radius:0;display:flex;flex-direction:column;animation:none}
+    .dash-modal-overlay.is-modal-fullscreen .dash-modal-body{max-height:none;flex:1;padding:2rem 2.5rem 2.25rem}
+    .dash-modal-overlay.is-modal-fullscreen .dash-modal-head{padding:1.25rem 2rem}
+    .dash-modal-overlay.is-modal-fullscreen .dash-modal-foot{padding:1rem 2rem 1.25rem}
+    .module-tab-bar{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+    .module-tab{padding:.45rem .95rem;border:1px solid var(--line);border-radius:999px;background:var(--surface);font-family:inherit;font-size:.78rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap}
+    .module-tab:hover{border-color:var(--brand);color:var(--brand);background:var(--brand-light)}
+    .module-tab.active{background:var(--brand);border-color:var(--brand);color:#fff}
+    .module-tab-panel{display:none;animation:fadeIn .2s ease}
+    .module-tab-panel.active{display:block}
+    .sub-accordion{border:1px solid var(--line);border-radius:12px;margin-bottom:.85rem;overflow:hidden;background:var(--bg);box-shadow:0 1px 3px rgba(15,23,42,.04)}
+    .sub-accordion summary{padding:1.05rem 1.25rem;font-size:1.05rem;font-weight:600;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:1rem;background:var(--surface);color:var(--ink);user-select:none}
+    .sub-accordion summary::-webkit-details-marker{display:none}
+    .sub-accordion-title{flex:1;line-height:1.4}
+    .sub-accordion-chevron{font-size:.8rem;color:var(--muted);transition:transform .25s ease,color .25s ease;flex-shrink:0}
+    .sub-accordion[open] summary{border-bottom:1px solid var(--line);background:var(--brand-light)}
+    .sub-accordion[open] summary .sub-accordion-chevron{transform:rotate(180deg);color:var(--brand)}
+    .sub-accordion-body{padding:1.25rem 1.35rem 1.4rem}
+    .sub-accordion-body h3{font-size:1.05rem;font-weight:700;margin:1.15rem 0 .55rem;color:var(--ink)}
+    .sub-accordion-body h3:first-child{margin-top:0}
+    .sub-accordion-body p,.sub-accordion-body li{font-size:1rem;color:var(--ink);line-height:1.75}
+    .sub-accordion-body .highlight p{font-size:1rem}
+    .sub-accordion-body table{font-size:.95rem}
+    .sub-accordion-body .org-person{font-size:.95rem}
+
+    /* ── Welcome: Layout, Org-Chart, Timeline ── */
+    .dash-modal--fixed{height:min(88vh,760px);max-height:min(88vh,760px);display:flex;flex-direction:column}
+    .dash-modal--fixed .dash-modal-head,.dash-modal--fixed .dash-modal-foot{flex-shrink:0}
+    .dash-modal--fixed .dash-modal-body{flex:1;min-height:0;max-height:none;overflow:hidden;display:flex;flex-direction:column}
+    .mod-section{border:none;border-radius:0;margin:0;background:transparent;box-shadow:none;border-bottom:1px solid var(--line)}
+    .mod-section:last-child{border-bottom:none}
+    .mod-section summary{padding:.95rem 0;font-size:.98rem;font-weight:600;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:1rem;background:transparent;color:var(--brand);user-select:none;transition:color .2s ease}
+    .mod-section summary::-webkit-details-marker{display:none}
+    .mod-section summary .sub-accordion-title{color:var(--brand)}
+    .mod-section[open] summary,.mod-section[open] summary .sub-accordion-title{color:var(--brand)}
+    .mod-section[open] summary{padding-bottom:.85rem;margin-bottom:.75rem;border-bottom:1px solid var(--line)}
+    .mod-section[open] .mod-section-chevron{transform:rotate(180deg);color:var(--brand)}
+    .mod-section-chevron{font-size:.75rem;color:var(--muted);transition:transform .25s ease,color .2s ease;flex-shrink:0}
+    .mod-section summary:hover,.mod-section summary:hover .sub-accordion-title{color:var(--brand)}
+    .mod-divider{display:block;width:100%;height:0;margin:1rem 0;border:none;border-top:1px solid var(--line)}
+    .mod-section-body{padding:0 0 1.1rem;color:var(--ink)}
+    .mod-section-body p,.mod-section-body li{font-size:.92rem;line-height:1.7;color:var(--ink)}
+    .mod-section-body table{width:100%;border-collapse:collapse;font-size:.85rem;margin:.65rem 0}
+    .mod-section-body th{background:var(--surface);padding:.55rem .75rem;text-align:left;font-weight:600;border:1px solid var(--line)}
+    .mod-section-body td{padding:.5rem .75rem;border:1px solid var(--line);color:var(--ink)}
+    .mod-section-body .placeholder{color:var(--muted);font-style:italic;font-size:.88rem}
+    .mod-section-body p{margin:0 0 .75rem}
+    .mod-section-body p:last-child{margin-bottom:0}
+    .mod-section-body .tool-download-list{list-style:none;padding:0;margin:0 0 1rem;display:flex;flex-direction:column;gap:.55rem}
+    .mod-section-body .tool-download-list a{display:inline-flex;align-items:center;gap:.45rem;color:var(--brand);font-weight:600;font-size:.92rem;text-decoration:none}
+    .mod-section-body .tool-download-list a:hover{text-decoration:underline}
+    .mod-section-body .tool-download-list a i{font-size:.7rem;opacity:.85}
+    .orga-action-buttons{display:flex;flex-direction:column;align-items:flex-start;gap:.5rem;margin:.75rem 0 0}
+    .orga-action-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem 1rem;border-radius:999px;border:1px solid var(--brand);background:var(--brand);color:#fff!important;font-weight:600;font-size:.82rem;text-decoration:none!important;transition:all .2s;max-width:100%}
+    .orga-action-btn:hover{background:var(--brand-dark);border-color:var(--brand-dark);text-decoration:none!important}
+    .orga-action-btn i{font-size:.75rem}
+    .orga-action-btn--ghost{background:transparent;color:var(--brand)!important}
+    .orga-action-btn--ghost:hover{background:var(--brand-light);color:var(--brand)!important}
+    .it-app-block{margin-bottom:1.35rem;padding-bottom:1.15rem;border-bottom:1px solid var(--line)}
+    .it-app-block:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+    .it-app-block__title{font-size:.9rem;font-weight:600;color:var(--ink);margin:0 0 .65rem}
+    .it-creds-panel{margin-top:.75rem;padding:.85rem 1rem;background:var(--surface);border:1px solid var(--line);border-radius:8px;font-size:.85rem;line-height:1.55}
+    .it-creds-panel[hidden]{display:none!important}
+    .it-creds-list{display:grid;grid-template-columns:minmax(5rem,auto) 1fr;gap:.35rem .85rem;margin:.65rem 0 0}
+    .it-creds-list dt{font-weight:600;color:var(--muted);font-size:.78rem}
+    .it-creds-list dd{margin:0;color:var(--ink)}
+    .mod-section-body .learn-list{margin:.25rem 0 0;padding-left:1.15rem}
+    .mod-section-body .learn-list li{margin-bottom:.4rem;font-size:.92rem;line-height:1.7;color:var(--ink)}
+    .mod-section-body h3,.mod-section-body h4{font-size:.95rem;font-weight:600;color:var(--ink);margin:1.1rem 0 .5rem}
+    .mod-section-body h3:first-child,.mod-section-body h4:first-child{margin-top:0}
+    .team-roster{display:grid;gap:.45rem;margin-top:.5rem}
+    .team-roster__row{display:flex;align-items:center;gap:.65rem;padding:.55rem .7rem;border-bottom:1px solid var(--line);font-size:.9rem}
+    .team-roster__row:last-child{border-bottom:none}
+    .team-roster__avatar{width:36px;height:36px;border-radius:50%;background:var(--brand-light);color:var(--brand);font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .team-roster__meta strong{display:block;color:var(--ink);font-weight:600}
+    .team-roster__meta span{font-size:.8rem;color:var(--muted)}
+    .org-chart{display:flex;flex-direction:column;align-items:center;padding:.75rem .5rem 1rem;min-height:260px;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .org-chart__root{margin-bottom:0}
+    .org-node{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.55rem .85rem;text-align:center;min-width:128px;max-width:150px;opacity:0}
+    .org-node--lead{border-color:var(--brand);background:var(--brand-light);min-width:160px}
+    .org-node__name{font-size:.82rem;font-weight:700;color:var(--ink);line-height:1.3}
+    .org-node__role{font-size:.7rem;color:var(--muted);margin-top:.15rem;line-height:1.35}
+    .org-chart__vline{width:2px;height:20px;background:var(--line);transform:scaleY(0);transform-origin:top}
+    .org-chart__hline{height:2px;background:var(--line);width:min(100%,520px);max-width:520px;margin:0 auto 12px;transform:scaleX(0);transform-origin:center}
+    .org-chart__row{display:flex;justify-content:center;align-items:flex-start;gap:.65rem;flex-wrap:nowrap;width:100%;max-width:560px;min-width:520px}
+    .org-chart__col{display:flex;flex-direction:column;align-items:center;flex:1;min-width:0;max-width:150px}
+    .org-chart__col--branch{align-items:center}
+    .org-chart__subrow{display:flex;justify-content:center;gap:.5rem;width:100%;margin-top:0}
+    .org-chart__subrow .org-node{min-width:110px;max-width:120px;font-size:.9em}
+    .org-chart__col--branch>.org-chart__vline{height:14px}
+    .org-node__reports{font-size:.65rem;color:var(--brand);margin-top:.35rem;font-weight:600}
+    .org-reporting{margin:1rem 0 0;padding:0;list-style:none;border-top:1px solid var(--line)}
+    .org-reporting li{display:flex;align-items:baseline;justify-content:space-between;gap:.75rem;padding:.5rem 0;border-bottom:1px solid var(--line);font-size:.85rem;line-height:1.45}
+    .org-reporting li:first-child{background:var(--brand-light);margin:0 -0.25rem;padding:.55rem .25rem;border-radius:8px;border-bottom:1px solid var(--line)}
+    .org-reporting__person{color:var(--ink)}
+    .org-reporting__to{color:var(--muted);font-size:.8rem;white-space:nowrap;flex-shrink:0}
+    .org-reporting__to::before{content:'→ ';color:var(--brand);font-weight:600}
+
+    .module-tab-panel.is-inview .org-node{animation:orgFadeIn .55s ease forwards;animation-delay:calc(var(--d,0)*100ms + 120ms)}
+    .module-tab-panel.is-inview .org-chart__vline{animation:orgLineV .4s ease forwards;animation-delay:calc(var(--d,0)*100ms + 60ms)}
+    .module-tab-panel.is-inview .org-chart__hline{animation:orgLineH .5s ease forwards;animation-delay:200ms}
+    .contact-lines,.wish-list{width:100%;margin:0;padding:0;list-style:none;border:none;display:flex;flex-direction:column;gap:.65rem}
+    .contact-lines>li,.wish-list>li{position:relative;width:100%;margin:0;padding:0;border:none;font-size:.9rem;line-height:1.5;color:var(--ink)}
+    .contact-lines>li{display:flex;align-items:flex-start;gap:.75rem}
+    .contact-lines i{flex:0 0 1.25rem;width:1.25rem;margin-top:.15rem;text-align:center;color:var(--brand);font-size:.9rem;line-height:1}
+    .contact-lines span{flex:1;min-width:0}
+    .contact-lines strong{font-weight:600;color:var(--ink)}
+    .wish-list{counter-reset:wish}
+    .wish-list>li{counter-increment:wish;padding:0 0 0 2.6rem;min-height:auto}
+    .wish-list>li::before{content:counter(wish);position:absolute;left:0;top:.1rem;width:1.5rem;height:1.5rem;border-radius:50%;background:var(--brand-light);color:var(--brand);font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1}
+    .learn-321{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:.75rem 0}
+    .learn-321__item{background:var(--brand-light);border-radius:8px;padding:.65rem .5rem;text-align:center}
+    .learn-321__item strong{display:block;font-size:1.1rem;color:var(--brand);margin-bottom:.15rem}
+    .learn-321__item span{font-size:.75rem;color:var(--ink);font-weight:600}
+    .ob-timeline-wrap{padding:.25rem 0 .25rem 0;margin-top:.5rem}
+    .ob-timeline{position:relative;padding-left:1.75rem}
+    .ob-timeline::before{content:'';position:absolute;left:6px;top:4px;bottom:4px;width:2px;background:var(--line);border-radius:999px}
+    .ob-timeline-progress{position:absolute;left:6px;top:4px;width:2px;height:0;background:var(--brand);border-radius:999px}
+    .ob-timeline-step{position:relative;padding:0 0 1.1rem 1rem;opacity:0;transform:translateY(6px);transition:opacity .38s ease,transform .38s ease}
+    .ob-timeline-step.is-visible{opacity:1;transform:none}
+    .ob-timeline-step::before{content:'';position:absolute;left:calc(-1.75rem + 2px);top:.3rem;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2.5px solid var(--line);box-sizing:border-box;z-index:2;transition:border-color .3s ease,background .3s ease}
+    .ob-timeline-step.is-visible::before{border-color:var(--brand);background:var(--brand-light)}
+    .ob-timeline-step__title{font-weight:600;font-size:.9rem;color:var(--ink);margin-bottom:.2rem}
+    .ob-timeline-step__desc{font-size:.82rem;color:var(--muted);line-height:1.5;margin:0}
+    @keyframes orgFadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes orgLineV{to{transform:scaleY(1)}}
+    @keyframes orgLineH{to{transform:scaleX(1)}}
+    @media (prefers-reduced-motion:reduce){.org-node,.org-chart__vline,.org-chart__hline{animation:none!important;opacity:1!important;transform:none!important}.ob-timeline-step{opacity:1!important;transform:none!important;transition:none!important}.ob-timeline-progress{height:100%!important}}
+  </style>
+</head>
+<body>
+
+<!-- ── Toast Benachrichtigungen ────────────────────── -->
+<div id="toast-container"></div>
+
+<!-- ── Login Page ────────────────────────────────── -->
+<div id="screen-login" class="page">
+  <div class="card">
+    <div class="logo-wrap">
+      <img src="https://roots-consultants.de/wp-content/uploads/2025/04/Roots-Brand-Strategy-Consultants-Logo.svg" alt="ROOTS" />
+    </div>
+
+    <!-- VIEW: Login -->
+    <div id="view-login">
+      <h1 class="card-title">Willkommen zurück</h1>
+      <p class="card-sub">Melde dich bei deinem ROOTS-Konto an.</p>
+
+      <div id="error-banner" class="alert alert-error">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span id="error-text"></span>
+      </div>
+
+      <form id="form-login" novalidate>
+        <div class="form-group">
+          <label for="email">E-Mail-Adresse</label>
+          <div class="input-wrap">
+            <i class="fa-regular fa-envelope icon"></i>
+            <input type="email" id="email" placeholder="name@roots-consultants.com" autocomplete="email" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Passwort</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-lock icon"></i>
+            <input type="password" id="password" placeholder="••••••••" autocomplete="current-password" required />
+            <button type="button" class="toggle-pw" id="toggle-pw">
+              <i class="fa-regular fa-eye" id="pw-icon"></i>
+            </button>
+          </div>
+        </div>
+        <div class="forgot-row">
+          <button type="button" class="link" id="go-forgot">Passwort vergessen?</button>
+        </div>
+        <button type="submit" class="btn-primary" id="btn-login">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Anmelden
+        </button>
+      </form>
+
+      <div class="card-footer">
+        Noch kein Konto?&nbsp;
+        <a href="mailto:info@roots-consultants.com?subject=Zugang%20anfragen" class="link">Zugang anfragen</a>
+      </div>
+    </div>
+
+    <!-- VIEW: Passwort vergessen -->
+    <div id="view-forgot">
+      <h1 class="card-title">Passwort zurücksetzen</h1>
+      <p class="card-sub">Gib deine E-Mail ein – wir schicken dir einen Link.</p>
+
+      <div id="reset-error" class="alert alert-error">
+        <i class="fa-solid fa-circle-exclamation"></i><span id="reset-error-text"></span>
+      </div>
+      <div id="reset-success" class="alert alert-success">
+        <i class="fa-solid fa-circle-check"></i><span>E-Mail versendet! Bitte prüfe deinen Posteingang.</span>
+      </div>
+
+      <form id="form-forgot" novalidate>
+        <div class="form-group">
+          <label for="reset-email">E-Mail-Adresse</label>
+          <div class="input-wrap">
+            <i class="fa-regular fa-envelope icon"></i>
+            <input type="email" id="reset-email" placeholder="name@roots-consultants.com" autocomplete="email" required />
+          </div>
+        </div>
+        <button type="submit" class="btn-primary" id="btn-reset">
+          <i class="fa-solid fa-paper-plane"></i> Link senden
+        </button>
+      </form>
+
+      <div class="card-footer" style="margin-top:1.25rem">
+        <button type="button" class="link" id="go-login">
+          <i class="fa-solid fa-arrow-left" style="font-size:.75rem;margin-right:4px"></i> Zurück zum Login
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Onboarding Dashboard ─── -->
+<div id="screen-dashboard">
+  <div class="topbar" id="dash-topbar">
+    <img src="https://roots-consultants.de/wp-content/uploads/2025/04/Roots-Brand-Strategy-Consultants-Logo.svg" alt="ROOTS"/>
+    <div class="topbar-sep"></div>
+    <div class="topbar-user">
+      <div class="dash-avatar" id="user-avatar">?</div>
+      <span id="user-name-topbar">…</span>
+      <button type="button" class="btn-logout" id="btn-dash-logout">Abmelden</button>
+    </div>
+  </div>
+
+  <div class="dash-main">
+    <div class="greeting">
+      <h1 id="greeting-text">Hallo!</h1>
+      <p>Willkommen bei ROOTS – dein persönlicher Onboarding-Plan. Starte mit Orga/Admin, arbeite dann den Lernpfad durch und zum Schluss die Module Kunden & Projekte.</p>
+    </div>
+
+    <div class="progress-card">
+      <div class="prog-info">
+        <div class="prog-label">Gesamtfortschritt Onboarding</div>
+        <div class="prog-title" id="prog-status">Du hast gerade erst begonnen – los geht's!</div>
+        <div class="prog-bar-wrap"><div class="prog-bar" id="overall-bar" style="width:0%"></div></div>
+      </div>
+      <div class="prog-pct" id="overall-pct">0%</div>
+    </div>
+
+    <div class="week-header">
+      <span class="week-badge week-badge--orga">Orga/Admin</span>
+      <span class="week-title">Administration & IT-Setup</span>
+      <span class="week-prog" id="modules-prog-orga">0 / 0 Aufgaben</span>
+    </div>
+    <div class="module-grid" id="grid-modules-orga"></div>
+
+    <div class="week-header">
+      <span class="week-badge week-badge--path">Lernpfad</span>
+      <span class="week-title">Grundlagen & Arbeitsweise</span>
+      <span class="week-prog" id="modules-prog">0 / 3 Module</span>
+    </div>
+    <div class="module-grid" id="grid-modules-path"></div>
+
+    <div class="week-header">
+      <span class="week-badge week-badge--project">Kunden & Projekte</span>
+      <span class="week-title">Praxisbezug im Beratungsalltag</span>
+      <span class="week-prog" id="modules-prog-project">0 / 2 Module</span>
+    </div>
+    <div class="module-grid" id="grid-modules-project"></div>
+  </div>
+
+  <div class="dash-modal-overlay" id="modal-overlay" role="dialog" aria-modal="true">
+    <div class="dash-modal" id="dash-modal-box" onclick="event.stopPropagation()">
+      <div class="dash-modal-head">
+        <div class="dash-modal-head-icon" id="modal-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+        <div class="dash-modal-head-text">
+          <h2 id="modal-title">Titel</h2>
+          <p id="modal-sub">Untertitel</p>
+        </div>
+        <div class="dash-modal-head-actions">
+          <button type="button" class="dash-modal-icon-btn" id="modal-fullscreen-btn" title="Vollbild" aria-label="Vollbild">
+            <i class="fa-solid fa-expand"></i>
+          </button>
+          <button type="button" class="dash-modal-close" id="modal-close-btn" aria-label="Schließen"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+      <div class="dash-modal-body" id="modal-body"></div>
+      <div class="dash-modal-foot">
+        <button type="button" class="btn-close-modal" id="modal-btn-close">Schließen</button>
+        <button type="button" class="btn-done-module" id="btn-done-module"><i class="fa-solid fa-check"></i> Als erledigt markieren</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Onboarding Overlay ──────────────────────────── -->
+<div id="onboarding-overlay">
+  <div class="ob-card">
+
+    <div class="ob-header">
+      <div class="ob-icon"><i class="fa-solid fa-user-tie"></i></div>
+      <h2 class="ob-title">Profil einrichten</h2>
+      <p class="ob-sub">Kurz noch ein paar Angaben zu deiner Rolle bei ROOTS.</p>
+    </div>
+
+    <div class="ob-steps">
+      <div class="ob-step-dot active" id="dot-1"></div>
+      <div class="ob-step-dot"        id="dot-2"></div>
+      <div class="ob-step-dot"        id="dot-3"></div>
+    </div>
+
+    <!-- Step 1: Position -->
+    <div class="ob-step active" id="step-1">
+      <span class="ob-section-label">Was ist deine Position?</span>
+      <div class="position-grid">
+        <div class="pos-card" data-value="Praktikant">
+          <div class="pos-icon"><i class="fa-solid fa-seedling"></i></div>
+          <div><div class="pos-label">Praktikant</div><div class="pos-sub">Intern</div></div>
+        </div>
+        <div class="pos-card" data-value="Junior Consultant">
+          <div class="pos-icon"><i class="fa-solid fa-star"></i></div>
+          <div><div class="pos-label">Junior Consultant</div><div class="pos-sub">Entry Level</div></div>
+        </div>
+        <div class="pos-card" data-value="Consultant">
+          <div class="pos-icon"><i class="fa-solid fa-briefcase"></i></div>
+          <div><div class="pos-label">Consultant</div><div class="pos-sub">Mid Level</div></div>
+        </div>
+        <div class="pos-card" data-value="Senior Consultant">
+          <div class="pos-icon"><i class="fa-solid fa-award"></i></div>
+          <div><div class="pos-label">Senior Consultant</div><div class="pos-sub">Senior Level</div></div>
+        </div>
+        <div class="pos-card" data-value="Director">
+          <div class="pos-icon"><i class="fa-solid fa-chess-king"></i></div>
+          <div><div class="pos-label">Director</div><div class="pos-sub">Leadership</div></div>
+        </div>
+        <div class="pos-card" data-value="Partner">
+          <div class="pos-icon"><i class="fa-solid fa-crown"></i></div>
+          <div><div class="pos-label">Partner</div><div class="pos-sub">Führungsebene</div></div>
+        </div>
+      </div>
+      <div class="ob-nav">
+        <button class="btn-primary" id="btn-next-1" disabled onclick="goStep(2)">
+          Weiter <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 2: Stundensatz -->
+    <div class="ob-step" id="step-2">
+      <span class="ob-section-label">Wie hoch ist dein Stundensatz?</span>
+      <div class="input-num-wrap">
+        <input type="number" id="hourly-rate" placeholder="0" min="0" max="9999" step="1" />
+        <span class="input-num-suffix">€ / h</span>
+      </div>
+      <p class="input-hint"><i class="fa-solid fa-circle-info" style="margin-right:4px"></i>Wird für Zeiterfassung und Projektabrechnung verwendet.</p>
+      <div class="ob-nav" style="margin-top:1.5rem">
+        <button class="btn-secondary" onclick="goStep(1)"><i class="fa-solid fa-arrow-left"></i> Zurück</button>
+        <button class="btn-primary"   onclick="goStep(3)">Weiter <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- Step 3: Wochenstunden + Zusammenfassung -->
+    <div class="ob-step" id="step-3">
+      <span class="ob-section-label">Wie viele Stunden arbeitest du pro Woche?</span>
+      <div class="input-num-wrap">
+        <input type="number" id="weekly-hours" placeholder="40" min="1" max="80" step="0.5" />
+        <span class="input-num-suffix">h / Woche</span>
+      </div>
+
+      <span class="ob-section-label" style="margin-top:.25rem">Deine Angaben</span>
+      <div class="ob-summary">
+        <div class="ob-summary-row"><span>Position</span><span id="sum-pos">–</span></div>
+        <div class="ob-summary-row"><span>Stundensatz</span><span id="sum-rate">–</span></div>
+        <div class="ob-summary-row"><span>Wochenarbeitszeit</span><span id="sum-hours">–</span></div>
+      </div>
+
+      <div id="ob-error" class="alert alert-error" style="margin-bottom:1rem">
+        <i class="fa-solid fa-circle-exclamation"></i><span id="ob-error-text"></span>
+      </div>
+
+      <div class="ob-nav">
+        <button class="btn-secondary" onclick="goStep(2)"><i class="fa-solid fa-arrow-left"></i> Zurück</button>
+        <button class="btn-primary" id="btn-save" onclick="saveProfile()">
+          <i class="fa-solid fa-check"></i> Speichern & starten
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  console.info('[ROOTS] Inline-Script Start');
+
+  const SUPABASE_URL  = 'https://csmguwcvzreefluhahyu.supabase.co';
+  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzbWd1d2N2enJlZWZsdWhhaHl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5NjM0ODcsImV4cCI6MjA5MjUzOTQ4N30.Fiafx7XBaQZXUX3bKQIBH7znBHx3B51yL-bftOHsL4Q';
+
+  const { createClient } = supabase;
+  const sb = createClient(SUPABASE_URL, SUPABASE_ANON, {
+    auth: {
+      storageKey: 'roots-wp-auth-v1',
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true,
+    },
+  });
+
+  /* ═══ Globale Variablen ═══ */
+  let userName = '';
+  let userPosition = '';
+  let userEmail = '';
+  let currentUserId = null;
+  let completedModules = [];
+  let completedTodos   = [];
+  let currentModuleId  = null;
+
+  /* ── Toasts (Live-Logs) System ──────────────────────── */
+  function showToast(msg, type = 'info') {
+    const container = document.getElementById('toast-container');
+    const t = document.createElement('div');
+    t.className = `toast ${type}`;
+    let icon = 'fa-circle-info';
+    if(type === 'success') icon = 'fa-circle-check';
+    if(type === 'error') icon = 'fa-circle-exclamation';
+    
+    let iconColor = 'var(--brand)';
+    if(type === 'error') iconColor = 'var(--warn)';
+    if(type === 'success') iconColor = 'var(--success)';
+
+    t.innerHTML = `<i class="fa-solid ${icon}" style="color:${iconColor}; font-size:1.1rem;"></i> <span>${msg}</span>`;
+    container.appendChild(t);
+    
+    setTimeout(() => {
+      t.classList.add('fade-out');
+      setTimeout(() => t.remove(), 300);
+    }, 3000);
+  }
+
+  function showLoginScreen() {
+    document.body.classList.remove('body-dashboard');
+    document.getElementById('screen-dashboard').style.display = 'none';
+    document.getElementById('screen-login').style.display = 'flex';
+    document.getElementById('onboarding-overlay').classList.remove('visible');
+    document.getElementById('modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+    document.getElementById('form-login').reset();
+  }
+
+  function showOnboardingPopup() {
+    document.getElementById('screen-login').style.display = 'none';
+    document.getElementById('screen-dashboard').style.display = 'block';
+    document.body.classList.add('body-dashboard');
+    
+    document.getElementById('greeting-text').textContent = 'Willkommen bei ROOTS';
+    document.getElementById('user-name-topbar').textContent = 'Profil wird eingerichtet...';
+    document.getElementById('user-avatar').textContent = 'R';
+    
+    document.getElementById('onboarding-overlay').classList.add('visible');
+  }
+
+  function showDashboard() {
+    document.getElementById('onboarding-overlay').classList.remove('visible');
+    document.getElementById('screen-login').style.display = 'none';
+    document.getElementById('screen-dashboard').style.display = 'block';
+    document.body.classList.add('body-dashboard');
+    initDashboardView().catch(function (err) {
+      console.error(err);
+      showLoginScreen();
+      showError(err && err.message ? err.message : String(err));
+    });
+  }
+
+  function isProfileComplete(p) {
+    if (!p) return false;
+    // HIER ANGEPASST: Prüft jetzt p.position statt p.app_role
+    if (!p.position || String(p.position).trim() === '') return false;
+    if (p.hourly_rate === null || p.hourly_rate === undefined || p.hourly_rate === '') return false;
+    if (p.weekly_hours === null || p.weekly_hours === undefined || p.weekly_hours === '') return false;
+    var wh = Number(p.weekly_hours);
+    if (!Number.isFinite(wh) || wh <= 0) return false;
+    var hr = Number(p.hourly_rate);
+    return Number.isFinite(hr) && hr >= 0;
+  }
+
+  /* ════════════════════════════════════════════════════
+     MODULE & TODOS KONFIGURATION
+     ════════════════════════════════════════════════ */
+  const MODULES = {
+    week1: [
+      {
+        id:'orga-admin', icon:'fa-solid fa-list-check', title:'Orga / Admin',
+        sub:'Admin, IT-Setup, Tools & weitere Aufgaben',
+        orgaTodos: true
+      },
+      {
+        id:'welcome', icon:'fa-solid fa-star', title:'Welcome at ROOTS',
+        sub:'Team, Mentor, Onboardingplan & deine Wünsche',
+        submodules:[
+          { id:'w-team', tab:'Team Welcome', sections:[
+            { title:'Team Welcome & Vorstellung', open:true, content:`
+              <div class="team-roster">
+                <div class="team-roster__row"><div class="team-roster__avatar">RE</div><div class="team-roster__meta"><strong>Richard Erbler</strong><span>Founder, Managing Partner</span></div></div>
+                <div class="team-roster__row"><div class="team-roster__avatar">OL</div><div class="team-roster__meta"><strong>Olena Lemeshko</strong><span>Partner Middle East</span></div></div>
+                <div class="team-roster__row"><div class="team-roster__avatar">MS</div><div class="team-roster__meta"><strong>Manuel Stankovic</strong><span>Director Consulting</span></div></div>
+                <div class="team-roster__row"><div class="team-roster__avatar">JF</div><div class="team-roster__meta"><strong>Julia Fränzel</strong><span>Consultant</span></div></div>
+                <div class="team-roster__row"><div class="team-roster__avatar">RM</div><div class="team-roster__meta"><strong>Rod Mitecki</strong><span>Consultant</span></div></div>
+                <div class="team-roster__row"><div class="team-roster__avatar">PG</div><div class="team-roster__meta"><strong>Pano Goutzeris</strong><span>Junior Consultant</span></div></div>
+                <div class="team-roster__row"><div class="team-roster__avatar">JM</div><div class="team-roster__meta"><strong>Jannik Müller</strong><span>Junior Consultant</span></div></div>
+              </div>
+            ` }
+          ]},
+          { id:'w-mentor', tab:'Mentor & Kontakte', sections:[
+            { title:'Onboarding-Mentor & Ansprechpartner', open:true, content:`
+              <p>Dein erster Point of Contact ist dein Onboarding-Mentor. Ihm/Ihr kannst du alle Fragen stellen, die dich beschäftigen.</p>
+              <p>Fragen sind ausdrücklich gewünscht. Im Onboarding gibt es keine dummen Fragen. Also frage gerne fleißig drauf los.</p>
+              <p>Zudem kannst du bei folgenden Themen gerne auf andere Kollegen zukommen:</p>
+              <div class="mod-divider" role="separator" aria-hidden="true"></div>
+              <ul class="contact-lines">
+                <li><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span><strong>Admin:</strong> Richard</span></li>
+                <li><i class="fa-solid fa-laptop" aria-hidden="true"></i><span><strong>IT:</strong> Pano</span></li>
+                <li><i class="fa-solid fa-robot" aria-hidden="true"></i><span><strong>KI:</strong> Manuel</span></li>
+                <li><i class="fa-solid fa-diagram-project" aria-hidden="true"></i><span><strong>Prozesse:</strong> Rod</span></li>
+              </ul>
+            ` }
+          ]},
+          { id:'w-plan', tab:'Onboardingplan', sections:[
+            { title:'Learning by Doing', open:true, content:`
+              <p>Wir setzen beim Onboarding auf Praxis. Das bedeutet:</p>
+              <div class="learn-321">
+                <div class="learn-321__item"><strong>~70%</strong><span>On the Job</span></div>
+                <div class="learn-321__item"><strong>~20%</strong><span>Über andere</span></div>
+                <div class="learn-321__item"><strong>~10%</strong><span>Formale Trainings</span></div>
+              </div>
+              <p>In den ersten Wochen werden wir dich stärker betreuen und du wirst Kollegen in Kundentermine shadowen. Danach gehen wir schnell in den Regelbetrieb über. Eine gewisse Unsicherheit ist normal – dafür wird deine Lernkurve steil verlaufen.</p>
+              <p><strong>Die nächsten Wochen gestalten sich wie folgt:</strong></p>
+            ` },
+            { title:'Woche 1: Ankommen und Orientieren', content:`
+              <div class="ob-timeline-wrap">
+                <div class="ob-timeline" data-timeline>
+                  <div class="ob-timeline-progress"></div>
+                  <div class="ob-timeline-step"><div class="ob-timeline-step__title">Welcome at ROOTS</div><p class="ob-timeline-step__desc">Wir stellen dir das Team vor, zeigen dir wie dein Onboarding aufgebaut ist und was dich in den ersten Wochen erwartet.</p></div>
+                  <div class="ob-timeline-step"><div class="ob-timeline-step__title">Office Tour</div><p class="ob-timeline-step__desc">Wo alles zu finden ist, welche Räume du nutzen kannst und wie der Alltag im Büro bei uns aussieht.</p></div>
+                  <div class="ob-timeline-step"><div class="ob-timeline-step__title">Insight ROOTS</div><p class="ob-timeline-step__desc">Du lernst ROOTS von innen kennen.</p></div>
+                  <div class="ob-timeline-step"><div class="ob-timeline-step__title">Modus Operandi</div><p class="ob-timeline-step__desc">Prozesse, Tools und Gewohnheiten, die dir den Alltag als Consultant erleichtern und dich schnell ins Team integrieren.</p></div>
+                  <div class="ob-timeline-step"><div class="ob-timeline-step__title">Kunden Insights</div><p class="ob-timeline-step__desc">Ein erster Blick auf unser Kundenportfolio, wie wir mit ihnen zusammenarbeiten und was du über sie wissen solltest.</p></div>
+                  <div class="ob-timeline-step"><div class="ob-timeline-step__title">Admin & IT To-Dos</div><p class="ob-timeline-step__desc">In dieser ersten Woche richtest du Rechner, Tools und Zugänge ein, damit du arbeitsfähig bist.</p></div>
+                  <div class="ob-timeline-step"><div class="ob-timeline-step__title">Shadowen</div><p class="ob-timeline-step__desc">Du begleitest Kollegen in echte Kundentermine und bekommst so einen direkten Eindruck vom Beratungsalltag.</p></div>
+                </div>
+              </div>
+            ` },
+            { title:'Woche 2: Methoden & Standards', content:`
+              <div class="ob-timeline-wrap">
+                <div class="ob-timeline" data-timeline>
+                  <div class="ob-timeline-progress"></div>
+                  <div class="ob-timeline-step"><div class="ob-timeline-step__title">Projektbriefings</div><p class="ob-timeline-step__desc">Du wirst in aktuelle (und ggf. vergangene) Projekte eingeführt und erhältst das nötige Detailwissen für deine Arbeit.</p></div>
+                  <div class="ob-timeline-step"><div class="ob-timeline-step__title">Chart Clinique</div><p class="ob-timeline-step__desc">Du lernst, wie bei ROOTS professionelle und wirkungsvolle Charts entstehen.</p></div>
+                  <div class="ob-timeline-step"><div class="ob-timeline-step__title">Shadowen</div><p class="ob-timeline-step__desc">Weiterer Praxisbezug im Beratungsalltag.</p></div>
+                </div>
+              </div>
+            ` }
+          ]},
+          { id:'w-wishes', tab:'Deine Wünsche', sections:[
+            { title:'Deine Wünsche', open:true, content:`
+              <p>Soviel zu unserem Plan. Bevor wir gemeinsam in die ersten Wochen starten, ist es uns wichtig, deine Perspektive zu hören.</p>
+              <p>Nimm dir einen Moment Zeit für die folgenden Fragen.</p>
+              <div class="mod-divider" role="separator" aria-hidden="true"></div>
+              <ol class="wish-list">
+                <li>Was erhoffst du dir von deinen ersten Wochen bei uns?</li>
+                <li>Gibt es etwas, das dir beim Einstieg besonders helfen würde?</li>
+                <li>In welchen Bereichen möchtest du dich weiterentwickeln, und wo siehst du deine größten Stärken?</li>
+                <li>Gibt es etwas, das wir als Team wissen sollten, um gut zusammenzuarbeiten (z.&nbsp;B. wie du am liebsten kommunizierst oder arbeitest)?</li>
+              </ol>
+            ` }
+          ]}
+        ]
+      },
+      {
+        id:'insight', icon:'fa-solid fa-lightbulb', title:'Insight ROOTS',
+        sub:'Geschichte, Vision, Markt & Growth',
+        submodules:[
+          { id:'i-ident', tab:'Geschichte & Vision', sections:[
+            { title:'Woher wir kommen', open:true, content:`
+              <p>ROOTS wurde 2016 in Düsseldorf gegründet – mit der Überzeugung, dass Marketing-Beratung praxisnah, direkt und mit echtem unternehmerischem Verstand funktionieren muss. Unser Team bringt langjährige Managementerfahrung auf Kundenseite mit – u.&nbsp;a. aus Stationen bei Coca-Cola, OBI und Montblanc.</p>
+              <div class="highlight"><p><i class="fa-solid fa-quote-left" aria-hidden="true"></i> Wir beginnen, wo McKinsey aufhört. Wir hören auf, wo Kreativagenturen beginnen.</p></div>
+            ` },
+            { title:'Wohin wir gehen', content:`
+              <p>Unsere Vision ist klar: Wir wollen in der Champions League der Marketingberatung spielen – als die führende Boutique für Marketing-Exzellenz in Deutschland.</p>
+              <div class="highlight"><p><i class="fa-solid fa-bullseye" aria-hidden="true"></i> <strong>Purpose:</strong> Helping You Outperform The Market.</p></div>
+              <p>Unser Anspruch: die „Go-To"-Beratung für Topmarken werden – das McKinsey des Marketings. Wir helfen Marketingentscheidern, die Wirksamkeit ihres Marketings messbar zu steigern und sichtbar zu machen.</p>
+            ` },
+            { title:'Wie wir arbeiten', content:`
+              <p>Wir sind eine agile Boutique – klein, vernetzt, fokussiert. Was uns auszeichnet:</p>
+              <ul class="learn-list">
+                <li><strong>Erfahrene Praktiker</strong> – Wir kennen die Kundenseite aus eigener Erfahrung.</li>
+                <li><strong>Analytisch & outside-in</strong> – Wir denken konsequent aus Kundenperspektive.</li>
+                <li><strong>Execution-fokussiert</strong> – Strategy is king, but execution is King Kong.</li>
+                <li><strong>Digital & tech-savvy</strong> – KI und MarTech sind fester Teil unserer Arbeit.</li>
+                <li><strong>Umsetzungsbegleitung</strong> – Wir bleiben auch als PMO an Bord, wenn es drauf ankommt.</li>
+              </ul>
+              <p>Unser <strong>Champions Playbook</strong> definiert, wie wir täglich „Exzellent", „Führend" und „Nahbar" leben – mit konkreten Dos & Don'ts für den Alltag.</p>
+            ` }
+          ]},
+          { id:'i-business', tab:'Business & Markt', sections:[
+            { title:'Unser Business Model', open:true, content:`
+              <p>Wir sind eine strategische Marketingberatungs-Boutique. Wir schaffen Wert entlang des <strong>6P-Modells</strong> – von der Markenstrategie bis zur operativen Umsetzung.</p>
+              <table>
+                <tr><th>Bereich</th><th>Was wir anbieten</th></tr>
+                <tr><td>Consulting</td><td>Strategische Beratungsprojekte für Marketingentscheider</td></tr>
+                <tr><td>Trainings & Coaching</td><td>KI-Schulungen, Capabilities-Aufbau, 1:1-Coaching</td></tr>
+                <tr><td>Software</td><td>Lizenzen & Tools (u.&nbsp;a. über brylliant.one)</td></tr>
+              </table>
+              <p style="margin-top:.75rem">Unsere wichtigsten Partner: spezialisierte Freelancer, Tech-Partner Brylliant sowie ausgewählte Agenturen.</p>
+            ` },
+            { title:'Wen wir beraten', content:`
+              <p>Wir arbeiten mit Marketingentscheidern – primär in zwei Profilen:</p>
+              <ul class="learn-list">
+                <li><strong>CMO / Marketingleiter</strong> – strategische Entscheider, die ihren Wertbeitrag sichern und skalieren wollen.</li>
+                <li><strong>Marketing / Brand Manager</strong> – operative Führungskräfte, die liefern wollen und dabei wachsen.</li>
+              </ul>
+              <p>Unser Branchenschwerpunkt: <strong>Konsumgüter & Handel</strong> – mit Ausdehnung auf alle markenorientierten Unternehmen. Unsere Bestandskunden: Beiersdorf, Danone, Lidl.</p>
+              <div class="highlight"><p><i class="fa-solid fa-chart-bar" aria-hidden="true"></i> Aktuell bewegen die Marketingwelt: KI (68 %), Brand Building (17 %), Personalisierung (8 %). – CMO-Barometer 2025</p></div>
+            ` },
+            { title:'Wettbewerb & Positionierung', content:`
+              <p>Wir bewegen uns zwischen zwei Polen – und das bewusst:</p>
+              <div class="highlight"><p><i class="fa-solid fa-arrow-right-arrow-left" aria-hidden="true"></i> Strategie-Beratungen (z.&nbsp;B. McKinsey) liefern Konzepte ohne Umsetzung. Kreativagenturen setzen um ohne Strategie. Wir tun beides.</p></div>
+              <p>Direkte Wettbewerber im Boutique-Segment: GMK, Brandmeyer, BrandTrust, Esch, Prophet, Blackeight, HPP, ANXO. Unser Vorteil: Wir sind der einzige Anbieter mit Stärke über alle 6 Ps – kombiniert mit echter Digitalexpertise und Umsetzungsorientierung.</p>
+              <p><strong>Unsere Stärken:</strong> Erfahrene Praktiker, starke FMCG/Handel-Expertise, Topkunden als Referenzen, KI-Integration.<br>
+              <strong>Unser Fokus:</strong> Boutiquen-Qualität mit Consulting-Rigor – nah, verbindlich, messbar.</p>
+            ` }
+          ]},
+          { id:'i-growth', tab:'Growth & Produkte', sections:[
+            { title:'Unsere Wachstumsstrategie', open:true, content:`
+              <p>Unser Wachstum basiert auf drei Säulen: starke Bestandskundenbeziehungen ausbauen, gezielt neue Kunden gewinnen und KI als Wettbewerbsvorteil ausbauen.</p>
+              <ul class="learn-list">
+                <li><strong>LinkedIn</strong> – unser wichtigster Kanal für Sichtbarkeit und Inbound</li>
+                <li><strong>SEO / SEA</strong> – Landingpages und Google Ads für gezielte Reichweite</li>
+                <li><strong>Events & Speaking</strong> – OMR, DMEXCO und Fachmedien (Horizont, W&V)</li>
+                <li><strong>CRM</strong> – Lead-Tracking und Pipeline-Management via Brevo</li>
+              </ul>
+              <p>Aktive Leads: Denns, ERGO, Rossmann, dm.</p>
+            ` },
+            { title:'Die 6Ps – unser Leistungsmodell', content:`
+              <p>Alle unsere Leistungen ordnen sich in das <strong>ROOTS 6P-Modell</strong> ein:</p>
+              <table>
+                <tr><th>P</th><th>Bereich</th><th>Kernleistungen</th></tr>
+                <tr><td><strong>Planning</strong></td><td>Wachstumsstrategie</td><td>Marketingstrategie, Innovationsstrategie</td></tr>
+                <tr><td><strong>Purpose</strong></td><td>Markenpositionierung</td><td>Brand Audit, Internal Branding, Handelsmarkenstrategie</td></tr>
+                <tr><td><strong>Presence</strong></td><td>Customer Experience</td><td>Social Media, Influencer Marketing, Content Strategie</td></tr>
+                <tr><td><strong>People</strong></td><td>Marketing Capability</td><td>KI-Coaching, „Die ersten 100 Tage als CMO"</td></tr>
+                <tr><td><strong>Productivity</strong></td><td>Marketing Operations</td><td>KI-Automation, Design-to-Print, Marketing Automation</td></tr>
+                <tr><td><strong>Performance</strong></td><td>Marketing Analytics</td><td>Digital Maturity Assessment, Datenstrategie</td></tr>
+              </table>
+            ` },
+            { title:'KI-Strategie', content:`
+              <p>Wir positionieren uns als führende KI-Beratung für das Marketing. Unser <strong>ROOTS AI House</strong> steht auf drei Säulen:</p>
+              <ul class="learn-list">
+                <li><strong>Intern</strong> – KI effizient, effektiv und verantwortungsvoll im Alltag einsetzen</li>
+                <li><strong>Beratung</strong> – marktorientierte KI-Beratungsangebote unter „ROOTS AI for Impact"</li>
+                <li><strong>Produkt</strong> – ein marketingnatives KI-Tool (in Entwicklung)</li>
+              </ul>
+              <p><strong>ROOTS AI for Impact</strong> umfasst vier Bereiche: Strategy, Process, Ethics & Compliance sowie People – vom AI Maturity Assessment bis zu KI-Schulungen.</p>
+            ` },
+            { title:'Offsite', content:`
+              <p>Regelmäßige Offsites sind bei uns fester Bestandteil der Strategiearbeit – für Team-Alignment, Kultur und Fokus.</p>
+              <table>
+                <tr><th>Offsite</th><th>Wann</th><th>Fokus</th></tr>
+                <tr><td>Nächstes Offsite</td><td>22.–25. Juni 2026, Tegernsee</td><td>OKRs & operative Jahresziele</td></tr>
+              </table>
+            ` }
+          ]}
+        ]
+      },
+      {
+        id:'modus', icon:'fa-solid fa-gear', title:'Modus Operandi',
+        sub:'Arbeitsweise, KI & Kommunikation',
+        submodules:[
+          { id:'m-time', tab:'Arbeitszeit und Arbeitsweise', sections:[
+            { title:'Arbeitszeit', open:true, content:`
+              <table>
+                <tr><th>Thema</th><th>Regelung</th></tr>
+                <tr><td>Kernarbeitszeiten</td><td>9:00 – 18:00 Uhr</td></tr>
+                <tr><td>Home Office</td><td>Nach Absprache, projektabhängig</td></tr>
+                <tr><td>Überstunden</td><td>Projektabhängig</td></tr>
+              </table>
+            ` },
+            { title:'Arbeit im Team und mit dem Einzelnen', content:`
+              <p class="placeholder">Platzhalter: Implizite Normen, Zusammenarbeit im Team und Erwartungen an Feedback-Kultur.</p>
+              <ul class="learn-list">
+                <li>Direkte Kommunikation und kurze Abstimmungswege</li>
+                <li>Feedback ist erwünscht – früh und konkret</li>
+                <li>Verlässlichkeit in Terminen, Deliverables und Follow-ups</li>
+              </ul>
+            ` }
+          ]},
+          { id:'m-ki', tab:'KI', sections:[
+            { title:'KI-Nutzung: unser digitaler Mitarbeiter', open:true, content:`
+              <p class="placeholder">Platzhalter: Wie wir KI im Beratungsalltag einsetzen und was das für deine Arbeit bedeutet.</p>
+              <div class="highlight"><p><i class="fa-solid fa-robot" aria-hidden="true"></i> KI beschleunigt – ersetzt aber nicht dein Denken. Nutze Tools bewusst und verantwortungsvoll.</p></div>
+              <h3 style="font-size:.92rem;margin:1rem 0 .4rem;color:var(--brand)">AI Rules</h3>
+              <ul class="learn-list">
+                <li>Keine Kundendaten in öffentliche KI-Tools</li>
+                <li>Outputs immer kritisch prüfen</li>
+                <li>Transparenz gegenüber Team und Kunden, wo relevant</li>
+              </ul>
+            ` }
+          ]},
+          { id:'m-okr', tab:'OKRs', sections:[
+            { title:'Team Meeting JFX / OKRs – Was ist das?', open:true, content:`
+              <p class="placeholder">Platzhalter: Bedeutung von JFX und OKRs bei ROOTS.</p>
+              <p><strong>OKRs</strong> = Objectives & Key Results. <strong>JFX</strong> = wöchentliches Team-Alignment zu Prioritäten und Blockern.</p>
+            ` },
+            { title:'Meetings & Vorbereitung', content:`
+              <p class="placeholder">Platzhalter: Ablauf, Rollen und Erwartungen an Updates im JFX.</p>
+              <ul class="learn-list">
+                <li>Check-in, OKR-Update, Projektstatus, Blocker & Support</li>
+                <li>Kurze, konkrete Updates mitbringen</li>
+                <li>Blocker klar benennen – idealerweise mit Lösungsvorschlag</li>
+              </ul>
+            ` },
+            { title:'Review', content:`
+              <p class="placeholder">Platzhalter: Quartals-Reviews, Zielvereinbarung und persönliche Ziele.</p>
+              <p>OKRs werden quartalsweise reviewed und neu gesetzt. Dein Zielvereinbarungsdokument bildet den Rahmen für persönliche Ziele.</p>
+            ` }
+          ]},
+          { id:'m-comm', tab:'Kommunikation', sections:[
+            { title:'Channels', open:true, content:`
+              <p class="placeholder">Platzhalter: Wann welcher Kanal – Direkt, Anruf, Teams, E-Mail, Meeting, WhatsApp.</p>
+              <table>
+                <tr><th>Kanal</th><th>Wann</th></tr>
+                <tr><td>Direkt / vor Ort</td><td>Schnelle Abstimmung im Büro</td></tr>
+                <tr><td>Anruf / Call</td><td>Dringend oder komplex in Kurzform</td></tr>
+                <tr><td>Teams Chat</td><td>Täglicher Austausch, schnelle Fragen</td></tr>
+                <tr><td>E-Mail</td><td>Formell, Kunden, Dokumentation</td></tr>
+                <tr><td>Meeting</td><td>Entscheidungen, komplexe Themen</td></tr>
+                <tr><td>WhatsApp</td><td>Nur Dringendes außerhalb der Arbeitszeit</td></tr>
+              </table>
+            ` },
+            { title:'First Minute Guide', content:`
+              <p class="placeholder">Platzhalter: Reaktionszeiten und Prioritäten bei eingehenden Anfragen.</p>
+              <p>Teams-Nachrichten innerhalb von ca. 4h, E-Mails an Kunden innerhalb von 24h – je nach Kontext anpassen.</p>
+            ` },
+            { title:'E-Mail Etikette', content:`
+              <p class="placeholder">Platzhalter: Betreff, Struktur, Anrede und Follow-up-Standards.</p>
+              <ul class="learn-list">
+                <li>Klare Betreffzeilen und eine Kernaussage pro Mail</li>
+                <li>Professioneller Ton – präzise und freundlich</li>
+                <li>Zero-Inbox als Ziel, nicht als Stressfaktor</li>
+              </ul>
+            ` },
+            { title:'Meeting Etikette', content:`
+              <p class="placeholder">Platzhalter: Erwartungen an Vorbereitung, Teilnahme und Nachbereitung.</p>
+              <ul class="learn-list">
+                <li>Pünktlich und vorbereitet</li>
+                <li>Laptop zu (außer für Notizen)</li>
+                <li>Aktiv mitdenken und Entscheidungen dokumentieren</li>
+              </ul>
+            ` },
+            { title:'Präsentationen (McKinsey Chart Clinique)', content:`
+              <p class="placeholder">Platzhalter: ROOTS-Standards für Charts und Storylines – Verweis auf Chart Clinique.</p>
+              <p>Eine klare Botschaft pro Slide, konsistente Formatierung und saubere Datenherleitung.</p>
+            ` }
+          ]}
+        ]
+      },
+      {
+        id:'okr', icon:'fa-solid fa-bullseye', title:'Team Meeting JFX / OKRs',
+        sub:'Ziele, Reviews & Meetings',
+        content:`
+          <h3>Was sind OKRs?</h3>
+          <p><strong>Objectives & Key Results</strong> – unser Rahmen für Zieldefinition und Fortschrittsmessung. Objectives sind inspirierend und qualitativ, Key Results sind messbar.</p>
+          <h3>JFX – Joint Focus Execution</h3>
+          <p>Unser wöchentliches Team-Alignment-Meeting. Hier besprechen wir Prioritäten, Blocker und nächste Schritte.</p>
+          <h3>Meeting-Struktur</h3>
+          <ul>
+            <li><strong>Check-in:</strong> Wie geht's jedem? (5 Min)</li>
+            <li><strong>OKR-Update:</strong> Status der Key Results (10 Min)</li>
+            <li><strong>Projektstatus:</strong> Kurze Updates pro Projekt (15 Min)</li>
+            <li><strong>Blocker & Support:</strong> Was braucht wer? (10 Min)</li>
+          </ul>
+          <h3>Vorbereitung</h3>
+          <p>Komm mit kurzen, konkreten Updates. Formuliere Blocker klar und bring wenn möglich Lösungsvorschläge mit.</p>
+          <h3>Review</h3>
+          <p>Quartalsweise reviewen wir OKRs und setzen neue. Dein Zielvereinbarungsdokument ist der Rahmen für deine persönlichen Ziele.</p>
+        `
+      },
+      {
+        id:'tipps', icon:'fa-solid fa-brain', title:'Tipps & Tricks',
+        sub:'Zeitmanagement, Tools & Berateralltag',
+        content:`
+          <h3>Zeitmanagement</h3>
+          <ul>
+            <li><strong>Time Blocking:</strong> Reserviere feste Blöcke für Deep Work</li>
+            <li><strong>Zero Inbox:</strong> E-Mails täglich abarbeiten, Ordnerstruktur nutzen</li>
+            <li><strong>Prioritäten:</strong> Was ist dringend? Was ist wichtig? Unterschied kennen.</li>
+          </ul>
+          <h3>Resilienz im Beratungsalltag</h3>
+          <ul>
+            <li>Feedback ist ein Geschenk – nimm ihn an</li>
+            <li>Fehler passieren – wichtig ist wie du damit umgehst</li>
+            <li>Grenzen setzen ist professionell</li>
+          </ul>
+          <h3>Auf dem Laufenden bleiben</h3>
+          <ul>
+            <li>Perplexity für schnelle Recherchen</li>
+            <li>LinkedIn für Branchennews</li>
+            <li>Kunden-Marketingmaßnahmen aktiv beobachten</li>
+          </ul>
+          <h3>Laufwerk-Struktur</h3>
+          <p>Alle Projektdokumente liegen auf dem SharePoint in der vereinbarten Ordnerstruktur. Frage deinen Mentor nach dem Zugang und der Konvention.</p>
+          <h3>Buch- & Podcastempfehlungen</h3>
+          <ul>
+            <li><i class="fa-solid fa-book" aria-hidden="true"></i> The McKinsey Way – Ethan Rasiel</li>
+            <li><i class="fa-solid fa-book" aria-hidden="true"></i> Thinking in Bets – Annie Duke</li>
+            <li><i class="fa-solid fa-microphone" aria-hidden="true"></i> How I Built This – Guy Raz</li>
+            <li><i class="fa-solid fa-microphone" aria-hidden="true"></i> Masters of Scale – Reid Hoffman</li>
+          </ul>
+          <h3>Präsentationen (McKinsey Chart Clinique)</h3>
+          <p>Wird ausführlich in Woche 2 behandelt. Grundregel: Jede Folie hat eine Botschaft. Diese steht als Überschrift.</p>
+        `
+      },
+      {
+        id:'kunden', icon:'fa-solid fa-building', title:'Kunden Insights',
+        sub:'Portfolio & Deep-Dives',
+        submodules:[
+          { id:'k-overview', tab:'Kundenüberblick', sections:[
+            { title:'Kundenüberblick', open:true, content:`
+              <p>ROOTS betreut internationale Household-Brands – u.&nbsp;a. Danone, Lidl und Beiersdorf. Nutze die Deep-Dives für Details pro Kunde.</p>
+              <div class="highlight"><p><i class="fa-solid fa-thumbtack" aria-hidden="true"></i> Beobachte aktiv Marketingmaßnahmen, Geschäftszahlen und die wirtschaftliche Lage unserer Kunden.</p></div>
+            ` }
+          ]},
+          { id:'k-danone', tab:'Danone', sections:[
+            { title:'Kundenhistorie', open:true, content:`<p class="placeholder">Platzhalter: Langjährige Zusammenarbeit und Projektgeschichte mit Danone.</p><p>Langjährige Zusammenarbeit, diverse Projekte im Bereich Brand Strategy & Marketing Operations.</p>` },
+            { title:'Projektfokus', content:`<p class="placeholder">Platzhalter: Aktuelle strategische Schwerpunkte.</p><p>Brand Strategy & Marketing Operations.</p>` },
+            { title:'Auftraggeber', content:`<p>CMO / Senior Marketing Leadership.</p>` },
+            { title:'Kultur & Arbeitsweise', content:`<p>Internationales, matrixorganisiertes Unternehmen – klare Strukturen, hohe Erwartungen an Qualität und Tempo.</p>` },
+            { title:'Aktuelle Projekte', content:`<p class="placeholder">Platzhalter: Aktuelle Projekte – Details im SharePoint / Projektbriefing.</p>` }
+          ]},
+          { id:'k-lidl', tab:'Lidl', sections:[
+            { title:'Kundenhistorie', open:true, content:`<p class="placeholder">Platzhalter: Zusammenarbeit mit Lidl.</p>` },
+            { title:'Projektfokus', content:`<p>Marketing Effizienz und Brand Experience.</p>` },
+            { title:'Auftraggeber', content:`<p class="placeholder">Platzhalter: Typische Auftraggeber bei Lidl.</p>` },
+            { title:'Kultur & Arbeitsweise', content:`<p>Internationaler Kontext, schnelle Entscheidungswege.</p>` },
+            { title:'Aktuelle Projekte', content:`<p class="placeholder">Platzhalter: Aktuelle Projekte.</p>` }
+          ]},
+          { id:'k-beiersdorf', tab:'Beiersdorf', sections:[
+            { title:'Kundenhistorie', open:true, content:`<p class="placeholder">Platzhalter: Zusammenarbeit mit Beiersdorf.</p>` },
+            { title:'Projektfokus', content:`<p>Consumer Insights & Brand Strategy – starke Eigenmarken (NIVEA, Eucerin u.&nbsp;a.).</p>` },
+            { title:'Auftraggeber', content:`<p class="placeholder">Platzhalter: Typische Auftraggeber.</p>` },
+            { title:'Kultur & Arbeitsweise', content:`<p class="placeholder">Platzhalter: Arbeitsweise und Erwartungen.</p>` },
+            { title:'Aktuelle Projekte', content:`<p class="placeholder">Platzhalter: Aktuelle Projekte.</p>` }
+          ]}
+        ]
+      },
+      {
+        id:'projektbriefing', icon:'fa-solid fa-clipboard-list', title:'Projektbriefing',
+        sub:'Dein erstes Projekt bei ROOTS',
+        submodules:[
+          { id:'pb-intro', tab:'Überblick', sections:[
+            { title:'Projektbriefing', open:true, content:`
+              <div class="highlight"><p><i class="fa-solid fa-wrench" aria-hidden="true"></i> Dieses Modul wird von deinem Projektlead individuell befüllt – je nach dem Projekt, auf dem du eingesetzt wirst.</p></div>
+              <p>Ein gutes Briefing gibt dir Orientierung für Situation, Ziele, Team und nächste Schritte.</p>
+            ` }
+          ]},
+          { id:'pb-situation', tab:'Situation', sections:[
+            { title:'Situation des Kunden', open:true, content:`<p class="placeholder">Platzhalter: Wo steht der Kunde? Was ist das Problem oder die Chance?</p>` }
+          ]},
+          { id:'pb-objectives', tab:'Objectives', sections:[
+            { title:'Projekt Objectives', open:true, content:`<p class="placeholder">Platzhalter: Was soll am Ende des Projekts erreicht sein?</p>` }
+          ]},
+          { id:'pb-team', tab:'Team', sections:[
+            { title:'Projektteam', open:true, content:`<p class="placeholder">Platzhalter: Wer macht was? Wer ist Lead?</p>` }
+          ]},
+          { id:'pb-zeitplan', tab:'Zeitplan', sections:[
+            { title:'Zeitplan & Status', open:true, content:`<p class="placeholder">Platzhalter: Meilensteine und aktuelle Phase.</p>` }
+          ]},
+          { id:'pb-stand', tab:'Arbeitsstand', sections:[
+            { title:'Aktueller Arbeitsstand', open:true, content:`<p class="placeholder">Platzhalter: Was wurde bisher erarbeitet?</p>` },
+            { title:'Deine Vorbereitung', content:`
+              <ul class="learn-list">
+                <li>Relevante Decks auf dem SharePoint ansehen</li>
+                <li>Kunden recherchieren: Website, LinkedIn, Presse, Geschäftsbericht</li>
+                <li>Fragen vorbereiten und stellen</li>
+              </ul>
+              <div class="highlight"><p><i class="fa-solid fa-comment" aria-hidden="true"></i> Selbstvorstellung: kurz, konkret, vertrauensbildend – Rolle bei ROOTS und dein Beitrag im Projekt.</p></div>
+            ` }
+          ]}
+        ]
+      },
+      {
+        id:'organigramm', icon:'fa-solid fa-sitemap', title:'Organigramm',
+        sub:'Formelle Struktur & Reporting Lines',
+        content:`
+          <h3>Formelle Struktur</h3>
+          <div class="org-person" style="background:var(--brand-light);border:1px solid #bfdbfe"><i class="fa-solid fa-crown" style="color:var(--brand);font-size:.85rem"></i><strong>Richard Erbler</strong> – Founder, Managing Partner</div>
+          <div class="org-indent">
+            <div class="org-person"><span class="dot" style="background:#7c3aed"></span><strong>Olena Lemeshko</strong> – Partner Middle East</div>
+            <div class="org-person"><span class="dot" style="background:#0891b2"></span><strong>Manuel Stankovic</strong> – Director Consulting</div>
+            <div class="org-indent">
+              <div class="org-person"><span class="dot" style="background:var(--brand)"></span><strong>Pano Goutzeris</strong> – Junior Consultant</div>
+              <div class="org-person"><span class="dot" style="background:var(--brand)"></span><strong>Jannik Müller</strong> – Junior Consultant</div>
+            </div>
+            <div class="org-person"><span class="dot" style="background:#d97706"></span><strong>Julia Fränzel</strong> – Consultant</div>
+            <div class="org-person"><span class="dot" style="background:#d97706"></span><strong>Rod Mitecki</strong> – Consultant</div>
+          </div>
+          <div class="highlight" style="margin-top:1rem"><p><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> <strong>Wichtig:</strong> Wir sind eine agile Boutique-Beratung. Die tatsächlich gelebten Reporting Lines sind sehr projektabhängig. Je nach Projektlead wird an diesen berichtet.</p></div>
+        `
+      }
+    ],
+    week2: [
+      {
+        id:'chartklinik', icon:'fa-solid fa-chart-column', title:'McKinsey Chart Clinique',
+        sub:'Daten überzeugend visualisieren',
+        content:`
+          <div class="highlight"><p><i class="fa-solid fa-chart-bar" aria-hidden="true"></i> Die Chart Clinique ist eine der wichtigsten Methoden in der Beratungspraxis. Du lernst, Daten in überzeugende, klare Visualisierungen zu übersetzen.</p></div>
+          <h3>Das Grundprinzip</h3>
+          <p>Jede Folie hat <strong>eine Botschaft</strong>. Diese steht als Überschrift – nicht als Titel.</p>
+          <ul>
+            <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> Schlechte Überschrift: "Marktanteile 2024"</li>
+            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Gute Überschrift: "ROOTS hat seinen Marktanteil in 2024 um 12% gesteigert"</li>
+          </ul>
+          <h3>Chart-Typen & wann welcher</h3>
+          <table>
+            <tr><th>Chart-Typ</th><th>Wann nutzen</th></tr>
+            <tr><td>Balken</td><td>Vergleich von Kategorien</td></tr>
+            <tr><td>Linie</td><td>Entwicklung über Zeit</td></tr>
+            <tr><td>Wasserfall</td><td>Aufbau eines Ergebnisses</td></tr>
+            <tr><td>Scatter</td><td>Korrelationen</td></tr>
+            <tr><td>Mekko</td><td>Marktstruktur / Segmentierung</td></tr>
+          </table>
+          <h3>Tipps</h3>
+          <ul>
+            <li>Weniger ist mehr – ein Gedanke pro Chart</li>
+            <li>Farbe hat Bedeutung – nutze sie gezielt</li>
+            <li>Beschriftungen direkt am Chart, nicht in Legenden</li>
+            <li>Quelle immer angeben</li>
+          </ul>
+        `
+      },
+      {
+        id:'sops', icon:'fa-solid fa-book-open', title:'SOPs',
+        sub:'Standard Operating Procedures bei ROOTS',
+        content:`
+          <div class="highlight"><p><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i> SOPs sind unsere dokumentierten Standardprozesse. Sie sorgen dafür, dass wir konsistent und effizient arbeiten.</p></div>
+          <h3>Wo du SOPs findest</h3>
+          <p>Alle SOPs liegen auf dem SharePoint in der Ordnerstruktur unter <strong>"Operations > SOPs"</strong>.</p>
+          <h3>Wichtigste SOPs für den Einstieg</h3>
+          <ul>
+            <li>SOP: Projektsetup & Kickoff</li>
+            <li>SOP: Kundenkommunikation & E-Mail-Etikette</li>
+            <li>SOP: Präsentationsstandards (Fonts, Farben, Layout)</li>
+            <li>SOP: Zeiterfassung in Tyme</li>
+            <li>SOP: Ablagestruktur & Dateibenennungskonventionen</li>
+            <li>SOP: Rechnungsstellung & Projektverwaltung</li>
+          </ul>
+          <h3>Projekts-Planung (KVA, Scoping)</h3>
+          <ul>
+            <li><strong>KVA (Kostenvoranschlag):</strong> Jedes Projekt beginnt mit einem strukturierten KVA</li>
+            <li><strong>Scoping:</strong> Klare Definition von In-Scope und Out-of-Scope</li>
+            <li><strong>Change Request:</strong> Scope-Änderungen immer dokumentieren und genehmigen lassen</li>
+          </ul>
+          <div class="highlight"><p><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Die AINAUTEN Schulung ist ebenfalls Pflicht im Onboarding. Link und Zugangsdaten bekommst du von deinem Mentor.</p></div>
+        `
+      }
+    ]
+  };
+
+  const ORGA_ACTIONS = {
+    admin_2: [
+      { kind:'link', label:'Personalfragebogen öffnen (SharePoint)', url:'https://rootsconsultants.sharepoint.com/:w:/s/ROOTSBrandStrategyConsultantsGmbH/IQDnwQ1HJFpmQan1WM2YidXyAWngEwvKyidnKHX57Dc5ozg?e=j2nqa2' },
+      { kind:'link', label:'An Steuerberater senden', url:'mailto:SYakubets@tw-ratingen.de?subject=Personalfragebogen' },
+    ],
+    admin_7: [
+      { kind:'link', label:'E-Mail an rerbler@roots-consultants.com', url:'mailto:rerbler@roots-consultants.com?subject=Krankmeldung', button:true },
+      { kind:'link', label:'E-Mail an SYakubets@tw-ratingen.de', url:'mailto:SYakubets@tw-ratingen.de?subject=Krankmeldung', button:true },
+    ],
+    admin_3: [
+      { kind:'access', label:'DATEV Arbeitnehmer-Online', url:'https://www.datev.de/web/de/berufliches/arbeitnehmer-online/' },
+    ],
+    admin_5: [
+      { kind:'download', label:'Zielvereinbarungs-Template', url:'' },
+      { kind:'link', label:'SharePoint Vorlagen', url:'' },
+    ],
+    admin_6: [
+      { kind:'link', label:'Urlaub eintragen', url:'' },
+      { kind:'access', label:'Freigabe Richard', url:'' },
+    ],
+    it_1: [
+      { kind:'link', label:'Authenticator – App Store', url:'https://apps.apple.com/app/microsoft-authenticator/id983156458', button:true },
+      { kind:'link', label:'Authenticator – Google Play', url:'https://play.google.com/store/apps/details?id=com.azure.authenticator', button:true },
+    ],
+    it_3: [
+      { kind:'link', label:'OneDrive App Store', url:'https://apps.apple.com/app/microsoft-onedrive/id477537958' },
+      { kind:'link', label:'OneDrive bei Microsoft', url:'https://www.microsoft.com/de-de/microsoft-365/onedrive/download' },
+    ],
+    tools_laufwerk: [
+      { kind:'link', label:'ROOTS SharePoint öffnen', url:'https://rootsconsultants.sharepoint.com/sites/ROOTSBrandStrategyConsultantsGmbH', button:true },
+    ],
+    it_4: [
+      { kind:'link', label:'ROOTS Font', url:'https://rootsconsultants.sharepoint.com/:f:/s/ROOTSBrandStrategyConsultantsGmbH/ElWcbInNVhlEjoCjF2zaHhwBzzM2l5rwTYfJ4FQ_hfLYHw?e=SZFBO4', button:true },
+      { kind:'download', label:'Kunden Schriftarten', url:'' },
+    ],
+    it_5: [],
+    it_6: [
+      { kind:'link', label:'Microsoft Teams', url:'https://teams.microsoft.com/' },
+    ],
+    it_7: [
+      { kind:'link', label:'Teams Meetinghintergrund herunterladen', url:'https://rootsconsultants.sharepoint.com/:i:/s/ROOTSBrandStrategyConsultantsGmbH/EWWB4_pxrF9Hl-swAa62C5oBKy5w84dzb2ChOJHCbbng0A?e=VE7gfx', button:true },
+    ],
+    it_8: [],
+    it_9: [],
+    it_10: [],
+    w_1: [
+      { kind:'link', label:'ROOTS auf LinkedIn', url:'https://www.linkedin.com/company/roots-consultants' },
+    ],
+  };
+
+  const IT_INSTALL_APPS = {
+    m365: {
+      label: 'Microsoft 365',
+      downloads: [
+        { label: 'Office für Mac herunterladen', url: 'https://go.microsoft.com/fwlink/?linkid=525133' },
+        { label: 'Microsoft 365 im Browser', url: 'https://www.microsoft365.com/' }
+      ],
+      creds: {
+        hint: 'Dein Microsoft-Geschäftskonto wird von IT/Admin eingerichtet.',
+        fields: [
+          { label: 'E-Mail', value: 'dein.name@roots-consultants.com' },
+          { label: 'Passwort', value: 'In der Willkommens-Mail / vom IT-Team' },
+          { label: 'Authenticator', value: 'Zur Anmeldung mit Microsoft Authenticator (siehe Schritt 1)' }
+        ]
+      }
+    },
+    tyme: {
+      label: 'Tyme',
+      downloads: [{ label: 'Tyme herunterladen', url: 'https://www.tyme-app.com/app/Tyme.dmg' }],
+      creds: {
+        hint: 'Zugangsdaten erhältst du von deinem Mentor oder der IT.',
+        fields: [
+          { label: 'Login', value: 'Geschäftliche E-Mail-Adresse' },
+          { label: 'Passwort', value: 'Separat mitgeteilt' }
+        ]
+      }
+    },
+    claude: {
+      label: 'Claude',
+      downloads: [{ label: 'Claude herunterladen', url: 'https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect' }],
+      creds: {
+        hint: 'Team-Zugang wird von ROOTS bereitgestellt.',
+        fields: [
+          { label: 'Login', value: 'Geschäftliche E-Mail / Einladungslink' },
+          { label: 'Passwort', value: 'Bei Ersteinrichtung festlegen' }
+        ]
+      }
+    },
+    chatgpt: {
+      label: 'ChatGPT',
+      downloads: [
+        { label: 'ChatGPT (Web)', url: 'https://chatgpt.com/' },
+        { label: 'ChatGPT App (Mac)', url: 'https://persistent.oaistatic.com/sidekick/public/ChatGPT.dmg' }
+      ],
+      creds: {
+        hint: 'Zugangsdaten für den ROOTS-Team-Account erhältst du von IT/Admin.',
+        fields: [
+          { label: 'Login', value: 'Vom IT-Team mitgeteilt' },
+          { label: 'Passwort', value: 'Vom IT-Team mitgeteilt' }
+        ]
+      }
+    },
+    pleo: {
+      label: 'Pleo',
+      downloads: [
+        { label: 'Pleo im App Store', url: 'https://apps.apple.com/de/app/pleo/id1110743278' },
+        { label: 'Pleo online', url: 'https://app.pleo.io/' }
+      ],
+      creds: {
+        hint: 'Einladung und Zugangsdaten erhältst du von der Administration.',
+        fields: [
+          { label: 'Login', value: 'Geschäftliche E-Mail-Adresse' },
+          { label: 'Passwort', value: 'Bei Ersteinrichtung festlegen / von Admin mitgeteilt' }
+        ]
+      }
+    }
+  };
+
+  const TODOS = [
+    { section:'Tools', items:[
+      { id:'it_1', text:'Microsoft Authenticator' },
+      { id:'it_m365', text:'Microsoft 365', itApps:['m365'] },
+      { id:'it_pleo', text:'Pleo', itApps:['pleo'] },
+      { id:'it_apps', text:'Weitere Apps: Tyme, Claude, ChatGPT', itApps:['tyme','claude','chatgpt'] },
+    ]},
+    { section:'IT-Setup', items:[
+      { id:'tools_laufwerk', text:'Laufwerkstruktur', detail:`
+        <p>Projektdokumente liegen in der vereinbarten Struktur auf dem ROOTS SharePoint. Zugang und Ordnerkonventionen klärt dein Mentor bei Bedarf.</p>
+      ` },
+      { id:'it_3', text:'OneDrive mit Apple Finder verbinden', detail:`
+        <div class="mod-setup-block">
+          <h3>OneDrive installieren</h3>
+          <p>Lade die OneDrive-App aus dem App Store oder von Microsoft herunter und installiere sie.</p>
+        </div>
+        <div class="mod-setup-block">
+          <h3>Anmelden</h3>
+          <p>Melde dich mit deinem ROOTS Microsoft-Geschäftskonto an und wähle den Standard-Speicherort für den OneDrive-Ordner.</p>
+        </div>
+        <div class="mod-setup-block">
+          <h3>Im Finder</h3>
+          <p>Der OneDrive-Ordner erscheint danach unter Favoriten bzw. Standorte in der Finder-Seitenleiste.</p>
+        </div>
+      ` },
+      { id:'it_4', text:'ROOTS Font installieren', detail:`
+        <p>Lade den ROOTS Font über den Button oben herunter und öffne die Schriftdatei per Doppelklick. In der Schriftsammlung auf Installieren klicken – alternativ die Datei per Drag and Drop in die Schriftsammlung ziehen.</p>
+        <p>Kundenschriftarten erhältst du projektbezogen von deinem Mentor.</p>
+      ` },
+      { id:'it_5', text:'E-Mail Signatur einrichten', detail:`
+        <div class="sig-copy-wrap">
+          <div class="sig-preview-frame" id="sig-preview-it5" contenteditable="true" spellcheck="false"><em style="color:#aaa;font-size:.85rem">Signatur wird geladen…</em></div>
+          <div class="sig-copy-bar">
+            <button class="sig-copy-btn" onclick="copySig()"><i class="fa-solid fa-copy" aria-hidden="true"></i> Signatur kopieren</button>
+          </div>
+        </div>
+        <ol>
+          <li>Signatur oben direkt bearbeiten (z.&nbsp;B. Telefonnummer eintragen)</li>
+          <li><strong>Signatur kopieren</strong> klicken</li>
+          <li>Outlook → <strong>Einstellungen</strong> → <strong>Signaturen</strong> → Neue Signatur anlegen</li>
+          <li>In das Signatur-Editor-Feld <strong>Cmd+V</strong> einfügen</li>
+          <li>Als Standard für Neue Nachrichten und Antworten/Weiterleitungen setzen</li>
+        </ol>
+      ` },
+      { id:'it_6', text:'Profilbild in Teams hochladen' },
+      { id:'it_7', text:'ROOTS Teams Meetinghintergrund installieren' },
+      { id:'it_8', text:'Mac Setup', detail:`
+        <div class="mod-setup-block">
+          <h3>Screenshots</h3>
+          <p>Screenshot-Speicherort auf Downloads setzen (Tastenkürzel Cmd+Shift+5, dann Optionen).</p>
+        </div>
+        <div class="mod-setup-block">
+          <h3>Finder</h3>
+          <p>Seitenleiste auf Zuletzt benutzt, Programme, Dokumente und Downloads reduzieren. Suche auf aktuellen Ordner beschränken. Für Dokumente Listenansicht und Pfadleiste aktivieren. Symbolleiste mit Zurück, Vorwärts, Darstellung, AirDrop, Teilen und Suchen anpassen.</p>
+        </div>
+        <div class="mod-setup-block">
+          <h3>Aktive Ecken</h3>
+          <p>Unter Mission Control: rechts oben Bildschirmsperre, rechts unten Schnellnotiz.</p>
+        </div>
+      ` },
+      { id:'it_9', text:'Outlook Setup', detail:`
+        <div class="mod-setup-block">
+          <h3>Grundlagen</h3>
+          <p>Dunkle Ansicht aktivieren. Desktop-Benachrichtigungen für neue Nachrichten deaktivieren. Leselayout ohne Relevant/Sonstige, Dateien in M365-Apps öffnen, Anheften aus, Archivieren an.</p>
+        </div>
+        <div class="mod-setup-block">
+          <h3>Verfassen &amp; Senden</h3>
+          <p>Symbolleiste mit Löschen, Archivieren, Antworten, Weiterleiten und Kategorisieren. Cc/Bcc standardmäßig anzeigen. Senden rückgängig machen auf 45 Sekunden.</p>
+        </div>
+        <div class="mod-setup-block">
+          <h3>Ordner &amp; Regeln</h3>
+          <p>Ordner Followup, Waiting, Reading und Newsletter anlegen. Newsletter per Regel automatisch einsortieren. Suche auf aktuelles Postfach beschränken.</p>
+        </div>
+        <div class="mod-setup-block">
+          <h3>Kalender</h3>
+          <p>Arbeitszeit 9:00–17:00. Bookings-with-me-Link in die Signatur. Kategorien für Break, Buffer, Client Meeting, Deep Work, Team Meetings und Travel anlegen.</p>
+        </div>
+      ` },
+      { id:'it_10', text:'PowerPoint Setup', detail:`
+        <p>In den PowerPoint-Einstellungen unter Menü und Symbolleiste die Symbolleiste für den Schnellzugriff erweitern: Ausrichten (horizontal/vertikal zentrieren, Objekte ausrichten und verteilen) hinzufügen und speichern.</p>
+      ` },
+      { id:'it_11', text:'Browser Lesezeichen', detail:`
+        <p>Lege im Browser Lesezeichen für deine wichtigsten Tools an, zum Beispiel:</p>
+        <ul class="tool-download-list">
+          <li><a href="https://www.perplexity.ai/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Perplexity</a></li>
+          <li><a href="https://www.deepl.com/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> DeepL</a></li>
+          <li><a href="https://www.duden.de/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Duden</a></li>
+          <li><a href="https://thenounproject.com/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Noun Project</a></li>
+          <li><a href="https://unsplash.com/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Unsplash</a></li>
+          <li><a href="https://miro.com/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Miro</a></li>
+          <li><a href="https://mockuuups.studio/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Mockuuups</a></li>
+        </ul>
+      ` },
+    ]},
+    { section:'Admin', items:[
+      { id:'admin_1', text:'Aushändigungen mit Seriennummern und Unterschrift bestätigen lassen', handoverDoc:true },
+      { id:'admin_2', text:'Personalfragebogen ausfüllen und an Steuerberater senden', detail:`
+        <p>Öffne den Personalfragebogen in SharePoint, fülle ihn aus und sende ihn anschließend an den Steuerberater.</p>
+      ` },
+      { id:'admin_7', text:'Im Krankheitsfall', detail:`
+        <p>Bitte gib sofort Bescheid und reiche ab dem ersten Tag die AU digital ein. Schicke deine Krankmeldung per E-Mail an beide Adressen unten.</p>
+      ` },
+      { id:'admin_3', text:'DATEV Arbeitnehmer-Online Zugang einrichten' },
+      { id:'admin_5', text:'Zielvereinbarungsdokument ausfüllen (Template vorher kopieren und lokal abspeichern)' },
+      { id:'admin_6', text:'Urlaubstage eintragen und von Richard genehmigen lassen' },
+    ]},
+    { section:'Weitere', items:[
+      { id:'w_1', text:'ROOTS bei LinkedIn folgen und im Profil hinzufügen' },
+    ]}
+  ];
+
+  /* dashboard funcs */
+  async function initDashboardView() {
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) {
+      showLoginScreen();
+      return;
+    }
+    currentUserId = session.user.id;
+    completedModules = [];
+    completedTodos   = [];
+
+    // 1. Lade Profile-Daten (HIER ANGEPASST: position)
+    const { data: profile } = await sb.schema('users').from('profiles')
+      .select('full_name, email, position').eq('id', currentUserId).maybeSingle();
+
+    // 2. Lade Fortschritt-Daten (AUTO-FIX für User ohne Zeile!)
+    let { data: progressData, error: progErr } = await sb.schema('onboarding').from('user_progress')
+      .select('completed_modules, completed_todos').eq('user_id', currentUserId).maybeSingle();
+
+    if (progErr) console.error('[ROOTS] DB Ladefehler Fortschritt:', progErr);
+
+    // Reparieren: Falls der User noch gar keine Fortschritts-Zeile hat, jetzt anlegen!
+    if (!progressData && !progErr) {
+      console.info('[ROOTS] Repariere: Lege fehlende Fortschritts-Zeile an...');
+      const { data: newData, error: insertErr } = await sb.schema('onboarding').from('user_progress').insert({
+        user_id: currentUserId,
+        completed_modules: [],
+        completed_todos: []
+      }).select().single();
+      
+      if (insertErr) {
+        console.error('[ROOTS] Datenbank Fehler beim Anlegen:', insertErr);
+        showToast('Fehler bei der Datenbank-Einrichtung', 'error');
+      } else {
+        progressData = newData;
+      }
+    }
+      
+    if (progressData) {
+      completedModules = progressData.completed_modules || [];
+      completedTodos   = progressData.completed_todos || [];
+    }
+
+    userName = profile?.full_name || session.user.email.split('@')[0];
+    userPosition = profile?.position || '';
+    userEmail = session.user.email || '';
+    const initials = userName.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
+
+    document.getElementById('greeting-text').textContent = `Hallo, ${userName}`;
+    // HIER ANGEPASST: profile.position
+    document.getElementById('user-name-topbar').textContent = `${userName}${profile?.position ? ' · ' + profile.position : ''}`;
+    document.getElementById('user-avatar').textContent = initials;
+
+    renderModules();
+    updateProgress();
+    document.getElementById('btn-done-module').onclick = markDone;
+  }
+
+  const MODULE_ORGA_IDS = ['orga-admin'];
+  const MODULE_PATH_IDS = ['welcome', 'insight', 'modus'];
+  const MODULE_PROJECT_IDS = ['kunden', 'projektbriefing'];
+  const MODULE_TAB_IDS = [...MODULE_PATH_IDS, ...MODULE_PROJECT_IDS];
+
+  function getOrgaTodoStats() {
+    const items = TODOS.flatMap(s => s.items);
+    const done = items.filter(i => completedTodos.includes(i.id)).length;
+    return { items, done, total: items.length, pct: items.length ? Math.round(done / items.length * 100) : 0 };
+  }
+
+  const HANDOVER_ITEMS = [
+    'Officeschlüssel',
+    'Zugangschip',
+    'Laptop',
+    'Dongle',
+    'Diensthandy (falls zutreffend)'
+  ];
+  const HANDOVER_STORAGE_PREFIX = 'roots-handover-doc';
+  let handoverSaveTimer = null;
+  let handoverPads = null;
+
+  function getHandoverStorageKey() {
+    return `${HANDOVER_STORAGE_PREFIX}-${currentUserId || 'guest'}`;
+  }
+
+  function defaultHandoverData() {
+    const today = new Date().toISOString().slice(0, 10);
+    return {
+      employee: userName || '',
+      handoverDate: today,
+      items: HANDOVER_ITEMS.map(() => ({ serial: '', handed: false })),
+      giver: { name: '', date: today },
+      receiver: { name: userName || '', date: today },
+      signatures: { giver: null, receiver: null }
+    };
+  }
+
+  function loadHandoverData() {
+    try {
+      const raw = localStorage.getItem(getHandoverStorageKey());
+      if (!raw) return defaultHandoverData();
+      const parsed = JSON.parse(raw);
+      const base = defaultHandoverData();
+      return {
+        ...base,
+        ...parsed,
+        items: HANDOVER_ITEMS.map((_, i) => ({
+          serial: parsed.items?.[i]?.serial || '',
+          handed: !!parsed.items?.[i]?.handed
+        })),
+        giver: { ...base.giver, ...(parsed.giver || {}) },
+        receiver: { ...base.receiver, ...(parsed.receiver || {}) },
+        signatures: { giver: parsed.signatures?.giver || null, receiver: parsed.signatures?.receiver || null }
+      };
+    } catch {
+      return defaultHandoverData();
+    }
+  }
+
+  function persistHandoverData(data) {
+    try { localStorage.setItem(getHandoverStorageKey(), JSON.stringify(data)); } catch (_) {}
+  }
+
+  function scheduleHandoverSave() {
+    clearTimeout(handoverSaveTimer);
+    handoverSaveTimer = setTimeout(() => {
+      const data = collectHandoverFormData();
+      persistHandoverData(data);
+    }, 350);
+  }
+
+  function collectHandoverFormData() {
+    const root = document.getElementById('handover-doc');
+    if (!root) return loadHandoverData();
+    const data = loadHandoverData();
+    data.employee = root.querySelector('[data-field="employee"]')?.value?.trim() || '';
+    data.handoverDate = root.querySelector('[data-field="handoverDate"]')?.value || data.handoverDate;
+    data.items = HANDOVER_ITEMS.map((_, i) => ({
+      serial: root.querySelector(`[data-field="serial-${i}"]`)?.value?.trim() || '',
+      handed: !!root.querySelector(`[data-field="handed-${i}"]`)?.checked
+    }));
+    data.giver.name = root.querySelector('[data-field="giverName"]')?.value?.trim() || '';
+    data.giver.date = root.querySelector('[data-field="giverDate"]')?.value || '';
+    data.receiver.name = root.querySelector('[data-field="receiverName"]')?.value?.trim() || '';
+    data.receiver.date = root.querySelector('[data-field="receiverDate"]')?.value || '';
+    if (handoverPads?.giver) data.signatures.giver = handoverPads.giver.toDataURL();
+    if (handoverPads?.receiver) data.signatures.receiver = handoverPads.receiver.toDataURL();
+    return data;
+  }
+
+  function renderHandoverDocumentHtml() {
+    const rows = HANDOVER_ITEMS.map((label, i) => `
+      <tr>
+        <td>${i + 1}</td>
+        <td>${label}</td>
+        <td><input type="text" data-field="serial-${i}" placeholder="Seriennummer / Kennung" autocomplete="off"/></td>
+        <td class="handover-td-check"><input type="checkbox" data-field="handed-${i}" aria-label="Übergeben: ${label}"/></td>
+      </tr>`).join('');
+    return `
+      <p class="handover-intro">Protokoll live ausfüllen – Änderungen werden automatisch gespeichert. Danach als PDF herunterladen oder drucken.</p>
+      <div class="handover-toolbar">
+        <button type="button" class="handover-btn" id="handover-download-btn"><i class="fa-solid fa-file-pdf"></i> PDF herunterladen</button>
+        <button type="button" class="handover-btn handover-btn--ghost" id="handover-print-btn"><i class="fa-solid fa-print"></i> Drucken</button>
+        <button type="button" class="handover-btn handover-btn--ghost" id="handover-reset-btn">Zurücksetzen</button>
+      </div>
+      <div class="handover-doc" id="handover-doc">
+        <div class="handover-doc__header">
+          <div class="handover-doc__header-text">
+            <div class="handover-doc__brand">ROOTS Brand Strategy Consultants GmbH</div>
+            <h3 class="handover-doc__title">Übergabeprotokoll – Arbeitsmittel</h3>
+          </div>
+          <img src="https://roots-consultants.de/wp-content/uploads/2025/04/Roots-Brand-Strategy-Consultants-Logo.svg" class="handover-doc__logo" alt="ROOTS" crossorigin="anonymous" onerror="this.onerror=null;this.src='https://roots-consultants.de/wp-content/uploads/2025/08/1630566728264.jpeg'">
+        </div>
+        <div class="handover-doc__meta">
+          <div class="handover-field">
+            <label for="handover-employee">Mitarbeiter/in</label>
+            <input type="text" id="handover-employee" data-field="employee" autocomplete="name"/>
+          </div>
+          <div class="handover-field">
+            <label for="handover-date">Übergabedatum</label>
+            <input type="date" id="handover-date" data-field="handoverDate"/>
+          </div>
+        </div>
+        <div class="handover-doc__section-title">Ausgehändigte Arbeitsmittel</div>
+        <table>
+          <thead><tr><th>#</th><th>Gegenstand</th><th>Seriennummer / Kennung</th><th>Übergeben</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+        <div class="handover-doc__section-title">Hinweise</div>
+        <ul class="handover-doc__hints">
+          <li>Die ausgehändigten Arbeitsmittel verbleiben im Eigentum des Unternehmens.</li>
+          <li>Bei Verlust oder Beschädigung ist unverzüglich die zuständige Person zu informieren.</li>
+          <li>Bei Beendigung des Arbeitsverhältnisses sind alle Arbeitsmittel vollständig zurückzugeben.</li>
+        </ul>
+        <div class="handover-doc__section-title">Unterschriften</div>
+        <div class="handover-signatures">
+          <div class="handover-sign-block">
+            <label>Übergeben durch</label>
+            <div class="handover-sign-canvas-wrap">
+              <canvas class="handover-sign-canvas" id="handover-sign-giver" width="400" height="144"></canvas>
+              <button type="button" class="handover-sign-clear" data-sign-clear="giver">Löschen</button>
+            </div>
+            <div class="handover-sign-meta">
+              <div class="handover-field"><label>Name</label><input type="text" data-field="giverName" autocomplete="off"/></div>
+              <div class="handover-field"><label>Datum</label><input type="date" data-field="giverDate"/></div>
+            </div>
+          </div>
+          <div class="handover-sign-block">
+            <label>Empfangen durch (neue/r Mitarbeiter/in)</label>
+            <div class="handover-sign-canvas-wrap">
+              <canvas class="handover-sign-canvas" id="handover-sign-receiver" width="400" height="144"></canvas>
+              <button type="button" class="handover-sign-clear" data-sign-clear="receiver">Löschen</button>
+            </div>
+            <div class="handover-sign-meta">
+              <div class="handover-field"><label>Name</label><input type="text" data-field="receiverName" autocomplete="off"/></div>
+              <div class="handover-field"><label>Datum</label><input type="date" data-field="receiverDate"/></div>
+            </div>
+          </div>
+        </div>
+        <p class="handover-doc__footer">Mit meiner Unterschrift bestätige ich den Erhalt der oben aufgeführten Arbeitsmittel und nehme die genannten Hinweise zur Kenntnis.</p>
+      </div>`;
+  }
+
+  function initSignaturePad(canvas, initialDataUrl, onChange) {
+    const ctx = canvas.getContext('2d');
+    const ratio = Math.max(window.devicePixelRatio || 1, 1);
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = Math.floor(rect.width * ratio);
+    canvas.height = Math.floor(rect.height * ratio);
+    ctx.scale(ratio, ratio);
+    ctx.strokeStyle = '#0f172a';
+    ctx.lineWidth = 1.8;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    function drawImageFromDataUrl(url) {
+      if (!url) return;
+      const img = new Image();
+      img.onload = () => {
+        ctx.clearRect(0, 0, rect.width, rect.height);
+        ctx.drawImage(img, 0, 0, rect.width, rect.height);
+      };
+      img.src = url;
+    }
+    drawImageFromDataUrl(initialDataUrl);
+
+    let drawing = false;
+    function pos(e) {
+      const r = canvas.getBoundingClientRect();
+      const t = e.touches?.[0];
+      const x = (t ? t.clientX : e.clientX) - r.left;
+      const y = (t ? t.clientY : e.clientY) - r.top;
+      return { x, y };
+    }
+    function start(e) {
+      e.preventDefault();
+      drawing = true;
+      const p = pos(e);
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+    }
+    function move(e) {
+      if (!drawing) return;
+      e.preventDefault();
+      const p = pos(e);
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+    }
+    function end() {
+      if (!drawing) return;
+      drawing = false;
+      onChange?.();
+    }
+    canvas.addEventListener('mousedown', start);
+    canvas.addEventListener('mousemove', move);
+    canvas.addEventListener('mouseup', end);
+    canvas.addEventListener('mouseleave', end);
+    canvas.addEventListener('touchstart', start, { passive: false });
+    canvas.addEventListener('touchmove', move, { passive: false });
+    canvas.addEventListener('touchend', end);
+
+    return {
+      clear() {
+        ctx.clearRect(0, 0, rect.width, rect.height);
+        onChange?.();
+      },
+      toDataURL() {
+        return canvas.toDataURL('image/png');
+      },
+      redraw(url) { drawImageFromDataUrl(url); }
+    };
+  }
+
+  function applyHandoverDataToForm(data) {
+    const root = document.getElementById('handover-doc');
+    if (!root) return;
+    root.querySelector('[data-field="employee"]').value = data.employee || '';
+    root.querySelector('[data-field="handoverDate"]').value = data.handoverDate || '';
+    HANDOVER_ITEMS.forEach((_, i) => {
+      root.querySelector(`[data-field="serial-${i}"]`).value = data.items[i]?.serial || '';
+      root.querySelector(`[data-field="handed-${i}"]`).checked = !!data.items[i]?.handed;
+    });
+    root.querySelector('[data-field="giverName"]').value = data.giver?.name || '';
+    root.querySelector('[data-field="giverDate"]').value = data.giver?.date || '';
+    root.querySelector('[data-field="receiverName"]').value = data.receiver?.name || '';
+    root.querySelector('[data-field="receiverDate"]').value = data.receiver?.date || '';
+  }
+
+  function initHandoverDocument() {
+    const root = document.getElementById('handover-doc');
+    if (!root || root.dataset.inited === '1') return;
+    root.dataset.inited = '1';
+    const data = loadHandoverData();
+    applyHandoverDataToForm(data);
+
+    const giverCanvas = document.getElementById('handover-sign-giver');
+    const receiverCanvas = document.getElementById('handover-sign-receiver');
+    handoverPads = {
+      giver: initSignaturePad(giverCanvas, data.signatures?.giver, scheduleHandoverSave),
+      receiver: initSignaturePad(receiverCanvas, data.signatures?.receiver, scheduleHandoverSave)
+    };
+
+    root.querySelectorAll('input').forEach(inp => {
+      inp.addEventListener('input', scheduleHandoverSave);
+      inp.addEventListener('change', scheduleHandoverSave);
+    });
+    root.querySelectorAll('[data-sign-clear]').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const key = btn.dataset.signClear;
+        handoverPads[key]?.clear();
+        scheduleHandoverSave();
+      });
+    });
+
+    document.getElementById('handover-download-btn')?.addEventListener('click', e => {
+      e.stopPropagation();
+      downloadHandoverPdf();
+    });
+    document.getElementById('handover-print-btn')?.addEventListener('click', e => {
+      e.stopPropagation();
+      printHandoverDoc();
+    });
+    document.getElementById('handover-reset-btn')?.addEventListener('click', e => {
+      e.stopPropagation();
+      if (!confirm('Alle Eingaben und Unterschriften zurücksetzen?')) return;
+      try { localStorage.removeItem(getHandoverStorageKey()); } catch (_) {}
+      delete root.dataset.inited;
+      handoverPads = null;
+      const section = root.closest('.mod-section-body');
+      if (section) {
+        section.innerHTML = renderHandoverDocumentHtml();
+        initHandoverDocument();
+      }
+    });
+  }
+
+  async function loadImageAsDataUrl(url) {
+    return new Promise(resolve => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        try {
+          const c = document.createElement('canvas');
+          c.width = img.naturalWidth || 200;
+          c.height = img.naturalHeight || 200;
+          c.getContext('2d').drawImage(img, 0, 0);
+          resolve(c.toDataURL('image/png'));
+        } catch(e) { resolve(url); }
+      };
+      img.onerror = () => resolve(url);
+      img.src = url + (url.includes('?') ? '&' : '?') + '_t=' + Date.now();
+    });
+  }
+
+  function buildPrintableHandoverClone(source) {
+    const data = collectHandoverFormData();
+    const fmtDate = d => {
+      if (!d) return '';
+      const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d);
+      return m ? `${m[3]}.${m[2]}.${m[1]}` : d;
+    };
+    const sourceCanvases = source.querySelectorAll('canvas');
+    const sigDataUrl = (canv) => {
+      if (canv && canv.width > 0 && canv.height > 0) {
+        try { return canv.toDataURL('image/png'); } catch(_) {}
+      }
+      return '';
+    };
+    const giverSig = sigDataUrl(sourceCanvases[0]);
+    const receiverSig = sigDataUrl(sourceCanvases[1]);
+
+    const FONT = 'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;color:#111';
+    const BRAND = '#1f4d8f';
+    const INK = '#111';
+    const MUTED = '#666';
+    const LINE = '#d8d8d8';
+    const BRAND_LIGHT = '#eaf1fb';
+
+    const itemRows = HANDOVER_ITEMS.map((label, i) => {
+      const it = (data.items || [])[i] || {};
+      return `
+      <tr>
+        <td style="border:1px solid ${LINE};padding:6px 8px;width:28px;text-align:center;font-weight:600">${i+1}</td>
+        <td style="border:1px solid ${LINE};padding:6px 8px">${String(label).replace(/</g,'&lt;')}</td>
+        <td style="border:1px solid ${LINE};padding:6px 8px">${(it.serial||'').replace(/</g,'&lt;')}</td>
+        <td style="border:1px solid ${LINE};padding:6px 8px;width:60px;text-align:center;font-weight:700">${it.handed ? '✓' : ''}</td>
+      </tr>`;
+    }).join('');
+
+    const sigBlock = (label, name, date, sigUrl) => `
+      <div style="flex:1;min-width:0">
+        <div style="font-size:9.5px;font-weight:700;color:${MUTED};text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">${label}</div>
+        <div style="height:72px;border:1px solid ${LINE};border-radius:3px;background:#fff;margin-bottom:8px;${sigUrl ? `background:url('${sigUrl}') center/contain no-repeat` : ''}"></div>
+        <div style="display:flex;gap:14px;font-size:11px">
+          <div style="flex:1"><div style="font-size:9px;color:${MUTED};margin-bottom:2px;text-transform:uppercase;letter-spacing:.04em">Name</div><div style="border-bottom:1px solid ${INK};padding:2px 0;min-height:18px">${(name||'').replace(/</g,'&lt;')}</div></div>
+          <div style="width:90px"><div style="font-size:9px;color:${MUTED};margin-bottom:2px;text-transform:uppercase;letter-spacing:.04em">Datum</div><div style="border-bottom:1px solid ${INK};padding:2px 0;min-height:18px">${fmtDate(date)}</div></div>
+        </div>
+      </div>`;
+
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = `${FONT};font-size:11.5px;line-height:1.55;background:#fff;padding:0;box-sizing:border-box`;
+    wrapper.innerHTML = `
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:22px;padding-bottom:14px;border-bottom:3px solid ${BRAND}">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:${BRAND};margin-bottom:6px">ROOTS Brand Strategy Consultants GmbH</div>
+          <div style="font-size:22px;font-weight:700;color:${INK};margin:0;line-height:1.15;letter-spacing:-.01em">Übergabeprotokoll – Arbeitsmittel</div>
+        </div>
+        <img class="handover-doc__logo" src="https://roots-consultants.de/wp-content/uploads/2025/04/Roots-Brand-Strategy-Consultants-Logo.svg" alt="ROOTS" style="display:block;width:140px;height:auto;flex:0 0 140px;object-fit:contain">
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 28px;margin-bottom:18px">
+        <div>
+          <div style="font-size:9.5px;font-weight:700;color:${MUTED};text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Mitarbeiter/in</div>
+          <div style="border-bottom:1px solid ${INK};padding:3px 0;min-height:20px;font-size:13px">${(data.employee||'').replace(/</g,'&lt;')}</div>
+        </div>
+        <div>
+          <div style="font-size:9.5px;font-weight:700;color:${MUTED};text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Übergabedatum</div>
+          <div style="border-bottom:1px solid ${INK};padding:3px 0;min-height:20px;font-size:13px">${fmtDate(data.handoverDate)}</div>
+        </div>
+      </div>
+
+      <div style="font-size:10px;font-weight:700;margin:18px 0 8px;color:${BRAND};text-transform:uppercase;letter-spacing:.07em">Ausgehändigte Arbeitsmittel</div>
+      <table style="width:100%;border-collapse:collapse;font-size:11px;margin-bottom:6px">
+        <thead>
+          <tr>
+            <th style="background:${BRAND_LIGHT};color:${BRAND};font-weight:600;font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;border:1px solid ${BRAND_LIGHT};padding:8px;text-align:left">#</th>
+            <th style="background:${BRAND_LIGHT};color:${BRAND};font-weight:600;font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;border:1px solid ${BRAND_LIGHT};padding:8px;text-align:left">Gegenstand</th>
+            <th style="background:${BRAND_LIGHT};color:${BRAND};font-weight:600;font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;border:1px solid ${BRAND_LIGHT};padding:8px;text-align:left">Seriennummer / Kennung</th>
+            <th style="background:${BRAND_LIGHT};color:${BRAND};font-weight:600;font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;border:1px solid ${BRAND_LIGHT};padding:8px;text-align:center">Übergeben</th>
+          </tr>
+        </thead>
+        <tbody>${itemRows}</tbody>
+      </table>
+
+      <div style="font-size:10px;font-weight:700;margin:18px 0 8px;color:${BRAND};text-transform:uppercase;letter-spacing:.07em">Hinweise</div>
+      <ul style="margin:0 0 14px;padding-left:18px;font-size:11px;color:${INK}">
+        <li style="margin-bottom:3px">Die ausgehändigten Arbeitsmittel verbleiben im Eigentum des Unternehmens.</li>
+        <li style="margin-bottom:3px">Bei Verlust oder Beschädigung ist unverzüglich die zuständige Person zu informieren.</li>
+        <li style="margin-bottom:3px">Bei Beendigung des Arbeitsverhältnisses sind alle Arbeitsmittel vollständig zurückzugeben.</li>
+      </ul>
+
+      <div style="font-size:10px;font-weight:700;margin:18px 0 10px;color:${BRAND};text-transform:uppercase;letter-spacing:.07em">Unterschriften</div>
+      <div style="display:flex;gap:28px;margin-bottom:14px">
+        ${sigBlock('Übergeben durch', data.giver?.name, data.giver?.date, giverSig)}
+        ${sigBlock('Empfangen durch (neue/r Mitarbeiter/in)', data.receiver?.name, data.receiver?.date, receiverSig)}
+      </div>
+
+      <div style="margin-top:18px;padding-top:10px;border-top:2px solid ${BRAND_LIGHT};font-size:10px;color:${MUTED};font-style:italic">Mit meiner Unterschrift bestätige ich den Erhalt der oben aufgeführten Arbeitsmittel und nehme die genannten Hinweise zur Kenntnis.</div>
+    `;
+    return wrapper;
+  }
+
+  async function downloadHandoverPdf() {
+    const el = document.getElementById('handover-doc');
+    if (!el || typeof html2pdf === 'undefined') {
+      showToast('PDF-Export nicht verfügbar', 'error');
+      return;
+    }
+    const data = collectHandoverFormData();
+    persistHandoverData(data);
+    const namePart = (data.employee || 'Mitarbeiter').replace(/[^\wäöüÄÖÜß\-]+/gi, '_').slice(0, 40);
+    const fileName = `Uebergabeprotokoll_${namePart}_${data.handoverDate || 'datum'}.pdf`;
+    const btn = document.getElementById('handover-download-btn');
+    if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> PDF wird erstellt…'; }
+
+    const clone = buildPrintableHandoverClone(el);
+    const logoImg = clone.querySelector('.handover-doc__logo');
+    if (logoImg) {
+      try { logoImg.src = await loadImageAsDataUrl(logoImg.src); } catch(_) {}
+    }
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 'position:fixed;left:-99999px;top:0;width:760px;background:#fff;padding:0;margin:0;border:none;box-shadow:none;z-index:-1';
+    wrapper.appendChild(clone);
+    document.body.appendChild(wrapper);
+
+    try {
+      await html2pdf().set({
+        margin: [12, 12, 14, 12],
+        filename: fileName,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, allowTaint: true, logging: false, imageTimeout: 8000, backgroundColor: '#ffffff' },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+      }).from(clone).save();
+      showToast('PDF heruntergeladen', 'success');
+    } catch (err) {
+      console.error('[ROOTS] PDF export:', err);
+      showToast('PDF-Export fehlgeschlagen: ' + (err && err.message || err), 'error');
+    } finally {
+      wrapper.remove();
+      if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> PDF herunterladen'; }
+    }
+  }
+
+  async function printHandoverDoc() {
+    const data = collectHandoverFormData();
+    persistHandoverData(data);
+    const source = document.getElementById('handover-doc');
+    if (!source) return;
+    let printRoot = document.getElementById('handover-print-root');
+    if (!printRoot) {
+      printRoot = document.createElement('div');
+      printRoot.id = 'handover-print-root';
+      document.body.appendChild(printRoot);
+    }
+    const clone = buildPrintableHandoverClone(source);
+    printRoot.innerHTML = '';
+    printRoot.appendChild(clone);
+    document.body.classList.add('body-handover-print');
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+    window.print();
+    setTimeout(() => {
+      document.body.classList.remove('body-handover-print');
+      printRoot.innerHTML = '';
+    }, 800);
+  }
+
+  function renderItCredsPanel(creds) {
+    if (!creds) return '<p class="placeholder">Zugangsdaten folgen – bei Bedarf Mentor oder IT kontaktieren.</p>';
+    let html = creds.hint ? `<p>${creds.hint}</p>` : '';
+    if (creds.fields?.length) {
+      html += '<dl class="it-creds-list">' + creds.fields.map(f =>
+        `<dt>${f.label}</dt><dd>${f.value}</dd>`
+      ).join('') + '</dl>';
+    }
+    return html;
+  }
+
+  function renderItAppsInstallHtml(appIds) {
+    return appIds.map(id => {
+      const app = IT_INSTALL_APPS[id];
+      if (!app) return '';
+      const dlBtns = (app.downloads || []).map(d =>
+        `<a href="${d.url}" class="orga-action-btn" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-solid fa-download" aria-hidden="true"></i> ${d.label}</a>`
+      ).join('');
+      return `
+        <div class="it-app-block" data-app="${id}">
+          <h4 class="it-app-block__title">${app.label}</h4>
+          <div class="orga-action-buttons">
+            ${dlBtns}
+            <button type="button" class="orga-action-btn orga-action-btn--ghost" data-show-creds="${id}">Zugangsdaten anzeigen</button>
+          </div>
+          <div class="it-creds-panel" id="it-creds-${id}" hidden>${renderItCredsPanel(app.creds)}</div>
+        </div>`;
+    }).join('');
+  }
+
+  function bindItAppCredentials() {
+    const body = document.getElementById('modal-body');
+    if (!body) return;
+    body.querySelectorAll('[data-show-creds]').forEach(btn => {
+      if (btn.dataset.credsBound === '1') return;
+      btn.dataset.credsBound = '1';
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const id = btn.dataset.showCreds;
+        const panel = document.getElementById(`it-creds-${id}`);
+        if (!panel) return;
+        const show = panel.hidden;
+        panel.hidden = !show;
+        btn.textContent = show ? 'Zugangsdaten ausblenden' : 'Zugangsdaten anzeigen';
+      });
+    });
+  }
+
+  function renderOrgaActionLinks(todoId) {
+    const actions = ORGA_ACTIONS[todoId];
+    if (!actions || !actions.length) return '';
+    const renderOne = action => {
+      if (!action.url) {
+        return action.button
+          ? `<span class="orga-link-muted">${action.label} <em>(folgt)</em></span>`
+          : `<li><span class="orga-link-muted">${action.label} <em>(folgt)</em></span></li>`;
+      }
+      const external = (action.url.startsWith('mailto:') || action.external === false)
+        ? ''
+        : ' target="_blank" rel="noopener noreferrer"';
+      const icon = action.url.startsWith('mailto:') ? 'fa-envelope'
+        : (action.kind === 'download' || /herunterladen/i.test(action.label)) ? 'fa-download'
+        : 'fa-arrow-up-right-from-square';
+      if (action.button) {
+        return `<a href="${action.url}" class="orga-action-btn"${external} onclick="event.stopPropagation()"><i class="fa-solid ${icon}" aria-hidden="true"></i> ${action.label}</a>`;
+      }
+      return `<li><a href="${action.url}"${external} onclick="event.stopPropagation()"><i class="fa-solid ${icon}" aria-hidden="true"></i> ${action.label}</a></li>`;
+    };
+    const links = actions.filter(a => !a.button);
+    const buttons = actions.filter(a => a.button);
+    let html = '';
+    if (links.length) html += `<ul class="tool-download-list">${links.map(renderOne).join('')}</ul>`;
+    if (buttons.length) html += `<div class="orga-action-buttons">${buttons.map(renderOne).join('')}</div>`;
+    return html;
+  }
+
+  function renderOrgaTodoItem(item, openFirst) {
+    const checked = completedTodos.includes(item.id);
+    const isHandover = item.handoverDoc || item.id === 'admin_1';
+    const isItApps = Array.isArray(item.itApps) && item.itApps.length;
+    const linksHtml = (isHandover || isItApps) ? '' : renderOrgaActionLinks(item.id);
+    const detailHtml = isHandover ? renderHandoverDocumentHtml()
+      : isItApps ? renderItAppsInstallHtml(item.itApps)
+      : (item.detail || '');
+    const linksAfterDetail = !isHandover && !isItApps && (ORGA_ACTIONS[item.id] || []).some(a => a.button);
+    const bodyParts = (linksAfterDetail ? [detailHtml, linksHtml] : [linksHtml, detailHtml]).filter(Boolean).join('');
+    const bodyHtml = bodyParts || '<p class="placeholder">Keine weiteren Details.</p>';
+    return `
+      <details class="mod-section orga-mod-item${checked ? ' is-done' : ''}"${openFirst ? ' open' : ''}>
+        <summary>
+          <label class="orga-mod-check" onclick="event.stopPropagation()">
+            <input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleTodoItem('${item.id}'); this.closest('.mod-section').classList.toggle('is-done', this.checked)"/>
+          </label>
+          <span class="sub-accordion-title">${item.text}</span>
+          <i class="fa-solid fa-chevron-down mod-section-chevron" aria-hidden="true"></i>
+        </summary>
+        <div class="mod-section-body">${bodyHtml}</div>
+      </details>`;
+  }
+
+  function orgaSectionTabId(section) {
+    return section.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  }
+
+  function getActiveModuleTabId() {
+    return document.querySelector('#modal-body .module-tab.active')?.dataset.sub || null;
+  }
+
+  function restoreModuleTab(subId) {
+    if (!subId) return;
+    const btn = document.querySelector(`#modal-body .module-tab[data-sub="${subId}"]`);
+    if (btn) btn.click();
+  }
+
+  function bindOrgaModAccordions() {
+    const body = document.getElementById('modal-body');
+    if (!body) return;
+    body.querySelectorAll('.orga-mod-panel a, .orga-mod-panel label, .orga-mod-panel input, .orga-mod-panel button').forEach(el => {
+      el.addEventListener('click', e => e.stopPropagation());
+    });
+  }
+
+  function bindOrgaTodoInteractions() {
+    bindOrgaModAccordions();
+    bindModuleModalTabs();
+    initHandoverDocument();
+    bindItAppCredentials();
+  }
+
+  function renderOrgaAdminModalBody() {
+    const tabsHtml = TODOS.map((sec, i) =>
+      `<button type="button" class="module-tab${i === 0 ? ' active' : ''}" data-sub="${orgaSectionTabId(sec.section)}">${sec.section}</button>`
+    ).join('');
+    const panelsHtml = TODOS.map((sec, i) => {
+      const tabId = orgaSectionTabId(sec.section);
+      let firstOpen = true;
+      const itemsHtml = sec.items.map(item => {
+        const open = firstOpen;
+        if (open) firstOpen = false;
+        return renderOrgaTodoItem(item, open);
+      }).join('');
+      return `<div class="module-tab-panel modal-scroll${i === 0 ? ' active' : ''}" data-sub="${tabId}"><div class="modal-scroll-inner orga-mod-panel">${itemsHtml}</div></div>`;
+    }).join('');
+    return `<div class="module-tab-bar" role="tablist">${tabsHtml}</div><div class="module-tab-panels">${panelsHtml}</div>`;
+  }
+
+  function getAllDashboardModules() { return [...MODULES.week1, ...MODULES.week2]; }
+  function getModuleById(id) { return getAllDashboardModules().find(m => m.id === id); }
+  function renderSubmoduleAccordions(sub, useFlat) {
+    const cls = useFlat ? 'mod-section' : 'sub-accordion';
+    const chev = useFlat ? 'mod-section-chevron' : 'sub-accordion-chevron';
+    const bodyCls = useFlat ? 'mod-section-body' : 'sub-accordion-body';
+    return sub.sections.map((sec, i) => `
+      <details class="${cls}"${sec.open || i === 0 ? ' open' : ''}>
+        <summary><span class="sub-accordion-title">${sec.title}</span><i class="fa-solid fa-chevron-down ${chev}" aria-hidden="true"></i></summary>
+        <div class="${bodyCls}">${sec.content}</div>
+      </details>`).join('');
+  }
+  function buildSignatureHtml() {
+    const name = userName || 'Dein Name';
+    const pos = userPosition || 'Junior Consultant';
+    const email = userEmail || 'vorname.nachname@roots-consultants.com';
+    const logo = 'https://roots-consultants.de/wp-content/uploads/2025/08/1630566728264.jpeg';
+    const logoFallback = 'https://roots-consultants.de/wp-content/uploads/2025/04/Roots-Brand-Strategy-Consultants-Logo.svg';
+    const sep = `<span style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;color:#000"><s>${'&nbsp;'.repeat(60)}</s></span>`;
+    return `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px"><b>${name}</b></p>`
+      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px">${pos}</p>`
+      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px">ROOTS Brand Strategy Consultants GmbH</p>`
+      + `<p style="margin:6px 0 4px"><img src="${logo}" width="88" height="88" alt="ROOTS" style="width:88px;height:88px;max-width:100%" onerror="this.onerror=null;this.src='${logoFallback}'"></p>`
+      + `<p style="margin:2px 0">${sep}</p>`
+      + `<p style="margin:0 0 2px"><a href="tel:[Telefonnummer]" style="color:rgb(0,120,212);font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;text-decoration:none">[Telefonnummer eintragen]</a></p>`
+      + `<p style="margin:0 0 2px"><a href="mailto:${email}" style="color:rgb(0,120,212);font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;text-decoration:none">${email}</a></p>`
+      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px"><a href="https://www.roots-consultants.com/" style="color:#000">Website</a>&nbsp;I <a href="https://www.linkedin.com/company/roots-consultants" style="color:#000">LinkedIn</a></p>`
+      + `<p style="margin:2px 0">${sep}</p>`
+      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px"><b>Mehr über ROOTS:</b></p>`
+      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:5.5pt;margin:0">&nbsp;</p>`
+      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px">Bereit für den EU AI Act?</p>`
+      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 6px"><b><u><a href="https://www.roots-consultants.com/productivity/ai-governance-marketing/" style="color:#000">Hier</a></u></b>&nbsp;zu AI Governance informieren.</p>`
+      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px">Interesse an frischen Marketing-Impulsen?</p>`
+      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0"><b><u><a href="https://www.roots-consultants.com/newsletter/" style="color:#000">Hier</a></u></b>&nbsp;zum Quarterly-Newsletter anmelden.</p>`;
+  }
+  function renderSigPreview() {
+    const el = document.getElementById('sig-preview-it5');
+    if (!el) return;
+    el.innerHTML = buildSignatureHtml();
+  }
+  async function copySig() {
+    const editorEl = document.getElementById('sig-preview-it5');
+    const html = `<html><body>${editorEl ? editorEl.innerHTML : buildSignatureHtml()}</body></html>`;
+    try {
+      await navigator.clipboard.write([new ClipboardItem({'text/html': new Blob([html], {type:'text/html'})})]);
+      showToast('Signatur kopiert – in Outlook mit Cmd+V einfügen', 'success');
+    } catch(e) {
+      try { await navigator.clipboard.writeText(html); showToast('HTML in Zwischenablage kopiert', 'success'); }
+      catch(e2) { showToast('Kopieren fehlgeschlagen – bitte manuell markieren', 'error'); }
+    }
+  }
+  function animateTimeline(tlEl) {
+    if (!tlEl) return;
+    const progress = tlEl.querySelector('.ob-timeline-progress');
+    if (!progress) return;
+    const steps = Array.from(tlEl.querySelectorAll('.ob-timeline-step'));
+    progress.style.transition = 'none';
+    progress.style.height = '0px';
+    steps.forEach(s => s.classList.remove('is-visible'));
+    const lineTop = 4;
+    const DURATION = 1800;
+    let startTime = null;
+    function easeOut(t) { return 1 - Math.pow(1 - t, 2.8); }
+    function frame(ts) {
+      if (!startTime) startTime = ts;
+      const rawT = Math.min((ts - startTime) / DURATION, 1);
+      const h = easeOut(rawT) * (tlEl.offsetHeight - lineTop - 4);
+      progress.style.height = h + 'px';
+      steps.forEach(step => {
+        if (!step.classList.contains('is-visible')) {
+          const circleY = step.offsetTop + Math.round(parseFloat(getComputedStyle(step).paddingTop || 0)) + 4;
+          if (lineTop + h >= circleY) step.classList.add('is-visible');
+        }
+      });
+      if (rawT < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  function triggerPanelAnimations(panelEl) {
+    if (!panelEl) return;
+    panelEl.classList.remove('is-inview');
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      panelEl.classList.add('is-inview');
+      panelEl.querySelectorAll('.mod-section[open] [data-timeline]').forEach(tl => {
+        setTimeout(() => animateTimeline(tl), 30);
+      });
+    }));
+  }
+  function renderModuleModalBody(mod) {
+    if (!mod.submodules) return `<div class="mod-modal-scroll mod-modal-scroll--solo modal-scroll"><div class="modal-scroll-inner">${mod.content || ''}</div></div>`;
+    const flat = MODULE_TAB_IDS.includes(mod.id);
+    const tabsHtml = mod.submodules.map((sub, i) => `<button type="button" class="module-tab${i === 0 ? ' active' : ''}" data-sub="${sub.id}">${sub.tab}</button>`).join('');
+    const panelsHtml = mod.submodules.map((sub, i) => `<div class="module-tab-panel modal-scroll${i === 0 ? ' active' : ''}" data-sub="${sub.id}"><div class="modal-scroll-inner">${renderSubmoduleAccordions(sub, flat)}</div></div>`).join('');
+    return `<div class="module-tab-bar" role="tablist">${tabsHtml}</div><div class="module-tab-panels">${panelsHtml}</div>`;
+  }
+
+  function bindWelcomeTimelineReveal() {
+    const body = document.getElementById('modal-body');
+    if (!body) return;
+    body.querySelectorAll('.module-tab-panel .mod-section').forEach(det => {
+      det.addEventListener('toggle', () => {
+        if (!det.open) return;
+        const tl = det.querySelector('[data-timeline]');
+        if (!tl) return;
+        setTimeout(() => animateTimeline(tl), 40);
+      });
+    });
+  }
+  function bindWelcomeAccordions() {
+    const body = document.getElementById('modal-body');
+    if (!body) return;
+    body.querySelectorAll('.module-tab-panel').forEach(panel => {
+      panel.querySelectorAll('.mod-section').forEach(det => {
+        det.addEventListener('toggle', () => {
+          if (!det.open) return;
+          panel.querySelectorAll('.mod-section').forEach(other => {
+            if (other !== det) other.removeAttribute('open');
+          });
+        });
+      });
+    });
+  }
+  function bindModuleModalTabs() {
+    const body = document.getElementById('modal-body');
+    body.querySelectorAll('.module-tab').forEach(btn => btn.addEventListener('click', () => {
+      const subId = btn.dataset.sub;
+      body.querySelectorAll('.module-tab').forEach(b => b.classList.toggle('active', b.dataset.sub === subId));
+      body.querySelectorAll('.module-tab-panel').forEach(panel => {
+        const active = panel.dataset.sub === subId;
+        panel.classList.toggle('active', active);
+        if (active) {
+          panel.scrollTop = 0;
+          triggerPanelAnimations(panel);
+        }
+      });
+    }));
+    const activePanel = body.querySelector('.module-tab-panel.active');
+    triggerPanelAnimations(activePanel);
+    bindWelcomeTimelineReveal();
+    bindWelcomeAccordions();
+    if (activePanel) activePanel.scrollTop = 0;
+  }
+  function resetModuleModalFullscreen() {
+    const overlay = document.getElementById('modal-overlay');
+    const btn = document.getElementById('modal-fullscreen-btn');
+    const icon = btn?.querySelector('i');
+    overlay?.classList.remove('is-modal-fullscreen');
+    if (icon) { icon.classList.add('fa-expand'); icon.classList.remove('fa-compress'); }
+    btn?.setAttribute('title', 'Vollbild'); btn?.setAttribute('aria-label', 'Vollbild');
+  }
+  function toggleModuleModalFullscreen() {
+    const overlay = document.getElementById('modal-overlay');
+    const btn = document.getElementById('modal-fullscreen-btn');
+    const icon = btn?.querySelector('i');
+    const on = overlay.classList.toggle('is-modal-fullscreen');
+    if (icon) { icon.classList.toggle('fa-expand', !on); icon.classList.toggle('fa-compress', on); }
+    btn?.setAttribute('title', on ? 'Vollbild beenden' : 'Vollbild');
+    btn?.setAttribute('aria-label', on ? 'Vollbild beenden' : 'Vollbild');
+  }
+  function renderTile(grid, m) {
+    const orgaStats = m.orgaTodos ? getOrgaTodoStats() : null;
+    const done = m.orgaTodos
+      ? (orgaStats.pct === 100 || completedModules.includes(m.id))
+      : completedModules.includes(m.id);
+    const pct = m.orgaTodos ? orgaStats.pct : (done ? 100 : 0);
+    const badge = done
+      ? '<i class="fa-solid fa-check"></i> Erledigt'
+      : (m.orgaTodos && pct > 0 ? `${pct}%` : 'Neu');
+    grid.innerHTML += `<div class="tile${done ? ' done' : ''}" onclick="openModal('${m.id}')">
+        <span class="tile-badge ${done ? 'done' : 'new'}">${badge}</span>
+        <div class="tile-icon"><i class="${m.icon}"></i></div>
+        <div class="tile-title">${m.title}</div>
+        <div class="tile-sub">${m.sub}</div>
+        <div class="tile-progress"><div class="tile-prog-bar"><div class="tile-prog-fill" style="width:${pct}%"></div></div><div class="tile-prog-pct">${pct}%</div></div>
+      </div>`;
+  }
+  function renderModules() {
+    const gridOrga = document.getElementById('grid-modules-orga');
+    const gridPath = document.getElementById('grid-modules-path');
+    const gridProject = document.getElementById('grid-modules-project');
+    if (gridOrga) {
+      gridOrga.innerHTML = '';
+      getAllDashboardModules().filter(m => MODULE_ORGA_IDS.includes(m.id)).forEach(m => renderTile(gridOrga, m));
+    }
+    if (gridPath) {
+      gridPath.innerHTML = '';
+      getAllDashboardModules().filter(m => MODULE_PATH_IDS.includes(m.id)).forEach(m => renderTile(gridPath, m));
+    }
+    if (gridProject) {
+      gridProject.innerHTML = '';
+      getAllDashboardModules().filter(m => MODULE_PROJECT_IDS.includes(m.id)).forEach(m => renderTile(gridProject, m));
+    }
+    const orgaStats = getOrgaTodoStats();
+    const progOrga = document.getElementById('modules-prog-orga');
+    if (progOrga) progOrga.textContent = `${orgaStats.done} / ${orgaStats.total} Aufgaben`;
+  }
+  function updateProgress() {
+    const mains = getAllDashboardModules().filter(m =>
+      MODULE_ORGA_IDS.includes(m.id) || MODULE_PATH_IDS.includes(m.id) || MODULE_PROJECT_IDS.includes(m.id));
+    const orgaStats = getOrgaTodoStats();
+    const orgaDone = orgaStats.pct === 100 || completedModules.includes('orga-admin');
+    const learnDone = mains
+      .filter(m => MODULE_PATH_IDS.includes(m.id) || MODULE_PROJECT_IDS.includes(m.id))
+      .filter(m => completedModules.includes(m.id)).length;
+    const learnTotal = MODULE_PATH_IDS.length + MODULE_PROJECT_IDS.length;
+    const total = 1 + learnTotal;
+    const done = (orgaDone ? 1 : 0) + learnDone;
+    const pct = total > 0 ? Math.round(done / total * 100) : 0;
+    document.getElementById('overall-bar').style.width = pct + '%';
+    document.getElementById('overall-pct').textContent = pct + '%';
+    const status = pct === 0 ? "Du hast gerade erst begonnen – los geht's!" : pct < 34 ? 'Guter Start! Weiter so.' : pct < 67 ? 'Du machst großartige Fortschritte.' : pct < 100 ? 'Fast geschafft! Noch ein bisschen.' : 'Onboarding abgeschlossen! Herzlichen Glückwunsch.';
+    document.getElementById('prog-status').textContent = status;
+    const pathMods = getAllDashboardModules().filter(m => MODULE_PATH_IDS.includes(m.id));
+    const pathDone = pathMods.filter(m => completedModules.includes(m.id)).length;
+    const projMods = getAllDashboardModules().filter(m => MODULE_PROJECT_IDS.includes(m.id));
+    const projDone = projMods.filter(m => completedModules.includes(m.id)).length;
+    const progEl = document.getElementById('modules-prog');
+    if (progEl) progEl.textContent = `${pathDone} / ${pathMods.length} Module`;
+    const progProj = document.getElementById('modules-prog-project');
+    if (progProj) progProj.textContent = `${projDone} / ${projMods.length} Module`;
+  }
+  function logModalScrollMetrics(moduleId, runId) {
+    const box = document.getElementById('dash-modal-box');
+    const body = document.getElementById('modal-body');
+    const scrollEl = body?.querySelector('.mod-modal-scroll, .module-tab-panel.active');
+    if (!scrollEl) return;
+    const bodyCs = body ? getComputedStyle(body) : null;
+    const cs = getComputedStyle(scrollEl);
+    const panelWrap = body?.querySelector('.module-tab-panels');
+    const inner = scrollEl.querySelector('.modal-scroll-inner');
+    const tabBar = body?.querySelector('.module-tab-bar');
+    const firstTitle = scrollEl.querySelector('.mod-section summary .sub-accordion-title, .sub-accordion summary .sub-accordion-title');
+    const boxRect = box?.getBoundingClientRect();
+    const innerRect = inner?.getBoundingClientRect();
+    const titleRect = firstTitle?.getBoundingClientRect();
+    const data = {
+      moduleId,
+      hasFixed: !!box?.classList.contains('dash-modal--fixed'),
+      scrollElClass: scrollEl.className,
+      bodyPaddingLeft: bodyCs?.paddingLeft,
+      scrollPaddingLeft: cs.paddingLeft,
+      innerPaddingLeft: inner ? getComputedStyle(inner).paddingLeft : null,
+      contentLeftOffset: boxRect && innerRect ? Math.round(innerRect.left - boxRect.left) : null,
+      titleLeftOffset: boxRect && titleRect ? Math.round(titleRect.left - boxRect.left) : null,
+      tabBarLeftOffset: boxRect && tabBar ? Math.round(tabBar.getBoundingClientRect().left - boxRect.left) : null,
+      clientHeight: scrollEl.clientHeight,
+      scrollHeight: scrollEl.scrollHeight,
+      canScroll: scrollEl.scrollHeight > scrollEl.clientHeight + 1,
+      panelsClientHeight: panelWrap?.clientHeight ?? null
+    };
+    // #region agent log
+    fetch('http://127.0.0.1:7671/ingest/51ffd9d4-145f-4eaf-bc7f-168cc0f83c5e',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'a8f6ee'},body:JSON.stringify({sessionId:'a8f6ee',runId,hypothesisId:'H-scroll',location:'index.txt:openModal',message:'modal scroll metrics',data,timestamp:Date.now()})}).catch(()=>{});
+    // #endregion
+  }
+
+  function openModal(id) {
+    const mod = getModuleById(id);
+    if (!mod) return;
+    resetModuleModalFullscreen();
+    currentModuleId = id;
+    document.getElementById('modal-icon').innerHTML = `<i class="${mod.icon}"></i>`;
+    document.getElementById('modal-title').textContent = mod.title;
+    document.getElementById('modal-sub').textContent = mod.sub;
+    document.getElementById('modal-body').innerHTML = mod.orgaTodos ? renderOrgaAdminModalBody() : renderModuleModalBody(mod);
+    if (mod.orgaTodos) { bindOrgaTodoInteractions(); renderSigPreview(); }
+    if (mod.submodules) bindModuleModalTabs();
+    const orgaStats = mod.orgaTodos ? getOrgaTodoStats() : null;
+    const done = mod.orgaTodos
+      ? (orgaStats.pct === 100 || completedModules.includes(id))
+      : completedModules.includes(id);
+    const btn = document.getElementById('btn-done-module');
+    btn.innerHTML = done ? '<i class="fa-solid fa-circle-check"></i> Bereits erledigt' : '<i class="fa-solid fa-check"></i> Als erledigt markieren';
+    btn.style.background = done ? 'var(--brand-dark)' : '';
+    const modalBox = document.getElementById('dash-modal-box');
+    modalBox.classList.add('dash-modal--fixed');
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => requestAnimationFrame(() => logModalScrollMetrics(id, 'post-open')));
+  }
+
+  function refreshOrgaModalIfOpen() {
+    if (currentModuleId !== 'orga-admin') return;
+    const activeTab = getActiveModuleTabId();
+    handoverPads = null;
+    document.getElementById('modal-body').innerHTML = renderOrgaAdminModalBody();
+    bindOrgaTodoInteractions();
+    renderSigPreview();
+    restoreModuleTab(activeTab);
+    const orgaStats = getOrgaTodoStats();
+    const done = orgaStats.pct === 100 || completedModules.includes('orga-admin');
+    const btn = document.getElementById('btn-done-module');
+    btn.innerHTML = done ? '<i class="fa-solid fa-circle-check"></i> Bereits erledigt' : '<i class="fa-solid fa-check"></i> Als erledigt markieren';
+    btn.style.background = done ? 'var(--brand-dark)' : '';
+  }
+
+  function closeDashModalDirect() {
+    document.getElementById('dash-modal-box')?.classList.remove('dash-modal--fixed');
+    document.getElementById('modal-overlay').classList.remove('open');
+    resetModuleModalFullscreen();
+    document.body.style.overflow = '';
+    currentModuleId = null;
+  }
+  function closeDashModal(e) {
+    if (e && e.target !== document.getElementById('modal-overlay') && e.currentTarget !== document.getElementById('modal-overlay')) return;
+    closeDashModalDirect();
+  }
+
+  async function markDone() {
+    if (!currentModuleId) return;
+    
+    if (!completedModules.includes(currentModuleId)) {
+      completedModules.push(currentModuleId);
+      
+      const { error } = await sb.schema('onboarding').from('user_progress').update({
+        completed_modules: completedModules,
+        updated_at: new Date().toISOString()
+      }).eq('user_id', currentUserId);
+
+      if (error) {
+        console.error('[ROOTS] Speicherfehler Modul:', error);
+        showToast('Fehler beim Speichern', 'error');
+      } else {
+        console.info('[ROOTS] Modul erfolgreich gespeichert:', currentModuleId);
+        showToast('Modul abgeschlossen', 'success');
+      }
+    }
+    
+    renderModules();
+    updateProgress();
+    closeDashModalDirect();
+  }
+
+  async function toggleTodoItem(id) {
+    if (completedTodos.includes(id)) {
+      completedTodos = completedTodos.filter(t => t !== id);
+    } else {
+      completedTodos.push(id);
+    }
+
+    renderModules();
+    updateProgress();
+    refreshOrgaModalIfOpen();
+
+    const { error } = await sb.schema('onboarding').from('user_progress').update({
+      completed_todos: completedTodos,
+      updated_at: new Date().toISOString()
+    }).eq('user_id', currentUserId);
+
+    if (error) {
+      console.error('[ROOTS] Speicherfehler To-Do:', error);
+      showToast('Speichern fehlgeschlagen', 'error');
+    }
+  }
+
+  async function dashboardLogout() {
+    await sb.auth.signOut();
+    userName = '';
+    currentUserId = null;
+    completedModules = [];
+    completedTodos = [];
+    currentModuleId = null;
+    showLoginScreen();
+    showToast('Erfolgreich abgemeldet', 'info');
+  }
+
+  /* ── Login-Box State ────────────────────────────── */
+  let currentStep      = 1;
+  let selectedPosition = '';
+
+  document.getElementById('go-forgot').addEventListener('click', () => {
+    document.getElementById('view-login').style.display  = 'none';
+    document.getElementById('view-forgot').style.display = 'block';
+    clearError();
+  });
+  document.getElementById('go-login').addEventListener('click', () => {
+    document.getElementById('view-forgot').style.display = 'none';
+    document.getElementById('view-login').style.display  = 'block';
+    clearResetMessages();
+  });
+
+  document.getElementById('toggle-pw').addEventListener('click', () => {
+    const pw   = document.getElementById('password');
+    const icon = document.getElementById('pw-icon');
+    const show = pw.type === 'password';
+    pw.type = show ? 'text' : 'password';
+    icon.classList.toggle('fa-eye',      !show);
+    icon.classList.toggle('fa-eye-slash', show);
+  });
+
+  function showError(msg) {
+    document.getElementById('error-text').textContent = msg;
+    document.getElementById('error-banner').classList.add('visible');
+  }
+  function clearError() { document.getElementById('error-banner').classList.remove('visible'); }
+  function clearResetMessages() {
+    document.getElementById('reset-error').classList.remove('visible');
+    document.getElementById('reset-success').classList.remove('visible');
+  }
+  function setLoading(btn, loading, icon, label) {
+    btn.disabled = loading;
+    btn.innerHTML = loading
+      ? `<i class="fa-solid fa-circle-notch fa-spin-custom"></i> ${label}`
+      : `<i class="${icon}"></i> ${label}`;
+  }
+
+  /* ── Routing Logik ────────────────────────────── */
+  let __rootsAuthSeq = 0;
+  async function rootsRouteFromSession(seq, session, source) {
+    try {
+      if (!session || !session.user || !session.user.id) {
+         showLoginScreen();
+         return;
+      }
+      currentUserId = session.user.id;
+      
+      console.info('[ROOTS] Prüfe Profil für User:', currentUserId);
+      // HIER ANGEPASST: position
+      var q = await sb.schema('users').from('profiles')
+        .select('position, hourly_rate, weekly_hours')
+        .eq('id', currentUserId)
+        .maybeSingle();
+
+      if (seq !== __rootsAuthSeq) return;
+
+      if (q.error) {
+        console.error('[ROOTS] DB Fehler beim Profil-Laden:', q.error);
+        showError('Profil konnte nicht geladen werden: ' + q.error.message);
+        return;
+      }
+
+      // FIRST TIME LOGIN CHECK:
+      var complete = isProfileComplete(q.data);
+      console.info('[ROOTS] Profil vollständig ausgefüllt?', complete, q.data);
+      
+      if (complete) {
+        console.info('[ROOTS] -> Zeige normales Dashboard');
+        showDashboard();
+      } else {
+        console.info('[ROOTS] -> Zeige Onboarding Assistent');
+        showOnboardingPopup();
+      }
+    } catch (ex) {
+      console.error('[ROOTS] Exception im Routing:', ex);
+    }
+  }
+
+  var __rootsAuthDeb = null;
+  function queueProfileRoute(session, source) {
+    __rootsAuthSeq += 1;
+    var seq = __rootsAuthSeq;
+    clearTimeout(__rootsAuthDeb);
+    __rootsAuthDeb = setTimeout(function () { rootsRouteFromSession(seq, session, source); }, 50);
+  }
+
+  sb.auth.onAuthStateChange(function (event, session) {
+    console.info('[ROOTS] Auth Event:', event);
+    if (event === 'SIGNED_OUT') {
+      __rootsAuthSeq += 1;
+      showLoginScreen();
+      return;
+    }
+    if (event === 'TOKEN_REFRESHED') return;
+    if (!session || !session.user) {
+      showLoginScreen();
+      return;
+    }
+    if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION' || event === 'USER_UPDATED') {
+      queueProfileRoute(session, event);
+    }
+  });
+
+  document.getElementById('form-login').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    clearError();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    if (!email || !password) {
+      showError('Bitte E-Mail und Passwort eingeben.');
+      return;
+    }
+    const btn = document.getElementById('btn-login');
+    try {
+      setLoading(btn, true, '', 'Anmelden...');
+      var out = await sb.auth.signInWithPassword({ email, password });
+      if (out.error) {
+        showError(mapAuthError(out.error.message));
+        return;
+      }
+      showToast('Erfolgreich angemeldet', 'success');
+    } catch (ex) {
+      showError('Anmeldung fehlgeschlagen: ' + (ex && ex.message ? ex.message : String(ex)));
+    } finally {
+      setLoading(btn, false, 'fa-solid fa-arrow-right-to-bracket', 'Anmelden');
+    }
+  });
+
+  document.getElementById('form-forgot').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    clearResetMessages();
+    const email = document.getElementById('reset-email').value.trim();
+    if (!email) {
+      document.getElementById('reset-error-text').textContent = 'Bitte gib deine E-Mail ein.';
+      document.getElementById('reset-error').classList.add('visible');
+      return;
+    }
+    const btn = document.getElementById('btn-reset');
+    setLoading(btn, true, '', 'Wird gesendet …');
+    const { error } = await sb.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + '/reset-password'
+    });
+    setLoading(btn, false, 'fa-solid fa-paper-plane', 'Link senden');
+    if (error) {
+      document.getElementById('reset-error-text').textContent = mapAuthError(error.message);
+      document.getElementById('reset-error').classList.add('visible');
+    } else {
+      document.getElementById('reset-success').classList.add('visible');
+      document.getElementById('reset-email').value = '';
+    }
+  });
+
+  /* ════════════════════════════════════════════════════
+     ONBOARDING POPUP WIZARD
+     ════════════════════════════════════════════════ */
+
+  document.querySelectorAll('.pos-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.pos-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      selectedPosition = card.dataset.value;
+      document.getElementById('btn-next-1').disabled = false;
+    });
+  });
+
+  function goStep(step) {
+    if (step === 3) updateSummary();
+    document.querySelectorAll('.ob-step').forEach(s => s.classList.remove('active'));
+    document.getElementById(`step-${step}`).classList.add('active');
+    for (let i = 1; i <= 3; i++) {
+      const dot = document.getElementById(`dot-${i}`);
+      dot.classList.remove('active', 'done');
+      if (i === step)    dot.classList.add('active');
+      else if (i < step) dot.classList.add('done');
+    }
+    currentStep = step;
+  }
+
+  function updateSummary() {
+    const rate  = parseFloat(document.getElementById('hourly-rate').value)  || 0;
+    const hours = parseFloat(document.getElementById('weekly-hours').value) || 0;
+    document.getElementById('sum-pos').textContent   = selectedPosition || '–';
+    document.getElementById('sum-rate').textContent  = rate  ? `${rate.toFixed(2)} € / h`  : '–';
+    document.getElementById('sum-hours').textContent = hours ? `${hours} h / Woche` : '–';
+  }
+
+  document.getElementById('weekly-hours').addEventListener('input', updateSummary);
+
+  async function saveProfile() {
+    const rate  = parseFloat(document.getElementById('hourly-rate').value);
+    const hours = parseFloat(document.getElementById('weekly-hours').value);
+    const errEl    = document.getElementById('ob-error');
+    const errTxtEl = document.getElementById('ob-error-text');
+    errEl.classList.remove('visible');
+
+    if (!selectedPosition)        { errTxtEl.textContent = 'Bitte wähle deine Position.';                errEl.classList.add('visible'); return; }
+    if (isNaN(rate)  || rate < 0) { errTxtEl.textContent = 'Bitte einen gültigen Stundensatz eingeben.'; errEl.classList.add('visible'); return; }
+    if (isNaN(hours) || hours <= 0){ errTxtEl.textContent = 'Bitte eine gültige Wochenarbeitszeit eingeben.'; errEl.classList.add('visible'); return; }
+
+    const btn = document.getElementById('btn-save');
+    setLoading(btn, true, '', 'Wird gespeichert …');
+
+    console.info('[ROOTS] Speichere neues Profil (UPSERT) in DB...');
+
+    // HIER ANGEPASST: position statt app_role
+    const { error } = await sb.schema('users').from('profiles')
+      .upsert({
+        id: currentUserId,
+        position:     selectedPosition,
+        hourly_rate:  rate,
+        weekly_hours: hours,
+        updated_at:   new Date().toISOString()
+      });
+
+    setLoading(btn, false, 'fa-solid fa-check', 'Speichern & starten');
+
+    if (error) {
+      console.error('[ROOTS] Speicherfehler Profil:', error);
+      errTxtEl.textContent = 'Fehler beim Speichern: ' + error.message;
+      errEl.classList.add('visible');
+      showToast('Profil konnte nicht gespeichert werden', 'error');
+      return;
+    }
+
+    console.info('[ROOTS] Profil erfolgreich gespeichert!');
+    showToast('Profil eingerichtet!', 'success');
+    showDashboard();
+  }
+
+  document.getElementById('btn-dash-logout').addEventListener('click', dashboardLogout);
+  document.getElementById('modal-overlay').addEventListener('click', function (ev) {
+    if (ev.target === document.getElementById('modal-overlay')) closeDashModalDirect();
+  });
+  document.getElementById('modal-fullscreen-btn')?.addEventListener('click', toggleModuleModalFullscreen);
+  document.getElementById('modal-close-btn').addEventListener('click', closeDashModalDirect);
+  document.getElementById('modal-btn-close').addEventListener('click', closeDashModalDirect);
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape') closeDashModalDirect();
+  });
+
+  function mapAuthError(msg) {
+    if (!msg) return 'Ein unbekannter Fehler ist aufgetreten.';
+    const m = msg.toLowerCase();
+    if (m.includes('invalid login credentials') || m.includes('invalid email or password'))
+      return 'E-Mail-Adresse oder Passwort ist falsch.';
+    if (m.includes('email not confirmed'))
+      return 'Bitte bestätige zuerst deine E-Mail-Adresse.';
+    if (m.includes('too many requests'))
+      return 'Zu viele Versuche. Bitte warte kurz.';
+    if (m.includes('user not found'))
+      return 'Kein Konto mit dieser E-Mail-Adresse gefunden.';
+    if (m.includes('network'))
+      return 'Verbindungsproblem. Bitte prüfe deine Internetverbindung.';
+    return msg;
+  }
+
+</script>
+</body>
+</html>
+</user_query>
