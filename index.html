@@ -646,10 +646,6 @@
     <div class="header-right">
       <div class="dash-avatar" id="user-avatar">?</div>
       <span id="user-name-topbar" class="header-sub">…</span>
-      <div class="header-sep" aria-hidden="true"></div>
-      <button type="button" class="btn-logout" id="btn-dash-logout">
-        <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Abmelden
-      </button>
     </div>
   </header>
 
@@ -864,6 +860,10 @@
     document.getElementById('modal-overlay').classList.remove('open');
     document.body.style.overflow = '';
     document.getElementById('form-login').reset();
+    const loginBtn = document.getElementById('btn-login');
+    if (loginBtn) setLoading(loginBtn, false, 'fa-solid fa-arrow-right-to-bracket', 'Anmelden');
+    const resetBtn = document.getElementById('btn-reset');
+    if (resetBtn) setLoading(resetBtn, false, 'fa-solid fa-paper-plane', 'Link senden');
   }
 
   function showOnboardingPopup() {
@@ -2895,7 +2895,6 @@
     showDashboard();
   }
 
-  document.getElementById('btn-dash-logout').addEventListener('click', dashboardLogout);
   document.getElementById('modal-overlay').addEventListener('click', function (ev) {
     if (ev.target === document.getElementById('modal-overlay')) closeDashModalDirect();
   });
