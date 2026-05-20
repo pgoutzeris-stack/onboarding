@@ -806,7 +806,6 @@
   const { createClient } = supabase;
   const sb = createClient(SUPABASE_URL, SUPABASE_ANON, {
     auth: {
-      storageKey: 'roots-wp-auth-v1',
       persistSession: true,
       autoRefreshToken: true,
       detectSessionInUrl: true,
