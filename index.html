@@ -483,7 +483,7 @@
     .team-roster{display:grid;gap:.45rem;margin-top:.5rem}
     .team-roster__row{display:flex;align-items:center;gap:.65rem;padding:.55rem .7rem;border-bottom:1px solid var(--line);font-size:.9rem}
     .team-roster__row:last-child{border-bottom:none}
-    .team-roster__avatar{width:36px;height:36px;border-radius:50%;background:var(--brand-light);color:var(--brand);font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .team-roster__avatar{width:36px;height:36px;border-radius:50%;background:var(--brand-light);color:var(--brand);font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
     .team-roster__meta strong{display:block;color:var(--ink);font-weight:600}
     .team-roster__meta span{font-size:.8rem;color:var(--muted)}
     .org-chart{display:flex;flex-direction:column;align-items:center;padding:.75rem .5rem 1rem;min-height:260px;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
@@ -921,14 +921,8 @@
         submodules:[
           { id:'w-team', tab:'Team Welcome', sections:[
             { title:'Team Welcome & Vorstellung', open:true, content:`
-              <div class="team-roster">
-                <div class="team-roster__row"><div class="team-roster__avatar">RE</div><div class="team-roster__meta"><strong>Richard Erbler</strong><span>Founder, Managing Partner</span></div></div>
-                <div class="team-roster__row"><div class="team-roster__avatar">OL</div><div class="team-roster__meta"><strong>Olena Lemeshko</strong><span>Partner Middle East</span></div></div>
-                <div class="team-roster__row"><div class="team-roster__avatar">MS</div><div class="team-roster__meta"><strong>Manuel Stankovic</strong><span>Director Consulting</span></div></div>
-                <div class="team-roster__row"><div class="team-roster__avatar">JF</div><div class="team-roster__meta"><strong>Julia Fränzel</strong><span>Consultant</span></div></div>
-                <div class="team-roster__row"><div class="team-roster__avatar">RM</div><div class="team-roster__meta"><strong>Rod Mitecki</strong><span>Consultant</span></div></div>
-                <div class="team-roster__row"><div class="team-roster__avatar">PG</div><div class="team-roster__meta"><strong>Pano Goutzeris</strong><span>Junior Consultant</span></div></div>
-                <div class="team-roster__row"><div class="team-roster__avatar">JM</div><div class="team-roster__meta"><strong>Jannik Müller</strong><span>Junior Consultant</span></div></div>
+              <div class="team-roster" data-team-roster>
+                <p style="color:var(--muted);font-size:.875rem;margin:0"><i class="fa-solid fa-circle-notch fa-spin"></i> Team wird geladen…</p>
               </div>
             ` }
           ]},
@@ -2496,6 +2490,7 @@ Signature</pre></div>
         if (active) {
           panel.scrollTop = 0;
           triggerPanelAnimations(panel);
+          if (subId === 'w-team') hydrateTeamRoster();
         }
       });
     }));
@@ -2504,7 +2499,44 @@ Signature</pre></div>
     bindWelcomeTimelineReveal();
     bindWelcomeAccordions();
     if (activePanel) activePanel.scrollTop = 0;
+    if (activePanel?.dataset.sub === 'w-team') hydrateTeamRoster();
   }
+
+  function escapeHtml(s) {
+    if (s == null) return '';
+    return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+
+  async function hydrateTeamRoster() {
+    const el = document.querySelector('[data-team-roster]');
+    if (!el) return;
+    const sb = window.RootsUser?._sb;
+    if (!sb) {
+      el.innerHTML = '<p style="color:var(--muted);font-size:.875rem;margin:0">Team konnte nicht geladen werden.</p>';
+      return;
+    }
+    try {
+      const { data, error } = await sb.schema('users').from('profiles')
+        .select('full_name, position, avatar_url, app_role')
+        .order('full_name');
+      if (error) throw error;
+      const av = (url, name) => window.RootsUser?._avatarSpan(url, name, 36) || '';
+      const members = (data || []).filter(u => u.full_name && String(u.full_name).trim());
+      if (!members.length) {
+        el.innerHTML = '<p style="color:var(--muted);font-size:.875rem;margin:0">Keine Teammitglieder gefunden.</p>';
+        return;
+      }
+      el.innerHTML = members.map(u => `
+        <div class="team-roster__row">
+          <div class="team-roster__avatar">${av(u.avatar_url, u.full_name)}</div>
+          <div class="team-roster__meta"><strong>${escapeHtml(u.full_name)}</strong><span>${escapeHtml(u.position || '—')}</span></div>
+        </div>
+      `).join('');
+    } catch (_) {
+      el.innerHTML = '<p style="color:var(--muted);font-size:.875rem;margin:0">Team konnte nicht geladen werden.</p>';
+    }
+  }
+  window.onRootsTeamRefresh = hydrateTeamRoster;
   function resetModuleModalFullscreen() {
     const overlay = document.getElementById('modal-overlay');
     const btn = document.getElementById('modal-fullscreen-btn');
@@ -2629,6 +2661,7 @@ Signature</pre></div>
     document.getElementById('modal-body').innerHTML = mod.orgaTodos ? renderOrgaAdminModalBody() : renderModuleModalBody(mod);
     if (mod.orgaTodos) { bindOrgaTodoInteractions(); renderSigPreview(); }
     if (mod.submodules) bindModuleModalTabs();
+    if (id === 'welcome') hydrateTeamRoster();
     const orgaStats = mod.orgaTodos ? getOrgaTodoStats() : null;
     const done = mod.orgaTodos
       ? (orgaStats.pct === 100 || completedModules.includes(id))
@@ -2988,45 +3021,17 @@ Signature</pre></div>
 
 </script>
 
-<!-- ROOTS User Settings Modal -->
-<div id="roots-user-settings-modal" style="display:none;position:fixed;inset:0;z-index:10000;background:rgba(15,23,42,.6);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:1rem;font-family:'Circular Std',system-ui,sans-serif">
-  <div style="background:var(--bg,#fff);border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.25);width:100%;max-width:460px;padding:2rem">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem">
-      <h2 style="font-size:1.1rem;font-weight:700;color:var(--ink,#0f172a);margin:0">Mein Profil</h2>
-      <button onclick="window.RootsUser.closeSettings()" style="background:none;border:none;cursor:pointer;color:var(--muted,#475569);font-size:1.1rem;padding:4px"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <div style="text-align:center;margin-bottom:1.25rem">
-      <canvas id="rus-crop-canvas" width="120" height="120" style="border-radius:50%;border:3px solid var(--brand,#206efb);cursor:grab;display:block;margin:0 auto .75rem;box-shadow:0 2px 12px rgba(32,110,251,.15)" title="Ziehen zum Verschieben · Scrollen zum Zoomen"></canvas>
-      <div id="rus-drop-zone" style="border:2px dashed var(--line,#e2e8f0);border-radius:12px;padding:.65rem 1rem;cursor:pointer;transition:border-color .2s;margin-bottom:.5rem;font-size:.8rem;color:var(--muted,#475569);text-align:center" onclick="document.getElementById('rus-file-input').click()" ondragover="event.preventDefault();this.style.borderColor='#206efb'" ondragleave="this.style.borderColor=''" ondrop="event.preventDefault();this.style.borderColor='';window.RootsUser._cropLoad(event.dataTransfer.files[0])"><i class="fa-solid fa-folder-open" style="margin-right:6px"></i>Bild auswählen oder hier ablegen</div>
-      <input type="file" id="rus-file-input" accept="image/*" style="display:none" onchange="window.RootsUser._cropLoad(this.files[0])">
-      <div id="rus-zoom-row" style="display:none;align-items:center;gap:8px;padding:0 .25rem;margin-top:.5rem"><i class="fa-solid fa-magnifying-glass-minus" style="color:var(--muted,#475569);font-size:.8rem"></i><input type="range" id="rus-zoom" min="0.5" max="4" step="0.01" value="1" style="flex:1;accent-color:#206efb"><i class="fa-solid fa-magnifying-glass-plus" style="color:var(--muted,#475569);font-size:.8rem"></i></div>
-    </div>
-    <div style="display:grid;gap:.85rem">
-      <div><label style="display:block;font-size:.75rem;font-weight:600;color:var(--muted,#475569);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.3rem">Vollständiger Name</label><input id="rus-name" type="text" style="width:100%;height:42px;padding:0 12px;border:1px solid var(--line,#e2e8f0);border-radius:8px;font-family:inherit;font-size:.9rem;color:var(--ink,#0f172a);background:var(--bg,#fff);outline:none;box-sizing:border-box"></div>
-      <div><label style="display:block;font-size:.75rem;font-weight:600;color:var(--muted,#475569);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.3rem">E-Mail</label><input id="rus-email" type="email" style="width:100%;height:42px;padding:0 12px;border:1px solid var(--line,#e2e8f0);border-radius:8px;font-family:inherit;font-size:.9rem;color:var(--ink,#0f172a);background:var(--bg,#fff);outline:none;box-sizing:border-box"><p style="font-size:.72rem;color:var(--muted,#475569);margin:.25rem 0 0">Änderung erfordert E-Mail-Bestätigung.</p></div>
-      <div><label style="display:block;font-size:.75rem;font-weight:600;color:var(--muted,#475569);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.3rem">Position</label><input id="rus-position" type="text" placeholder="z.B. Brand Consultant" style="width:100%;height:42px;padding:0 12px;border:1px solid var(--line,#e2e8f0);border-radius:8px;font-family:inherit;font-size:.9rem;color:var(--ink,#0f172a);background:var(--bg,#fff);outline:none;box-sizing:border-box"></div>
-      <div><label style="display:block;font-size:.75rem;font-weight:600;color:var(--muted,#475569);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.3rem">LinkedIn</label><input id="rus-linkedin" type="url" placeholder="https://linkedin.com/in/..." style="width:100%;height:42px;padding:0 12px;border:1px solid var(--line,#e2e8f0);border-radius:8px;font-family:inherit;font-size:.9rem;color:var(--ink,#0f172a);background:var(--bg,#fff);outline:none;box-sizing:border-box"></div>
-    </div>
-    <div style="display:flex;gap:.75rem;margin-top:1.5rem">
-      <button id="rus-save" onclick="window.RootsUser.saveSettings()" style="flex:1;height:42px;background:#206efb;color:#fff;border:none;border-radius:999px;font-family:inherit;font-size:.9rem;font-weight:600;cursor:pointer;transition:background .2s">Speichern</button>
-      <button onclick="window.RootsUser.closeSettings()" style="height:42px;padding:0 1.25rem;background:none;border:1px solid var(--line,#e2e8f0);color:var(--ink,#0f172a);border-radius:999px;font-family:inherit;font-size:.9rem;cursor:pointer">Abbrechen</button>
-    </div>
-    <div id="rus-msg" style="display:none;margin-top:.75rem;font-size:.85rem;text-align:center"></div>
-  </div>
-</div>
-
 <script>
 window.RootsUser = window.RootsUser || {
   _p:null,_sb:null,_uid:null,
   _initials(n){if(!n)return'?';return n.trim().split(/\s+/).map(w=>w[0]||'').join('').slice(0,2).toUpperCase()},
   _avatarSpan(url,name,size){const ini=this._initials(name),s=`width:${size}px;height:${size}px;border-radius:50%;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:${Math.floor(size*.38)}px;flex-shrink:0;`;if(url)return`<span style="${s}background:var(--brand-light,#eff6ff)"><img src="${url}" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.parentElement.innerHTML='<span style=color:var(--brand,#206efb)>${ini}</span>'"></span>`;return`<span style="${s}background:var(--brand-light,#eff6ff);color:var(--brand,#206efb)">${ini}</span>`},
-  _previewAvatar(url){return this._avatarSpan(url||(this._p&&this._p.avatar_url),this._p&&this._p.full_name,64)},
   async _loadAndMount(sb){
     this._sb=sb;
     const{data:{session}}=await sb.auth.getSession();
     if(!session)return;
     this._uid=session.user.id;
-    const{data}=await sb.schema('users').from('profiles').select('id,email,full_name,position,avatar_url,linkedin_url,app_role').eq('id',this._uid).single();
+    const{data}=await sb.schema('users').from('profiles').select('id,email,full_name,position,avatar_url,linkedin_url,app_role,app_settings').eq('id',this._uid).single();
     this._p=data||{id:this._uid,email:session.user.email,app_role:'reader'};
     this._mount();
   },
@@ -3037,38 +3042,13 @@ window.RootsUser = window.RootsUser || {
     if(avEl){avEl.innerHTML=this._avatarSpan(p.avatar_url,p.full_name,32);avEl.style.cursor='pointer';avEl.onclick=()=>this.openSettings();}
     if(nmEl){nmEl.textContent=p.full_name||p.email||'';nmEl.style.cursor='pointer';nmEl.onclick=()=>this.openSettings();}
   },
+  openSettings(){},
   isAdmin(){return this._p?.app_role==='admin'},
   isReader(){return this._p?.app_role==='reader'},
-  getProfile(){return this._p},
-  _cs:null,
-  _cropDraw(){const cv=document.getElementById('rus-crop-canvas');if(!cv)return;const ctx=cv.getContext('2d');ctx.clearRect(0,0,120,120);if(this._cs?.img){const{img,x,y,scale}=this._cs,cr=Math.max(120/img.naturalWidth,120/img.naturalHeight),dw=img.naturalWidth*cr*scale,dh=img.naturalHeight*cr*scale,dx=(120-dw)/2+x,dy=(120-dh)/2+y;ctx.save();ctx.beginPath();ctx.arc(60,60,60,0,Math.PI*2);ctx.clip();ctx.drawImage(img,dx,dy,dw,dh);ctx.restore();}else{ctx.beginPath();ctx.arc(60,60,60,0,Math.PI*2);ctx.fillStyle='#eff6ff';ctx.fill();ctx.fillStyle='#206efb';ctx.font='bold 30px system-ui,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(this._initials(this._p&&this._p.full_name),60,60);}},
-  _cropLoad(file){if(!file||!file.type.startsWith('image/'))return;const url=URL.createObjectURL(file),img=new Image();img.onload=()=>{this._cs={img,x:0,y:0,scale:1,dragging:false,lastX:0,lastY:0};document.getElementById('rus-zoom-row').style.display='flex';document.getElementById('rus-zoom').value=1;this._cropDraw();};img.src=url;},
-  _initCropEditor(){const cv=document.getElementById('rus-crop-canvas');if(!cv||cv._ci)return;cv._ci=true;const on=(el,ev,fn,opt)=>el.addEventListener(ev,fn,opt);on(cv,'mousedown',e=>{e.preventDefault();if(this._cs){this._cs.dragging=true;this._cs.lastX=e.clientX;this._cs.lastY=e.clientY;}cv.style.cursor='grabbing';});on(document,'mousemove',e=>{if(!this._cs?.dragging)return;this._cs.x+=e.clientX-this._cs.lastX;this._cs.y+=e.clientY-this._cs.lastY;this._cs.lastX=e.clientX;this._cs.lastY=e.clientY;this._cropDraw();});on(document,'mouseup',()=>{if(this._cs)this._cs.dragging=false;cv.style.cursor='grab';});on(cv,'wheel',e=>{e.preventDefault();if(!this._cs)return;this._cs.scale=Math.max(.5,Math.min(4,this._cs.scale+(e.deltaY<0?.1:-.1)));document.getElementById('rus-zoom').value=this._cs.scale;this._cropDraw();},{passive:false});let lt=null;on(cv,'touchstart',e=>{e.preventDefault();lt=e.touches;if(this._cs){this._cs.dragging=true;this._cs.lastX=e.touches[0].clientX;this._cs.lastY=e.touches[0].clientY;}},{passive:false});on(cv,'touchmove',e=>{e.preventDefault();if(!this._cs)return;if(e.touches.length===2&&lt&&lt.length===2){const d1=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY),d0=Math.hypot(lt[0].clientX-lt[1].clientX,lt[0].clientY-lt[1].clientY);this._cs.scale=Math.max(.5,Math.min(4,this._cs.scale*(d1/d0)));document.getElementById('rus-zoom').value=this._cs.scale;}else if(e.touches.length===1){this._cs.x+=e.touches[0].clientX-this._cs.lastX;this._cs.y+=e.touches[0].clientY-this._cs.lastY;this._cs.lastX=e.touches[0].clientX;this._cs.lastY=e.touches[0].clientY;}lt=e.touches;this._cropDraw();},{passive:false});on(cv,'touchend',()=>{if(this._cs)this._cs.dragging=false;});on(document.getElementById('rus-zoom'),'input',e=>{if(this._cs){this._cs.scale=parseFloat(e.target.value);this._cropDraw();}});},
-  _getCroppedDataURL(){if(!this._cs?.img)return this._p?.avatar_url||'';const out=document.createElement('canvas');out.width=200;out.height=200;const ctx=out.getContext('2d'),f=200/120,{img,x,y,scale}=this._cs,cr=Math.max(120/img.naturalWidth,120/img.naturalHeight),dw=img.naturalWidth*cr*scale*f,dh=img.naturalHeight*cr*scale*f,dx=(200-dw)/2+x*f,dy=(200-dh)/2+y*f;ctx.save();ctx.beginPath();ctx.arc(100,100,100,0,Math.PI*2);ctx.clip();ctx.drawImage(img,dx,dy,dw,dh);ctx.restore();return out.toDataURL('image/jpeg',.85);},
-  openSettings(){
-    const p=this._p||{};
-    document.getElementById('rus-name').value=p.full_name||'';
-    document.getElementById('rus-email').value=p.email||'';
-    document.getElementById('rus-position').value=p.position||'';
-    document.getElementById('rus-linkedin').value=p.linkedin_url||'';
-    document.getElementById('rus-msg').style.display='none';
-    document.getElementById('roots-user-settings-modal').style.display='flex';
-    this._cs=null;this._initCropEditor();this._cropDraw();
-    if(p.avatar_url){const _i=new Image();_i.crossOrigin='anonymous';_i.onload=()=>{this._cs={img:_i,x:0,y:0,scale:1,dragging:false,lastX:0,lastY:0};document.getElementById('rus-zoom-row').style.display='flex';this._cropDraw();};_i.onerror=()=>this._cropDraw();_i.src=p.avatar_url;}
-  },
-  closeSettings(){document.getElementById('roots-user-settings-modal').style.display='none'},
-  async saveSettings(){
-    const name=document.getElementById('rus-name').value.trim(),email=document.getElementById('rus-email').value.trim(),pos=document.getElementById('rus-position').value.trim(),li=document.getElementById('rus-linkedin').value.trim(),av=this._getCroppedDataURL();
-    const btn=document.getElementById('rus-save'),msg=document.getElementById('rus-msg');
-    btn.disabled=true;btn.textContent='Speichern…';msg.style.display='none';
-    const{error}=await this._sb.schema('users').from('profiles').update({full_name:name,position:pos,linkedin_url:li,avatar_url:av}).eq('id',this._uid);
-    if(!error&&email&&email!==this._p.email)await this._sb.auth.updateUser({email});
-    btn.disabled=false;btn.textContent='Speichern';
-    if(error){msg.style.cssText='display:block;color:#dc2626;font-size:.85rem;text-align:center;margin-top:.5rem';msg.textContent='Fehler beim Speichern.';}
-    else{Object.assign(this._p,{full_name:name,position:pos,linkedin_url:li,avatar_url:av});if(email!==this._p.email)this._p.email=email;msg.style.cssText='display:block;color:#10b981;font-size:.85rem;text-align:center;margin-top:.5rem';msg.textContent='✓ Gespeichert!';this._mount();setTimeout(()=>this.closeSettings(),700);}
-  }
+  getProfile(){return this._p}
 };
 </script>
+<script src="https://pgoutzeris-stack.github.io/ROOTS_Intranet/roots-user-bridge.js"></script>
 </body>
 </html>
 </user_query>
