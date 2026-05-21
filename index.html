@@ -469,6 +469,7 @@
     .orga-action-btn--ghost:hover{background:var(--brand-light);color:var(--brand)!important}
     .it-app-block{margin-bottom:1.35rem;padding-bottom:1.15rem;border-bottom:1px solid var(--line)}
     .it-app-block:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+    .it-app-intro{margin:.15rem 0 1rem}
     .it-app-block__title{font-size:.9rem;font-weight:600;color:var(--ink);margin:0 0 .65rem}
     .it-creds-panel{margin-top:.75rem;padding:.85rem 1rem;background:var(--surface);border:1px solid var(--line);border-radius:8px;font-size:.85rem;line-height:1.55}
     .it-creds-panel[hidden]{display:none!important}
@@ -1097,13 +1098,60 @@
         sub:'Arbeitsweise, KI & Kommunikation',
         submodules:[
           { id:'m-time', tab:'Arbeitszeit und Arbeitsweise', sections:[
-            { title:'Arbeitszeit', open:true, content:`
-              <table>
-                <tr><th>Thema</th><th>Regelung</th></tr>
-                <tr><td>Kernarbeitszeiten</td><td>9:00 – 18:00 Uhr</td></tr>
-                <tr><td>Home Office</td><td>Nach Absprache, projektabhängig</td></tr>
-                <tr><td>Überstunden</td><td>Projektabhängig</td></tr>
-              </table>
+            { title:'Kernarbeitszeiten', open:true, content:`
+              <ul class="learn-list">
+                <li>Wir arbeiten in Gleitzeit</li>
+                <li>Arbeitsbeginn ist spätestens um 9:00 Uhr</li>
+                <li>Der Arbeitsbeginn kann je nach Kundenanforderung abweichen und insb. bei Reisetagen teils deutlich früher ausfallen</li>
+                <li>Das Arbeitsende ist abhängig deiner Arbeitszeitregelung, genommener Pausen und den Kundenanforderungen im Projekt</li>
+                <li>Bei &gt;6 Std. Arbeit musst du mind. 30 Min. Pause machen, bei &gt;9 Std. 45 Min.</li>
+                <li>Du darfst nicht länger als 6 Std. ohne Pause arbeiten</li>
+              </ul>
+            ` },
+            { title:'Home Office Regelung', content:`
+              <ul class="learn-list">
+                <li>Wir haben gemeinschaftlich beschlossen, mind. 3 Tage pro Woche im Office zu arbeiten</li>
+                <li>Montag und Mittwoch sind gemeinsame Officetage</li>
+                <li>Der dritte Tag ist frei wählbar</li>
+                <li>Je nach Projektanforderung können die Officetage variieren und werden nach Absprache mit deinen Kollegen vereinbart</li>
+                <li>Reisetage gelten als Officetage</li>
+              </ul>
+            ` },
+            { title:'Urlaubsregelung', content:`
+              <ul class="learn-list">
+                <li>Es gelten die vertraglich festgelegten Urlaubstage (typisch 30 Tage) und Fristen (typisch innerhalb der ersten 2 Monate des neuen Jahres)</li>
+                <li>Urlaube sollten möglichst früh im Vorfeld beantragt werden, um eine gute Projektplanung sicherstellen zu können</li>
+                <li>Der 24.12. ist ein von ROOTS geschenkter halber freier Tag</li>
+                <li>Die Tage zwischen Weihnachten und Neujahr sind Betriebsferien und müssen genommen werden</li>
+                <li>Trage zur Genehmigung deine Wunschurlaubstage in die Urlaubsliste ein und leite sie an Richard weiter</li>
+                <li>Richard wird sie genehmigen oder mit Begründung ablehnen</li>
+                <li>Blockiere die Tage nach der Genehmigung in deinem und dem ROOTS Team Kalender</li>
+              </ul>
+            ` },
+            { title:'Unmittelbar vor dem Urlaub', content:`
+              <ul class="learn-list">
+                <li>Stelle sicher, dass das restliche Projektteam über die zu erledigenden Aufgaben gebrieft ist</li>
+                <li>Erstelle eine Abwesenheitsnotiz in Outlook</li>
+              </ul>
+              <div class="highlight"><pre style="margin:0;white-space:pre-wrap;font-family:inherit;font-size:.84rem;line-height:1.55">Thank you for your message. I am currently on holiday and will be out of the office from &lt;Start Date, Time&gt; to &lt;End Date, Time&gt;. During this time, I will have no access to emails.
+
+What this means for you:
+- Urgent matters: If your request is urgent and cannot wait until my return, please contact &lt;Colleague's Name&gt; at &lt;Colleague's Email&gt;.
+- General inquiries: I will do my best to respond as soon as possible after my return on &lt;Return Date&gt;.
+- Meetings &amp; deadlines: If you need to schedule an appointment, please use &lt;Booking Link&gt; or reach out after my return.
+
+Thank you for your patience and understanding. I will get back to you as soon as possible upon my return.
+
+Best regards,
+Signature</pre></div>
+            ` },
+            { title:'Bei Krankheit', content:`
+              <ul class="learn-list">
+                <li>Grundsätzlich gilt: Arzttermine sollen außerhalb der Arbeitszeit liegen; nur wenn der Termin medizinisch notwendig und anders nicht sinnvoll zu bekommen ist, darf er während der Arbeitszeit stattfinden</li>
+                <li>Bei Arbeitsunfähigkeit musst du dich bei Richard unverzüglich krankmelden und das Projektteam informieren</li>
+                <li>Informiere zudem den Steuerberater (<a href="mailto:SYakubets@tw-ratingen.de">SYakubets@tw-ratingen.de</a>) per E-Mail über die Krankheitsdauer</li>
+                <li>Für die Krankschreibung ab dem dritten Tag benötigst du eine ärztliche Feststellung</li>
+              </ul>
             ` },
             { title:'Arbeit im Team und mit dem Einzelnen', content:`
               <p class="placeholder">Platzhalter: Implizite Normen, Zusammenarbeit im Team und Erwartungen an Feedback-Kultur.</p>
@@ -1454,6 +1502,19 @@
     },
     tyme: {
       label: 'Tyme',
+      intro: `
+        <div class="mod-setup-block">
+          <h3>Intro Tyme</h3>
+          <ul class="learn-list">
+            <li>In Tyme tracken wir unsere Arbeitszeit und das Projektbudget</li>
+            <li>Es wird auf 10 Minuten genau von dir eingetragen</li>
+            <li>Am besten setzt du dir feste Intervalle zum Eintragen (z.&nbsp;B. Vormittags und Nachmittags) oder schreibst die Stunden nach jedem Termin</li>
+            <li>Arbeitszeit auf dem Kunden wird auf den entsprechenden Sub-Track des Kundenprojektes nach deiner Rolle (Junior, Consultant, Senior Consultant, etc.) gebucht</li>
+            <li>Interne Arbeit buchst du je nach OKR auf Marketing, New Business, Team, KI oder der übergeordneten Stelle Infrastruktur &amp; Admin</li>
+            <li>Nun folgt eine Tyme Demo durch deinen Mentor</li>
+          </ul>
+        </div>
+      `,
       downloads: [{ label: 'Tyme herunterladen', url: 'https://www.tyme-app.com/app/Tyme.dmg' }],
       creds: {
         hint: 'Zugangsdaten erhältst du von deinem Mentor oder der IT.',
@@ -2167,12 +2228,14 @@
     return appIds.map(id => {
       const app = IT_INSTALL_APPS[id];
       if (!app) return '';
+      const introHtml = app.intro ? `<div class="it-app-intro">${app.intro}</div>` : '';
       const dlBtns = (app.downloads || []).map(d =>
         `<a href="${d.url}" class="orga-action-btn" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><i class="fa-solid fa-download" aria-hidden="true"></i> ${d.label}</a>`
       ).join('');
       return `
         <div class="it-app-block" data-app="${id}">
           <h4 class="it-app-block__title">${app.label}</h4>
+          ${introHtml}
           <div class="orga-action-buttons">
             ${dlBtns}
             <button type="button" class="orga-action-btn orga-action-btn--ghost" data-show-creds="${id}">Zugangsdaten anzeigen</button>
