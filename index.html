@@ -1120,8 +1120,8 @@
                 <li>Weitere Urlaubstage beantragst du über die Urlaubsplanung; nach Genehmigung erscheinen sie ebenfalls im Team-Kalender</li>
               </ul>
               <div class="orga-action-buttons">
-                <a href="https://pgoutzeris-stack.github.io/ROOTS_Intranet/#vacation" target="_top" class="orga-action-btn" onclick="event.stopPropagation()"><i class="fa-solid fa-umbrella-beach" aria-hidden="true"></i> Urlaubsplanung öffnen</a>
-                <a href="https://pgoutzeris-stack.github.io/ROOTS_Intranet/#teamkalender" target="_top" class="orga-action-btn orga-action-btn--ghost" onclick="event.stopPropagation()"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> Team-Kalender öffnen</a>
+                <a href="#" class="orga-action-btn" onclick="event.stopPropagation();openRootsIntranetView('vacation');return false;"><i class="fa-solid fa-umbrella-beach" aria-hidden="true"></i> Urlaubsplanung öffnen</a>
+                <a href="#" class="orga-action-btn orga-action-btn--ghost" onclick="event.stopPropagation();openRootsIntranetView('teamkalender');return false;"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> Team-Kalender öffnen</a>
               </div>
             ` },
             { title:'Unmittelbar vor dem Urlaub', content:`
@@ -2506,6 +2506,16 @@ Signature</pre></div>
     if (s == null) return '';
     return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   }
+
+  function openRootsIntranetView(view) {
+    const ORIGIN = 'https://pgoutzeris-stack.github.io';
+    if (window.parent !== window) {
+      window.parent.postMessage({ type: 'roots-open-view', view }, ORIGIN);
+      return;
+    }
+    window.top.location.href = ORIGIN + '/ROOTS_Intranet/#' + view;
+  }
+  window.openRootsIntranetView = openRootsIntranetView;
 
   async function hydrateTeamRoster() {
     const el = document.querySelector('[data-team-roster]');
