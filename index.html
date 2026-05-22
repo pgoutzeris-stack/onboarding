@@ -654,16 +654,7 @@
     .ob-outlook-compose{padding:0;background:#fff}
     .ob-outlook-body{min-height:300px;padding:1rem 1.1rem .75rem;font-family:Aptos,'Segoe UI',sans-serif;font-size:.84rem;line-height:1.55;color:#323130;outline:none;white-space:pre-wrap;word-break:break-word}
     .ob-outlook-body:focus{background:#fff}
-    .ob-outlook-body .em-critical{margin:.35rem 0 .65rem;padding:.65rem .75rem;border-left:3px solid #0078d4;background:#f0f6ff;border-radius:0 8px 8px 0}
-    .ob-outlook-body .em-line{margin:.28rem 0;display:block}
-    .ob-outlook-body .em-label{font-weight:700;font-size:.82rem;letter-spacing:.02em;margin-right:.35rem}
-    .ob-outlook-body .em-topic{color:#0078d4}
-    .ob-outlook-body .em-action{color:#15803d}
-    .ob-outlook-body .em-key{color:#1e3a8a}
-    .ob-outlook-body .em-time{color:#b45309}
-    .ob-outlook-body .em-q{color:#be185d}
-    .ob-outlook-body .em-frage{color:#be185d}
-    .ob-outlook-body .em-decision{color:#7c3aed}
+    .ob-outlook-body p{margin:.35rem 0}
     .ob-outlook-sig{margin-top:.85rem;padding:.75rem 0 0;border-top:1px solid #edebe9;font-size:.78rem;color:#605e5c;line-height:1.5}
     .ob-outlook-sig strong{color:#323130}
     .ob-email-guide{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:.85rem;position:sticky;top:0}
@@ -674,14 +665,6 @@
     .ob-email-check li.is-ok{color:#15803d}
     .ob-email-check li.is-ok i{color:#16a34a}
     .ob-email-check li.is-warn{color:#b45309}
-    .ob-email-legend{margin-top:.75rem;padding-top:.65rem;border-top:1px solid var(--line);font-size:.72rem;color:var(--muted);line-height:1.5}
-    .ob-email-legend span{display:inline-block;margin:.15rem .35rem .15rem 0;padding:.12rem .4rem;border-radius:4px;font-weight:600;font-size:.68rem}
-    .ob-email-legend .lg-subj{background:#dbeafe;color:#1d4ed8}
-    .ob-email-legend .lg-topic{background:#dbeafe;color:#0078d4}
-    .ob-email-legend .lg-key{background:#e0e7ff;color:#1e3a8a}
-    .ob-email-legend .lg-action{background:#dcfce7;color:#15803d}
-    .ob-email-legend .lg-time{background:#fef3c7;color:#b45309}
-    .ob-email-legend .lg-q{background:#fce7f3;color:#be185d}
     .ob-fm-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem}
     @media (max-width:820px){.ob-fm-layout{grid-template-columns:1fr}}
     .ob-fm-fields{display:grid;gap:.55rem}
@@ -690,33 +673,23 @@
     .ob-fm-output{border:1px dashed var(--brand);border-radius:10px;padding:.85rem;background:var(--brand-light);min-height:160px}
     .ob-fm-output h4{margin:0 0 .45rem;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--brand-dark)}
     .ob-fm-script{margin:0;font-size:.84rem;line-height:1.65;color:var(--ink);white-space:pre-wrap}
-    .ob-meet-invite{border:1px solid #e1dfdd;border-radius:12px;background:#fff;overflow:hidden;font-size:.82rem;color:#242424;box-shadow:0 8px 24px rgba(70,71,117,.12);font-family:'Segoe UI',system-ui,sans-serif}
-    .ob-teams-shell{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:420px}
-    @media (max-width:820px){.ob-teams-shell{grid-template-columns:1fr}}
-    .ob-teams-nav{background:#f5f5f5;border-right:1px solid #e1dfdd;padding:.85rem .65rem}
-    .ob-teams-nav-item{display:flex;align-items:center;gap:.55rem;padding:.55rem .65rem;border-radius:8px;font-size:.78rem;color:#616161;margin-bottom:.25rem}
-    .ob-teams-nav-item.is-active{background:#e8ebfa;color:#5b5fc7;font-weight:600}
-    .ob-teams-nav-item i{width:1rem;text-align:center}
-    .ob-teams-main{background:#faf9f8;padding:1rem 1.15rem 1.25rem}
-    .ob-teams-card{background:#fff;border:1px solid #e1dfdd;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-    .ob-teams-card__accent{height:4px;background:linear-gradient(90deg,#5b5fc7,#7b83eb)}
-    .ob-teams-card__body{padding:1rem 1.15rem 1.15rem}
-    .ob-teams-card__title{font-size:1.05rem;font-weight:700;color:#242424;margin:0 0 .65rem;line-height:1.35}
-    .ob-teams-meta-grid{display:grid;gap:.45rem;margin-bottom:1rem}
-    .ob-teams-meta-row{display:flex;align-items:flex-start;gap:.65rem;font-size:.8rem;color:#424242;line-height:1.45}
-    .ob-teams-meta-row i{width:1rem;color:#5b5fc7;margin-top:.15rem;flex-shrink:0}
-    .ob-teams-join{display:inline-flex;align-items:center;gap:.45rem;background:#5b5fc7;color:#fff;border:none;border-radius:6px;padding:.55rem 1rem;font-family:inherit;font-size:.8rem;font-weight:600;margin-bottom:1rem;cursor:default}
-    .ob-teams-attendees{display:flex;align-items:center;gap:.35rem;margin:.15rem 0 .85rem;flex-wrap:wrap}
-    .ob-teams-avatar{width:28px;height:28px;border-radius:50%;background:#c7c7c7;color:#fff;font-size:.62rem;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff;margin-left:-6px}
-    .ob-teams-avatar:first-child{margin-left:0}
-    .ob-teams-avatar.is-host{background:#5b5fc7}
-    .ob-teams-desc{border-top:1px solid #edebe9;padding-top:.85rem;font-size:.82rem;line-height:1.65;color:#242424}
-    .ob-meet-block{margin:.55rem 0;padding:.65rem .75rem;border-radius:8px;border:1px solid transparent;line-height:1.55}
-    .ob-meet-block.is-purpose{background:#eef2ff;border-color:#c7d2fe}
-    .ob-meet-block.is-output{background:#ecfdf5;border-color:#bbf7d0}
-    .ob-meet-block.is-gps{background:#fffbeb;border-color:#fde68a}
-    .ob-meet-block strong{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.25rem;color:#5b5fc7}
-    .ob-meet-block.is-output strong{color:#15803d}.ob-meet-block.is-gps strong{color:#b45309}
+    .ob-meet-invite{border:1px solid #c8c6c4;border-radius:8px;background:#fff;overflow:hidden;font-size:.84rem;color:#323130;font-family:'Segoe UI',system-ui,sans-serif}
+    .ob-teams-shell{display:block;min-height:0}
+    .ob-teams-nav{display:none}
+    .ob-teams-main{background:#fff;padding:0}
+    .ob-teams-card{background:#fff;border:none;border-radius:0;box-shadow:none}
+    .ob-teams-card__accent{display:none}
+    .ob-teams-card__body{padding:0}
+    .ob-teams-card__title{font-size:1rem;font-weight:600;color:#323130;margin:0;padding:.85rem 1rem;border-bottom:1px solid #edebe9;background:#faf9f8;line-height:1.35}
+    .ob-teams-meta-grid{display:grid;gap:.2rem;margin:0;padding:.75rem 1rem;border-bottom:1px solid #edebe9}
+    .ob-teams-meta-row{display:flex;align-items:flex-start;gap:.55rem;font-size:.8rem;color:#605e5c;line-height:1.45}
+    .ob-teams-meta-row i{display:none}
+    .ob-teams-join{display:none}
+    .ob-teams-attendees{display:none}
+    .ob-teams-desc{border-top:none;padding:1rem;font-size:.84rem;line-height:1.65;color:#323130}
+    .ob-meet-block{margin:0 0 .85rem;padding:0;border:none;border-radius:0;background:transparent;line-height:1.6}
+    .ob-meet-block:last-child{margin-bottom:0}
+    .ob-meet-block strong{display:block;font-size:.84rem;font-weight:600;text-transform:none;letter-spacing:0;margin-bottom:.2rem;color:#323130}
     .ob-ppt-stage{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
     @media (max-width:900px){.ob-ppt-stage{grid-template-columns:1fr}}
     .ob-ppt-window{border:1px solid #d1d1d1;border-radius:8px;overflow:hidden;background:#f3f3f3;box-shadow:0 10px 28px rgba(0,0,0,.12)}
@@ -1725,19 +1698,20 @@ Signature</pre></div>
               <p>Richtig:</p>
               <blockquote class="md-quote">„Wir haben den Roller-Stillstand gefunden und in 24 Stunden behoben. Produktion läuft wieder. Layout-Doku wird aktualisiert."</blockquote>
               <p>Goal und Problem sind identisch — aber die Solution-Formulierung kippt das ganze Gespräch von „Was ist passiert?" auf „Wie geht es weiter?".</p>
-            ` },
-            { title:'Live-Übung: First Minute bauen', content:`
-              <p>Fülle die Felder aus – dein First-Minute-Script wird live zusammengesetzt.</p>
+
+              <hr class="md-hr">
+              <h3>Übung: First Minute bauen</h3>
+              <p>Fülle die Felder aus – dein First-Minute-Script wird live aus Time Check, Framing, GPS und Validation zusammengesetzt.</p>
               <div class="ob-fm-layout" data-demo="first-minute">
                 <div class="ob-fm-fields">
-                  <div class="ob-fm-field"><label>Time Check</label><input type="text" data-fm="time" placeholder="Hast du 10 Min. für …?"></div>
+                  <div class="ob-fm-field"><label>Time Check</label><input type="text" data-fm="time" placeholder="Hast Du 10 Minuten für …?"></div>
                   <div class="ob-fm-field"><label>Context</label><input type="text" data-fm="context" placeholder="Projekt / Kunde / Prozess"></div>
                   <div class="ob-fm-field"><label>Intent</label><input type="text" data-fm="intent" placeholder="Entscheidung, Input, FYI …"></div>
                   <div class="ob-fm-field"><label>Key Message</label><input type="text" data-fm="key" placeholder="Kernaussage in einem Satz"></div>
                   <div class="ob-fm-field"><label>Goal</label><input type="text" data-fm="goal" placeholder="Was wollen wir erreichen?"></div>
                   <div class="ob-fm-field"><label>Problem</label><input type="text" data-fm="problem" placeholder="Was hindert uns?"></div>
                   <div class="ob-fm-field"><label>Solution</label><input type="text" data-fm="solution" placeholder="Vorschlag oder Bitte um Hilfe"></div>
-                  <div class="ob-fm-field"><label>Validation</label><input type="text" data-fm="validation" placeholder="Bist du die richtige Person? / Hast du Zeit?"></div>
+                  <div class="ob-fm-field"><label>Validation</label><input type="text" data-fm="validation" placeholder="Bist Du die richtige Person? / Hast Du Zeit?"></div>
                   <button type="button" class="ob-demo-action" data-fm="load-example"><i class="fa-solid fa-wand-magic-sparkles"></i> LT-10-Beispiel laden</button>
                 </div>
                 <div class="ob-fm-output"><h4>Dein Script</h4><p class="ob-fm-script" data-fm="output">Time Check → Framing → GPS → Validation – Felder ausfüllen …</p></div>
@@ -1886,8 +1860,8 @@ Signature</pre></div>
                 <li>Rechtschreibung &amp; Grammatik prüfen, besonders bei externen Empfängern</li>
               </ul>
 
-              <h3 style="margin-top:1.25rem">Live-Beispiel: ROOTS-E-Mail in Outlook</h3>
-              <p>Bearbeite die Mail wie in Outlook. Die Checkliste prüft live den ROOTS-Standard — farbige Labels zeigen Topic (blau), Action (grün), Key Message, Time Frame und Fragen.</p>
+              <h3 style="margin-top:1.25rem">Beispiel: ROOTS-E-Mail in Outlook</h3>
+              <p>Bearbeite die Mail wie in Outlook. Die Checkliste prüft den ROOTS-Aufbau: Topic, Action, Kernbotschaft, Zeitrahmen und Fragen – schwarzer Fließtext mit klaren Labels wie <strong>Action:</strong> und <strong>Frage:</strong>.</p>
               <div class="ob-demo" data-demo="email-editor">
                 <div class="ob-demo-head">
                   <strong><i class="fa-brands fa-microsoft"></i> Outlook · Neue Nachricht</strong>
@@ -1923,9 +1897,6 @@ Signature</pre></div>
                     <aside class="ob-email-guide">
                       <h4>Struktur-Check</h4>
                       <ul class="ob-email-check" data-email="checklist"></ul>
-                      <div class="ob-email-legend">
-                        <span class="lg-topic">TOPIC</span><span class="lg-key">KEY MESSAGE</span><span class="lg-action">ACTION</span><span class="lg-time">TIME FRAME</span><span class="lg-q">FRAGE</span>
-                      </div>
                     </aside>
                   </div>
                 </div>
@@ -1954,6 +1925,8 @@ Signature</pre></div>
               <div class="highlight"><p>Bain-Studie: Manager:innen verbringen 35 % ihres Arbeitstages in Meetings. Ludic-Studie: Nur 1 von 10 Personen versteht immer den Zweck eines Meetings. Klare Einladungen sind kein Nice-to-have.</p></div>
               <p><strong>Nie weiterleiten ohne eigene Einleitung.</strong> Wenn jemand zu einem Meeting hinzugefügt wird: Begrüßen + Grund nennen, sonst sitzt die Person rätselnd dort.</p>
 
+              <hr class="md-hr">
+
               <h3>Erste Minute des Meetings</h3>
               <p>Auch wenn Meeting Purpose und Output in der Einladung stehen — am Anfang des Meetings nochmal vorlesen.</p>
               <ul class="learn-list">
@@ -1962,6 +1935,8 @@ Signature</pre></div>
                 <li>Alle starten vom selben Punkt.</li>
                 <li>Reduziert Diskussionen über die Vergangenheit eines Problems → Fokus auf Solution.</li>
               </ul>
+
+              <hr class="md-hr">
 
               <h3>Meetingende</h3>
               <p>Genauso wichtig wie der Start ist das Meetingende. Es sollten immer mind. 5 Minuten am Ende für das Closing reserviert werden. Notfalls sollten Diskussionen gekappt und verschoben werden.</p>
@@ -1972,39 +1947,24 @@ Signature</pre></div>
                 <li><strong>Danke sagen</strong> – Kurz die Beiträge aller anerkennen.</li>
               </ol>
 
-              <h3 style="margin-top:1.25rem">Live-Beispiel: Teams-Kalendereinladung</h3>
-              <p>So strukturieren wir Einladungen in Microsoft Teams – Purpose, Output und GPS farblich markiert.</p>
+              <h3 style="margin-top:1.25rem">Beispiel: Kalendereinladung</h3>
+              <p>So sieht der Einladungstext aus – schlicht wie in Outlook/Teams, ohne Zusatzfarben.</p>
               <div class="ob-meet-invite" data-demo="meeting-invite">
                 <div class="ob-teams-shell">
-                  <div class="ob-teams-nav">
-                    <div class="ob-teams-nav-item"><i class="fa-regular fa-calendar"></i> Kalender</div>
-                    <div class="ob-teams-nav-item is-active"><i class="fa-solid fa-video"></i> Besprechungen</div>
-                    <div class="ob-teams-nav-item"><i class="fa-regular fa-clock"></i> Geplant</div>
-                  </div>
                   <div class="ob-teams-main">
                     <div class="ob-teams-card">
-                      <div class="ob-teams-card__accent"></div>
                       <div class="ob-teams-card__body">
                         <h4 class="ob-teams-card__title">Danone Q4 Steering – KPI-Freigabe &amp; Deck-Finalisierung</h4>
                         <div class="ob-teams-meta-grid">
-                          <div class="ob-teams-meta-row"><i class="fa-regular fa-clock"></i><span><strong>Di, 14. Jan. 2026 · 10:00–10:45</strong> (45 Min.)</span></div>
-                          <div class="ob-teams-meta-row"><i class="fa-solid fa-repeat"></i><span>Einmalig · ROOTS Team-Kalender</span></div>
-                          <div class="ob-teams-meta-row"><i class="fa-solid fa-location-dot"></i><span>Microsoft Teams-Besprechung</span></div>
-                        </div>
-                        <button type="button" class="ob-teams-join"><i class="fa-brands fa-microsoft"></i> Teams-Besprechung beitreten</button>
-                        <div class="ob-teams-attendees">
-                          <span class="ob-teams-avatar is-host" title="Richard">RE</span>
-                          <span class="ob-teams-avatar" title="Julia">JF</span>
-                          <span class="ob-teams-avatar" title="Rod">RM</span>
-                          <span class="ob-teams-avatar" title="Max">MM</span>
-                          <span style="font-size:.75rem;color:#616161;margin-left:.35rem">4 Teilnehmende</span>
+                          <div class="ob-teams-meta-row"><span>Di, 14. Jan. 2026 · 10:00–10:45 (45 Min.)</span></div>
+                          <div class="ob-teams-meta-row"><span>Microsoft Teams-Besprechung · ROOTS Team-Kalender</span></div>
                         </div>
                         <div class="ob-teams-desc">
-                          <div class="ob-meet-block is-purpose"><strong>Meeting Purpose</strong>Freigabe der Q4-KPIs und Abstimmung der offenen Punkte für das Steering Deck.</div>
-                          <div class="ob-meet-block is-output"><strong>Meeting Output</strong>Signierte KPI-Tabellen + Action List (wer / was / bis wann) für Deck-Finalisierung.</div>
-                          <div class="ob-meet-block is-gps"><strong>Additional Information (GPS)</strong><strong>Goal:</strong> Steering-ready Deck bis Fr 17:00 · <strong>Problem:</strong> KPI-Zeile 14 ungeklärt · <strong>Solution:</strong> Entscheidung im Call, Julia signiert bis Fr 15:00</div>
-                          <p style="margin:.75rem 0 0"><strong>Slides:</strong> <i class="fa-regular fa-file-powerpoint" style="color:#b7472a"></i> KPI_Draft_v3.pptx · SharePoint</p>
-                          <p style="margin:.45rem 0 0;font-size:.78rem;color:#616161"><em>Reply-All: Bei Fragen bitte nur an Max, nicht an alle.</em></p>
+                          <div class="ob-meet-block"><strong>Meeting Purpose</strong>Freigabe der Q4-KPIs und Abstimmung der offenen Punkte für das Steering Deck.</div>
+                          <div class="ob-meet-block"><strong>Meeting Output</strong>Signierte KPI-Tabellen + Action List (wer / was / bis wann) für Deck-Finalisierung.</div>
+                          <div class="ob-meet-block"><strong>Additional Information (GPS)</strong>Goal: Steering-ready Deck bis Fr 17:00<br>Problem: KPI-Zeile 14 ungeklärt<br>Solution: Entscheidung im Call, Julia signiert bis Fr 15:00</div>
+                          <div class="ob-meet-block"><strong>Slides:</strong> KPI_Draft_v3.pptx · SharePoint</div>
+                          <p style="margin:.85rem 0 0;font-size:.82rem;color:#605e5c"><em>Reply-All: Bei Fragen bitte nur an Max, nicht an alle.</em></p>
                         </div>
                       </div>
                     </div>
@@ -3364,15 +3324,14 @@ Signature</pre></div>
       cc: 'rod.mitecki@roots-consultants.com',
       subject: 'Genehmigen Veröffentlichung Q4-KPI Danone – Deadline Fr 15:00',
       bodyHtml: `<p>Hi Julia,</p>
-<div class="em-critical">
-<p class="em-line"><span class="em-label em-topic">TOPIC:</span> Veröffentlichung der Q4-KPIs im Danone-Steering Deck.</p>
-<p class="em-line"><span class="em-label em-action">ACTION:</span> Bitte bis Freitag, 15:00 Uhr, die KPI-Tabellen in Anhang A freigeben oder Rückfragen markieren.</p>
-<p class="em-line"><span class="em-label em-key">KEY MESSAGE:</span> Wir können das Deck erst finalisieren, wenn die KPIs signiert sind.</p>
-<p class="em-line"><span class="em-label em-time">TIME FRAME:</span> Nicht dringend für heute – Deadline Freitag 15:00.</p>
-<p class="em-line"><span class="em-label em-q">FRAGEN:</span> 1 Frage (siehe unten).</p>
-</div>
-<p class="em-line"><span class="em-label em-frage">FRAGE:</span> Stimmt die Organic-Growth-Zahl in Zeile 14 (4,2&nbsp;% vs. 4,8&nbsp;% im Last Read)?</p>
-<p class="em-line"><span class="em-label em-action">ACTION:</span> Julia – KPI-Freigabe bis Fr 15:00 &nbsp;|&nbsp; Rod – Layout-Update nach Freigabe bis Mo 10:00</p>
+<p>Veröffentlichung der Q4-KPIs im Danone-Steering Deck.</p>
+<p><strong>Action:</strong> Bitte bis Freitag, 15:00 Uhr, die KPI-Tabellen in Anhang A freigeben oder Rückfragen markieren.</p>
+<p>Kernbotschaft: Wir können das Deck erst finalisieren, wenn die KPIs signiert sind.</p>
+<p>Zeitrahmen: Nicht dringend für heute – Deadline Freitag 15:00.</p>
+<p>Fragen: 1 Frage (siehe unten).</p>
+<p>&nbsp;</p>
+<p><strong>Frage:</strong> Stimmt die Organic-Growth-Zahl in Zeile 14 (4,2&nbsp;% vs. 4,8&nbsp;% im Last Read)?</p>
+<p><strong>Action:</strong> Julia – KPI-Freigabe bis Fr 15:00 &nbsp;|&nbsp; Rod – Layout-Update nach Freigabe bis Mo 10:00</p>
 <p>Thanks!<br>Max</p>`,
     },
     bad: {
@@ -3390,9 +3349,9 @@ Signature</pre></div>
     context: 'Ich teste das LT-10-Programm.',
     intent: 'Wir haben ein Problem.',
     key: 'Wir liefern einen Monat später als geplant.',
-    goal: '',
-    problem: '',
-    solution: '',
+    goal: 'LT-10 pünktlich ausrollen',
+    problem: 'Lieferverzug um einen Monat',
+    solution: 'Scope-Reduktion Phase 2 vorschlagen – brauche Dein Go',
     validation: 'Bist Du die richtige Person dafür?',
   };
 
@@ -3412,19 +3371,23 @@ Signature</pre></div>
     const checks = [
       { label: 'Betreff = CTA + Thema (kein reines „FYI")', ok: subject.length > 12 && actionVerbs.test(subjLower) && !/^fyi$|^update$|^here you go$/i.test(subject.trim()) },
       { label: 'Betreff ≤ 72 Zeichen', ok: subject.length > 0 && subject.length <= 72 },
-      { label: 'TOPIC in den ersten Zeilen (blau)', ok: /topic:/i.test(bodyLower) },
-      { label: 'ACTION – Was soll getan werden', ok: /action:/i.test(bodyLower) },
-      { label: 'KEY MESSAGE – Kernbotschaft', ok: /key message:/i.test(bodyLower) },
-      { label: 'TIME FRAME – Deadline oder „nicht dringend"', ok: /time frame:|deadline|bis (montag|dienstag|mittwoch|donnerstag|freitag|fr|mo|di|mi|do)|nicht dringend/i.test(bodyLower) },
-      { label: 'Anzahl Fragen genannt (FRAGEN:)', ok: /fragen:/i.test(bodyLower) },
-      { label: 'Einzelne FRAGE: auf eigener Zeile', ok: /frage:/i.test(bodyLower) },
+      { label: 'Topic in den ersten Zeilen (Worum geht es?)', ok: (() => {
+        const lines = body.split('\n').map(l => l.trim()).filter(Boolean);
+        return lines.length >= 4 && /^hi[\s,!?]/i.test(lines[0]) && lines[1] && !/^action:/i.test(lines[1]) && lines[1].length > 10;
+      })() },
+      { label: 'Action: – Was soll getan werden', ok: /action:/i.test(bodyLower) },
+      { label: 'Kernbotschaft genannt', ok: /kernbotschaft:/i.test(bodyLower) },
+      { label: 'Zeitrahmen oder Deadline (auch „nicht dringend")', ok: /zeitrahmen:|deadline|bis (montag|dienstag|mittwoch|donnerstag|freitag|fr|mo|di|mi|do)|nicht dringend/i.test(bodyLower) },
+      { label: 'Anzahl Fragen genannt', ok: /fragen:/i.test(bodyLower) },
+      { label: 'Frage: auf eigener Zeile', ok: /frage:/i.test(bodyLower) },
       { label: 'Action-Format: Wer macht was bis wann', ok: /action:.*(\||bis|–|-)/i.test(bodyLower) || /action:.*\d/.test(bodyLower) },
+      { label: 'Keine englischen Demo-Labels (TOPIC:/KEY MESSAGE:)', ok: !/topic:|key message:|time frame:/i.test(bodyLower) },
       { label: 'Kurz & scanbar (Five-Sentence-Zone)', ok: body.split('\n').filter(l => l.trim()).slice(0, 12).join(' ').length >= 40 && body.length <= 2200 },
     ];
     list.innerHTML = checks.map(c => `<li class="${c.ok ? 'is-ok' : ''}"><i class="fa-solid ${c.ok ? 'fa-circle-check' : 'fa-circle'}"></i><span>${c.label}</span></li>`).join('');
     const score = checks.filter(c => c.ok).length;
-    if (score >= 8) list.insertAdjacentHTML('beforeend', `<li class="is-ok"><i class="fa-solid fa-star"></i><span><strong>${score}/${checks.length}</strong> – ROOTS-Standard erreicht</span></li>`);
-    else if (score <= 4) list.insertAdjacentHTML('beforeend', `<li class="is-warn"><i class="fa-solid fa-triangle-exclamation"></i><span>Nur ${score}/${checks.length} – Beispiel verbessern</span></li>`);
+    if (score >= 9) list.insertAdjacentHTML('beforeend', `<li class="is-ok"><i class="fa-solid fa-star"></i><span><strong>${score}/${checks.length}</strong> – ROOTS-Standard erreicht</span></li>`);
+    else if (score <= 5) list.insertAdjacentHTML('beforeend', `<li class="is-warn"><i class="fa-solid fa-triangle-exclamation"></i><span>Nur ${score}/${checks.length} – Beispiel verbessern</span></li>`);
   }
 
   function setEmailDemoMode(root, mode) {
@@ -3676,6 +3639,15 @@ Signature</pre></div>
     if (icon) { icon.classList.add('fa-expand'); icon.classList.remove('fa-compress'); }
     btn?.setAttribute('title', 'Vollbild'); btn?.setAttribute('aria-label', 'Vollbild');
   }
+  function enableModuleModalFullscreen() {
+    const overlay = document.getElementById('modal-overlay');
+    const btn = document.getElementById('modal-fullscreen-btn');
+    const icon = btn?.querySelector('i');
+    overlay?.classList.add('is-modal-fullscreen');
+    if (icon) { icon.classList.remove('fa-expand'); icon.classList.add('fa-compress'); }
+    btn?.setAttribute('title', 'Vollbild beenden');
+    btn?.setAttribute('aria-label', 'Vollbild beenden');
+  }
   function toggleModuleModalFullscreen() {
     const overlay = document.getElementById('modal-overlay');
     const btn = document.getElementById('modal-fullscreen-btn');
@@ -3784,7 +3756,6 @@ Signature</pre></div>
   function openModal(id) {
     const mod = getModuleById(id);
     if (!mod) return;
-    resetModuleModalFullscreen();
     currentModuleId = id;
     document.getElementById('modal-icon').innerHTML = `<i class="${mod.icon}"></i>`;
     document.getElementById('modal-title').textContent = mod.title;
@@ -3804,6 +3775,7 @@ Signature</pre></div>
     modalBox.classList.add('dash-modal--fixed');
     document.getElementById('modal-overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
+    enableModuleModalFullscreen();
     requestAnimationFrame(() => requestAnimationFrame(() => logModalScrollMetrics(id, 'post-open')));
   }
 
