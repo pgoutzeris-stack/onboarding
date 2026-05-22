@@ -3317,11 +3317,14 @@ Signature</pre></div>
     const cls = useFlat ? 'mod-section' : 'sub-accordion';
     const chev = useFlat ? 'mod-section-chevron' : 'sub-accordion-chevron';
     const bodyCls = useFlat ? 'mod-section-body' : 'sub-accordion-body';
-    return sub.sections.map((sec, i) => `
-      <details class="${cls}"${sec.open || i === 0 ? ' open' : ''}>
+    return sub.sections.map((sec, i) => {
+      const isOpen = useFlat ? i === 0 : (sec.open || i === 0);
+      return `
+      <details class="${cls}"${isOpen ? ' open' : ''}>
         <summary><span class="sub-accordion-title">${sec.title}</span><i class="fa-solid fa-chevron-down ${chev}" aria-hidden="true"></i></summary>
         <div class="${bodyCls}">${sec.content}</div>
-      </details>`).join('');
+      </details>`;
+    }).join('');
   }
   function buildSignatureHtml() {
     const name = userName || 'Dein Name';
@@ -3389,6 +3392,33 @@ Signature</pre></div>
     }
     requestAnimationFrame(frame);
   }
+  function getModalScrollEl(fromEl) {
+    if (fromEl) {
+      const scoped = fromEl.closest('.module-tab-panel, .mod-modal-scroll--solo, .mod-modal-scroll');
+      if (scoped) return scoped;
+    }
+    const body = document.getElementById('modal-body');
+    return body?.querySelector('.module-tab-panel.active, .mod-modal-scroll--solo, .mod-modal-scroll') || null;
+  }
+
+  function resetModalScroll() {
+    const scrollEl = getModalScrollEl();
+    if (scrollEl) scrollEl.scrollTop = 0;
+  }
+
+  function scrollModalToSummary(detailsEl) {
+    const scrollEl = getModalScrollEl(detailsEl);
+    const summary = detailsEl?.querySelector('summary');
+    if (!scrollEl || !summary) return;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const scrollRect = scrollEl.getBoundingClientRect();
+        const summaryRect = summary.getBoundingClientRect();
+        scrollEl.scrollTop += summaryRect.top - scrollRect.top - 12;
+      });
+    });
+  }
+
   function triggerPanelAnimations(panelEl) {
     if (!panelEl) return;
     panelEl.classList.remove('is-inview');
@@ -3569,28 +3599,25 @@ Signature</pre></div>
     el.querySelectorAll('[data-demo="slide-compare"]').forEach(bindSlideCompareDemo);
   }
 
-  function bindWelcomeTimelineReveal() {
-    const body = document.getElementById('modal-body');
-    if (!body) return;
-    body.querySelectorAll('.module-tab-panel .mod-section').forEach(det => {
-      det.addEventListener('toggle', () => {
-        if (!det.open) return;
-        const tl = det.querySelector('[data-timeline]');
-        if (tl) setTimeout(() => animateTimeline(tl), 40);
-        bindInteractiveDemos(det);
-      });
-    });
-  }
-  function bindWelcomeAccordions() {
+  function bindModuleAccordions() {
     const body = document.getElementById('modal-body');
     if (!body) return;
     body.querySelectorAll('.module-tab-panel').forEach(panel => {
-      panel.querySelectorAll('.mod-section').forEach(det => {
+      const isOrga = !!panel.querySelector('.orga-mod-panel');
+      panel.querySelectorAll('.mod-section, .sub-accordion').forEach(det => {
+        if (det.dataset.accBound === '1') return;
+        det.dataset.accBound = '1';
         det.addEventListener('toggle', () => {
           if (!det.open) return;
-          panel.querySelectorAll('.mod-section').forEach(other => {
-            if (other !== det) other.removeAttribute('open');
-          });
+          if (!isOrga) {
+            panel.querySelectorAll('.mod-section, .sub-accordion').forEach(other => {
+              if (other !== det) other.removeAttribute('open');
+            });
+          }
+          scrollModalToSummary(det);
+          const tl = det.querySelector('[data-timeline]');
+          if (tl) setTimeout(() => animateTimeline(tl), 40);
+          bindInteractiveDemos(det);
         });
       });
     });
@@ -3614,10 +3641,9 @@ Signature</pre></div>
     }));
     const activePanel = body.querySelector('.module-tab-panel.active');
     triggerPanelAnimations(activePanel);
-    bindWelcomeTimelineReveal();
-    bindWelcomeAccordions();
+    bindModuleAccordions();
     bindInteractiveDemos(body);
-    if (activePanel) activePanel.scrollTop = 0;
+    resetModalScroll();
     if (activePanel?.dataset.sub === 'w-team') hydrateTeamRoster();
     if (activePanel?.dataset.sub === 'w-mentor') hydrateMentorCard();
   }
@@ -3866,7 +3892,10 @@ Signature</pre></div>
     document.getElementById('modal-overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
     enableModuleModalFullscreen();
-    requestAnimationFrame(() => requestAnimationFrame(() => logModalScrollMetrics(id, 'post-open')));
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      resetModalScroll();
+      logModalScrollMetrics(id, 'post-open');
+    }));
   }
 
   function refreshOrgaModalIfOpen() {
