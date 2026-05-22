@@ -649,11 +649,19 @@
     .ob-outlook-row input{width:100%;border:none;padding:.48rem .75rem;font-family:inherit;font-size:.8rem;background:#fff;color:#323130;outline:none}
     .ob-outlook-row input:focus{background:#f0f6ff}
     .ob-outlook-compose{padding:0;background:#fff}
-    .ob-outlook-body{min-height:300px;padding:1rem 1.1rem 1.25rem;font-family:Aptos,'Segoe UI',sans-serif;font-size:.84rem;line-height:1.65;color:#323130;outline:none;white-space:pre-wrap;word-break:break-word}
+    .ob-outlook-body{min-height:300px;padding:1rem 1.1rem .75rem;font-family:Aptos,'Segoe UI',sans-serif;font-size:.84rem;line-height:1.55;color:#323130;outline:none;white-space:pre-wrap;word-break:break-word}
     .ob-outlook-body:focus{background:#fff}
-    .ob-outlook-body .em-label{font-weight:700;display:inline-block;min-width:7.5rem}
-    .ob-outlook-body .em-topic{color:#4338ca}.ob-outlook-body .em-action{color:#15803d}.ob-outlook-body .em-key{color:#1d4ed8}.ob-outlook-body .em-time{color:#b45309}.ob-outlook-body .em-q{color:#be185d}
-    .ob-outlook-sig{margin-top:1rem;padding-top:.75rem;border-top:1px solid #edebe9;font-size:.78rem;color:#605e5c;line-height:1.5}
+    .ob-outlook-body .em-critical{margin:.35rem 0 .65rem;padding:.65rem .75rem;border-left:3px solid #0078d4;background:#f0f6ff;border-radius:0 8px 8px 0}
+    .ob-outlook-body .em-line{margin:.28rem 0;display:block}
+    .ob-outlook-body .em-label{font-weight:700;font-size:.82rem;letter-spacing:.02em;margin-right:.35rem}
+    .ob-outlook-body .em-topic{color:#0078d4}
+    .ob-outlook-body .em-action{color:#15803d}
+    .ob-outlook-body .em-key{color:#1e3a8a}
+    .ob-outlook-body .em-time{color:#b45309}
+    .ob-outlook-body .em-q{color:#be185d}
+    .ob-outlook-body .em-frage{color:#be185d}
+    .ob-outlook-body .em-decision{color:#7c3aed}
+    .ob-outlook-sig{margin-top:.85rem;padding:.75rem 0 0;border-top:1px solid #edebe9;font-size:.78rem;color:#605e5c;line-height:1.5}
     .ob-outlook-sig strong{color:#323130}
     .ob-email-guide{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:.85rem;position:sticky;top:0}
     .ob-email-guide h4{margin:0 0 .55rem;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
@@ -666,7 +674,8 @@
     .ob-email-legend{margin-top:.75rem;padding-top:.65rem;border-top:1px solid var(--line);font-size:.72rem;color:var(--muted);line-height:1.5}
     .ob-email-legend span{display:inline-block;margin:.15rem .35rem .15rem 0;padding:.12rem .4rem;border-radius:4px;font-weight:600;font-size:.68rem}
     .ob-email-legend .lg-subj{background:#dbeafe;color:#1d4ed8}
-    .ob-email-legend .lg-topic{background:#e0e7ff;color:#4338ca}
+    .ob-email-legend .lg-topic{background:#dbeafe;color:#0078d4}
+    .ob-email-legend .lg-key{background:#e0e7ff;color:#1e3a8a}
     .ob-email-legend .lg-action{background:#dcfce7;color:#15803d}
     .ob-email-legend .lg-time{background:#fef3c7;color:#b45309}
     .ob-email-legend .lg-q{background:#fce7f3;color:#be185d}
@@ -1600,49 +1609,55 @@ Signature</pre></div>
           ]},
           { id:'m-comm', tab:'Kommunikation', sections:[
             { title:'Channels', open:true, content:`
-              <p>Bei ROOTS nutzen wir je nach Situation unterschiedliche Kanäle – hier die wichtigsten:</p>
-              <div class="content-cards">
-                <div class="content-card"><div class="content-card__icon"><i class="fa-solid fa-comments"></i></div><strong>Direkt</strong><p>Im Office kommunizieren wir meist direkt über den Schreibtisch oder in kurzen Spontanmeetings.</p></div>
-                <div class="content-card"><div class="content-card__icon"><i class="fa-solid fa-envelope"></i></div><strong>E-Mail</strong><p>Hauptmedium unserer schriftlichen Kommunikation – auch für kurze Austausche, die woanders oft über Teams laufen.</p></div>
-                <div class="content-card"><div class="content-card__icon"><i class="fa-brands fa-microsoft"></i></div><strong>MS Teams</strong><p>Schneller Austausch, z.&nbsp;B. zum Teilen von Links. Dokumente versenden wir eher per E-Mail. Richard nutzt Teams selten – lieber E-Mail.</p></div>
-                <div class="content-card"><div class="content-card__icon"><i class="fa-brands fa-whatsapp"></i></div><strong>WhatsApp</strong><p>Informelle Themen (z.&nbsp;B. Nachkaufen von Süßigkeiten) und Abstimmung bei Reisetätigkeit.</p></div>
-                <div class="content-card"><div class="content-card__icon"><i class="fa-solid fa-phone"></i></div><strong>Anrufe / Team Calls</strong><p>Selten genutzt – meist zur Abstimmung im Home-Office oder bei Reisetätigkeit vor/nach Kundenterminen (häufig von Richard).</p></div>
-              </div>
+              <ul class="learn-list">
+                <li><strong>Direkt:</strong> Im Office kommunizieren wir meistens direkt über den Schreibtisch oder setzen uns kurz zu Spontanmeetings zusammen.</li>
+                <li><strong>E-Mail:</strong> ist das Hauptmedium unserer schriftlichen Kommunikation. Wir nutzen sie auch für kurze Austausche, die in anderen Unternehmen typischerweise auf MS Teams laufen. Wundere dich also nicht über sehr kurze, informelle E-Mails.</li>
+                <li><strong>MS Team:</strong> nutzen wir für den schnellen Austausch, z.&nbsp;B. zum Teilen von Links. Dokumente versenden wir eher über E-Mail. Richard verwendet nur selten MS Teams. Sende ihm lieber eine E-Mail.</li>
+                <li><strong>WhatsApp:</strong> wird zu informellen Themen, wie dem Nachkaufen von Süßigkeiten genutzt. Zudem nutzen wir es häufig bei Reisetätigkeit zur Abstimmung.</li>
+                <li><strong>Anrufe/Team Calls:</strong> nutzen wir selten. Meistens werden diese zur Abstimmung im Home-Office oder bei Reisetätigkeit vor oder nach Kundenterminen von Richard genutzt.</li>
+              </ul>
             ` },
             { title:'First Minute Guide', content:`
               <p>Die First-Minute-Methode operationalisiert die ersten 60 Sekunden jedes beruflichen Gesprächs, jeder E-Mail und jeder Meetingeinladung.</p>
               <div class="highlight"><p><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> <strong>Ziel:</strong> In 60 Sekunden weiß die Empfängerseite (1) worum es geht, (2) was sie tun soll, (3) was die Lösung ist, (4) ob jetzt der richtige Moment ist.</p></div>
               <h3>Drei Grundprinzipien</h3>
               <ul class="learn-list">
-                <li><strong>Bereite die Empfängerseite vor, bevor du lieferst.</strong> Was für dich offensichtlich ist, ist für die andere Seite eine Black Box.</li>
-                <li><strong>Komm sofort zum Punkt.</strong> Arbeitskolleg:innen sind beschäftigt, nicht neugierig.</li>
-                <li><strong>Fokus auf Aktionen und Lösungen, nicht auf Probleme.</strong> Meetings verbringen 80 % der Zeit mit der Vergangenheit – strukturierte Kommunikation kippt das Verhältnis.</li>
+                <li><strong>Bereite die Empfängerseite vor, bevor du lieferst.</strong> Niemand teilt deinen Kontext. Was für dich offensichtlich ist, ist für die andere Seite eine Black Box. Erst Rahmen, dann Inhalt.</li>
+                <li><strong>Komm sofort zum Punkt.</strong> Arbeitskolleg:innen sind beschäftigt, nicht neugierig. Eine schnelle Pointe schlägt eine elegante Hinführung.</li>
+                <li><strong>Fokus auf Aktionen und Lösungen, nicht auf Probleme.</strong> Meetings verbringen 80&nbsp;% der Zeit mit der Vergangenheit eines Problems. Das ist verschwendete Energie. Strukturierte Kommunikation kippt das Verhältnis.</li>
               </ul>
               <h3>Die First-Minute-Architektur</h3>
               <div class="content-flow">
-                <div class="content-flow__step"><div class="content-flow__label">15 Sek</div><div class="content-flow__body"><strong>Time Check</strong><p>„Hast du 10 Minuten für eine Entscheidung zum Projekt X?" statt „Hast du eine Minute?" – sonst beschädigst du deinen Ruf als verlässliche:r Kommunikator:in.</p></div></div>
+                <div class="content-flow__step"><div class="content-flow__label">15 Sek</div><div class="content-flow__body"><strong>Time Check</strong><p>Die häufige Eröffnung „Hast du eine Minute?" ist eine Lüge — kaum ein Thema ist in 60 Sekunden inkl. Antwort durch. Stattdessen: Frage nach dem Zeitfenster, das du wirklich brauchst.</p><p>„Hast du 10 Minuten für eine Entscheidung zum Projekt X?" · „Brauche kurz 5 Minuten für ein FYI."</p></div></div>
                 <div class="content-flow__step"><div class="content-flow__label">15 Sek</div><div class="content-flow__body"><strong>Framing</strong><p><em>Context</em> – worum geht es? · <em>Intent</em> – Entscheidung, Input, Genehmigung, FYI? · <em>Key Message</em> – Kernaussage (Na-und-Test).</p><p><em>Beispiel LT-10:</em> Context: LT-10-Programm · Intent: Problem · Key Message: Wir liefern einen Monat später.</p></div></div>
                 <div class="content-flow__step"><div class="content-flow__label">45 Sek</div><div class="content-flow__body"><strong>Structured Summary (GPS)</strong><p><em>Goal</em> – Was wollen wir erreichen? · <em>Problem</em> – Was hindert uns? · <em>Solution</em> – Vorschlag oder Hilfe?</p></div></div>
-                <div class="content-flow__step"><div class="content-flow__label">5 Sek</div><div class="content-flow__body"><strong>Validation Checkpoint</strong><p>Ability (Wissen/Befugnis) und Availability (Zeit/Bereitschaft) prüfen.</p></div></div>
+                <div class="content-flow__step"><div class="content-flow__label">5 Sek</div><div class="content-flow__body"><strong>Validation Checkpoint</strong><p>Ability (Wissen/Befugnis) und Availability (Zeit/Bereitschaft) prüfen:</p><ul class="learn-list" style="margin:.35rem 0 0"><li>„Bist du die richtige Person dafür?"</li><li>„Hast du jetzt Zeit, das zu besprechen?"</li><li>„Hast du Fragen zu dem, was ich gerade beschrieben habe?"</li></ul><p style="margin-top:.45rem">Ohne Checkpoint riskierst du, jemandem 10 Minuten zu erklären, was sie sowieso nicht entscheiden können — oder jemanden festzuhalten, der gerade auf dem Weg ins nächste Meeting ist.</p></div></div>
               </div>
-              <h3>Vier Ursachen für überkomplexe Summaries</h3>
+              <h3>Drei Situationen — drei Solution-Typen</h3>
               <ul class="learn-list">
-                <li>Du nimmst an, das Gegenüber denkt wie du</li>
-                <li>Du glaubst, alle Details seien nötig zum Verstehen</li>
-                <li>Du beschreibst Abhängigkeiten statt das Problem</li>
-                <li>Du fasst mehrere Probleme auf einmal zusammen</li>
+                <li>Du hast ein Problem und brauchst eine Lösung. → Solution = „Hilfst du mir, eine Lösung zu finden?"</li>
+                <li>Du hast ein Problem und schlägst eine Lösung vor. → Solution = dein Vorschlag.</li>
+                <li>Du hattest ein Problem und es ist gelöst. → Solution = was du getan hast und der Status.</li>
               </ul>
-              <h3>NASA-ISS-Beispiel (30 Sek. statt 20 Min.)</h3>
+              <h3>Vier Ursachen für überkomplexe Zusammenfassungen</h3>
+              <ul class="learn-list">
+                <li><strong>Du nimmst an, das Gegenüber denkt wie du.</strong> Es tut es nicht. Starte mit der minimalsten Information, nicht der vollständigsten.</li>
+                <li><strong>Du glaubst, Empfänger braucht alle Details, um dich zu verstehen.</strong> Tut sie nicht. Wenige Worte mit den richtigen Informationen schlagen viele Worte mit allen.</li>
+                <li><strong>Du beschreibst Variablen und Abhängigkeiten statt das Problem.</strong> Eine späte Lieferung ist die Lösung; die Abhängigkeit selbst ist nicht das Problem.</li>
+                <li><strong>Du fasst mehrere Probleme auf einmal zusammen.</strong> Probleme werden eines nach dem anderen gelöst — also auch eines nach dem anderen geframt.</li>
+              </ul>
+              <h3>Beispiel: Komplexes Thema in 30 Sekunden</h3>
+              <p>NASA-Engineers vs. Laie. Zwei Engineers erklärten 20 Minuten lang die Komplexität der ISS. Ein fachfremder Zuhörer fasste anschließend zusammen:</p>
               <ul class="learn-list">
                 <li><strong>Goal:</strong> Forschungslabor im All bauen, damit die Menschheit Wichtiges lernt</li>
                 <li><strong>Problem:</strong> Das All ist schwer zu erreichen, 100 Wege dort zu sterben</li>
                 <li><strong>Solution:</strong> Viel Geld, um die Forschenden am Leben zu halten</li>
               </ul>
               <div class="compare-cols">
-                <div class="compare-col is-bad"><strong>Falsch (Vergangenheit)</strong>„Wir hatten einen Stillstand wegen blockierter Roller, dann mussten wir Markierungen neu machen …"</div>
-                <div class="compare-col is-good"><strong>Richtig (Zukunft)</strong>„Roller-Stillstand in 24h behoben. Produktion läuft. Layout-Doku wird aktualisiert."</div>
+                <div class="compare-col is-bad"><strong>Falsch (Status-Update Fertigung)</strong>„Wir hatten einen Stillstand wegen blockierter Roller, dann mussten wir die Markierungen neu machen, weil das Layout veraltet war …"</div>
+                <div class="compare-col is-good"><strong>Richtig (zukunftsgerichtet)</strong>„Wir haben den Roller-Stillstand gefunden und in 24 Stunden behoben. Produktion läuft wieder. Layout-Doku wird aktualisiert."</div>
               </div>
-              <p>High Performers kommen mit 1–2 Lösungsideen – nicht leer. Der Unterschied: „Mach du das" vs. „Was hältst du davon?"</p>
+              <p>High Performers fragen häufig um Rat, kommen aber meist mit ein bis zwei Lösungsideen — nicht „leer". Der Unterschied zwischen „Mach du das für mich" und „Was hältst du davon?" ist signifikant.</p>
             ` },
             { title:'Live-Übung: First Minute bauen', content:`
               <p>Fülle die Felder aus – dein First-Minute-Script wird live zusammengesetzt.</p>
@@ -1663,19 +1678,56 @@ Signature</pre></div>
             ` },
             { title:'E-Mail Etikette', open:true, content:`
               <h3>Wann (k)eine E-Mail?</h3>
-              <p><strong>Keine E-Mail, wenn:</strong> Google/Doku reicht · bis zum nächsten Treffen warten kann · konfliktbehaftet/emotional · Diskussion eskaliert · Teams/Anruf besser passt.</p>
-              <p><strong>Stattdessen E-Mail, wenn:</strong> dokumentationspflichtig · asynchron · mehrere denselben Stand brauchen.</p>
-              <h3>Zero Inbox · Betreff · Body</h3>
+              <p><strong>Keine E-Mail senden, wenn:</strong></p>
               <ul class="learn-list">
-                <li>E-Mail-Zeiten im Kalender (90 Min. morgens, vor Mittag, Tagesende) · alt → neu</li>
-                <li><strong>Betreff = Urgency + CTA + Thema + Grund</strong> · max. 72 Zeichen · nie leer</li>
-                <li>Body: Topic · Action · Key Message · Time Frame · Anzahl Fragen in den ersten Zeilen</li>
-                <li>Labels: <strong>FRAGE:</strong> · <strong>ACTION:</strong> · <strong>DECISION:</strong> auf eigener Zeile</li>
+                <li>Die Frage durch Google, Doku oder eigenes Ausprobieren beantwortbar ist</li>
+                <li>Das Anliegen bis zum nächsten persönlichen Treffen warten kann</li>
+                <li>Es konfliktbehaftet, kontrovers oder emotional ist → persönlich, Telefon oder Video</li>
+                <li>Eine E-Mail-Diskussion zur Debatte wird → in Meeting verlagern</li>
+                <li>Es besser per Teams/Anruf passt (z.&nbsp;B. Single-Line-Updates)</li>
               </ul>
-              <p><strong>Vermeide im Betreff:</strong> False Urgency · Clickbait · reine „FYI"-Labels.</p>
+              <p><strong>Stattdessen E-Mail, wenn:</strong></p>
+              <ul class="learn-list">
+                <li>Information schriftlich dokumentiert werden muss</li>
+                <li>Empfänger asynchron reagieren soll</li>
+                <li>Mehrere Personen denselben Stand brauchen</li>
+              </ul>
+
+              <h3>Zero Inbox</h3>
+              <ul class="learn-list">
+                <li>Plane Zeiten zum Checken der E-Mails im Kalender; 90&nbsp;Min. nach Arbeitsbeginn, vor der Mittagspause und zum Ende des Arbeitstages</li>
+                <li>Gehe E-Mails immer von alt zu neu durch</li>
+                <li>Lösche unrelevante E-Mails direkt. Beantworte E-Mails die &lt; 2&nbsp;Min. dauern unmittelbar und archiviere sie danach.</li>
+                <li>Für E-Mails deren Beantwortung &gt; 2&nbsp;Min. einnehmen, flagge sie und kategorisiere sie zu <strong>Followup</strong>. Arbeite sie dann später über das Aufgabenfenster ab.</li>
+              </ul>
+
+              <h3>Aufbau einer E-Mail · Betreff</h3>
+              <p><strong>Betreff = Urgency (optional) + CTA + Thema + Grund</strong></p>
+              <p>z.&nbsp;B. „[URGENT] Genehmigen Veröffentlichung Zahlen Q4"</p>
+              <ul class="learn-list">
+                <li><strong>DE.</strong> Aktion, Unterschrift, Info, Entscheidung, Anfrage, Genehmigen, Rücksprache etc.</li>
+                <li><strong>EN.</strong> Action, Sign, Info, Decision, Request, to Approve etc.</li>
+                <li>Max. ca. 72 Zeichen, damit auf Mobile nicht abgeschnitten</li>
+                <li>Nie leer lassen</li>
+                <li>Passt die ganze E-Mail in den Betreff → in den Betreff packen (z.&nbsp;B. „Standup verschoben auf 10:00 Uhr morgen — danke!")</li>
+              </ul>
+              <p><strong>Vermeide:</strong> False Urgency (überstrapaziertes [URGENT]) · Clickbait („Du wirst nicht glauben…") · Bait-and-Switch · reine Labels wie „FYI", „Update", „Here you go"</p>
+
+              <h3>Body</h3>
+              <p><strong>Body = Begrüßung + Topic + Action + Key message + Time frame + Anzahl Fragen</strong></p>
+              <p><strong>Die ersten 5 Zeilen sind kritisch</strong> — annehmen, dass nur diese gelesen werden. Dort gehört rein:</p>
+              <ol class="learn-list">
+                <li>Worum geht es?</li>
+                <li>Was soll der/die Empfänger:in tun?</li>
+                <li>Kernbotschaft</li>
+                <li>Bis wann (auch „nicht dringend" explizit nennen — Empfänger überschätzen Dringlichkeit um ~36&nbsp;%)</li>
+                <li>Wie viele Fragen die E-Mail enthält</li>
+              </ol>
+              <p>Bei mehreren Themen im Intro: Anzahl + Namen der Themen nennen, dann mit Headern strukturieren.</p>
+              <p>Fragen, Aktionen, Entscheidungen sichtbar machen: auf eigene Zeile · mit Label <strong>Frage:</strong>, <strong>Action:</strong>, <strong>Decision:</strong> · fett oder GROSSBUCHSTABEN (Plain-Text-sicher)</p>
 
               <h3 style="margin-top:1.25rem">Live-Beispiel: ROOTS-E-Mail in Outlook</h3>
-              <p>Bearbeite die Mail wie in Outlook – die Checkliste prüft live den ROOTS-Standard. Wechsle zwischen gutem und schlechtem Beispiel.</p>
+              <p>Bearbeite die Mail wie in Outlook. Die Checkliste prüft live den ROOTS-Standard — farbige Labels zeigen Topic (blau), Action (grün), Key Message, Time Frame und Fragen.</p>
               <div class="ob-demo" data-demo="email-editor">
                 <div class="ob-demo-head">
                   <strong><i class="fa-brands fa-microsoft"></i> Outlook · Neue Nachricht</strong>
@@ -1712,33 +1764,70 @@ Signature</pre></div>
                       <h4>Struktur-Check</h4>
                       <ul class="ob-email-check" data-email="checklist"></ul>
                       <div class="ob-email-legend">
-                        <span class="lg-subj">Betreff</span><span class="lg-topic">Topic</span><span class="lg-action">Action</span><span class="lg-time">Zeitrahmen</span><span class="lg-q">Fragen</span>
+                        <span class="lg-topic">TOPIC</span><span class="lg-key">KEY MESSAGE</span><span class="lg-action">ACTION</span><span class="lg-time">TIME FRAME</span><span class="lg-q">FRAGE</span>
                       </div>
                     </aside>
                   </div>
                 </div>
               </div>
 
-              <h3>Best Practices, Reply &amp; Gruppen-Mails</h3>
+              <h3>Best Practices</h3>
+              <p><strong>Länge &amp; Struktur:</strong> So kurz wie möglich — kürzere E-Mails haben &gt; 60&nbsp;% höhere Antwortrate · Faustregel: max. 2× Scrollen am Phone · Five-Sentence-Rule · Ein E-Mailverlauf pro Thema · Whitespace zwischen Absätzen · nummerierte Listen wenn Empfänger auf einzelne Items antworten soll</p>
+              <p><strong>Links, Anhänge:</strong> Hyperlinks statt rohe URLs (⌘&nbsp;K) · im Fließtext platzieren · Anhänge benennen, Grund nennen · Kerninfo in der E-Mail — nicht nur im Anhang</p>
+              <p><strong>Reply-Regeln:</strong> Betreff in Replies nicht ändern · Reply nicht mit „Thank you" beginnen · Reply to points statt Top-Posting · Reply-All: erst alle eintragen, dann gezielt entfernen</p>
+              <h3>Gruppen-E-Mails, Cc, Bcc</h3>
               <ul class="learn-list">
-                <li>Five-Sentence-Rule · max. 2× Scrollen am Phone · kürzere Mails &gt; 60 % Antwortrate</li>
-                <li>Hyperlinks statt rohe URLs · Kerninfo in der Mail, nicht nur im Anhang</li>
-                <li>Reply nicht mit „Thank you" beginnen · Betreff nicht ändern · Reply to points</li>
-                <li>Cc nur FYI · Bcc für Waiting-Kopie oder Datenschutz bei Verteilern</li>
-                <li>Gruppen: Seniorität ordnen · Reply-All-Regel explizit setzen</li>
-                <li>Arbeits-E-Mails sind nicht privat – Rechtschreibung bei externen Empfängern prüfen</li>
+                <li>Personen nach Senioritätsgrad ordnen · pro Subgroup separat ansprechen · Reply-All-Regel explizit festlegen</li>
+                <li><strong>Cc:</strong> Faustregel: Cc nur für FYI-Empfänger — alle anderen ins An-Feld</li>
+                <li><strong>Bcc:</strong> nur Datenschutz bei großen Verteilern oder Kopie an sich selbst (z.&nbsp;B. „Waiting")</li>
+              </ul>
+              <h3>Tipps</h3>
+              <ul class="learn-list">
+                <li>Mit <strong>@</strong> Personen taggen — E-Mail wird automatisch eingefügt</li>
+                <li>Dich selbst bei <strong>Bcc</strong> einfügen für eine Kopie (ggf. Kategorie „Waiting")</li>
+                <li>Templates für wiederkehrende E-Mails anlegen</li>
+                <li>Arbeits-E-Mails sind <strong>nicht privat</strong> — nichts schreiben, was vor Gericht oder vor Mama unangenehm wäre</li>
+                <li>Rechtschreibung &amp; Grammatik prüfen, besonders bei externen Empfängern</li>
               </ul>
             ` },
             { title:'Meeting Etikette', open:true, content:`
               <h3>Braucht es überhaupt ein Meeting?</h3>
-              <p>Kein Meeting, wenn es nur ein Update ist, Entscheidungsträger fehlen oder sich noch Zeit mit Feedback gelassen werden kann.</p>
-              <div class="highlight"><p><i class="fa-solid fa-chart-pie" aria-hidden="true"></i> Bain: <strong>35 %</strong> des Tages in Meetings. Ludic: Nur <strong>1 von 10</strong> versteht immer den Zweck.</p></div>
-              <h3>Invitation · Erste Minute · Closing</h3>
+              <p><strong>Es braucht kein Meeting, wenn:</strong></p>
               <ul class="learn-list">
-                <li><strong>Subject:</strong> Context + Intent · Body: Purpose, Output, optional GPS, Slides</li>
-                <li>Nie weiterleiten ohne Einleitung · Neu Hinzugefügte begrüßen</li>
-                <li>Start: Purpose &amp; Output vorlesen · Ende: 5 Min. Closing (Summary, Output-Status, Actions, Danke)</li>
+                <li>Es lediglich ein Update ist</li>
+                <li>Entscheidungsträger nicht zugegen sind</li>
+                <li>und sich noch Zeit mit Feedback gelassen werden kann</li>
               </ul>
+
+              <h3>Invitation</h3>
+              <p><strong>Subject line:</strong> Context + Intent</p>
+              <p><strong>Body:</strong></p>
+              <ul class="learn-list">
+                <li><strong>Meeting purpose</strong> (one line describing what the meeting is for)</li>
+                <li><strong>Meeting output</strong> (one line stating the expected outcome or output of the meeting)</li>
+                <li><strong>Additional Information</strong> (optional: GPS-Summary)</li>
+                <li><strong>Slides</strong></li>
+              </ul>
+              <div class="highlight"><p><i class="fa-solid fa-chart-pie" aria-hidden="true"></i> Bain-Studie: Manager:innen verbringen <strong>35&nbsp;%</strong> ihres Arbeitstages in Meetings. Ludic-Studie: Nur <strong>1 von 10</strong> Personen versteht immer den Zweck eines Meetings. Klare Einladungen sind kein Nice-to-have.</p></div>
+              <p><strong>Nie weiterleiten ohne eigene Einleitung.</strong> Wenn jemand zu einem Meeting hinzugefügt wird: Begrüßen + Grund nennen, sonst sitzt die Person rätselnd dort.</p>
+
+              <h3>Erste Minute des Meetings</h3>
+              <p>Auch wenn Meeting Purpose und Output in der Einladung stehen — am Anfang des Meetings nochmal vorlesen.</p>
+              <ul class="learn-list">
+                <li>Nicht alle haben die Einladung gelesen.</li>
+                <li>Wer sie gelesen hat, hat die Details vergessen.</li>
+                <li>Alle starten vom selben Punkt.</li>
+                <li>Reduziert Diskussionen über die Vergangenheit eines Problems → Fokus auf Solution.</li>
+              </ul>
+
+              <h3>Meetingende</h3>
+              <p>Genauso wichtig wie der Start ist das Meetingende. Es sollten immer mind. 5 Minuten am Ende für das Closing reserviert werden. Notfalls sollten Diskussionen gekappt und verschoben werden.</p>
+              <ol class="learn-list">
+                <li><strong>Meeting zusammenfassen</strong> – Sehr kurz die wichtigsten besprochenen Punkte rekapitulieren.</li>
+                <li><strong>Output-Status bestätigen</strong> – Klar kommunizieren, ob das Ziel des Meetings erreicht wurde oder nicht und ob es ein Follow-up braucht.</li>
+                <li><strong>Entscheidungen &amp; Aufgaben rekapitulieren (am wichtigsten)</strong> – Konkret benennen, wer was bis wann tut. Falls was wann fehlt, nachfragen.</li>
+                <li><strong>Danke sagen</strong> – Kurz die Beiträge aller anerkennen.</li>
+              </ol>
 
               <h3 style="margin-top:1.25rem">Live-Beispiel: Teams-Kalendereinladung</h3>
               <p>So strukturieren wir Einladungen in Microsoft Teams – Purpose, Output und GPS farblich markiert.</p>
@@ -1781,12 +1870,12 @@ Signature</pre></div>
               </div>
             ` },
             { title:'Präsentationen (McKinsey Chart Clinique)', content:`
-              <p>Wer eine gute Präsentation hält, überträgt eine Idee in den Kopf des Zuhörers – Inhalt und Narrativ schlagen Design.</p>
+              <p>Wer eine gute Präsentation hält, überträgt eine Idee in den Kopf des Zuhörers. Das ist das einzige Ziel. Folien, Struktur und Rhetorik sind Mittel dafür — kein Selbstzweck. Präsentationen stehen und fallen mit Inhalt und Narrativ, nicht mit Design oder Bühnenpräsenz.</p>
               <div class="pres-phases">
-                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-bullseye"></i> Phase 1 · Strategie</div><div class="pres-phase-body"><p>Was weiß der Zuhörer? Was soll er denken, fühlen, tun? <strong>20-Sekunden-Test:</strong> Kernbotschaft in einem Satz.</p></div></div>
-                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-route"></i> Phase 2 · Storyline</div><div class="pres-phase-body"><p>Problem → Aha-Moment → neue Perspektive. Pyramidenprinzip: MECE Logical Group oder Logical Chain.</p></div></div>
-                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-chart-column"></i> Phase 3 · Visualisierung</div><div class="pres-phase-body"><p>Grafiken statt Sätze · nicht von der Folie ablesen · Quelle angeben.</p></div></div>
-                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-microphone"></i> Phase 4 · Delivery</div><div class="pres-phase-body"><p>Frei sprechen · Valley of Awkwardness vermeiden · Vortrag als Audio üben.</p></div></div>
+                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-bullseye"></i> Phase 1 · Strategie</div><div class="pres-phase-body"><p><strong>Die drei entscheidenden Fragen:</strong> Was weiß mein Zuhörer bereits? Was soll er nach der Präsentation denken, fühlen oder tun? Welche Barrieren könnte er haben?</p><p><strong>20-Sekunden-Test:</strong> Kernbotschaft in einem Satz — sonst ist das Thema noch nicht durchdrungen.</p></div></div>
+                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-route"></i> Phase 2 · Storyline</div><div class="pres-phase-body"><p>Problem zeigen → Lösungssuche → Aha-Moment → neue Perspektive. <strong>Pyramidenprinzip:</strong> Kernaussage oben, darunter 2–5 stützende Argumente (Logical Group oder Logical Chain), darunter Belege. Logical Group = MECE · Logical Chain = „Wenn A, dann B, deshalb C".</p></div></div>
+                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-chart-column"></i> Phase 3 · Visualisierung</div><div class="pres-phase-body"><p>Grafiken statt langer Sätze · kognitive Belastung minimieren · nicht von der Folie ablesen. Diagrammwahl: Balken (Vergleiche), horizontal bei langen Labels, Kreis max. 2–3 Segmente, Linie für Zeitverläufe · keine irreführenden Achsen.</p></div></div>
+                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-microphone"></i> Phase 4 · Delivery</div><div class="pres-phase-body"><p>Du präsentierst den Inhalt, nicht die Folien · frei sprechen optimal · nicht vom Skript lesen · „Valley of Awkwardness" vermeiden · Vortrag als Audio aufnehmen und z.&nbsp;B. auf dem Nachhauseweg anhören.</p></div></div>
               </div>
 
               <h3 style="margin-top:1.25rem">Live-Vergleich: Folien-Titel (PowerPoint)</h3>
@@ -3068,16 +3157,17 @@ Signature</pre></div>
     good: {
       to: 'julia.fraenzel@roots-consultants.com',
       cc: 'rod.mitecki@roots-consultants.com',
-      subject: 'Genehmigen Q4-KPI Danone – Entscheidung bis Fr 15:00',
+      subject: 'Genehmigen Veröffentlichung Q4-KPI Danone – Deadline Fr 15:00',
       bodyHtml: `<p>Hi Julia,</p>
-<p><span class="em-label em-topic">TOPIC:</span> Veröffentlichung der Q4-KPIs im Danone-Steering Deck.</p>
-<p><span class="em-label em-action">ACTION:</span> Bitte bis Freitag, 15:00 Uhr, die KPI-Tabellen in Anhang A freigeben oder Rückfragen markieren.</p>
-<p><span class="em-label em-key">KEY MESSAGE:</span> Wir können das Deck erst finalisieren, wenn die KPIs signiert sind.</p>
-<p><span class="em-label em-time">TIME FRAME:</span> Nicht dringend für heute – Deadline Freitag 15:00.</p>
-<p><span class="em-label em-q">FRAGEN:</span> 1 Frage unten.</p>
-<p>&nbsp;</p>
-<p><span class="em-label em-q">FRAGE:</span> Stimmt die Organic-Growth-Zahl in Zeile 14 (4,2&nbsp;% vs. 4,8&nbsp;% im Last Read)?</p>
-<p><span class="em-label em-action">ACTION:</span> Julia – KPI-Freigabe bis Fr 15:00 &nbsp;|&nbsp; Rod – Layout-Update nach Freigabe bis Mo 10:00</p>
+<div class="em-critical">
+<p class="em-line"><span class="em-label em-topic">TOPIC:</span> Veröffentlichung der Q4-KPIs im Danone-Steering Deck.</p>
+<p class="em-line"><span class="em-label em-action">ACTION:</span> Bitte bis Freitag, 15:00 Uhr, die KPI-Tabellen in Anhang A freigeben oder Rückfragen markieren.</p>
+<p class="em-line"><span class="em-label em-key">KEY MESSAGE:</span> Wir können das Deck erst finalisieren, wenn die KPIs signiert sind.</p>
+<p class="em-line"><span class="em-label em-time">TIME FRAME:</span> Nicht dringend für heute – Deadline Freitag 15:00.</p>
+<p class="em-line"><span class="em-label em-q">FRAGEN:</span> 1 Frage (siehe unten).</p>
+</div>
+<p class="em-line"><span class="em-label em-frage">FRAGE:</span> Stimmt die Organic-Growth-Zahl in Zeile 14 (4,2&nbsp;% vs. 4,8&nbsp;% im Last Read)?</p>
+<p class="em-line"><span class="em-label em-action">ACTION:</span> Julia – KPI-Freigabe bis Fr 15:00 &nbsp;|&nbsp; Rod – Layout-Update nach Freigabe bis Mo 10:00</p>
 <p>Thanks!<br>Max</p>`,
     },
     bad: {
@@ -3113,22 +3203,23 @@ Signature</pre></div>
     if (!list) return;
     const subjLower = subject.toLowerCase();
     const bodyLower = body.toLowerCase();
-    const actionVerbs = /genehmig|entscheid|freigeb|approve|action|sign|info|anfrage|rücksprache|signier|review|feedback|bestätig/;
+    const actionVerbs = /genehmig|entscheid|freigeb|approve|action|sign|info|anfrage|rücksprache|signier|review|feedback|bestätig|veröffentlich|publish|decision|request/;
     const checks = [
-      { label: 'Betreff enthält klare Aktion (kein reines „FYI")', ok: subject.length > 8 && actionVerbs.test(subjLower) && !/^fyi$|^update$|^here you go$/i.test(subject.trim()) },
+      { label: 'Betreff = CTA + Thema (kein reines „FYI")', ok: subject.length > 12 && actionVerbs.test(subjLower) && !/^fyi$|^update$|^here you go$/i.test(subject.trim()) },
       { label: 'Betreff ≤ 72 Zeichen', ok: subject.length > 0 && subject.length <= 72 },
-      { label: 'TOPIC / Worum geht es in den ersten Zeilen', ok: /topic:|worum geht|betrifft:/i.test(bodyLower) },
-      { label: 'ACTION – Was soll getan werden', ok: /action:|action /i.test(bodyLower) },
-      { label: 'KEY MESSAGE / Kernbotschaft', ok: /key message:|kernbotschaft|kernaussage/i.test(bodyLower) },
-      { label: 'TIME FRAME / Deadline (auch „nicht dringend")', ok: /time frame:|deadline|bis (montag|dienstag|mittwoch|donnerstag|freitag|fr|mo|di|mi|do)|nicht dringend|dringend/i.test(bodyLower) },
-      { label: 'Anzahl Fragen genannt', ok: /fragen:|frage:|question/i.test(bodyLower) },
-      { label: 'Labels: FRAGE / ACTION / DECISION sichtbar', ok: /\b(frage|action|decision):/i.test(bodyLower) },
-      { label: 'Kurz & scanbar (Five-Sentence-Zone)', ok: body.split('\n').filter(l => l.trim()).slice(0, 10).join(' ').length >= 40 },
+      { label: 'TOPIC in den ersten Zeilen (blau)', ok: /topic:/i.test(bodyLower) },
+      { label: 'ACTION – Was soll getan werden', ok: /action:/i.test(bodyLower) },
+      { label: 'KEY MESSAGE – Kernbotschaft', ok: /key message:/i.test(bodyLower) },
+      { label: 'TIME FRAME – Deadline oder „nicht dringend"', ok: /time frame:|deadline|bis (montag|dienstag|mittwoch|donnerstag|freitag|fr|mo|di|mi|do)|nicht dringend/i.test(bodyLower) },
+      { label: 'Anzahl Fragen genannt (FRAGEN:)', ok: /fragen:/i.test(bodyLower) },
+      { label: 'Einzelne FRAGE: auf eigener Zeile', ok: /frage:/i.test(bodyLower) },
+      { label: 'Action-Format: Wer macht was bis wann', ok: /action:.*(\||bis|–|-)/i.test(bodyLower) || /action:.*\d/.test(bodyLower) },
+      { label: 'Kurz & scanbar (Five-Sentence-Zone)', ok: body.split('\n').filter(l => l.trim()).slice(0, 12).join(' ').length >= 40 && body.length <= 2200 },
     ];
     list.innerHTML = checks.map(c => `<li class="${c.ok ? 'is-ok' : ''}"><i class="fa-solid ${c.ok ? 'fa-circle-check' : 'fa-circle'}"></i><span>${c.label}</span></li>`).join('');
     const score = checks.filter(c => c.ok).length;
-    if (score >= 7) list.insertAdjacentHTML('beforeend', `<li class="is-ok"><i class="fa-solid fa-star"></i><span><strong>${score}/${checks.length}</strong> – ROOTS-Standard erreicht</span></li>`);
-    else if (score <= 3) list.insertAdjacentHTML('beforeend', `<li class="is-warn"><i class="fa-solid fa-triangle-exclamation"></i><span>Nur ${score}/${checks.length} – Beispiel verbessern</span></li>`);
+    if (score >= 8) list.insertAdjacentHTML('beforeend', `<li class="is-ok"><i class="fa-solid fa-star"></i><span><strong>${score}/${checks.length}</strong> – ROOTS-Standard erreicht</span></li>`);
+    else if (score <= 4) list.insertAdjacentHTML('beforeend', `<li class="is-warn"><i class="fa-solid fa-triangle-exclamation"></i><span>Nur ${score}/${checks.length} – Beispiel verbessern</span></li>`);
   }
 
   function setEmailDemoMode(root, mode) {
