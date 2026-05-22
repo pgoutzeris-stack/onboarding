@@ -645,8 +645,7 @@
       <span class="header-sub">Dein persönlicher Einstiegsplan</span>
     </div>
     <div class="header-right">
-      <div class="dash-avatar" id="user-avatar">?</div>
-      <span id="user-name-topbar" class="header-sub">…</span>
+      <div id="roots-sync-status" class="roots-sync-wrap" aria-live="polite"></div>
     </div>
   </header>
 
@@ -874,8 +873,6 @@
     document.body.classList.add('body-dashboard');
 
     document.getElementById('greeting-text').textContent = 'Willkommen bei ROOTS';
-    document.getElementById('user-name-topbar').textContent = 'Profil wird eingerichtet...';
-    document.getElementById('user-avatar').textContent = 'R';
 
     document.getElementById('onboarding-overlay').classList.add('visible');
     window.RootsUser._loadAndMount(sb);
@@ -1722,9 +1719,6 @@ Signature</pre></div>
     const initials = userName.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
 
     document.getElementById('greeting-text').textContent = `Hallo, ${userName}`;
-    // HIER ANGEPASST: profile.position
-    document.getElementById('user-name-topbar').textContent = `${userName}${profile?.position ? ' · ' + profile.position : ''}`;
-    document.getElementById('user-avatar').textContent = initials;
 
     renderModules();
     updateProgress();
