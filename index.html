@@ -594,6 +594,46 @@
     .module-tab-panel.is-inview .content-flow__step:nth-child(2){transition-delay:120ms}
     .module-tab-panel.is-inview .content-flow__step:nth-child(3){transition-delay:190ms}
     .module-tab-panel.is-inview .content-flow__step:nth-child(4){transition-delay:260ms}
+    .module-tab-panel.is-inview .content-flow__step:nth-child(5){transition-delay:330ms}
+    .module-tab-panel.is-inview .content-flow__step:nth-child(6){transition-delay:400ms}
+    .mod-section[open] .content-card,.mod-section[open] .content-flow__step,.mod-section[open] .fm-principle{opacity:1;transform:none}
+    .mod-section[open] .content-card:nth-child(1),.mod-section[open] .fm-principle:nth-child(1){transition-delay:40ms}
+    .mod-section[open] .content-card:nth-child(2),.mod-section[open] .fm-principle:nth-child(2){transition-delay:100ms}
+    .mod-section[open] .content-card:nth-child(3),.mod-section[open] .fm-principle:nth-child(3){transition-delay:160ms}
+    .mod-section[open] .content-card:nth-child(4){transition-delay:220ms}
+    .mod-section[open] .content-card:nth-child(5){transition-delay:280ms}
+    .mod-section[open] .content-flow__step:nth-child(1){transition-delay:50ms}
+    .mod-section[open] .content-flow__step:nth-child(2){transition-delay:130ms}
+    .mod-section[open] .content-flow__step:nth-child(3){transition-delay:210ms}
+    .mod-section[open] .content-flow__step:nth-child(4){transition-delay:290ms}
+    .fm-principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.65rem;margin:.75rem 0}
+    .fm-principle{border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;background:var(--surface);opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease}
+    .fm-principle__head{display:flex;align-items:center;gap:.55rem;margin-bottom:.45rem}
+    .fm-principle__num{width:1.75rem;height:1.75rem;border-radius:50%;background:var(--brand);color:#fff;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .fm-principle__head strong{font-size:.88rem;color:var(--ink);line-height:1.35}
+    .fm-principle p{margin:0;font-size:.84rem;line-height:1.6;color:var(--muted)}
+    .fm-intro{display:grid;gap:.55rem;margin:.25rem 0 .75rem}
+    .fm-intro .highlight{margin:0}
+    .fm-arch-diagram{margin:.75rem 0;padding:.9rem 1rem;border:1px solid var(--line);border-radius:12px;background:linear-gradient(135deg,var(--brand-light) 0%,var(--surface) 100%);opacity:0;transform:translateY(6px);transition:opacity .35s ease,transform .35s ease}
+    .mod-section[open] .fm-arch-diagram,.module-tab-panel.is-inview .fm-arch-diagram{opacity:1;transform:none}
+    .fm-arch-diagram__row{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .45rem;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.72rem;line-height:1.45;color:var(--ink)}
+    .fm-arch-diagram__chip{padding:.32rem .55rem;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-weight:600;color:var(--brand-dark);white-space:nowrap}
+    .fm-arch-diagram__arrow{color:var(--muted);font-weight:400}
+    .fm-arch-diagram__times{display:flex;flex-wrap:wrap;gap:.35rem 1.2rem;margin-top:.55rem;padding-top:.55rem;border-top:1px dashed var(--line);font-size:.68rem;color:var(--muted)}
+    .fm-arch-diagram__times span{white-space:nowrap}
+    .content-flow__step--fm1{border-left:3px solid #3b82f6;background:linear-gradient(90deg,rgba(59,130,246,.06),var(--status-bg) 38%)}
+    .content-flow__step--fm2{border-left:3px solid #8b5cf6;background:linear-gradient(90deg,rgba(139,92,246,.06),var(--status-bg) 38%)}
+    .content-flow__step--fm3{border-left:3px solid #10b981;background:linear-gradient(90deg,rgba(16,185,129,.06),var(--status-bg) 38%)}
+    .content-flow__step--fm4{border-left:3px solid #f59e0b;background:linear-gradient(90deg,rgba(245,158,11,.06),var(--status-bg) 38%)}
+    .content-flow__body .fm-bullet-list{margin:.35rem 0 0;padding-left:1.1rem}
+    .content-flow__body .fm-bullet-list li{margin-bottom:.28rem;font-size:.86rem;line-height:1.55}
+    .content-flow__body .fm-example{margin:.45rem 0 0;padding:.55rem .65rem;border-radius:8px;background:var(--brand-light);border:1px solid rgba(32,110,251,.12)}
+    .content-flow__body .fm-example .fm-bullet-list{margin-top:.25rem}
+    .content-card--channel:nth-child(1) .content-card__icon{background:#eff6ff;color:#2563eb}
+    .content-card--channel:nth-child(2) .content-card__icon{background:#ecfdf5;color:#059669}
+    .content-card--channel:nth-child(3) .content-card__icon{background:#eef2ff;color:#4f46e5}
+    .content-card--channel:nth-child(4) .content-card__icon{background:#fef3c7;color:#d97706}
+    .content-card--channel:nth-child(5) .content-card__icon{background:#fce7f3;color:#db2777}
     .content-zone-grid{display:grid;gap:.65rem;margin:.75rem 0}
     .content-zone{border-left:4px solid var(--brand);padding:.75rem .9rem;background:var(--brand-light);border-radius:0 10px 10px 0}
     .content-zone strong{display:block;font-size:.88rem;color:var(--brand-dark);margin-bottom:.2rem}
@@ -741,7 +781,7 @@
     .compare-col.is-bad{background:#fef2f2;border:1px solid #fecaca;color:#7f1d1d}
     .compare-col.is-good{background:#ecfdf5;border:1px solid #bbf7d0;color:#14532d}
     .compare-col strong{display:block;font-size:.72rem;text-transform:uppercase;margin-bottom:.35rem;letter-spacing:.04em}
-    @media (prefers-reduced-motion:reduce){.org-node,.org-chart__vline,.org-chart__hline{animation:none!important;opacity:1!important;transform:none!important}.ob-timeline-step{opacity:1!important;transform:none!important;transition:none!important}.ob-timeline-progress{height:100%!important}.content-card,.content-flow__step,.rule-item,.pres-phase{opacity:1!important;transform:none!important;transition:none!important}}
+    @media (prefers-reduced-motion:reduce){.org-node,.org-chart__vline,.org-chart__hline{animation:none!important;opacity:1!important;transform:none!important}.ob-timeline-step{opacity:1!important;transform:none!important;transition:none!important}.ob-timeline-progress{height:100%!important}.content-card,.content-flow__step,.rule-item,.pres-phase,.fm-principle,.fm-arch-diagram{opacity:1!important;transform:none!important;transition:none!important}}
   </style>
 </head>
 <body>
@@ -1596,70 +1636,119 @@ Signature</pre></div>
           ]},
           { id:'m-comm', tab:'Kommunikation', sections:[
             { title:'Kommunikationskanäle', open:true, content:`
-              <ul class="learn-list">
-                <li><strong>Direkt:</strong> Im Office kommunizieren wir meistens direkt über den Schreibtisch oder setzen uns kurz zu Spontanmeetings zusammen.</li>
-                <li><strong>E-Mail:</strong> ist das Hauptmedium unserer schriftlichen Kommunikation. Wir nutzen sie auch für kurze Austausche, die in anderen Unternehmen typischerweise auf MS Teams laufen. Wundere dich also nicht über sehr kurze, informelle E-Mails.</li>
-                <li><strong>MS Team:</strong> nutzen wir für den schnellen Austausch, z. B. zum Teilen von Links. Dokumente versenden wir eher über E-Mail. Richard verwendet nur selten MS Teams. Sende ihm lieber eine E-Mail.</li>
-                <li><strong>WhatsApp:</strong> wird zu informellen Themen, wie dem Nachkaufen von Süßigkeiten genutzt. Zudem nutzen wir es häufig bei Reisetätigkeit zur Abstimmung.</li>
-                <li><strong>Anrufe/Team Calls:</strong> nutzen wir selten. Meistens werden diese zur Abstimmung im Home-Office oder bei Reisetätigkeit vor oder nach Kundenterminen von Richard genutzt.</li>
-              </ul>
+              <div class="content-cards">
+                <div class="content-card content-card--channel"><div class="content-card__icon"><i class="fa-solid fa-comments"></i></div><strong>Direkt:</strong><p>Im Office kommunizieren wir meistens direkt über den Schreibtisch oder setzen uns kurz zu Spontanmeetings zusammen.</p></div>
+                <div class="content-card content-card--channel"><div class="content-card__icon"><i class="fa-solid fa-envelope"></i></div><strong>E-Mail:</strong><p>ist das Hauptmedium unserer schriftlichen Kommunikation. Wir nutzen sie auch für kurze Austausche, die in anderen Unternehmen typischerweise auf MS Teams laufen. Wundere dich also nicht über sehr kurze, informelle E-Mails.</p></div>
+                <div class="content-card content-card--channel"><div class="content-card__icon"><i class="fa-brands fa-microsoft"></i></div><strong>MS Team:</strong><p>nutzen wir für den schnellen Austausch, z. B. zum Teilen von Links. Dokumente versenden wir eher über E-Mail. Richard verwendet nur selten MS Teams. Sende ihm lieber eine E-Mail.</p></div>
+                <div class="content-card content-card--channel"><div class="content-card__icon"><i class="fa-brands fa-whatsapp"></i></div><strong>WhatsApp:</strong><p>wird zu informellen Themen, wie dem Nachkaufen von Süßigkeiten genutzt. Zudem nutzen wir es häufig bei Reisetätigkeit zur Abstimmung.</p></div>
+                <div class="content-card content-card--channel"><div class="content-card__icon"><i class="fa-solid fa-phone"></i></div><strong>Anrufe/Team Calls:</strong><p>nutzen wir selten. Meistens werden diese zur Abstimmung im Home-Office oder bei Reisetätigkeit vor oder nach Kundenterminen von Richard genutzt.</p></div>
+              </div>
             ` },
             { title:'First Minute Guide', content:`
-              <p>Die First-Minute-Methode ist eine Operationalisierung der ersten 60 Sekunden jedes beruflichen Gesprächs, jeder E-Mail und jeder Meetingeinladung.</p>
-              <p>Ziel: In 60 Sekunden weiß die Empfängerseite (1) worum es geht, (2) was sie tun soll, (3) was die Lösung ist, und (4) ob jetzt der richtige Moment dafür ist.</p>
+              <div class="fm-intro">
+                <p>Die First-Minute-Methode ist eine Operationalisierung der ersten 60 Sekunden jedes beruflichen Gesprächs, jeder E-Mail und jeder Meetingeinladung.</p>
+                <div class="highlight"><p><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> Ziel: In 60 Sekunden weiß die Empfängerseite (1) worum es geht, (2) was sie tun soll, (3) was die Lösung ist, und (4) ob jetzt der richtige Moment dafür ist.</p></div>
+              </div>
 
               <hr class="md-hr">
 
               <h3>Drei Grundprinzipien</h3>
-              <ul class="learn-list">
-                <li><strong>Bereite die Empfängerseite vor, bevor Du lieferst.</strong> Niemand teilt Deinen Kontext. Was für Dich offensichtlich ist, ist für die andere Seite eine Black Box. Erst Rahmen, dann Inhalt.</li>
-                <li><strong>Komm sofort zum Punkt.</strong> Arbeitskolleg:innen sind beschäftigt, nicht neugierig. Eine schnelle Pointe schlägt eine elegante Hinführung.</li>
-                <li><strong>Fokus auf Aktionen und Lösungen, nicht auf Probleme.</strong> Meetings verbringen 80 % der Zeit mit der Vergangenheit eines Problems. Das ist verschwendete Energie. Strukturierte Kommunikation kippt das Verhältnis.</li>
-              </ul>
+              <div class="fm-principles">
+                <div class="fm-principle">
+                  <div class="fm-principle__head"><span class="fm-principle__num">1</span><strong>Bereite die Empfängerseite vor, bevor Du lieferst.</strong></div>
+                  <p>Niemand teilt Deinen Kontext. Was für Dich offensichtlich ist, ist für die andere Seite eine Black Box. Erst Rahmen, dann Inhalt.</p>
+                </div>
+                <div class="fm-principle">
+                  <div class="fm-principle__head"><span class="fm-principle__num">2</span><strong>Komm sofort zum Punkt.</strong></div>
+                  <p>Arbeitskolleg:innen sind beschäftigt, nicht neugierig. Eine schnelle Pointe schlägt eine elegante Hinführung.</p>
+                </div>
+                <div class="fm-principle">
+                  <div class="fm-principle__head"><span class="fm-principle__num">3</span><strong>Fokus auf Aktionen und Lösungen, nicht auf Probleme.</strong></div>
+                  <p>Meetings verbringen 80 % der Zeit mit der Vergangenheit eines Problems. Das ist verschwendete Energie. Strukturierte Kommunikation kippt das Verhältnis.</p>
+                </div>
+              </div>
 
               <hr class="md-hr">
 
               <h3>Die First-Minute-Architektur</h3>
-              <pre class="md-pre">[Time Check]  →  Framing  +  Structured Summary  →  [Validation Checkpoint]  →  Conversation
-   (15 Sek)        (15 Sek)        (45 Sek)              (5 Sek)</pre>
+              <div class="fm-arch-diagram" aria-label="First-Minute-Ablauf">
+                <div class="fm-arch-diagram__row">
+                  <span class="fm-arch-diagram__chip">[Time Check]</span>
+                  <span class="fm-arch-diagram__arrow">→</span>
+                  <span class="fm-arch-diagram__chip">Framing</span>
+                  <span class="fm-arch-diagram__arrow">+</span>
+                  <span class="fm-arch-diagram__chip">Structured Summary</span>
+                  <span class="fm-arch-diagram__arrow">→</span>
+                  <span class="fm-arch-diagram__chip">[Validation Checkpoint]</span>
+                  <span class="fm-arch-diagram__arrow">→</span>
+                  <span class="fm-arch-diagram__chip">Conversation</span>
+                </div>
+                <div class="fm-arch-diagram__times">
+                  <span>(15 Sek)</span>
+                  <span>(15 Sek)</span>
+                  <span>(45 Sek)</span>
+                  <span>(5 Sek)</span>
+                </div>
+              </div>
 
-              <h4>1. Time Check — Habe ich den Zeitrahmen geklärt?</h4>
-              <p>Die häufigste Eröffnung „Hast Du eine Minute?" ist eine Lüge — kaum ein Thema ist in 60 Sekunden inkl. Antwort durch. Stattdessen: Frage nach dem Zeitfenster, das Du wirklich brauchst, oder eher mehr.</p>
-              <ul class="learn-list">
-                <li>„Hast Du 10 Minuten für eine Entscheidung zum Projekt X?"</li>
-                <li>„Brauche kurz 5 Minuten für ein FYI."</li>
-              </ul>
-              <p>Wenn Du fünf Minuten brauchst und nach einer Minute fragst, beschädigst Du Deinen Ruf als verlässliche Kommunikator:in.</p>
-
-              <h4>2. Framing — Worum geht es, was will ich, was ist die Pointe?</h4>
-              <ul class="learn-list">
-                <li><strong>Context</strong> — Worum geht es? (Projekt, Kunde, Prozess benennen)</li>
-                <li><strong>Intent</strong> — Was will ich vom Gegenüber? (Entscheidung, Input, Genehmigung, FYI)</li>
-                <li><strong>Key Message</strong> — Was ist die Kernaussage in einem Satz? (Muss den „Na und?"-Test bestehen)</li>
-              </ul>
-              <p>Beispiel:</p>
-              <ul class="learn-list">
-                <li><em>Context:</em> Ich teste das LT-10-Programm.</li>
-                <li><em>Intent:</em> Wir haben ein Problem.</li>
-                <li><em>Key Message:</em> Wir liefern einen Monat später als geplant.</li>
-              </ul>
-
-              <h4>3. Structured Summary — Goal, Problem, Solution</h4>
-              <ul class="learn-list">
-                <li><strong>Goal</strong> — Was wollen wir erreichen?</li>
-                <li><strong>Problem</strong> — Was hindert uns daran?</li>
-                <li><strong>Solution</strong> — Was schlage ich vor (oder: woran will ich Hilfe)?</li>
-              </ul>
-
-              <h4>4. Validation Checkpoint — Ist jetzt der Moment dafür?</h4>
-              <p>Nach Framing und Summary: Eine kurze Validierungsfrage, ob die Empfängerseite <strong>ability</strong> (Wissen/Befugnis) und <strong>availability</strong> (Zeit/Bereitschaft) hat.</p>
-              <p>Drei mögliche Fragen:</p>
-              <ul class="learn-list">
-                <li>„Bist Du die richtige Person dafür?"</li>
-                <li>„Hast Du jetzt Zeit, das zu besprechen?"</li>
-                <li>„Hast Du Fragen zu dem, was ich gerade beschrieben habe?"</li>
-              </ul>
-              <p>Ohne Checkpoint riskierst Du, jemandem 10 Minuten zu erklären, was sie sowieso nicht entscheiden können — oder jemanden festzuhalten, der gerade auf dem Weg ins nächste Meeting ist.</p>
+              <div class="content-flow">
+                <div class="content-flow__step content-flow__step--fm1">
+                  <div class="content-flow__label">15 Sek</div>
+                  <div class="content-flow__body">
+                    <p><strong>1. Time Check — Habe ich den Zeitrahmen geklärt?</strong></p>
+                    <p>Die häufigste Eröffnung „Hast Du eine Minute?" ist eine Lüge — kaum ein Thema ist in 60 Sekunden inkl. Antwort durch. Stattdessen: Frage nach dem Zeitfenster, das Du wirklich brauchst, oder eher mehr.</p>
+                    <ul class="fm-bullet-list">
+                      <li>„Hast Du 10 Minuten für eine Entscheidung zum Projekt X?"</li>
+                      <li>„Brauche kurz 5 Minuten für ein FYI."</li>
+                    </ul>
+                    <p>Wenn Du fünf Minuten brauchst und nach einer Minute fragst, beschädigst Du Deinen Ruf als verlässliche Kommunikator:in.</p>
+                  </div>
+                </div>
+                <div class="content-flow__step content-flow__step--fm2">
+                  <div class="content-flow__label">15 Sek</div>
+                  <div class="content-flow__body">
+                    <p><strong>2. Framing — Worum geht es, was will ich, was ist die Pointe?</strong></p>
+                    <ul class="fm-bullet-list">
+                      <li><strong>Context</strong> — Worum geht es? (Projekt, Kunde, Prozess benennen)</li>
+                      <li><strong>Intent</strong> — Was will ich vom Gegenüber? (Entscheidung, Input, Genehmigung, FYI)</li>
+                      <li><strong>Key Message</strong> — Was ist die Kernaussage in einem Satz? (Muss den „Na und?"-Test bestehen)</li>
+                    </ul>
+                    <p>Beispiel:</p>
+                    <div class="fm-example">
+                      <ul class="fm-bullet-list">
+                        <li><em>Context:</em> Ich teste das LT-10-Programm.</li>
+                        <li><em>Intent:</em> Wir haben ein Problem.</li>
+                        <li><em>Key Message:</em> Wir liefern einen Monat später als geplant.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="content-flow__step content-flow__step--fm3">
+                  <div class="content-flow__label">45 Sek</div>
+                  <div class="content-flow__body">
+                    <p><strong>3. Structured Summary — Goal, Problem, Solution</strong></p>
+                    <ul class="fm-bullet-list">
+                      <li><strong>Goal</strong> — Was wollen wir erreichen?</li>
+                      <li><strong>Problem</strong> — Was hindert uns daran?</li>
+                      <li><strong>Solution</strong> — Was schlage ich vor (oder: woran will ich Hilfe)?</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="content-flow__step content-flow__step--fm4">
+                  <div class="content-flow__label">5 Sek</div>
+                  <div class="content-flow__body">
+                    <p><strong>4. Validation Checkpoint — Ist jetzt der Moment dafür?</strong></p>
+                    <p>Nach Framing und Summary: Eine kurze Validierungsfrage, ob die Empfängerseite <strong>ability</strong> (Wissen/Befugnis) und <strong>availability</strong> (Zeit/Bereitschaft) hat.</p>
+                    <p>Drei mögliche Fragen:</p>
+                    <ul class="fm-bullet-list">
+                      <li>„Bist Du die richtige Person dafür?"</li>
+                      <li>„Hast Du jetzt Zeit, das zu besprechen?"</li>
+                      <li>„Hast Du Fragen zu dem, was ich gerade beschrieben habe?"</li>
+                    </ul>
+                    <p>Ohne Checkpoint riskierst Du, jemandem 10 Minuten zu erklären, was sie sowieso nicht entscheiden können — oder jemanden festzuhalten, der gerade auf dem Weg ins nächste Meeting ist.</p>
+                  </div>
+                </div>
+              </div>
 
               <hr class="md-hr">
 
