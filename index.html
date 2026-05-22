@@ -1950,7 +1950,7 @@ Signature</pre></div>
               </ul>
 
               <h3 style="margin-top:1.25rem">Beispiel: ROOTS-E-Mail in Outlook</h3>
-              <p>Bearbeite die Mail wie in Outlook. Die Checkliste prüft den ROOTS-Aufbau: Topic, Action, Kernbotschaft, Zeitrahmen und Fragen – schwarzer Fließtext mit klaren Labels wie <strong>Action:</strong> und <strong>Frage:</strong>.</p>
+              <p>Bearbeite die Mail wie in Outlook. Die Checkliste prüft den ROOTS-Aufbau in professionellem Deutsch – klare Action- und Frage-Labels, sachlicher Ton, kein „Hi/Thanks“.</p>
               <div class="ob-demo" data-demo="email-editor">
                 <div class="ob-demo-head">
                   <strong><i class="fa-brands fa-microsoft"></i> Outlook · Neue Nachricht</strong>
@@ -3411,17 +3411,16 @@ Signature</pre></div>
     good: {
       to: 'julia.fraenzel@roots-consultants.com',
       cc: 'rod.mitecki@roots-consultants.com',
-      subject: 'Genehmigen Veröffentlichung Q4-KPI Danone – Deadline Fr 15:00',
-      bodyHtml: `<p>Hi Julia,</p>
-<p>Veröffentlichung der Q4-KPIs im Danone-Steering Deck.</p>
-<p><strong>Action:</strong> Bitte bis Freitag, 15:00 Uhr, die KPI-Tabellen in Anhang A freigeben oder Rückfragen markieren.</p>
-<p>Kernbotschaft: Wir können das Deck erst finalisieren, wenn die KPIs signiert sind.</p>
-<p>Zeitrahmen: Nicht dringend für heute – Deadline Freitag 15:00.</p>
-<p>Fragen: 1 Frage (siehe unten).</p>
+      subject: 'Freigabe Q4-KPI Danone Steering Deck – bitte bis Fr, 15:00 Uhr',
+      bodyHtml: `<p>Hallo Julia,</p>
+<p>ich bitte um Freigabe der Q4-KPIs für das Danone-Steering Deck (Anhang A).</p>
+<p><strong>Action:</strong> Bitte prüfe die Tabellen und gib sie bis Freitag, 15:00 Uhr frei – alternativ markierst du Rückfragen direkt in der Datei.</p>
+<p>Ohne signierte KPIs können wir das Deck nicht finalisieren. Für heute besteht keine Dringlichkeit; maßgeblich ist die Deadline am Freitag, 15:00 Uhr.</p>
+<p>Die Mail enthält eine Rückfrage (siehe unten).</p>
 <p>&nbsp;</p>
-<p><strong>Frage:</strong> Stimmt die Organic-Growth-Zahl in Zeile 14 (4,2&nbsp;% vs. 4,8&nbsp;% im Last Read)?</p>
-<p><strong>Action:</strong> Julia – KPI-Freigabe bis Fr 15:00 &nbsp;|&nbsp; Rod – Layout-Update nach Freigabe bis Mo 10:00</p>
-<p>Thanks!<br>Max</p>`,
+<p><strong>Frage:</strong> Entspricht die Organic-Growth-Angabe in Zeile 14 dem Last Read (4,2&nbsp;% vs. 4,8&nbsp;%)?</p>
+<p><strong>Action:</strong> Julia – KPI-Freigabe bis Fr, 15:00 Uhr &nbsp;|&nbsp; Rod – Layout-Update nach Freigabe bis Mo, 10:00 Uhr</p>
+<p>Viele Grüße</p>`,
     },
     bad: {
       to: 'julia',
@@ -3462,21 +3461,23 @@ Signature</pre></div>
       { label: 'Betreff ≤ 72 Zeichen', ok: subject.length > 0 && subject.length <= 72 },
       { label: 'Topic in den ersten Zeilen (Worum geht es?)', ok: (() => {
         const lines = body.split('\n').map(l => l.trim()).filter(Boolean);
-        return lines.length >= 4 && /^hi[\s,!?]/i.test(lines[0]) && lines[1] && !/^action:/i.test(lines[1]) && lines[1].length > 10;
+        return lines.length >= 4 && /^(hallo|guten tag|liebe|lieber)/i.test(lines[0]) && lines[1] && !/^action:/i.test(lines[1]) && lines[1].length > 15;
       })() },
+      { label: 'Professionelle Anrede (kein „Hi")', ok: !/^hi[\s,!?]/i.test(bodyLower) && /^(hallo|guten tag|liebe|lieber)/im.test(body.trim()) },
       { label: 'Action: – Was soll getan werden', ok: /action:/i.test(bodyLower) },
-      { label: 'Kernbotschaft genannt', ok: /kernbotschaft:/i.test(bodyLower) },
-      { label: 'Zeitrahmen oder Deadline (auch „nicht dringend")', ok: /zeitrahmen:|deadline|bis (montag|dienstag|mittwoch|donnerstag|freitag|fr|mo|di|mi|do)|nicht dringend/i.test(bodyLower) },
-      { label: 'Anzahl Fragen genannt', ok: /fragen:/i.test(bodyLower) },
+      { label: 'Kernbotschaft im Fließtext (nicht nur Label)', ok: /finalisieren|kern|wichtig|ohne signierte|zusammenfassung/i.test(bodyLower) },
+      { label: 'Zeitrahmen oder Deadline (auch „nicht dringend")', ok: /deadline|bis (montag|dienstag|mittwoch|donnerstag|freitag|fr|mo|di|mi|do)|nicht dringend|15:00|17:00/i.test(bodyLower) },
+      { label: 'Anzahl Fragen genannt', ok: /rückfrage|fragen:|eine frage|\d+\s*frage/i.test(bodyLower) },
       { label: 'Frage: auf eigener Zeile', ok: /frage:/i.test(bodyLower) },
       { label: 'Action-Format: Wer macht was bis wann', ok: /action:.*(\||bis|–|-)/i.test(bodyLower) || /action:.*\d/.test(bodyLower) },
-      { label: 'Keine englischen Demo-Labels (TOPIC:/KEY MESSAGE:)', ok: !/topic:|key message:|time frame:/i.test(bodyLower) },
+      { label: 'Professioneller Abschluss (kein „Thanks/lg")', ok: !/thanks|lg|best,|cheers/i.test(bodyLower) && /viele grüße|beste grüße|freundliche grüße|mit freundlichen grüßen/i.test(bodyLower) },
+      { label: 'Keine englischen Struktur-Labels (TOPIC:/KEY MESSAGE:)', ok: !/topic:|key message:|time frame:/i.test(bodyLower) },
       { label: 'Kurz & scanbar (Five-Sentence-Zone)', ok: body.split('\n').filter(l => l.trim()).slice(0, 12).join(' ').length >= 40 && body.length <= 2200 },
     ];
     list.innerHTML = checks.map(c => `<li class="${c.ok ? 'is-ok' : ''}"><i class="fa-solid ${c.ok ? 'fa-circle-check' : 'fa-circle'}"></i><span>${c.label}</span></li>`).join('');
     const score = checks.filter(c => c.ok).length;
-    if (score >= 9) list.insertAdjacentHTML('beforeend', `<li class="is-ok"><i class="fa-solid fa-star"></i><span><strong>${score}/${checks.length}</strong> – ROOTS-Standard erreicht</span></li>`);
-    else if (score <= 5) list.insertAdjacentHTML('beforeend', `<li class="is-warn"><i class="fa-solid fa-triangle-exclamation"></i><span>Nur ${score}/${checks.length} – Beispiel verbessern</span></li>`);
+    if (score >= 10) list.insertAdjacentHTML('beforeend', `<li class="is-ok"><i class="fa-solid fa-star"></i><span><strong>${score}/${checks.length}</strong> – ROOTS-Standard erreicht</span></li>`);
+    else if (score <= 6) list.insertAdjacentHTML('beforeend', `<li class="is-warn"><i class="fa-solid fa-triangle-exclamation"></i><span>Nur ${score}/${checks.length} – Beispiel verbessern</span></li>`);
   }
 
   function setEmailDemoMode(root, mode) {
