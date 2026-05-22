@@ -256,6 +256,25 @@
     .prog-bar-wrap{background:var(--line);border-radius:999px;height:8px;overflow:hidden}
     .prog-bar{height:100%;border-radius:999px;background:var(--brand);transition:width .6s ease}
     .prog-pct{font-size:1.5rem;font-weight:700;color:var(--brand);white-space:nowrap}
+    .mgmt-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-bottom:1.75rem}
+    @media (max-width:900px){.mgmt-summary{grid-template-columns:1fr}}
+    .mgmt-stat{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-dash);padding:1rem 1.15rem;box-shadow:var(--shadow-dash)}
+    .mgmt-stat-label{font-size:.75rem;color:var(--muted);margin-bottom:.25rem}
+    .mgmt-stat-value{font-size:1.35rem;font-weight:700;color:var(--ink)}
+    .mgmt-list{display:flex;flex-direction:column;gap:.75rem}
+    .mgmt-card{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-dash);padding:1rem 1.15rem;box-shadow:var(--shadow-dash);display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:1rem;align-items:center}
+    @media (max-width:768px){.mgmt-card{grid-template-columns:1fr}}
+    .mgmt-user{display:flex;align-items:center;gap:.85rem;min-width:0}
+    .mgmt-user-meta{min-width:0}
+    .mgmt-user-name{font-size:.95rem;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .mgmt-user-sub{font-size:.78rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .mgmt-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.45rem .65rem;font-size:.72rem;color:var(--muted);margin-top:.45rem}
+    .mgmt-metrics strong{color:var(--ink);font-weight:600}
+    .mgmt-progress-wrap{min-width:0}
+    .mgmt-progress-top{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:.35rem}
+    .mgmt-progress-pct{font-size:1.1rem;font-weight:700;color:var(--brand)}
+    .mgmt-progress-status{font-size:.72rem;color:var(--muted);text-align:right;line-height:1.35}
+    .mgmt-empty{text-align:center;padding:2.5rem 1rem;color:var(--muted);background:var(--bg);border:1px dashed var(--line);border-radius:var(--radius-dash)}
     .week-header{display:flex;align-items:center;gap:.75rem;margin:2rem 0 1rem}
     .week-badge{padding:.3rem .85rem;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:.01em}
     .week-badge--orga{background:var(--brand-light);color:var(--brand)}
@@ -642,14 +661,14 @@
       </div>
       <span class="wordmark">ROOTS <span>ONBOARDING</span></span>
       <div class="header-divider" aria-hidden="true"></div>
-      <span class="header-sub">Dein persönlicher Einstiegsplan</span>
+      <span class="header-sub" id="header-sub">Dein persönlicher Einstiegsplan</span>
     </div>
     <div class="header-right">
       <div id="roots-sync-status" class="roots-sync-wrap" aria-live="polite"></div>
     </div>
   </header>
 
-  <div class="dash-main">
+  <div class="dash-main" id="dash-view-personal">
     <div class="greeting">
       <h1 id="greeting-text">Hallo!</h1>
       <p>Willkommen bei ROOTS – dein persönlicher Onboarding-Plan. Starte mit Orga/Admin, arbeite dann den Lernpfad durch und zum Schluss die Module Kunden & Projekte.</p>
@@ -684,6 +703,25 @@
       <span class="week-prog" id="modules-prog-project">0 / 2 Module</span>
     </div>
     <div class="module-grid" id="grid-modules-project"></div>
+  </div>
+
+  <div class="dash-main" id="dash-view-manage" style="display:none">
+    <div class="greeting">
+      <h1 id="mgmt-greeting-text">Onboarding Verwaltung</h1>
+      <p>Fortschritt aller Mitarbeitenden mit Leserechten im Onboarding-Prozess.</p>
+    </div>
+    <div class="mgmt-summary">
+      <div class="mgmt-stat"><div class="mgmt-stat-label">Mitarbeitende (Lesen)</div><div class="mgmt-stat-value" id="mgmt-count">—</div></div>
+      <div class="mgmt-stat"><div class="mgmt-stat-label">Durchschnittlicher Fortschritt</div><div class="mgmt-stat-value" id="mgmt-avg">—</div></div>
+      <div class="mgmt-stat"><div class="mgmt-stat-label">Abgeschlossen</div><div class="mgmt-stat-value" id="mgmt-done-count">—</div></div>
+    </div>
+    <div class="week-header">
+      <span class="week-badge week-badge--orga">Übersicht</span>
+      <span class="week-title">Onboarding-Fortschritt pro Person</span>
+    </div>
+    <div id="mgmt-user-list" class="mgmt-list">
+      <div class="mgmt-empty"><i class="fa-solid fa-circle-notch fa-spin"></i> Lade Fortschrittsdaten…</div>
+    </div>
   </div>
 
   <div class="dash-modal-overlay" id="modal-overlay" role="dialog" aria-modal="true">
@@ -860,6 +898,8 @@
     document.getElementById('onboarding-overlay').classList.remove('visible');
     document.getElementById('modal-overlay').classList.remove('open');
     document.body.style.overflow = '';
+    document.getElementById('dash-view-personal').style.display = 'block';
+    document.getElementById('dash-view-manage').style.display = 'none';
     document.getElementById('form-login').reset();
     const loginBtn = document.getElementById('btn-login');
     if (loginBtn) setLoading(loginBtn, false, 'fa-solid fa-arrow-right-to-bracket', 'Anmelden');
@@ -871,6 +911,9 @@
     document.getElementById('screen-login').style.display = 'none';
     document.getElementById('screen-dashboard').style.display = 'block';
     document.body.classList.add('body-dashboard');
+    document.getElementById('dash-view-personal').style.display = 'block';
+    document.getElementById('dash-view-manage').style.display = 'none';
+    document.getElementById('header-sub').textContent = 'Dein persönlicher Einstiegsplan';
 
     document.getElementById('greeting-text').textContent = 'Willkommen bei ROOTS';
 
@@ -878,11 +921,29 @@
     window.RootsUser._loadAndMount(sb);
   }
 
+  function showManagementDashboard() {
+    document.getElementById('onboarding-overlay').classList.remove('visible');
+    document.getElementById('screen-login').style.display = 'none';
+    document.getElementById('screen-dashboard').style.display = 'block';
+    document.body.classList.add('body-dashboard');
+    document.getElementById('dash-view-personal').style.display = 'none';
+    document.getElementById('dash-view-manage').style.display = 'block';
+    document.getElementById('header-sub').textContent = 'Onboarding-Fortschritt · Verwaltung';
+    window.RootsUser._loadAndMount(sb);
+    initManagementView().catch(function (err) {
+      console.error(err);
+      showError(err && err.message ? err.message : String(err));
+    });
+  }
+
   function showDashboard() {
     document.getElementById('onboarding-overlay').classList.remove('visible');
     document.getElementById('screen-login').style.display = 'none';
     document.getElementById('screen-dashboard').style.display = 'block';
     document.body.classList.add('body-dashboard');
+    document.getElementById('dash-view-personal').style.display = 'block';
+    document.getElementById('dash-view-manage').style.display = 'none';
+    document.getElementById('header-sub').textContent = 'Dein persönlicher Einstiegsplan';
     window.RootsUser._loadAndMount(sb);
     initDashboardView().catch(function (err) {
       console.error(err);
@@ -901,6 +962,118 @@
     if (!Number.isFinite(wh) || wh <= 0) return false;
     var hr = Number(p.hourly_rate);
     return Number.isFinite(hr) && hr >= 0;
+  }
+
+  function isOnboardingManagerRole(role) {
+    const r = String(role || '').trim();
+    return r === 'admin' || r === 'editor' || r === 'member';
+  }
+
+  function progressStatusText(pct) {
+    if (pct === 0) return 'Noch nicht gestartet';
+    if (pct < 34) return 'Guter Start';
+    if (pct < 67) return 'Auf gutem Weg';
+    if (pct < 100) return 'Fast abgeschlossen';
+    return 'Abgeschlossen';
+  }
+
+  function calcOnboardingProgress(modules, todos) {
+    const mods = Array.isArray(modules) ? modules : [];
+    const tds = Array.isArray(todos) ? todos : [];
+    const orgaItems = TODOS.flatMap(s => s.items);
+    const orgaDoneCount = orgaItems.filter(i => tds.includes(i.id)).length;
+    const orgaTotal = orgaItems.length;
+    const orgaPct = orgaTotal ? Math.round(orgaDoneCount / orgaTotal * 100) : 0;
+    const orgaDone = orgaPct === 100 || mods.includes('orga-admin');
+    const learnIds = [...MODULE_PATH_IDS, ...MODULE_PROJECT_IDS];
+    const learnDone = learnIds.filter(id => mods.includes(id)).length;
+    const learnTotal = learnIds.length;
+    const total = 1 + learnTotal;
+    const done = (orgaDone ? 1 : 0) + learnDone;
+    const pct = total > 0 ? Math.round(done / total * 100) : 0;
+    const pathDone = MODULE_PATH_IDS.filter(id => mods.includes(id)).length;
+    const projDone = MODULE_PROJECT_IDS.filter(id => mods.includes(id)).length;
+    return {
+      pct,
+      orgaDoneCount,
+      orgaTotal,
+      orgaPct,
+      pathDone,
+      pathTotal: MODULE_PATH_IDS.length,
+      projDone,
+      projTotal: MODULE_PROJECT_IDS.length,
+      status: progressStatusText(pct),
+    };
+  }
+
+  async function initManagementView() {
+    const listEl = document.getElementById('mgmt-user-list');
+    if (!listEl) return;
+    listEl.innerHTML = '<div class="mgmt-empty"><i class="fa-solid fa-circle-notch fa-spin"></i> Lade Fortschrittsdaten…</div>';
+
+    const [{ data: readers, error: readersErr }, { data: progressRows, error: progErr }] = await Promise.all([
+      sb.schema('users').from('profiles')
+        .select('id, full_name, email, position, avatar_url, app_role')
+        .eq('app_role', 'reader')
+        .order('full_name'),
+      sb.schema('onboarding').from('user_progress')
+        .select('user_id, completed_modules, completed_todos, updated_at'),
+    ]);
+
+    if (readersErr) throw readersErr;
+    if (progErr) throw progErr;
+
+    const progressByUser = {};
+    (progressRows || []).forEach(row => { progressByUser[row.user_id] = row; });
+
+    const users = readers || [];
+    const managerName = window.RootsUser?._p?.full_name?.split(' ')[0] || 'Team';
+    document.getElementById('mgmt-greeting-text').textContent = `Hallo, ${managerName}`;
+
+    if (!users.length) {
+      listEl.innerHTML = '<div class="mgmt-empty">Keine Mitarbeitenden mit Leserechten gefunden.</div>';
+      document.getElementById('mgmt-count').textContent = '0';
+      document.getElementById('mgmt-avg').textContent = '—';
+      document.getElementById('mgmt-done-count').textContent = '0';
+      return;
+    }
+
+    const rows = users.map(u => {
+      const prog = progressByUser[u.id];
+      const stats = calcOnboardingProgress(prog?.completed_modules, prog?.completed_todos);
+      return { user: u, prog, stats };
+    });
+
+    const avg = Math.round(rows.reduce((sum, r) => sum + r.stats.pct, 0) / rows.length);
+    const doneCount = rows.filter(r => r.stats.pct >= 100).length;
+    document.getElementById('mgmt-count').textContent = String(rows.length);
+    document.getElementById('mgmt-avg').textContent = avg + '%';
+    document.getElementById('mgmt-done-count').textContent = String(doneCount);
+
+    listEl.innerHTML = rows.map(({ user: u, stats }) => {
+      const av = window.RootsUser?._avatarSpan(u.avatar_url, u.full_name, 40) || '';
+      return `<article class="mgmt-card">
+        <div class="mgmt-user">
+          ${av}
+          <div class="mgmt-user-meta">
+            <div class="mgmt-user-name">${escapeHtml(u.full_name || u.email || '—')}</div>
+            <div class="mgmt-user-sub">${escapeHtml(u.position || '—')}${u.email ? ' · ' + escapeHtml(u.email) : ''}</div>
+            <div class="mgmt-metrics">
+              <span>Orga: <strong>${stats.orgaDoneCount}/${stats.orgaTotal}</strong></span>
+              <span>Lernpfad: <strong>${stats.pathDone}/${stats.pathTotal}</strong></span>
+              <span>Projekte: <strong>${stats.projDone}/${stats.projTotal}</strong></span>
+            </div>
+          </div>
+        </div>
+        <div class="mgmt-progress-wrap">
+          <div class="mgmt-progress-top">
+            <span class="mgmt-progress-pct">${stats.pct}%</span>
+            <span class="mgmt-progress-status">${escapeHtml(stats.status)}</span>
+          </div>
+          <div class="prog-bar-wrap"><div class="prog-bar" style="width:${stats.pct}%"></div></div>
+        </div>
+      </article>`;
+    }).join('');
   }
 
   /* ════════════════════════════════════════════════════
@@ -1730,9 +1903,9 @@ Signature</pre></div>
   const MODULE_PROJECT_IDS = ['kunden', 'projektbriefing'];
   const MODULE_TAB_IDS = [...MODULE_PATH_IDS, ...MODULE_PROJECT_IDS];
 
-  function getOrgaTodoStats() {
+  function getOrgaTodoStats(todos = completedTodos) {
     const items = TODOS.flatMap(s => s.items);
-    const done = items.filter(i => completedTodos.includes(i.id)).length;
+    const done = items.filter(i => todos.includes(i.id)).length;
     return { items, done, total: items.length, pct: items.length ? Math.round(done / items.length * 100) : 0 };
   }
 
@@ -2819,7 +2992,7 @@ Signature</pre></div>
       console.info('[ROOTS] Prüfe Profil für User:', currentUserId);
       // HIER ANGEPASST: position
       var q = await sb.schema('users').from('profiles')
-        .select('position, hourly_rate, weekly_hours')
+        .select('position, hourly_rate, weekly_hours, app_role')
         .eq('id', currentUserId)
         .maybeSingle();
 
@@ -2828,6 +3001,12 @@ Signature</pre></div>
       if (q.error) {
         console.error('[ROOTS] DB Fehler beim Profil-Laden:', q.error);
         showError('Profil konnte nicht geladen werden: ' + q.error.message);
+        return;
+      }
+
+      if (isOnboardingManagerRole(q.data?.app_role)) {
+        console.info('[ROOTS] -> Zeige Onboarding Verwaltung (Admin/Editor)');
+        showManagementDashboard();
         return;
       }
 
@@ -3049,6 +3228,8 @@ window.RootsUser = window.RootsUser || {
   },
   openSettings(){},
   isAdmin(){return this._p?.app_role==='admin'},
+  isEditor(){const r=this._p?.app_role;return r==='editor'||r==='member'},
+  isManager(){return this.isAdmin()||this.isEditor()},
   isReader(){return this._p?.app_role==='reader'},
   getProfile(){return this._p}
 };
