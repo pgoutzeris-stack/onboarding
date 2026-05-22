@@ -609,6 +609,87 @@
     .tag-list li{font-size:.72rem;font-weight:600;padding:.22rem .55rem;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
     .tag-list li.is-do{background:#ecfdf5;border-color:#bbf7d0;color:#15803d}
     .tag-list li.is-dont{background:#fef2f2;border-color:#fecaca;color:#b91c1c}
+    .ob-demo{border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden;margin:1rem 0;box-shadow:0 2px 8px rgba(15,23,42,.04)}
+    .ob-demo-head{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.75rem 1rem;background:var(--brand-light);border-bottom:1px solid var(--line);flex-wrap:wrap}
+    .ob-demo-head strong{font-size:.86rem;color:var(--brand-dark)}
+    .ob-demo-tabs{display:flex;gap:.35rem;flex-wrap:wrap}
+    .ob-demo-tab{height:32px;padding:0 .85rem;border:1px solid var(--line);border-radius:999px;background:var(--bg);font-family:inherit;font-size:.72rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s}
+    .ob-demo-tab:hover{border-color:var(--brand);color:var(--brand)}
+    .ob-demo-tab.active,.ob-demo-tab.is-good.active{background:#ecfdf5;border-color:#86efac;color:#15803d}
+    .ob-demo-tab.is-bad.active{background:#fef2f2;border-color:#fca5a5;color:#b91c1c}
+    .ob-demo-action{margin-top:.35rem;height:36px;padding:0 1rem;border:1px dashed var(--brand);border-radius:999px;background:var(--brand-light);font-family:inherit;font-size:.78rem;font-weight:600;color:var(--brand);cursor:pointer;display:inline-flex;align-items:center;gap:.4rem}
+    .ob-demo-action:hover{background:var(--brand);color:#fff}
+    .ob-demo-body{padding:1rem}
+    .ob-email-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(220px,1fr);gap:1rem;align-items:start}
+    @media (max-width:820px){.ob-email-layout{grid-template-columns:1fr}}
+    .ob-email-app{border:1px solid #c8c6c4;border-radius:8px;background:#fff;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+    .ob-email-toolbar{display:flex;align-items:center;gap:.5rem;padding:.45rem .65rem;background:#f3f2f1;border-bottom:1px solid #e1dfdd;font-size:.72rem;color:#605e5c}
+    .ob-email-toolbar i{color:var(--brand)}
+    .ob-email-row{display:grid;grid-template-columns:52px minmax(0,1fr);align-items:center;border-bottom:1px solid #edebe9;font-size:.82rem}
+    .ob-email-row label{padding:.45rem .65rem;color:#605e5c;font-weight:600;background:#faf9f8}
+    .ob-email-row input,.ob-email-row select{width:100%;border:none;padding:.5rem .65rem;font-family:inherit;font-size:.82rem;background:#fff;color:#323130;outline:none}
+    .ob-email-row input:focus,.ob-email-row textarea:focus{background:#f0f6ff}
+    .ob-email-body-wrap{position:relative;min-height:280px}
+    .ob-email-body{width:100%;min-height:280px;border:none;padding:.75rem .85rem;font-family:Aptos,'Segoe UI',sans-serif;font-size:.84rem;line-height:1.65;color:#323130;resize:vertical;outline:none;box-sizing:border-box;display:block;background:#fff}
+    .ob-email-guide{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:.85rem}
+    .ob-email-guide h4{margin:0 0 .55rem;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+    .ob-email-check{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.4rem}
+    .ob-email-check li{display:flex;align-items:flex-start;gap:.45rem;font-size:.78rem;line-height:1.45;color:var(--muted);transition:color .2s}
+    .ob-email-check li i{width:.95rem;margin-top:.1rem;flex-shrink:0}
+    .ob-email-check li.is-ok{color:#15803d}
+    .ob-email-check li.is-ok i{color:#16a34a}
+    .ob-email-check li.is-warn{color:#b45309}
+    .ob-email-legend{margin-top:.75rem;padding-top:.65rem;border-top:1px solid var(--line);font-size:.72rem;color:var(--muted);line-height:1.5}
+    .ob-email-legend span{display:inline-block;margin:.15rem .35rem .15rem 0;padding:.12rem .4rem;border-radius:4px;font-weight:600;font-size:.68rem}
+    .ob-email-legend .lg-subj{background:#dbeafe;color:#1d4ed8}
+    .ob-email-legend .lg-topic{background:#e0e7ff;color:#4338ca}
+    .ob-email-legend .lg-action{background:#dcfce7;color:#15803d}
+    .ob-email-legend .lg-time{background:#fef3c7;color:#b45309}
+    .ob-email-legend .lg-q{background:#fce7f3;color:#be185d}
+    .ob-fm-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem}
+    @media (max-width:820px){.ob-fm-layout{grid-template-columns:1fr}}
+    .ob-fm-fields{display:grid;gap:.55rem}
+    .ob-fm-field label{display:block;font-size:.72rem;font-weight:600;color:var(--muted);margin-bottom:.28rem}
+    .ob-fm-field input,.ob-fm-field textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:8px;padding:.5rem .65rem;font-family:inherit;font-size:.82rem;background:var(--bg);color:var(--ink)}
+    .ob-fm-output{border:1px dashed var(--brand);border-radius:10px;padding:.85rem;background:var(--brand-light);min-height:160px}
+    .ob-fm-output h4{margin:0 0 .45rem;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--brand-dark)}
+    .ob-fm-script{margin:0;font-size:.84rem;line-height:1.65;color:var(--ink);white-space:pre-wrap}
+    .ob-meet-invite{border:1px solid #c8c6c4;border-radius:10px;background:#fff;overflow:hidden;font-size:.82rem;color:#323130}
+    .ob-meet-invite__head{padding:.85rem 1rem;background:linear-gradient(135deg,#206efb,#1d4ed8);color:#fff}
+    .ob-meet-invite__head strong{display:block;font-size:.95rem;margin-bottom:.2rem}
+    .ob-meet-invite__meta{font-size:.78rem;opacity:.92}
+    .ob-meet-invite__body{padding:.85rem 1rem;line-height:1.65}
+    .ob-meet-block{margin:.55rem 0;padding:.55rem .65rem;border-left:3px solid var(--line);border-radius:0 8px 8px 0;background:var(--status-bg)}
+    .ob-meet-block.is-purpose{border-color:#206efb;background:#eff6ff}
+    .ob-meet-block.is-output{border-color:#16a34a;background:#ecfdf5}
+    .ob-meet-block.is-gps{border-color:#d97706;background:#fffbeb}
+    .ob-meet-block strong{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.15rem}
+    .ob-slide-compare{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+    @media (max-width:720px){.ob-slide-compare{grid-template-columns:1fr}}
+    .ob-slide{width:100%;aspect-ratio:16/10;border-radius:10px;padding:1rem 1.1rem;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-start;border:2px solid var(--line);background:#fff;transition:transform .25s ease,border-color .25s ease}
+    .ob-slide.is-bad{border-color:#fca5a5;background:#fef2f2}
+    .ob-slide.is-good{border-color:#86efac;background:#f0fdf4}
+    .ob-slide__label{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.45rem}
+    .ob-slide.is-bad .ob-slide__label{color:#b91c1c}
+    .ob-slide.is-good .ob-slide__label{color:#15803d}
+    .ob-slide__title{font-size:.95rem;font-weight:700;line-height:1.35;color:var(--ink);margin-bottom:.65rem}
+    .ob-slide__chart{flex:1;border-radius:6px;background:linear-gradient(180deg,#e2e8f0 0%,#f8fafc 100%);display:flex;align-items:flex-end;gap:.35rem;padding:.55rem .6rem .45rem}
+    .ob-slide__bar{flex:1;background:var(--brand);border-radius:3px 3px 0 0;opacity:.85}
+    .ob-zone-quiz{display:grid;gap:.55rem}
+    .ob-zone-item{border:1px solid var(--line);border-radius:10px;padding:.75rem;background:var(--bg);cursor:pointer;transition:border-color .2s,background .2s}
+    .ob-zone-item:hover{border-color:var(--brand);background:var(--brand-light)}
+    .ob-zone-item.is-correct{border-color:#86efac;background:#ecfdf5}
+    .ob-zone-item.is-wrong{border-color:#fca5a5;background:#fef2f2}
+    .ob-zone-item strong{display:block;font-size:.84rem;margin-bottom:.2rem}
+    .ob-zone-item span{font-size:.78rem;color:var(--muted)}
+    .ob-zone-answer{margin-top:.45rem;font-size:.78rem;font-weight:600;color:var(--brand-dark);display:none}
+    .ob-zone-item.is-correct .ob-zone-answer,.ob-zone-item.is-wrong .ob-zone-answer{display:block}
+    .compare-cols{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.75rem 0}
+    @media (max-width:720px){.compare-cols{grid-template-columns:1fr}}
+    .compare-col{border-radius:10px;padding:.75rem .85rem;font-size:.84rem;line-height:1.6}
+    .compare-col.is-bad{background:#fef2f2;border:1px solid #fecaca;color:#7f1d1d}
+    .compare-col.is-good{background:#ecfdf5;border:1px solid #bbf7d0;color:#14532d}
+    .compare-col strong{display:block;font-size:.72rem;text-transform:uppercase;margin-bottom:.35rem;letter-spacing:.04em}
     @media (prefers-reduced-motion:reduce){.org-node,.org-chart__vline,.org-chart__hline{animation:none!important;opacity:1!important;transform:none!important}.ob-timeline-step{opacity:1!important;transform:none!important;transition:none!important}.ob-timeline-progress{height:100%!important}.content-card,.content-flow__step,.rule-item,.pres-phase{opacity:1!important;transform:none!important;transition:none!important}}
   </style>
 </head>
@@ -1385,21 +1466,32 @@ Signature</pre></div>
           { id:'m-ki', tab:'KI', sections:[
             { title:'KI-Nutzung: unser digitaler Mitarbeiter', open:true, content:`
               <div class="highlight"><p><i class="fa-solid fa-robot" aria-hidden="true"></i> KI macht uns schneller, nicht schlauer. Die Verantwortung für Inhalt, Qualität und Vertraulichkeit bleibt bei uns.</p></div>
-              <p>Wir haben verbindliche <strong>AI Rules</strong>, die Nutzung und Umgang mit künstlicher Intelligenz regeln und Rechtssicherheit für uns und unsere Kunden schaffen. Diese sieben Regeln gelten für alle bei ROOTS – ohne Ausnahme.</p>
-              <h3>Drei Zonen für Aufgaben</h3>
+              <p>Wir haben verbindliche <strong>AI Rules</strong> – Rechtssicherheit für uns und unsere Kunden. Diese sieben Regeln gelten für alle bei ROOTS, ohne Ausnahme.</p>
+              <h3>Regel 1 · Drei Zonen für Aufgaben</h3>
               <div class="content-zone-grid">
                 <div class="content-zone"><strong>Zone 1 · Sicherer Datenraum</strong><span><strong>Claude Cowork</strong> – Strategie, Analyse, Deck-Erstellung, Dokumentenarbeit. Vertrauliche Kundendaten und freigegebenes Kundenmaterial gehören ausschließlich hierhin.</span></div>
-                <div class="content-zone"><strong>Zone 2 · Anonymisierte Daten</strong><span>Office- und Produktivitäts-Tools wie <strong>MS Copilot</strong> und <strong>Notion</strong>.</span></div>
+                <div class="content-zone"><strong>Zone 2 · Anonymisierte Daten</strong><span>Office- und Produktivitäts-Tools: <strong>MS Copilot</strong>, <strong>Notion</strong>.</span></div>
                 <div class="content-zone"><strong>Zone 3 · Spezial-LLMs</strong><span>Bilder und Marketingtexte (Gemini), Datenanalysen (ChatGPT), Recherche (Perplexity).</span></div>
               </div>
               <h3>Die 7 AI Rules</h3>
               <div class="rule-grid">
-                <div class="rule-item"><div class="rule-num">2</div><div><strong>Diese drei Zonen sind freigegeben. Andere Tools nicht.</strong><p>Jedes andere Tool ist genehmigungspflichtig – neue Anbieter, AI-Features und Erweiterungen. Freigabe durch Richard.</p></div></div>
-                <div class="rule-item"><div class="rule-num">3</div><div><strong>Kein Output ohne eigenes Urteil.</strong><p>AI macht, der Mensch denkt. Fakten, Quellen, Zahlen, Tonalität und IP-Risiken prüfen. Halluzinationen sind unser Problem.</p></div></div>
-                <div class="rule-item"><div class="rule-num">4</div><div><strong>Substanziellen KI-Beitrag kennzeichnen.</strong><p>Inhaltlicher Beitrag wird mit „generated with the use of AI" gelabelt. Hilfsarbeit nach Prüfung ist eigene Beratungsleistung.</p></div></div>
-                <div class="rule-item"><div class="rule-num">5</div><div><strong>Weiterbilden, teilen, Cowork ausnutzen.</strong><p>AInauten-Programm aktiv nutzen. Insights, Prompts und Workflows gehören ins Team – Skills und Templates dokumentieren.</p></div></div>
-                <div class="rule-item"><div class="rule-num">6</div><div><strong>Effizienzgewinne transparent teilen.</strong><p>Bei T&amp;M-Mandaten buchen wir, was wir tatsächlich gearbeitet haben. Spürbare Beschleunigung erst intern besprechen.</p></div></div>
-                <div class="rule-item"><div class="rule-num">7</div><div><strong>Vorfälle sofort melden.</strong><p>Datenleck, falscher Output, Verstoß gegen Tool-Regeln: Erste Adresse Manuel, Richard wird informiert.</p></div></div>
+                <div class="rule-item"><div class="rule-num">1</div><div><strong>Wir unterteilen in 3 Zonen.</strong><p>Vertrauliche Kundendaten nur in Zone 1 (Claude Cowork). Siehe Zonen oben.</p></div></div>
+                <div class="rule-item"><div class="rule-num">2</div><div><strong>Diese drei Zonen sind freigegeben. Andere Tools nicht.</strong><p>Blanket Approvals (BDF erteilt, weitere Kunden in Vorbereitung). Jedes andere Tool ist genehmigungspflichtig – neue Anbieter, AI-Features, Erweiterungen. Freigabe durch Richard.</p></div></div>
+                <div class="rule-item"><div class="rule-num">3</div><div><strong>Kein Output ohne eigenes Urteil.</strong><p>Vor dem Prompt: Was will ich? Vor der Übergabe: Fakten, Quellen, Zahlen, Tonalität, IP-Risiken prüfen. Was du nicht selbst geprüft hast, schickst du nicht an den Kunden.</p></div></div>
+                <div class="rule-item"><div class="rule-num">4</div><div><strong>Substanziellen KI-Beitrag kennzeichnen.</strong><p>Inhaltlicher Beitrag → „generated with the use of AI". Hilfsarbeit nach Prüfung ist eigene Beratungsleistung. <em>Im Zweifel: labeln.</em></p></div></div>
+                <div class="rule-item"><div class="rule-num">5</div><div><strong>Weiterbilden, teilen, Cowork ausnutzen.</strong><p>AInauten-Programm: Lernzeit ist Arbeitszeit. In Cowork: Projekte anlegen, claude.md pflegen, Skills entwickeln. Skills, Prompts, Workflows gehören dem Team – Solo-Optimierung ist gegen die Regel.</p></div></div>
+                <div class="rule-item"><div class="rule-num">6</div><div><strong>Effizienzgewinne transparent teilen.</strong><p>Bei T&amp;M buchen wir, was wir gearbeitet haben. Spürbare Beschleunigung erst intern besprechen.</p></div></div>
+                <div class="rule-item"><div class="rule-num">7</div><div><strong>Vorfälle sofort melden.</strong><p>Datenleck, falscher Output, Verstoß gegen Tool-Regeln: Erste Adresse Manuel, Richard wird informiert. Stillschweigen schützt niemanden.</p></div></div>
+              </div>
+            ` },
+            { title:'Live-Übung: Welche KI-Zone?', content:`
+              <p>Klicke auf ein Szenario – dann siehst du, welche Zone (und welches Tool) bei ROOTS richtig ist.</p>
+              <div class="ob-zone-quiz" data-demo="ki-zones">
+                <div class="ob-zone-item" data-answer="Zone 1 · Claude Cowork"><strong>Strategie-Deck mit Danone-Kundendaten analysieren</strong><span>Vertrauliche Kundendaten, Deck-Erstellung</span><div class="ob-zone-answer"></div></div>
+                <div class="ob-zone-item" data-answer="Zone 2 · MS Copilot / Notion"><strong>Meeting-Notizen anonymisiert zusammenfassen</strong><span>Keine Kundennamen, interne Produktivität</span><div class="ob-zone-answer"></div></div>
+                <div class="ob-zone-item" data-answer="Zone 3 · Perplexity"><strong>Branchentrend-Recherche für FMCG-Marketing</strong><span>Öffentliche Recherche, keine Kundendaten</span><div class="ob-zone-answer"></div></div>
+                <div class="ob-zone-item" data-answer="Zone 3 · Gemini"><strong>Visual-Konzept für internen Workshop erstellen</strong><span>Bilder/Marketingtexte ohne Kundendaten</span><div class="ob-zone-answer"></div></div>
+                <div class="ob-zone-item" data-answer="Genehmigungspflichtig · Richard"><strong>Neues KI-Plugin in PowerPoint testen</strong><span>Neues Tool / neues AI-Feature</span><div class="ob-zone-answer"></div></div>
               </div>
             ` }
           ]},
@@ -1450,86 +1542,233 @@ Signature</pre></div>
             ` },
             { title:'First Minute Guide', content:`
               <p>Die First-Minute-Methode operationalisiert die ersten 60 Sekunden jedes beruflichen Gesprächs, jeder E-Mail und jeder Meetingeinladung.</p>
-              <div class="highlight"><p><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> <strong>Ziel:</strong> In 60 Sekunden weiß die Empfängerseite (1) worum es geht, (2) was sie tun soll, (3) was die Lösung ist, und (4) ob jetzt der richtige Moment dafür ist.</p></div>
+              <div class="highlight"><p><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> <strong>Ziel:</strong> In 60 Sekunden weiß die Empfängerseite (1) worum es geht, (2) was sie tun soll, (3) was die Lösung ist, (4) ob jetzt der richtige Moment ist.</p></div>
               <h3>Drei Grundprinzipien</h3>
               <ul class="learn-list">
-                <li><strong>Bereite die Empfängerseite vor, bevor du lieferst.</strong> Niemand teilt deinen Kontext.</li>
-                <li><strong>Komm sofort zum Punkt.</strong> Eine schnelle Pointe schlägt eine elegante Hinführung.</li>
-                <li><strong>Fokus auf Aktionen und Lösungen, nicht auf Probleme.</strong> Strukturierte Kommunikation kippt das Verhältnis.</li>
+                <li><strong>Bereite die Empfängerseite vor, bevor du lieferst.</strong> Was für dich offensichtlich ist, ist für die andere Seite eine Black Box.</li>
+                <li><strong>Komm sofort zum Punkt.</strong> Arbeitskolleg:innen sind beschäftigt, nicht neugierig.</li>
+                <li><strong>Fokus auf Aktionen und Lösungen, nicht auf Probleme.</strong> Meetings verbringen 80 % der Zeit mit der Vergangenheit – strukturierte Kommunikation kippt das Verhältnis.</li>
               </ul>
               <h3>Die First-Minute-Architektur</h3>
               <div class="content-flow">
-                <div class="content-flow__step"><div class="content-flow__label">15 Sek</div><div class="content-flow__body"><strong>Time Check</strong><p>Habe ich den Zeitrahmen geklärt? Statt „Hast du eine Minute?" lieber: „Hast du 10 Minuten für eine Entscheidung zum Projekt X?"</p></div></div>
-                <div class="content-flow__step"><div class="content-flow__label">15 Sek</div><div class="content-flow__body"><strong>Framing</strong><p><em>Context</em> – worum geht es? · <em>Intent</em> – was will ich? · <em>Key Message</em> – Kernaussage in einem Satz (Na-und-Test).</p></div></div>
-                <div class="content-flow__step"><div class="content-flow__label">45 Sek</div><div class="content-flow__body"><strong>Structured Summary</strong><p><em>Goal</em> – Was wollen wir erreichen? · <em>Problem</em> – Was hindert uns? · <em>Solution</em> – Was schlage ich vor?</p></div></div>
-                <div class="content-flow__step"><div class="content-flow__label">5 Sek</div><div class="content-flow__body"><strong>Validation Checkpoint</strong><p>„Bist du die richtige Person?" · „Hast du jetzt Zeit?" · „Hast du Fragen dazu?"</p></div></div>
+                <div class="content-flow__step"><div class="content-flow__label">15 Sek</div><div class="content-flow__body"><strong>Time Check</strong><p>„Hast du 10 Minuten für eine Entscheidung zum Projekt X?" statt „Hast du eine Minute?" – sonst beschädigst du deinen Ruf als verlässliche:r Kommunikator:in.</p></div></div>
+                <div class="content-flow__step"><div class="content-flow__label">15 Sek</div><div class="content-flow__body"><strong>Framing</strong><p><em>Context</em> – worum geht es? · <em>Intent</em> – Entscheidung, Input, Genehmigung, FYI? · <em>Key Message</em> – Kernaussage (Na-und-Test).</p><p><em>Beispiel LT-10:</em> Context: LT-10-Programm · Intent: Problem · Key Message: Wir liefern einen Monat später.</p></div></div>
+                <div class="content-flow__step"><div class="content-flow__label">45 Sek</div><div class="content-flow__body"><strong>Structured Summary (GPS)</strong><p><em>Goal</em> – Was wollen wir erreichen? · <em>Problem</em> – Was hindert uns? · <em>Solution</em> – Vorschlag oder Hilfe?</p></div></div>
+                <div class="content-flow__step"><div class="content-flow__label">5 Sek</div><div class="content-flow__body"><strong>Validation Checkpoint</strong><p>Ability (Wissen/Befugnis) und Availability (Zeit/Bereitschaft) prüfen.</p></div></div>
               </div>
-              <h3>Solution-Typen</h3>
+              <h3>Vier Ursachen für überkomplexe Summaries</h3>
               <ul class="learn-list">
-                <li>Problem + brauche Hilfe → „Hilfst du mir, eine Lösung zu finden?"</li>
-                <li>Problem + Vorschlag → dein Lösungsvorschlag</li>
-                <li>Problem gelöst → was getan wurde und aktueller Status</li>
+                <li>Du nimmst an, das Gegenüber denkt wie du</li>
+                <li>Du glaubst, alle Details seien nötig zum Verstehen</li>
+                <li>Du beschreibst Abhängigkeiten statt das Problem</li>
+                <li>Du fasst mehrere Probleme auf einmal zusammen</li>
               </ul>
-              <p>Solutions sind zukunftsgerichtet – nicht chronologisch erklären, sondern mit Blick nach vorn abschließen.</p>
+              <h3>NASA-ISS-Beispiel (30 Sek. statt 20 Min.)</h3>
+              <ul class="learn-list">
+                <li><strong>Goal:</strong> Forschungslabor im All bauen, damit die Menschheit Wichtiges lernt</li>
+                <li><strong>Problem:</strong> Das All ist schwer zu erreichen, 100 Wege dort zu sterben</li>
+                <li><strong>Solution:</strong> Viel Geld, um die Forschenden am Leben zu halten</li>
+              </ul>
+              <div class="compare-cols">
+                <div class="compare-col is-bad"><strong>Falsch (Vergangenheit)</strong>„Wir hatten einen Stillstand wegen blockierter Roller, dann mussten wir Markierungen neu machen …"</div>
+                <div class="compare-col is-good"><strong>Richtig (Zukunft)</strong>„Roller-Stillstand in 24h behoben. Produktion läuft. Layout-Doku wird aktualisiert."</div>
+              </div>
+              <p>High Performers kommen mit 1–2 Lösungsideen – nicht leer. Der Unterschied: „Mach du das" vs. „Was hältst du davon?"</p>
             ` },
-            { title:'E-Mail Etikette', content:`
+            { title:'Live-Übung: First Minute bauen', content:`
+              <p>Fülle die Felder aus – dein First-Minute-Script wird live zusammengesetzt.</p>
+              <div class="ob-fm-layout" data-demo="first-minute">
+                <div class="ob-fm-fields">
+                  <div class="ob-fm-field"><label>Time Check</label><input type="text" data-fm="time" placeholder="Hast du 10 Min. für …?"></div>
+                  <div class="ob-fm-field"><label>Context</label><input type="text" data-fm="context" placeholder="Projekt / Kunde / Prozess"></div>
+                  <div class="ob-fm-field"><label>Intent</label><input type="text" data-fm="intent" placeholder="Entscheidung, Input, FYI …"></div>
+                  <div class="ob-fm-field"><label>Key Message</label><input type="text" data-fm="key" placeholder="Kernaussage in einem Satz"></div>
+                  <div class="ob-fm-field"><label>Goal</label><input type="text" data-fm="goal" placeholder="Was wollen wir erreichen?"></div>
+                  <div class="ob-fm-field"><label>Problem</label><input type="text" data-fm="problem" placeholder="Was hindert uns?"></div>
+                  <div class="ob-fm-field"><label>Solution</label><input type="text" data-fm="solution" placeholder="Vorschlag oder Bitte um Hilfe"></div>
+                  <div class="ob-fm-field"><label>Validation</label><input type="text" data-fm="validation" placeholder="Bist du die richtige Person? / Hast du Zeit?"></div>
+                  <button type="button" class="ob-demo-action" data-fm="load-example"><i class="fa-solid fa-wand-magic-sparkles"></i> LT-10-Beispiel laden</button>
+                </div>
+                <div class="ob-fm-output"><h4>Dein Script</h4><p class="ob-fm-script" data-fm="output">Time Check → Framing → GPS → Validation – Felder ausfüllen …</p></div>
+              </div>
+            ` },
+            { title:'E-Mail Etikette – Grundlagen', content:`
               <h3>Wann (k)eine E-Mail?</h3>
-              <ul class="tag-list">
-                <li class="is-dont">Keine E-Mail bei Google-/Doku-Lösungen</li>
-                <li class="is-dont">Nicht bei Konflikt oder Emotion → persönlich/Telefon</li>
-                <li class="is-dont">Nicht wenn Diskussion eskaliert → Meeting</li>
-                <li class="is-do">Ja bei dokumentationspflichtiger Info</li>
-                <li class="is-do">Ja bei asynchroner Reaktion</li>
-                <li class="is-do">Ja wenn mehrere denselben Stand brauchen</li>
+              <p><strong>Keine E-Mail, wenn:</strong></p>
+              <ul class="learn-list">
+                <li>Google, Doku oder Ausprobieren die Frage löst</li>
+                <li>Es bis zum nächsten persönlichen Treffen warten kann</li>
+                <li>Es konfliktbehaftet, kontrovers oder emotional ist → persönlich, Telefon, Video</li>
+                <li>Eine E-Mail-Diskussion zur Debatte wird → Meeting</li>
+                <li>Teams/Anruf besser passt (Single-Line-Updates)</li>
               </ul>
+              <p><strong>Stattdessen E-Mail, wenn:</strong> Info dokumentiert werden muss · Empfänger asynchron reagieren soll · mehrere denselben Stand brauchen.</p>
               <h3>Zero Inbox</h3>
               <ul class="learn-list">
-                <li>E-Mail-Zeiten im Kalender planen: 90 Min. nach Arbeitsbeginn, vor Mittagspause, Tagesende</li>
-                <li>Von alt nach neu durcharbeiten</li>
-                <li>Unrelevantes löschen; Antworten &lt; 2 Min. sofort erledigen und archivieren</li>
-                <li>Antworten &gt; 2 Min. flaggen und als <strong>Followup</strong> später abarbeiten</li>
+                <li>E-Mail-Zeiten im Kalender: 90 Min. nach Arbeitsbeginn, vor Mittagspause, Tagesende</li>
+                <li>Von alt nach neu · Unrelevantes löschen</li>
+                <li>Antwort &lt; 2 Min. → sofort erledigen und archivieren</li>
+                <li>Antwort &gt; 2 Min. → flaggen als <strong>Followup</strong></li>
               </ul>
-              <h3>Betreff</h3>
-              <p><strong>Betreff = Urgency (optional) + CTA + Thema + Grund</strong> – z.&nbsp;B. „[URGENT] Genehmigen Veröffentlichung Zahlen Q4". Max. ca. 72 Zeichen.</p>
+              <h3>Betreff = Urgency + CTA + Thema + Grund</h3>
+              <p>z.&nbsp;B. „[URGENT] Genehmigen Veröffentlichung Zahlen Q4" · Max. ca. 72 Zeichen · nie leer.</p>
+              <p><strong>DE:</strong> Aktion, Unterschrift, Info, Entscheidung, Anfrage, Genehmigen, Rücksprache · <strong>EN:</strong> Action, Sign, Info, Decision, Request, to Approve</p>
+              <p>Passt die ganze Mail in den Betreff → in den Betreff packen (z.&nbsp;B. „Standup verschoben auf 10:00 morgen — danke!").</p>
+              <p><strong>Vermeide:</strong> False Urgency · Clickbait · Bait-and-Switch · reine Labels („FYI", „Update", „Here you go").</p>
               <h3>Body – die ersten 5 Zeilen</h3>
               <ol class="learn-list">
                 <li>Worum geht es?</li>
                 <li>Was soll der/die Empfänger:in tun?</li>
                 <li>Kernbotschaft</li>
-                <li>Bis wann (auch „nicht dringend" explizit nennen)</li>
+                <li>Bis wann (auch „nicht dringend" – Empfänger überschätzen Dringlichkeit um ~36 %)</li>
                 <li>Wie viele Fragen die E-Mail enthält</li>
               </ol>
-              <p>Fragen, Aktionen und Entscheidungen sichtbar machen – mit Labels wie <strong>Frage:</strong>, <strong>Action:</strong>, <strong>Decision:</strong> auf eigener Zeile.</p>
+              <p>Bei mehreren Themen: Anzahl + Namen im Intro, dann mit Headern strukturieren.</p>
+            ` },
+            { title:'Live E-Mail-Editor', open:true, content:`
+              <p>Bearbeite die E-Mail live – die Checkliste rechts zeigt, ob ROOTS-Standards erfüllt sind. Wechsle zwischen gutem und schlechtem Beispiel.</p>
+              <div class="ob-demo" data-demo="email-editor">
+                <div class="ob-demo-head">
+                  <strong><i class="fa-solid fa-envelope-open-text"></i> Outlook-Compose (Simulation)</strong>
+                  <div class="ob-demo-tabs">
+                    <button type="button" class="ob-demo-tab is-good active" data-email-mode="good">ROOTS-Standard ✓</button>
+                    <button type="button" class="ob-demo-tab is-bad" data-email-mode="bad">Typischer Fehler ✗</button>
+                  </div>
+                </div>
+                <div class="ob-demo-body">
+                  <div class="ob-email-layout">
+                    <div class="ob-email-app">
+                      <div class="ob-email-toolbar"><i class="fa-solid fa-paper-plane"></i> Neue Nachricht</div>
+                      <div class="ob-email-row"><label>An</label><input type="text" data-email="to" autocomplete="off"></div>
+                      <div class="ob-email-row"><label>Cc</label><input type="text" data-email="cc" autocomplete="off"></div>
+                      <div class="ob-email-row"><label>Betreff</label><input type="text" data-email="subject" autocomplete="off"></div>
+                      <div class="ob-email-body-wrap"><textarea class="ob-email-body" data-email="body" spellcheck="false"></textarea></div>
+                    </div>
+                    <aside class="ob-email-guide">
+                      <h4>Struktur-Check</h4>
+                      <ul class="ob-email-check" data-email="checklist"></ul>
+                      <div class="ob-email-legend">
+                        <span class="lg-subj">Betreff</span><span class="lg-topic">Topic</span><span class="lg-action">Action</span><span class="lg-time">Zeitrahmen</span><span class="lg-q">Fragen</span>
+                      </div>
+                    </aside>
+                  </div>
+                </div>
+              </div>
+            ` },
+            { title:'E-Mail – Best Practices & Reply', content:`
+              <h3>Länge &amp; Struktur</h3>
+              <ul class="learn-list">
+                <li>So kurz wie möglich – kürzere E-Mails haben &gt; 60 % höhere Antwortrate</li>
+                <li>Max. 2× Scrollen am Phone · Five-Sentence-Rule für Routine-Mails</li>
+                <li>Ein Verlauf pro Thema · Whitespace · Absätze &lt; 4 Zeilen</li>
+                <li>Nummerierte Listen, wenn auf einzelne Items geantwortet werden soll</li>
+              </ul>
+              <h3>Fragen, Aktionen, Entscheidungen</h3>
+              <ul class="learn-list">
+                <li>Labels auf eigener Zeile: <strong>Frage:</strong> · <strong>Action:</strong> · <strong>Decision:</strong></li>
+                <li>Action: „Wer macht was bis wann" · Decision: „Wer hat was entschieden, gültig ab wann"</li>
+                <li>In Gruppen-Mails: Personennamen vor jeder Action</li>
+              </ul>
+              <h3>Links, Anhänge, Tonalität</h3>
+              <ul class="learn-list">
+                <li>Hyperlinks statt rohe URLs · im Fließtext, nicht gesammelt am Ende</li>
+                <li>Kerninfo in der Mail – nicht nur im Anhang · Bilder als Anhang</li>
+                <li>Heikle Mails: schreiben, Pause, senden – ggf. Zweitleser:in</li>
+                <li>„Thanks!" wirkt oft echter als „Sincerely" · Sarkasmus nur mit Hinweis</li>
+              </ul>
+              <h3>Reply-Regeln</h3>
+              <ul class="learn-list">
+                <li>Betreff in Replies nicht ändern</li>
+                <li>Reply nicht mit „Thank you" beginnen</li>
+                <li>Reply to points statt Top-Posting</li>
+                <li>Reply-All: erst alle eintragen, dann gezielt entfernen</li>
+              </ul>
+            ` },
+            { title:'Gruppen-E-Mails, Cc, Bcc & Tipps', content:`
+              <h3>Gruppen-E-Mails</h3>
+              <ul class="learn-list">
+                <li>Personen nach Senioritätsgrad ordnen (CEO → Senior → Junior → ROOTS Senior → ROOTS Junior)</li>
+                <li>Pro Subgroup separat ansprechen („David &amp; Irina, bitte …")</li>
+                <li>Reply-All-Regel explizit: „Bei Fragen bitte nur an mich, nicht an alle"</li>
+              </ul>
+              <h3>Cc &amp; Bcc</h3>
+              <ul class="learn-list">
+                <li><strong>Cc:</strong> nur für FYI – alle anderen ins An-Feld</li>
+                <li><strong>Bcc legitime Use-Cases:</strong> Datenschutz bei großen Verteilern · Kopie an sich selbst („Waiting")</li>
+              </ul>
+              <h3>Tipps</h3>
+              <ul class="learn-list">
+                <li><strong>@</strong> taggt Personen – E-Mail wird automatisch eingefügt</li>
+                <li>Templates für wiederkehrende Mails anlegen</li>
+                <li>Arbeits-E-Mails sind nicht privat – nichts schreiben, was vor Gericht oder vor Mama unangenehm wäre</li>
+                <li>Rechtschreibung prüfen, besonders bei externen Empfängern</li>
+              </ul>
             ` },
             { title:'Meeting Etikette', content:`
               <h3>Braucht es überhaupt ein Meeting?</h3>
               <p>Kein Meeting, wenn es nur ein Update ist, Entscheidungsträger fehlen oder sich noch Zeit mit Feedback gelassen werden kann.</p>
+              <div class="highlight"><p><i class="fa-solid fa-chart-pie" aria-hidden="true"></i> Bain: Manager:innen verbringen <strong>35 %</strong> ihres Tages in Meetings. Ludic: Nur <strong>1 von 10</strong> versteht immer den Zweck. Klare Einladungen sind Pflicht.</p></div>
               <h3>Invitation</h3>
               <p><strong>Subject line:</strong> Context + Intent</p>
               <ul class="learn-list">
-                <li><strong>Meeting purpose</strong> – wofür das Meeting da ist (eine Zeile)</li>
+                <li><strong>Meeting purpose</strong> – wofür (eine Zeile)</li>
                 <li><strong>Meeting output</strong> – erwartetes Ergebnis (eine Zeile)</li>
                 <li><strong>Additional Information</strong> – optional GPS-Summary</li>
                 <li><strong>Slides</strong> – wenn relevant</li>
               </ul>
-              <p>Nie weiterleiten ohne eigene Einleitung. Wer neu hinzugefügt wird: begrüßen und Grund nennen.</p>
-              <h3>Erste Minute des Meetings</h3>
-              <p>Meeting Purpose und Output am Anfang nochmal vorlesen – auch wenn sie in der Einladung stehen. Alle starten vom selben Punkt, Fokus auf Solutions.</p>
-              <h3>Meetingende – mind. 5 Minuten Closing</h3>
-              <ol class="learn-list">
-                <li>Meeting kurz zusammenfassen</li>
-                <li>Output-Status bestätigen (Ziel erreicht? Follow-up nötig?)</li>
-                <li>Entscheidungen &amp; Aufgaben rekapitulieren – wer macht was bis wann</li>
-                <li>Danke sagen</li>
-              </ol>
+              <p>Nie weiterleiten ohne eigene Einleitung. Neu Hinzugefügte: begrüßen + Grund nennen.</p>
+              <h3>Erste Minute &amp; Meetingende</h3>
+              <p>Purpose und Output am Anfang nochmal vorlesen – Fokus auf Solutions, nicht Vergangenheit.</p>
+              <p><strong>Closing (mind. 5 Min.):</strong> (1) Zusammenfassen · (2) Output-Status · (3) Wer macht was bis wann · (4) Danke sagen. Notfalls Diskussionen kappen und verschieben.</p>
+            ` },
+            { title:'Live-Beispiel: Meeting-Einladung', content:`
+              <p>So sieht eine ROOTS-konforme Einladung aus – farblich markiert: Purpose, Output, GPS.</p>
+              <div class="ob-meet-invite" data-demo="meeting-invite">
+                <div class="ob-meet-invite__head">
+                  <strong>Danone Q4 Steering – KPI-Freigabe &amp; Deck-Finalisierung</strong>
+                  <div class="ob-meet-invite__meta"><i class="fa-regular fa-calendar"></i> Di, 14.01. · 10:00–10:45 · Teams · Richard, Julia, Rod, Max</div>
+                </div>
+                <div class="ob-meet-invite__body">
+                  <div class="ob-meet-block is-purpose"><strong>Meeting Purpose</strong>Freigabe der Q4-KPIs und Abstimmung der offenen Punkte für das Steering Deck.</div>
+                  <div class="ob-meet-block is-output"><strong>Meeting Output</strong>Signierte KPI-Tabellen + klare Action List (wer / was / bis wann) für Deck-Finalisierung.</div>
+                  <div class="ob-meet-block is-gps"><strong>GPS (optional)</strong><strong>Goal:</strong> Steering-ready Deck bis Fr 17:00 · <strong>Problem:</strong> KPI-Zeile 14 ungeklärt · <strong>Solution:</strong> Entscheidung im Call + Julia signiert bis Fr 15:00</div>
+                  <p style="margin:.65rem 0 0"><strong>Slides:</strong> KPI_Draft_v3.pptx (SharePoint-Link)<br><em>Reply-All: Bei Fragen bitte nur an Max, nicht an alle.</em></p>
+                </div>
+              </div>
             ` },
             { title:'Präsentationen (McKinsey Chart Clinique)', content:`
-              <p>Wer eine gute Präsentation hält, überträgt eine Idee in den Kopf des Zuhörers. Folien, Struktur und Rhetorik sind Mittel – kein Selbstzweck.</p>
+              <p>Wer eine gute Präsentation hält, überträgt eine Idee in den Kopf des Zuhörers – Inhalt und Narrativ schlagen Design.</p>
               <div class="pres-phases">
-                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-bullseye"></i> Phase 1 · Strategie</div><div class="pres-phase-body"><p>Was weiß der Zuhörer? Was soll er danach denken, fühlen oder tun? Welche Barrieren könnte er haben?</p><p><strong>20-Sekunden-Test:</strong> Kernbotschaft in einem Satz – sonst ist das Thema noch nicht durchdrungen.</p></div></div>
-                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-route"></i> Phase 2 · Storyline</div><div class="pres-phase-body"><p>Eine zentrale Idee, der alles untergeordnet ist. Narrativ: Problem → Lösungssuche → Aha-Moment → neue Perspektive.</p><p><strong>Pyramidenprinzip:</strong> Kernaussage oben, darunter 2–5 stützende Argumente (Logical Group oder Logical Chain), darunter Belege. Jede Folie hat eine Kernaussage – keine Gliederungstitel.</p></div></div>
-                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-chart-column"></i> Phase 3 · Visualisierung</div><div class="pres-phase-body"><p>Grafiken statt langer Sätze, kognitive Belastung minimieren, nicht von der Folie ablesen.</p><ul class="learn-list"><li>Balken (vertikal): Vergleiche mit zeitlicher Rangfolge</li><li>Balken (horizontal): lange Kategoriebeschriftungen</li><li>Kreis: max. 2–3 Segmente, sonst Balken</li><li>Linie: Entwicklung über Zeit</li></ul></div></div>
-                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-microphone"></i> Phase 4 · Delivery</div><div class="pres-phase-body"><p>Du präsentierst den Inhalt, nicht die Folien. Auf den Punkt kommen, authentisch bleiben.</p><p>Frei sprechen ist optimal; Stichpunkte als Backup. Nicht vom Skript lesen. Tipp: Vortrag als Audio aufnehmen und wiederholen.</p></div></div>
+                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-bullseye"></i> Phase 1 · Strategie</div><div class="pres-phase-body"><p>Was weiß der Zuhörer? Was soll er denken, fühlen, tun? Welche Barrieren?</p><p><strong>Zuhörer-Profil:</strong> Relevanz, Vorwissen, Rolle (Entscheider, Meinungsführer, Betroffener), Präferenzen, Haltung.</p><p><strong>20-Sekunden-Test:</strong> Kernbotschaft in einem Satz.</p></div></div>
+                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-route"></i> Phase 2 · Storyline</div><div class="pres-phase-body"><p>Problem → Lösungssuche → Aha-Moment → neue Perspektive.</p><p><strong>Einstiege:</strong> Problem, Widerspruch, These, Best Practice, Meinungen, Forderung.</p><p><strong>Pyramidenprinzip:</strong> Logical Group (MECE) oder Logical Chain. Jede Folie = Kernaussage, keine Gliederungstitel.</p></div></div>
+                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-chart-column"></i> Phase 3 · Visualisierung</div><div class="pres-phase-body"><p>Grafiken statt Sätze · nicht von der Folie ablesen · keine irreführenden Achsen.</p></div></div>
+                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-microphone"></i> Phase 4 · Delivery</div><div class="pres-phase-body"><p>Frei sprechen · authentisch · nicht vom Skript lesen.</p><p><strong>Valley of Awkwardness:</strong> halb auswendig ist der schlimmste Zustand. Tipp: Vortrag als Audio aufnehmen.</p></div></div>
+              </div>
+            ` },
+            { title:'Live-Vergleich: Folien-Titel', content:`
+              <p>Eine Folie = eine Botschaft als Überschrift. Klicke zum Vergleich:</p>
+              <div class="ob-demo" data-demo="slide-compare">
+                <div class="ob-demo-head">
+                  <strong><i class="fa-solid fa-display"></i> Slide-Vorschau</strong>
+                  <div class="ob-demo-tabs">
+                    <button type="button" class="ob-demo-tab is-bad active" data-slide-mode="bad">Schlecht</button>
+                    <button type="button" class="ob-demo-tab is-good" data-slide-mode="good">ROOTS-Standard</button>
+                  </div>
+                </div>
+                <div class="ob-demo-body">
+                  <div class="ob-slide-compare">
+                    <div class="ob-slide is-bad" data-slide="bad">
+                      <div class="ob-slide__label">Gliederungstitel</div>
+                      <div class="ob-slide__title">Marktanteile 2024</div>
+                      <div class="ob-slide__chart"><div class="ob-slide__bar" style="height:45%"></div><div class="ob-slide__bar" style="height:70%"></div><div class="ob-slide__bar" style="height:55%"></div></div>
+                    </div>
+                    <div class="ob-slide is-good" data-slide="good" hidden>
+                      <div class="ob-slide__label">Kernaussage</div>
+                      <div class="ob-slide__title">ROOTS hat seinen Marktanteil in Premium-Segmenten 2024 um 12&nbsp;% gesteigert</div>
+                      <div class="ob-slide__chart"><div class="ob-slide__bar" style="height:55%"></div><div class="ob-slide__bar" style="height:82%"></div><div class="ob-slide__bar" style="height:62%"></div></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             ` }
           ]}
@@ -2768,6 +3007,175 @@ Signature</pre></div>
     return `<div class="module-tab-bar" role="tablist">${tabsHtml}</div><div class="module-tab-panels">${panelsHtml}</div>`;
   }
 
+  const EMAIL_DEMO = {
+    good: {
+      to: 'julia.fraenzel@roots-consultants.com',
+      cc: 'rod.mitecki@roots-consultants.com',
+      subject: 'Genehmigen Q4-KPI Danone – Entscheidung bis Fr 15:00',
+      body: `Hi Julia,
+
+TOPIC: Veröffentlichung der Q4-KPIs im Danone-Steering Deck.
+
+ACTION: Bitte bis Freitag, 15:00 Uhr, die KPI-Tabellen in Anhang A freigeben oder Rückfragen markieren.
+
+KEY MESSAGE: Wir können das Deck erst finalisieren, wenn die KPIs signiert sind.
+
+TIME FRAME: Nicht dringend für heute – Deadline Freitag 15:00.
+
+FRAGEN: 1 Frage unten.
+
+---
+
+FRAGE: Stimmt die Organic-Growth-Zahl in Zeile 14 (4,2 % vs. 4,8 % im Last Read)?
+
+ACTION: Julia – KPI-Freigabe bis Fr 15:00 | Rod – Layout-Update nach Freigabe bis Mo 10:00
+
+Thanks!
+Max`,
+    },
+    bad: {
+      to: 'julia',
+      cc: '',
+      subject: 'FYI',
+      body: `Hi,
+
+wollte kurz fragen wegen der zahlen im deck und ob du mal schauen kannst wenn du zeit hast. ich glaube da stimmt was nicht in zeile 14 oder so. außerdem müssen wir noch das layout anpassen weil rod meinte gestern was anderes und ich bin mir nicht sicher ob richard schon bescheid weiß.
+
+lg`,
+    },
+  };
+
+  const FM_EXAMPLE = {
+    time: 'Hast du 10 Minuten für eine Entscheidung zum LT-10-Programm?',
+    context: 'LT-10-Programm',
+    intent: 'Wir haben ein Problem',
+    key: 'Wir liefern einen Monat später als geplant',
+    goal: 'LT-10 pünktlich ausrollen',
+    problem: 'Lieferverzug um einen Monat',
+    solution: 'Scope-Reduktion Phase 2 vorschlagen – brauche dein Go',
+    validation: 'Bist du die richtige Person für diese Entscheidung?',
+  };
+
+  function runEmailDemoChecklist(root) {
+    const subject = (root.querySelector('[data-email="subject"]')?.value || '').trim();
+    const body = (root.querySelector('[data-email="body"]')?.value || '').trim();
+    const list = root.querySelector('[data-email="checklist"]');
+    if (!list) return;
+    const subjLower = subject.toLowerCase();
+    const bodyLower = body.toLowerCase();
+    const actionVerbs = /genehmig|entscheid|freigeb|approve|action|sign|info|anfrage|rücksprache|signier|review|feedback|bestätig/;
+    const checks = [
+      { label: 'Betreff enthält klare Aktion (kein reines „FYI")', ok: subject.length > 8 && actionVerbs.test(subjLower) && !/^fyi$|^update$|^here you go$/i.test(subject.trim()) },
+      { label: 'Betreff ≤ 72 Zeichen', ok: subject.length > 0 && subject.length <= 72 },
+      { label: 'TOPIC / Worum geht es in den ersten Zeilen', ok: /topic:|worum geht|betrifft:/i.test(bodyLower) },
+      { label: 'ACTION – Was soll getan werden', ok: /action:|action /i.test(bodyLower) },
+      { label: 'KEY MESSAGE / Kernbotschaft', ok: /key message:|kernbotschaft|kernaussage/i.test(bodyLower) },
+      { label: 'TIME FRAME / Deadline (auch „nicht dringend")', ok: /time frame:|deadline|bis (montag|dienstag|mittwoch|donnerstag|freitag|fr|mo|di|mi|do)|nicht dringend|dringend/i.test(bodyLower) },
+      { label: 'Anzahl Fragen genannt', ok: /fragen:|frage:|question/i.test(bodyLower) },
+      { label: 'Labels: FRAGE / ACTION / DECISION sichtbar', ok: /\b(frage|action|decision):/i.test(bodyLower) },
+      { label: 'Kurz & scanbar (Five-Sentence-Zone)', ok: body.split('\n').filter(l => l.trim()).slice(0, 8).join(' ').length >= 40 },
+    ];
+    list.innerHTML = checks.map(c => `<li class="${c.ok ? 'is-ok' : ''}"><i class="fa-solid ${c.ok ? 'fa-circle-check' : 'fa-circle'}"></i><span>${c.label}</span></li>`).join('');
+    const score = checks.filter(c => c.ok).length;
+    if (score >= 7) list.insertAdjacentHTML('beforeend', `<li class="is-ok"><i class="fa-solid fa-star"></i><span><strong>${score}/${checks.length}</strong> – ROOTS-Standard erreicht</span></li>`);
+    else if (score <= 3) list.insertAdjacentHTML('beforeend', `<li class="is-warn"><i class="fa-solid fa-triangle-exclamation"></i><span>Nur ${score}/${checks.length} – Beispiel verbessern</span></li>`);
+  }
+
+  function setEmailDemoMode(root, mode) {
+    const data = EMAIL_DEMO[mode] || EMAIL_DEMO.good;
+    root.querySelector('[data-email="to"]').value = data.to;
+    root.querySelector('[data-email="cc"]').value = data.cc;
+    root.querySelector('[data-email="subject"]').value = data.subject;
+    root.querySelector('[data-email="body"]').value = data.body;
+    root.querySelectorAll('[data-email-mode]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.emailMode === mode);
+    });
+    runEmailDemoChecklist(root);
+  }
+
+  function bindEmailEditorDemo(root) {
+    if (root.dataset.bound === '1') return;
+    root.dataset.bound = '1';
+    setEmailDemoMode(root, 'good');
+    root.querySelectorAll('[data-email-mode]').forEach(btn => {
+      btn.addEventListener('click', () => setEmailDemoMode(root, btn.dataset.emailMode));
+    });
+    root.querySelector('[data-email="subject"]')?.addEventListener('input', () => runEmailDemoChecklist(root));
+    root.querySelector('[data-email="body"]')?.addEventListener('input', () => runEmailDemoChecklist(root));
+  }
+
+  function updateFirstMinuteDemo(root) {
+    const get = (k) => root.querySelector(`[data-fm="${k}"]`)?.value?.trim() || '';
+    const parts = [];
+    if (get('time')) parts.push(`⏱ ${get('time')}`);
+    if (get('context') || get('intent') || get('key')) {
+      parts.push(`\n📌 Framing:\n• Context: ${get('context') || '…'}\n• Intent: ${get('intent') || '…'}\n• Key Message: ${get('key') || '…'}`);
+    }
+    if (get('goal') || get('problem') || get('solution')) {
+      parts.push(`\n🎯 GPS:\n• Goal: ${get('goal') || '…'}\n• Problem: ${get('problem') || '…'}\n• Solution: ${get('solution') || '…'}`);
+    }
+    if (get('validation')) parts.push(`\n✓ Validation: ${get('validation')}`);
+    const out = root.querySelector('[data-fm="output"]');
+    if (out) out.textContent = parts.length ? parts.join('\n') : 'Time Check → Framing → GPS → Validation – Felder ausfüllen …';
+  }
+
+  function bindFirstMinuteDemo(root) {
+    if (root.dataset.bound === '1') return;
+    root.dataset.bound = '1';
+    root.querySelectorAll('input[data-fm]').forEach(el => el.addEventListener('input', () => updateFirstMinuteDemo(root)));
+    root.querySelector('[data-fm="load-example"]')?.addEventListener('click', () => {
+      Object.entries(FM_EXAMPLE).forEach(([k, v]) => {
+        const inp = root.querySelector(`[data-fm="${k}"]`);
+        if (inp) inp.value = v;
+      });
+      updateFirstMinuteDemo(root);
+    });
+    updateFirstMinuteDemo(root);
+  }
+
+  function bindKiZoneDemo(root) {
+    if (root.dataset.bound === '1') return;
+    root.dataset.bound = '1';
+    root.querySelectorAll('.ob-zone-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const ans = item.dataset.answer || '';
+        const box = item.querySelector('.ob-zone-answer');
+        item.classList.add('is-correct');
+        if (box) box.textContent = '✓ ' + ans;
+        root.querySelectorAll('.ob-zone-item').forEach(other => {
+          if (other !== item && !other.classList.contains('is-correct')) {
+            other.classList.add('is-wrong');
+            const oa = other.querySelector('.ob-zone-answer');
+            if (oa && !oa.textContent) oa.textContent = '→ ' + (other.dataset.answer || '');
+          }
+        });
+      });
+    });
+  }
+
+  function bindSlideCompareDemo(root) {
+    if (root.dataset.bound === '1') return;
+    root.dataset.bound = '1';
+    const show = (mode) => {
+      root.querySelectorAll('[data-slide-mode]').forEach(btn => btn.classList.toggle('active', btn.dataset.slideMode === mode));
+      const bad = root.querySelector('[data-slide="bad"]');
+      const good = root.querySelector('[data-slide="good"]');
+      if (bad) bad.hidden = mode === 'good';
+      if (good) good.hidden = mode === 'bad';
+    };
+    root.querySelectorAll('[data-slide-mode]').forEach(btn => btn.addEventListener('click', () => show(btn.dataset.slideMode)));
+    show('bad');
+  }
+
+  function bindInteractiveDemos(scope) {
+    const el = scope || document.getElementById('modal-body');
+    if (!el) return;
+    el.querySelectorAll('[data-demo="email-editor"]').forEach(bindEmailEditorDemo);
+    el.querySelectorAll('[data-demo="first-minute"]').forEach(bindFirstMinuteDemo);
+    el.querySelectorAll('[data-demo="ki-zones"]').forEach(bindKiZoneDemo);
+    el.querySelectorAll('[data-demo="slide-compare"]').forEach(bindSlideCompareDemo);
+  }
+
   function bindWelcomeTimelineReveal() {
     const body = document.getElementById('modal-body');
     if (!body) return;
@@ -2775,8 +3183,8 @@ Signature</pre></div>
       det.addEventListener('toggle', () => {
         if (!det.open) return;
         const tl = det.querySelector('[data-timeline]');
-        if (!tl) return;
-        setTimeout(() => animateTimeline(tl), 40);
+        if (tl) setTimeout(() => animateTimeline(tl), 40);
+        bindInteractiveDemos(det);
       });
     });
   }
@@ -2805,6 +3213,7 @@ Signature</pre></div>
         if (active) {
           panel.scrollTop = 0;
           triggerPanelAnimations(panel);
+          bindInteractiveDemos(panel);
           if (subId === 'w-team') hydrateTeamRoster();
         }
       });
@@ -2813,6 +3222,7 @@ Signature</pre></div>
     triggerPanelAnimations(activePanel);
     bindWelcomeTimelineReveal();
     bindWelcomeAccordions();
+    bindInteractiveDemos(body);
     if (activePanel) activePanel.scrollTop = 0;
     if (activePanel?.dataset.sub === 'w-team') hydrateTeamRoster();
   }
