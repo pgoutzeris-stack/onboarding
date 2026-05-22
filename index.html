@@ -141,75 +141,6 @@
     @keyframes toastSlideIn { from { opacity: 0; transform: translateX(40px) scale(0.95); } to { opacity: 1; transform: translateX(0) scale(1); } }
     @keyframes toastFadeOut { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.95); } }
 
-    /* ── Onboarding Overlay ─────────────────────────── */
-    #onboarding-overlay {
-      display: none; position: fixed; inset: 0; z-index: 2147483000;
-      background: rgba(15,23,42,.65); backdrop-filter: blur(6px);
-      align-items: center; justify-content: center; padding: 1rem;
-      animation: fadeIn .3s ease;
-    }
-    #onboarding-overlay.visible { display: flex !important; }
-
-    .ob-card {
-      background: var(--bg); border-radius: 24px;
-      box-shadow: 0 32px 80px rgba(0,0,0,.25);
-      width: 100%; max-width: 560px; padding: 2.75rem 2.5rem;
-      animation: slideUp .35s cubic-bezier(.22,.68,0,1.2);
-    }
-
-    .ob-header { text-align: center; margin-bottom: 2rem; }
-    .ob-icon {
-      width: 56px; height: 56px; border-radius: 16px;
-      background: var(--brand-light); color: var(--brand); font-size: 1.5rem;
-      display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1rem;
-    }
-    .ob-title { font-size: 1.4rem; font-weight: 700; margin-bottom: .35rem; }
-    .ob-sub   { font-size: .95rem; color: var(--muted); }
-
-    .ob-steps { display: flex; justify-content: center; gap: .5rem; margin-bottom: 2.25rem; }
-    .ob-step-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); transition: all .3s; }
-    .ob-step-dot.active { background: var(--brand); width: 24px; border-radius: 4px; }
-    .ob-step-dot.done   { background: var(--brand); opacity: .4; }
-
-    .ob-step { display: none; }
-    .ob-step.active { display: block; animation: slideUp .25s ease; }
-    .ob-section-label { font-weight: 600; font-size: .95rem; margin-bottom: .85rem; display: block; }
-
-    .position-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-bottom: 1.75rem; }
-    .pos-card {
-      border: 2px solid var(--line); border-radius: 12px; padding: 1rem 1.1rem;
-      cursor: pointer; transition: all .2s; background: var(--bg);
-      display: flex; align-items: center; gap: .75rem;
-    }
-    .pos-card:hover { border-color: var(--brand); background: var(--brand-light); }
-    .pos-card.selected { border-color: var(--brand); background: var(--brand-light); box-shadow: var(--shadow-focus); }
-    .pos-icon {
-      width: 20px; display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; color: var(--muted); flex-shrink: 0; transition: color .2s;
-    }
-    .pos-card.selected .pos-icon { color: var(--brand); }
-    .pos-label { font-size: .9rem; font-weight: 500; line-height: 1.3; }
-    .pos-sub   { font-size: .75rem; color: var(--muted); margin-top: 2px; }
-
-    .input-num-wrap { position: relative; margin-bottom: 1.75rem; }
-    .input-num-wrap input[type="number"] { padding-left: 14px; padding-right: 52px; font-size: 1.15rem; height: 52px; font-weight: 600; }
-    .input-num-suffix { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: .9rem; color: var(--muted); font-weight: 500; pointer-events: none; }
-    .input-hint { font-size: .8rem; color: var(--muted); margin-top: .5rem; }
-
-    .ob-summary { background: var(--status-bg); border-radius: 12px; padding: 1.1rem 1.25rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: .6rem; }
-    .ob-summary-row { display: flex; justify-content: space-between; align-items: center; font-size: .9rem; }
-    .ob-summary-row span:first-child { color: var(--muted); }
-    .ob-summary-row span:last-child  { font-weight: 600; }
-
-    .ob-nav { display: flex; gap: .75rem; margin-top: .5rem; }
-    .btn-secondary {
-      flex: 1; padding: .75rem; background: var(--status-bg); border: 1px solid var(--line);
-      border-radius: var(--radius-pill); font-family: inherit; font-size: .95rem;
-      font-weight: 500; color: var(--muted); cursor: pointer; transition: all .2s;
-    }
-    .btn-secondary:hover { border-color: var(--brand); color: var(--brand); }
-    .ob-nav .btn-primary { flex: 2; margin-top: 0; }
-
     /* ── Dashboard ───────── */
     #screen-dashboard { display: none; min-height: 100vh; background: var(--app-bg); }
     body.body-dashboard { background: var(--app-bg); }
@@ -973,102 +904,6 @@
   </div>
 </div>
 
-<!-- ── Onboarding Overlay ──────────────────────────── -->
-<div id="onboarding-overlay">
-  <div class="ob-card">
-
-    <div class="ob-header">
-      <div class="ob-icon"><i class="fa-solid fa-user-tie"></i></div>
-      <h2 class="ob-title">Profil einrichten</h2>
-      <p class="ob-sub">Kurz noch ein paar Angaben zu deiner Rolle bei ROOTS.</p>
-    </div>
-
-    <div class="ob-steps">
-      <div class="ob-step-dot active" id="dot-1"></div>
-      <div class="ob-step-dot"        id="dot-2"></div>
-      <div class="ob-step-dot"        id="dot-3"></div>
-    </div>
-
-    <!-- Step 1: Position -->
-    <div class="ob-step active" id="step-1">
-      <span class="ob-section-label">Was ist deine Position?</span>
-      <div class="position-grid">
-        <div class="pos-card" data-value="Praktikant">
-          <div class="pos-icon"><i class="fa-solid fa-seedling"></i></div>
-          <div><div class="pos-label">Praktikant</div><div class="pos-sub">Intern</div></div>
-        </div>
-        <div class="pos-card" data-value="Junior Consultant">
-          <div class="pos-icon"><i class="fa-solid fa-star"></i></div>
-          <div><div class="pos-label">Junior Consultant</div><div class="pos-sub">Entry Level</div></div>
-        </div>
-        <div class="pos-card" data-value="Consultant">
-          <div class="pos-icon"><i class="fa-solid fa-briefcase"></i></div>
-          <div><div class="pos-label">Consultant</div><div class="pos-sub">Mid Level</div></div>
-        </div>
-        <div class="pos-card" data-value="Senior Consultant">
-          <div class="pos-icon"><i class="fa-solid fa-award"></i></div>
-          <div><div class="pos-label">Senior Consultant</div><div class="pos-sub">Senior Level</div></div>
-        </div>
-        <div class="pos-card" data-value="Director">
-          <div class="pos-icon"><i class="fa-solid fa-chess-king"></i></div>
-          <div><div class="pos-label">Director</div><div class="pos-sub">Leadership</div></div>
-        </div>
-        <div class="pos-card" data-value="Partner">
-          <div class="pos-icon"><i class="fa-solid fa-crown"></i></div>
-          <div><div class="pos-label">Partner</div><div class="pos-sub">Führungsebene</div></div>
-        </div>
-      </div>
-      <div class="ob-nav">
-        <button class="btn-primary" id="btn-next-1" disabled onclick="goStep(2)">
-          Weiter <i class="fa-solid fa-arrow-right"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- Step 2: Stundensatz -->
-    <div class="ob-step" id="step-2">
-      <span class="ob-section-label">Wie hoch ist dein Stundensatz?</span>
-      <div class="input-num-wrap">
-        <input type="number" id="hourly-rate" placeholder="0" min="0" max="9999" step="1" />
-        <span class="input-num-suffix">€ / h</span>
-      </div>
-      <p class="input-hint"><i class="fa-solid fa-circle-info" style="margin-right:4px"></i>Wird für Zeiterfassung und Projektabrechnung verwendet.</p>
-      <div class="ob-nav" style="margin-top:1.5rem">
-        <button class="btn-secondary" onclick="goStep(1)"><i class="fa-solid fa-arrow-left"></i> Zurück</button>
-        <button class="btn-primary"   onclick="goStep(3)">Weiter <i class="fa-solid fa-arrow-right"></i></button>
-      </div>
-    </div>
-
-    <!-- Step 3: Wochenstunden + Zusammenfassung -->
-    <div class="ob-step" id="step-3">
-      <span class="ob-section-label">Wie viele Stunden arbeitest du pro Woche?</span>
-      <div class="input-num-wrap">
-        <input type="number" id="weekly-hours" placeholder="40" min="1" max="80" step="0.5" />
-        <span class="input-num-suffix">h / Woche</span>
-      </div>
-
-      <span class="ob-section-label" style="margin-top:.25rem">Deine Angaben</span>
-      <div class="ob-summary">
-        <div class="ob-summary-row"><span>Position</span><span id="sum-pos">–</span></div>
-        <div class="ob-summary-row"><span>Stundensatz</span><span id="sum-rate">–</span></div>
-        <div class="ob-summary-row"><span>Wochenarbeitszeit</span><span id="sum-hours">–</span></div>
-      </div>
-
-      <div id="ob-error" class="alert alert-error" style="margin-bottom:1rem">
-        <i class="fa-solid fa-circle-exclamation"></i><span id="ob-error-text"></span>
-      </div>
-
-      <div class="ob-nav">
-        <button class="btn-secondary" onclick="goStep(2)"><i class="fa-solid fa-arrow-left"></i> Zurück</button>
-        <button class="btn-primary" id="btn-save" onclick="saveProfile()">
-          <i class="fa-solid fa-check"></i> Speichern & starten
-        </button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
 <script>
   console.info('[ROOTS] Inline-Script Start');
 
@@ -1120,7 +955,6 @@
     document.body.classList.remove('body-dashboard');
     document.getElementById('screen-dashboard').style.display = 'none';
     document.getElementById('screen-login').style.display = 'flex';
-    document.getElementById('onboarding-overlay').classList.remove('visible');
     document.getElementById('modal-overlay').classList.remove('open');
     document.body.style.overflow = '';
     document.getElementById('dash-view-personal').style.display = 'block';
@@ -1132,22 +966,7 @@
     if (resetBtn) setLoading(resetBtn, false, 'fa-solid fa-paper-plane', 'Link senden');
   }
 
-  function showOnboardingPopup() {
-    document.getElementById('screen-login').style.display = 'none';
-    document.getElementById('screen-dashboard').style.display = 'block';
-    document.body.classList.add('body-dashboard');
-    document.getElementById('dash-view-personal').style.display = 'block';
-    document.getElementById('dash-view-manage').style.display = 'none';
-    document.getElementById('header-sub').textContent = 'Dein persönlicher Einstiegsplan';
-
-    document.getElementById('greeting-text').textContent = 'Willkommen bei ROOTS';
-
-    document.getElementById('onboarding-overlay').classList.add('visible');
-    window.RootsUser._loadAndMount(sb);
-  }
-
   function showManagementDashboard() {
-    document.getElementById('onboarding-overlay').classList.remove('visible');
     document.getElementById('screen-login').style.display = 'none';
     document.getElementById('screen-dashboard').style.display = 'block';
     document.body.classList.add('body-dashboard');
@@ -1162,7 +981,6 @@
   }
 
   function showDashboard() {
-    document.getElementById('onboarding-overlay').classList.remove('visible');
     document.getElementById('screen-login').style.display = 'none';
     document.getElementById('screen-dashboard').style.display = 'block';
     document.body.classList.add('body-dashboard');
@@ -1175,18 +993,6 @@
       showLoginScreen();
       showError(err && err.message ? err.message : String(err));
     });
-  }
-
-  function isProfileComplete(p) {
-    if (!p) return false;
-    // HIER ANGEPASST: Prüft jetzt p.position statt p.app_role
-    if (!p.position || String(p.position).trim() === '') return false;
-    if (p.hourly_rate === null || p.hourly_rate === undefined || p.hourly_rate === '') return false;
-    if (p.weekly_hours === null || p.weekly_hours === undefined || p.weekly_hours === '') return false;
-    var wh = Number(p.weekly_hours);
-    if (!Number.isFinite(wh) || wh <= 0) return false;
-    var hr = Number(p.hourly_rate);
-    return Number.isFinite(hr) && hr >= 0;
   }
 
   function isOnboardingManagerRole(role) {
@@ -3984,8 +3790,6 @@ Signature</pre></div>
   }
 
   /* ── Login-Box State ────────────────────────────── */
-  let currentStep      = 1;
-  let selectedPosition = '';
 
   document.getElementById('go-forgot').addEventListener('click', () => {
     document.getElementById('view-login').style.display  = 'none';
@@ -4033,10 +3837,9 @@ Signature</pre></div>
       }
       currentUserId = session.user.id;
       
-      console.info('[ROOTS] Prüfe Profil für User:', currentUserId);
-      // HIER ANGEPASST: position
+      console.info('[ROOTS] Prüfe Rolle für User:', currentUserId);
       var q = await sb.schema('users').from('profiles')
-        .select('position, hourly_rate, weekly_hours, app_role')
+        .select('app_role')
         .eq('id', currentUserId)
         .maybeSingle();
 
@@ -4054,17 +3857,8 @@ Signature</pre></div>
         return;
       }
 
-      // FIRST TIME LOGIN CHECK:
-      var complete = isProfileComplete(q.data);
-      console.info('[ROOTS] Profil vollständig ausgefüllt?', complete, q.data);
-      
-      if (complete) {
-        console.info('[ROOTS] -> Zeige normales Dashboard');
-        showDashboard();
-      } else {
-        console.info('[ROOTS] -> Zeige Onboarding Assistent');
-        showOnboardingPopup();
-      }
+      console.info('[ROOTS] -> Zeige normales Dashboard');
+      showDashboard();
     } catch (ex) {
       console.error('[ROOTS] Exception im Routing:', ex);
     }
@@ -4143,83 +3937,6 @@ Signature</pre></div>
       document.getElementById('reset-email').value = '';
     }
   });
-
-  /* ════════════════════════════════════════════════════
-     ONBOARDING POPUP WIZARD
-     ════════════════════════════════════════════════ */
-
-  document.querySelectorAll('.pos-card').forEach(card => {
-    card.addEventListener('click', () => {
-      document.querySelectorAll('.pos-card').forEach(c => c.classList.remove('selected'));
-      card.classList.add('selected');
-      selectedPosition = card.dataset.value;
-      document.getElementById('btn-next-1').disabled = false;
-    });
-  });
-
-  function goStep(step) {
-    if (step === 3) updateSummary();
-    document.querySelectorAll('.ob-step').forEach(s => s.classList.remove('active'));
-    document.getElementById(`step-${step}`).classList.add('active');
-    for (let i = 1; i <= 3; i++) {
-      const dot = document.getElementById(`dot-${i}`);
-      dot.classList.remove('active', 'done');
-      if (i === step)    dot.classList.add('active');
-      else if (i < step) dot.classList.add('done');
-    }
-    currentStep = step;
-  }
-
-  function updateSummary() {
-    const rate  = parseFloat(document.getElementById('hourly-rate').value)  || 0;
-    const hours = parseFloat(document.getElementById('weekly-hours').value) || 0;
-    document.getElementById('sum-pos').textContent   = selectedPosition || '–';
-    document.getElementById('sum-rate').textContent  = rate  ? `${rate.toFixed(2)} € / h`  : '–';
-    document.getElementById('sum-hours').textContent = hours ? `${hours} h / Woche` : '–';
-  }
-
-  document.getElementById('weekly-hours').addEventListener('input', updateSummary);
-
-  async function saveProfile() {
-    const rate  = parseFloat(document.getElementById('hourly-rate').value);
-    const hours = parseFloat(document.getElementById('weekly-hours').value);
-    const errEl    = document.getElementById('ob-error');
-    const errTxtEl = document.getElementById('ob-error-text');
-    errEl.classList.remove('visible');
-
-    if (!selectedPosition)        { errTxtEl.textContent = 'Bitte wähle deine Position.';                errEl.classList.add('visible'); return; }
-    if (isNaN(rate)  || rate < 0) { errTxtEl.textContent = 'Bitte einen gültigen Stundensatz eingeben.'; errEl.classList.add('visible'); return; }
-    if (isNaN(hours) || hours <= 0){ errTxtEl.textContent = 'Bitte eine gültige Wochenarbeitszeit eingeben.'; errEl.classList.add('visible'); return; }
-
-    const btn = document.getElementById('btn-save');
-    setLoading(btn, true, '', 'Wird gespeichert …');
-
-    console.info('[ROOTS] Speichere neues Profil (UPSERT) in DB...');
-
-    // HIER ANGEPASST: position statt app_role
-    const { error } = await sb.schema('users').from('profiles')
-      .upsert({
-        id: currentUserId,
-        position:     selectedPosition,
-        hourly_rate:  rate,
-        weekly_hours: hours,
-        updated_at:   new Date().toISOString()
-      });
-
-    setLoading(btn, false, 'fa-solid fa-check', 'Speichern & starten');
-
-    if (error) {
-      console.error('[ROOTS] Speicherfehler Profil:', error);
-      errTxtEl.textContent = 'Fehler beim Speichern: ' + error.message;
-      errEl.classList.add('visible');
-      showToast('Profil konnte nicht gespeichert werden', 'error');
-      return;
-    }
-
-    console.info('[ROOTS] Profil erfolgreich gespeichert!');
-    showToast('Profil eingerichtet!', 'success');
-    showDashboard();
-  }
 
   document.getElementById('modal-overlay').addEventListener('click', function (ev) {
     if (ev.target === document.getElementById('modal-overlay')) closeDashModalDirect();
