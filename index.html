@@ -502,8 +502,8 @@
     @keyframes orgFadeIn{from{opacity:0}to{opacity:1}}
     @keyframes orgLineV{to{transform:scaleY(1)}}
     @keyframes orgLineH{to{transform:scaleX(1)}}
-    .content-cards{display:flex;flex-direction:column;gap:.85rem;margin:1rem 0 1.25rem}
-    .content-card{border:1px solid var(--line);border-radius:14px;padding:1rem 1.15rem;background:var(--surface);opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease}
+    .content-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.75rem;margin:.85rem 0 1.1rem}
+    .content-card{border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;background:var(--surface);opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease}
     .content-card__icon{width:2rem;height:2rem;border-radius:8px;background:var(--brand-light);color:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:.45rem;font-size:.85rem}
     .content-card strong{display:block;font-size:.88rem;color:var(--ink);margin-bottom:.25rem}
     .content-card p{margin:0;font-size:.84rem;line-height:1.55;color:var(--muted)}
@@ -537,20 +537,37 @@
     .mod-section[open] .content-flow__step:nth-child(2){transition-delay:130ms}
     .mod-section[open] .content-flow__step:nth-child(3){transition-delay:210ms}
     .mod-section[open] .content-flow__step:nth-child(4){transition-delay:290ms}
-    .fm-principles{display:flex;flex-direction:column;gap:.85rem;margin:1rem 0 1.25rem}
-    .fm-principle{border:1px solid var(--line);border-radius:14px;padding:1.05rem 1.15rem;background:var(--surface);opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease}
+    .fm-principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.75rem;margin:.85rem 0 1.1rem}
+    .fm-principle{border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;background:var(--surface);opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease}
     .fm-principle__head{display:flex;align-items:center;gap:.55rem;margin-bottom:.45rem}
     .fm-principle__num{width:1.75rem;height:1.75rem;border-radius:50%;background:var(--brand);color:#fff;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
     .fm-principle__head strong{font-size:.88rem;color:var(--ink);line-height:1.35}
     .fm-principle p{margin:0;font-size:.84rem;line-height:1.6;color:var(--muted)}
     .fm-intro{display:grid;gap:.55rem;margin:.25rem 0 .75rem}
     .fm-intro .highlight{margin:0}
-    .fm-arch-diagram{margin:1rem 0 1.25rem;padding:1.15rem 1.25rem;border:1px solid var(--line);border-radius:14px;background:linear-gradient(135deg,var(--brand-light) 0%,var(--surface) 100%);opacity:0;transform:translateY(6px);transition:opacity .35s ease,transform .35s ease}
+    .fm-arch-diagram{margin:.85rem 0 1.1rem;padding:.9rem 1rem;border:1px solid var(--line);border-radius:12px;background:linear-gradient(135deg,var(--brand-light) 0%,var(--surface) 100%);opacity:0;transform:translateY(6px);transition:opacity .35s ease,transform .35s ease}
     .mod-section[open] .fm-arch-diagram,.module-tab-panel.is-inview .fm-arch-diagram{opacity:1;transform:none}
-    .fm-arch-diagram__row{display:flex;flex-direction:column;align-items:stretch;gap:.55rem;font-family:inherit;font-size:.82rem;line-height:1.45;color:var(--ink)}
-    .fm-arch-diagram__chip{padding:.55rem .85rem;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-weight:600;color:var(--brand-dark);text-align:center}
-    .fm-arch-diagram__arrow{display:none}
-    .fm-arch-diagram__times{display:flex;flex-wrap:wrap;gap:.45rem 1rem;margin-top:.75rem;padding-top:.75rem;border-top:1px dashed var(--line);font-size:.72rem;color:var(--muted)}
+    .fm-arch-diagram__row{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .45rem;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.72rem;line-height:1.45;color:var(--ink)}
+    .fm-arch-diagram__chip{padding:.32rem .55rem;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-weight:600;color:var(--brand-dark);white-space:nowrap}
+    .fm-arch-diagram__arrow{color:var(--muted);font-weight:400}
+    .fm-arch-diagram__times{display:flex;flex-wrap:wrap;gap:.35rem 1.2rem;margin-top:.55rem;padding-top:.55rem;border-top:1px dashed var(--line);font-size:.68rem;color:var(--muted)}
+    .fm-steps-prose{margin:1rem 0 1.25rem}
+    .fm-step-block{padding:1rem 1.1rem 1.05rem;border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-bottom:1rem}
+    .fm-step-block:last-child{margin-bottom:0}
+    .fm-step-block h4{margin:0 0 .55rem;font-size:.95rem;line-height:1.4;color:var(--ink);display:flex;align-items:baseline;justify-content:space-between;gap:.75rem;flex-wrap:wrap}
+    .fm-step-time{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--brand);white-space:nowrap}
+    .fm-step-block p{margin:0 0 .55rem;font-size:.88rem;line-height:1.7;color:var(--ink)}
+    .fm-step-block p:last-child{margin-bottom:0}
+    .fm-step-block--1{border-left:3px solid #3b82f6;background:linear-gradient(90deg,rgba(59,130,246,.05),var(--surface) 42%)}
+    .fm-step-block--2{border-left:3px solid #8b5cf6;background:linear-gradient(90deg,rgba(139,92,246,.05),var(--surface) 42%)}
+    .fm-step-block--3{border-left:3px solid #10b981;background:linear-gradient(90deg,rgba(16,185,129,.05),var(--surface) 42%)}
+    .fm-step-block .fm-bullet-list{margin:.35rem 0 .55rem;padding-left:1.1rem}
+    .fm-step-block .fm-bullet-list li{margin-bottom:.28rem;font-size:.86rem;line-height:1.6}
+    .fm-step-block .fm-example{margin-top:.45rem}
+    .ob-outlook-window--ooo{border-radius:0;box-shadow:none;border:none}
+    .ob-outlook-body--ooo{min-height:220px}
+    .ob-outlook-ribbon--ooo{background:#faf9f8}
+    .ob-outlook-rib-btn.is-active{background:#e8f4fd;border-color:#c7e0f4;color:#0f6cbd;font-weight:600}
     .fm-arch-diagram__times span{white-space:nowrap}
     .content-flow__step--fm1{border-left:3px solid #3b82f6;background:linear-gradient(90deg,rgba(59,130,246,.06),var(--status-bg) 38%)}
     .content-flow__step--fm2{border-left:3px solid #8b5cf6;background:linear-gradient(90deg,rgba(139,92,246,.06),var(--status-bg) 38%)}
@@ -1340,7 +1357,6 @@
           { id:'m-time', tab:'Arbeitszeit und Arbeitsweise', sections:[
             { title:'Kernarbeitszeiten', open:true, content:`
               <ul class="learn-list">
-                <li>Wir arbeiten in Gleitzeit</li>
                 <li>Arbeitsbeginn ist spätestens um 9:00 Uhr</li>
                 <li>Der Arbeitsbeginn kann je nach Kundenanforderung abweichen und insb. bei Reisetagen teils deutlich früher ausfallen</li>
                 <li>Das Arbeitsende ist abhängig deiner Arbeitszeitregelung, genommener Pausen und den Kundenanforderungen im Projekt</li>
@@ -1373,9 +1389,23 @@
             { title:'Unmittelbar vor dem Urlaub', content:`
               <ul class="learn-list">
                 <li>Stelle sicher, dass das restliche Projektteam über die zu erledigenden Aufgaben gebrieft ist</li>
-                <li>Erstelle eine Abwesenheitsnotiz in Outlook</li>
+                <li>Erstelle eine Abwesenheitsnotiz in Outlook (Vorlage und Anleitung unten)</li>
               </ul>
-              <div class="highlight"><pre style="margin:0;white-space:pre-wrap;font-family:inherit;font-size:.84rem;line-height:1.55">Thank you for your message. I am currently on holiday and will be out of the office from &lt;Start Date, Time&gt; to &lt;End Date, Time&gt;. During this time, I will have no access to emails.
+
+              <h3 style="margin-top:1.25rem">Vorlage: Abwesenheitsnotiz</h3>
+              <p>Passe die Platzhalter in <strong>&lt;Klammern&gt;</strong> an – Vertretung, Daten und Rückkehrtag eintragen.</p>
+              <div class="sig-copy-wrap">
+                <div class="ob-outlook-window ob-outlook-window--ooo">
+                  <div class="ob-outlook-titlebar">
+                    <span><i class="fa-regular fa-envelope-open"></i> Automatische Antworten – Microsoft Outlook</span>
+                    <div class="ob-outlook-dots"><i></i><i></i><i></i></div>
+                  </div>
+                  <div class="ob-outlook-ribbon ob-outlook-ribbon--ooo">
+                    <span class="ob-outlook-rib-btn is-active"><i class="fa-solid fa-toggle-on"></i> Automatische Antworten senden</span>
+                    <span class="ob-outlook-rib-btn"><i class="fa-regular fa-calendar"></i> Zeitraum festlegen</span>
+                  </div>
+                  <div class="ob-outlook-compose">
+                    <div class="ob-outlook-body ob-outlook-body--ooo" id="ooo-template" contenteditable="true" spellcheck="false">Thank you for your message. I am currently on holiday and will be out of the office from &lt;Start Date, Time&gt; to &lt;End Date, Time&gt;. During this time, I will have no access to emails.
 
 What this means for you:
 - Urgent matters: If your request is urgent and cannot wait until my return, please contact &lt;Colleague's Name&gt; at &lt;Colleague's Email&gt;.
@@ -1385,7 +1415,24 @@ What this means for you:
 Thank you for your patience and understanding. I will get back to you as soon as possible upon my return.
 
 Best regards,
-Signature</pre></div>
+&lt;Your Name&gt;</div>
+                  </div>
+                </div>
+                <div class="sig-copy-bar">
+                  <span class="sig-copy-hint">Text oben bearbeiten, dann kopieren und in Outlook einfügen.</span>
+                  <button type="button" class="sig-copy-btn" onclick="copyOoo()"><i class="fa-solid fa-copy" aria-hidden="true"></i> Vorlage kopieren</button>
+                </div>
+              </div>
+
+              <h3>Abwesenheitsnotiz in Outlook einrichten</h3>
+              <ol class="learn-list">
+                <li>Outlook öffnen → <strong>Einstellungen</strong> (Zahnrad) → <strong>E-Mail</strong> → <strong>Automatische Antworten</strong></li>
+                <li><strong>Automatische Antworten senden</strong> aktivieren</li>
+                <li>Zeitraum auf deinen Urlaub setzen (Start- und Enddatum)</li>
+                <li>Vorlage oben mit <strong>Vorlage kopieren</strong> übernehmen und ins Feld für externe Absender einfügen (<strong>Cmd+V</strong>)</li>
+                <li>Optional: gekürzte Version für interne Absender hinterlegen</li>
+                <li>Speichern – die Notiz läuft automatisch im gewählten Zeitraum</li>
+              </ol>
             ` },
             { title:'Arbeit im Team und mit dem Einzelnen', content:`
               <p>Bei ROOTS zählen direkte Abstimmung, Verlässlichkeit und frühzeitiges Feedback. Implizite Erwartungen:</p>
@@ -1512,70 +1559,77 @@ Signature</pre></div>
               <h3>Die First-Minute-Architektur</h3>
               <div class="fm-arch-diagram" aria-label="First-Minute-Ablauf">
                 <div class="fm-arch-diagram__row">
-                  <span class="fm-arch-diagram__chip">Time Check · 15 Sek</span>
-                  <span class="fm-arch-diagram__chip">Framing · 15 Sek</span>
-                  <span class="fm-arch-diagram__chip">Structured Summary (GPS) · 45 Sek</span>
-                  <span class="fm-arch-diagram__chip">Validation Checkpoint · 5 Sek</span>
+                  <span class="fm-arch-diagram__chip">[Time Check]</span>
+                  <span class="fm-arch-diagram__arrow">→</span>
+                  <span class="fm-arch-diagram__chip">Framing</span>
+                  <span class="fm-arch-diagram__arrow">+</span>
+                  <span class="fm-arch-diagram__chip">Structured Summary</span>
+                  <span class="fm-arch-diagram__arrow">→</span>
+                  <span class="fm-arch-diagram__chip">[Validation Checkpoint]</span>
+                  <span class="fm-arch-diagram__arrow">→</span>
                   <span class="fm-arch-diagram__chip">Conversation</span>
+                </div>
+                <div class="fm-arch-diagram__times">
+                  <span>(15 Sek)</span>
+                  <span>(15 Sek)</span>
+                  <span>(45 Sek)</span>
+                  <span>(5 Sek)</span>
                 </div>
               </div>
 
-              <div class="content-flow">
-                <div class="content-flow__step content-flow__step--fm1">
-                  <div class="content-flow__label">15 Sek</div>
-                  <div class="content-flow__body">
-                    <p><strong>1. Time Check — Habe ich den Zeitrahmen geklärt?</strong></p>
-                    <p>Die häufigste Eröffnung „Hast Du eine Minute?" ist eine Lüge — kaum ein Thema ist in 60 Sekunden inkl. Antwort durch. Stattdessen: Frage nach dem Zeitfenster, das Du wirklich brauchst, oder eher mehr.</p>
-                    <ul class="fm-bullet-list">
-                      <li>„Hast Du 10 Minuten für eine Entscheidung zum Projekt X?"</li>
-                      <li>„Brauche kurz 5 Minuten für ein FYI."</li>
-                    </ul>
-                    <p>Wenn Du fünf Minuten brauchst und nach einer Minute fragst, beschädigst Du Deinen Ruf als verlässliche Kommunikator:in.</p>
-                  </div>
+              <div class="fm-steps-prose">
+                <div class="fm-step-block fm-step-block--1">
+                  <h4>1. Time Check — Habe ich den Zeitrahmen geklärt? <span class="fm-step-time">15 Sek</span></h4>
+                  <p>Die häufigste Eröffnung „Hast Du eine Minute?" ist eine Lüge — kaum ein Thema ist in 60 Sekunden inkl. Antwort durch. Stattdessen: Frage nach dem Zeitfenster, das Du wirklich brauchst, oder eher mehr.</p>
+                  <ul class="fm-bullet-list">
+                    <li>„Hast Du 10 Minuten für eine Entscheidung zum Projekt X?"</li>
+                    <li>„Brauche kurz 5 Minuten für ein FYI."</li>
+                  </ul>
+                  <p>Wenn Du fünf Minuten brauchst und nach einer Minute fragst, beschädigst Du Deinen Ruf als verlässliche Kommunikator:in.</p>
                 </div>
-                <div class="content-flow__step content-flow__step--fm2">
-                  <div class="content-flow__label">15 Sek</div>
-                  <div class="content-flow__body">
-                    <p><strong>2. Framing — Worum geht es, was will ich, was ist die Pointe?</strong></p>
+
+                <hr class="md-hr">
+
+                <div class="fm-step-block fm-step-block--2">
+                  <h4>2. Framing — Worum geht es, was will ich, was ist die Pointe? <span class="fm-step-time">15 Sek</span></h4>
+                  <ul class="fm-bullet-list">
+                    <li><strong>Context</strong> — Worum geht es? (Projekt, Kunde, Prozess benennen)</li>
+                    <li><strong>Intent</strong> — Was will ich vom Gegenüber? (Entscheidung, Input, Genehmigung, FYI)</li>
+                    <li><strong>Key Message</strong> — Was ist die Kernaussage in einem Satz? (Muss den „Na und?"-Test bestehen)</li>
+                  </ul>
+                  <p>Beispiel:</p>
+                  <div class="fm-example">
                     <ul class="fm-bullet-list">
-                      <li><strong>Context</strong> — Worum geht es? (Projekt, Kunde, Prozess benennen)</li>
-                      <li><strong>Intent</strong> — Was will ich vom Gegenüber? (Entscheidung, Input, Genehmigung, FYI)</li>
-                      <li><strong>Key Message</strong> — Was ist die Kernaussage in einem Satz? (Muss den „Na und?"-Test bestehen)</li>
-                    </ul>
-                    <p>Beispiel:</p>
-                    <div class="fm-example">
-                      <ul class="fm-bullet-list">
-                        <li><em>Context:</em> Ich teste das LT-10-Programm.</li>
-                        <li><em>Intent:</em> Wir haben ein Problem.</li>
-                        <li><em>Key Message:</em> Wir liefern einen Monat später als geplant.</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="content-flow__step content-flow__step--fm3">
-                  <div class="content-flow__label">45 Sek</div>
-                  <div class="content-flow__body">
-                    <p><strong>3. Structured Summary — Goal, Problem, Solution</strong></p>
-                    <ul class="fm-bullet-list">
-                      <li><strong>Goal</strong> — Was wollen wir erreichen?</li>
-                      <li><strong>Problem</strong> — Was hindert uns daran?</li>
-                      <li><strong>Solution</strong> — Was schlage ich vor (oder: woran will ich Hilfe)?</li>
+                      <li><em>Context:</em> Ich teste das LT-10-Programm.</li>
+                      <li><em>Intent:</em> Wir haben ein Problem.</li>
+                      <li><em>Key Message:</em> Wir liefern einen Monat später als geplant.</li>
                     </ul>
                   </div>
                 </div>
-                <div class="content-flow__step content-flow__step--fm4">
-                  <div class="content-flow__label">5 Sek</div>
-                  <div class="content-flow__body">
-                    <p><strong>4. Validation Checkpoint — Ist jetzt der Moment dafür?</strong></p>
-                    <p>Nach Framing und Summary: Eine kurze Validierungsfrage, ob die Empfängerseite <strong>ability</strong> (Wissen/Befugnis) und <strong>availability</strong> (Zeit/Bereitschaft) hat.</p>
-                    <p>Drei mögliche Fragen:</p>
-                    <ul class="fm-bullet-list">
-                      <li>„Bist Du die richtige Person dafür?"</li>
-                      <li>„Hast Du jetzt Zeit, das zu besprechen?"</li>
-                      <li>„Hast Du Fragen zu dem, was ich gerade beschrieben habe?"</li>
-                    </ul>
-                    <p>Ohne Checkpoint riskierst Du, jemandem 10 Minuten zu erklären, was sie sowieso nicht entscheiden können — oder jemanden festzuhalten, der gerade auf dem Weg ins nächste Meeting ist.</p>
-                  </div>
+
+                <hr class="md-hr">
+
+                <div class="fm-step-block fm-step-block--3">
+                  <h4>3. Structured Summary — Goal, Problem, Solution <span class="fm-step-time">45 Sek</span></h4>
+                  <ul class="fm-bullet-list">
+                    <li><strong>Goal</strong> — Was wollen wir erreichen?</li>
+                    <li><strong>Problem</strong> — Was hindert uns daran?</li>
+                    <li><strong>Solution</strong> — Was schlage ich vor (oder: woran will ich Hilfe)?</li>
+                  </ul>
+                </div>
+
+                <hr class="md-hr">
+
+                <div class="fm-step-block fm-step-block--4">
+                  <h4>4. Validation Checkpoint — Ist jetzt der Moment dafür? <span class="fm-step-time">5 Sek</span></h4>
+                  <p>Nach Framing und Summary: Eine kurze Validierungsfrage, ob die Empfängerseite <strong>ability</strong> (Wissen/Befugnis) und <strong>availability</strong> (Zeit/Bereitschaft) hat.</p>
+                  <p>Drei mögliche Fragen:</p>
+                  <ul class="fm-bullet-list">
+                    <li>„Bist Du die richtige Person dafür?"</li>
+                    <li>„Hast Du jetzt Zeit, das zu besprechen?"</li>
+                    <li>„Hast Du Fragen zu dem, was ich gerade beschrieben habe?"</li>
+                  </ul>
+                  <p>Ohne Checkpoint riskierst Du, jemandem 10 Minuten zu erklären, was sie sowieso nicht entscheiden können — oder jemanden festzuhalten, der gerade auf dem Weg ins nächste Meeting ist.</p>
                 </div>
               </div>
             ` },
@@ -3447,6 +3501,20 @@ Signature</pre></div>
     } catch(e) {
       try { await navigator.clipboard.writeText(html); showToast('HTML in Zwischenablage kopiert', 'success'); }
       catch(e2) { showToast('Kopieren fehlgeschlagen – bitte manuell markieren', 'error'); }
+    }
+  }
+  async function copyOoo() {
+    const el = document.getElementById('ooo-template');
+    const text = el ? el.innerText.trim() : '';
+    if (!text) {
+      showToast('Kein Text zum Kopieren', 'error');
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast('Abwesenheitsnotiz kopiert – in Outlook einfügen', 'success');
+    } catch(e) {
+      showToast('Kopieren fehlgeschlagen – bitte manuell markieren', 'error');
     }
   }
   function animateTimeline(tlEl) {
