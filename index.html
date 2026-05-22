@@ -505,6 +505,18 @@
     .team-roster__avatar{width:36px;height:36px;border-radius:50%;background:var(--brand-light);color:var(--brand);font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
     .team-roster__meta strong{display:block;color:var(--ink);font-weight:600}
     .team-roster__meta span{font-size:.8rem;color:var(--muted)}
+    .mentor-card{display:flex;align-items:center;gap:1rem;padding:1rem 1.1rem;margin:.75rem 0 1rem;border:1px solid var(--line);border-radius:14px;background:var(--brand-light)}
+    .mentor-card__avatar{width:72px;height:72px;border-radius:50%;background:var(--surface);color:var(--brand);font-size:1rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+    .mentor-card__body{flex:1;min-width:0}
+    .mentor-card__body strong{display:block;font-size:1.05rem;color:var(--ink);font-weight:700;margin-bottom:.15rem}
+    .mentor-card__role{display:block;font-size:.82rem;color:var(--muted);margin-bottom:.35rem}
+    .mentor-card__email{display:inline-flex;align-items:center;gap:.35rem;font-size:.88rem;color:var(--brand);text-decoration:none;word-break:break-all}
+    .mentor-card__email:hover{text-decoration:underline}
+    .mentor-card__actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.65rem}
+    .mentor-call-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .85rem;border-radius:999px;background:var(--brand);color:#fff;font-size:.82rem;font-weight:600;text-decoration:none;border:none;cursor:pointer}
+    .mentor-call-btn:hover{filter:brightness(1.05)}
+    .mentor-call-btn.is-disabled{opacity:.45;pointer-events:none}
+    .mentor-empty{color:var(--muted);font-size:.875rem;margin:.75rem 0 1rem;padding:.85rem 1rem;border:1px dashed var(--line);border-radius:12px;background:var(--surface)}
     .org-chart{display:flex;flex-direction:column;align-items:center;padding:.75rem .5rem 1rem;min-height:260px;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
     .org-chart__root{margin-bottom:0}
     .org-node{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.55rem .85rem;text-align:center;min-width:128px;max-width:150px;opacity:0}
@@ -1289,6 +1301,9 @@
             { title:'Onboarding-Mentor & Ansprechpartner', open:true, content:`
               <p>Dein erster Point of Contact ist dein Onboarding-Mentor. Ihm/Ihr kannst du alle Fragen stellen, die dich beschäftigen.</p>
               <p>Fragen sind ausdrücklich gewünscht. Im Onboarding gibt es keine dummen Fragen. Also frage gerne fleißig drauf los.</p>
+              <div data-mentor-card>
+                <p style="color:var(--muted);font-size:.875rem;margin:.75rem 0 1rem"><i class="fa-solid fa-circle-notch fa-spin"></i> Mentor wird geladen…</p>
+              </div>
               <p>Zudem kannst du bei folgenden Themen gerne auf andere Kollegen zukommen:</p>
               <div class="mod-divider" role="separator" aria-hidden="true"></div>
               <ul class="contact-lines">
@@ -3244,6 +3259,7 @@ Signature</pre></div>
           triggerPanelAnimations(panel);
           bindInteractiveDemos(panel);
           if (subId === 'w-team') hydrateTeamRoster();
+          if (subId === 'w-mentor') hydrateMentorCard();
         }
       });
     }));
@@ -3254,6 +3270,7 @@ Signature</pre></div>
     bindInteractiveDemos(body);
     if (activePanel) activePanel.scrollTop = 0;
     if (activePanel?.dataset.sub === 'w-team') hydrateTeamRoster();
+    if (activePanel?.dataset.sub === 'w-mentor') hydrateMentorCard();
   }
 
   function escapeHtml(s) {
@@ -3301,6 +3318,60 @@ Signature</pre></div>
     }
   }
   window.onRootsTeamRefresh = hydrateTeamRoster;
+
+  function formatPhoneHref(phone) {
+    if (!phone) return '';
+    const digits = String(phone).replace(/[^\d+]/g, '');
+    return digits || '';
+  }
+
+  async function hydrateMentorCard() {
+    const el = document.querySelector('[data-mentor-card]');
+    if (!el) return;
+    const sb = window.RootsUser?._sb;
+    if (!sb || !currentUserId) {
+      el.innerHTML = '<p class="mentor-empty">Mentor konnte nicht geladen werden.</p>';
+      return;
+    }
+    try {
+      const { data: me, error: meErr } = await sb.schema('users').from('profiles')
+        .select('mentor_id')
+        .eq('id', currentUserId)
+        .maybeSingle();
+      if (meErr) throw meErr;
+      if (!me?.mentor_id) {
+        el.innerHTML = '<p class="mentor-empty">Für dein Profil ist noch kein Onboarding-Mentor hinterlegt. Dein Admin kann das in der Nutzerverwaltung einstellen.</p>';
+        return;
+      }
+      const { data: mentor, error: mentorErr } = await sb.schema('users').from('profiles')
+        .select('full_name, email, phone, avatar_url, position')
+        .eq('id', me.mentor_id)
+        .maybeSingle();
+      if (mentorErr) throw mentorErr;
+      if (!mentor) {
+        el.innerHTML = '<p class="mentor-empty">Der hinterlegte Mentor wurde nicht gefunden.</p>';
+        return;
+      }
+      const av = window.RootsUser?._avatarSpan(mentor.avatar_url, mentor.full_name, 72) || '';
+      const phoneHref = formatPhoneHref(mentor.phone);
+      const callBtn = phoneHref
+        ? `<a class="mentor-call-btn" href="tel:${escapeHtml(phoneHref)}"><i class="fa-solid fa-phone" aria-hidden="true"></i> Anrufen</a>`
+        : `<span class="mentor-call-btn is-disabled" aria-disabled="true"><i class="fa-solid fa-phone" aria-hidden="true"></i> Keine Telefonnummer</span>`;
+      el.innerHTML = `
+        <div class="mentor-card">
+          <div class="mentor-card__avatar">${av}</div>
+          <div class="mentor-card__body">
+            <strong>${escapeHtml(mentor.full_name || 'Onboarding-Mentor')}</strong>
+            ${mentor.position ? `<span class="mentor-card__role">${escapeHtml(mentor.position)}</span>` : ''}
+            ${mentor.email ? `<a class="mentor-card__email" href="mailto:${escapeHtml(mentor.email)}"><i class="fa-solid fa-envelope" aria-hidden="true"></i>${escapeHtml(mentor.email)}</a>` : ''}
+            <div class="mentor-card__actions">${callBtn}</div>
+          </div>
+        </div>`;
+    } catch (_) {
+      el.innerHTML = '<p class="mentor-empty">Mentor konnte nicht geladen werden.</p>';
+    }
+  }
+  window.onRootsMentorRefresh = hydrateMentorCard;
   function resetModuleModalFullscreen() {
     const overlay = document.getElementById('modal-overlay');
     const btn = document.getElementById('modal-fullscreen-btn');
