@@ -423,6 +423,19 @@
     .ob-content-section__body h4:first-child{margin-top:0}
     .ob-content-section__body .highlight{margin:.75rem 0 0}
     .ob-content-section__body .highlight p{margin:0}
+    .ob-content-section.is-highlighted{box-shadow:0 0 0 2px rgba(32,110,251,.22),0 8px 24px rgba(15,23,42,.06)}
+    .ob-content-section--fm1{border-left:3px solid #3b82f6}
+    .ob-content-section--fm2{border-left:3px solid #8b5cf6}
+    .ob-content-section--fm3{border-left:3px solid #10b981}
+    .ob-content-section--fm4{border-left:3px solid #f59e0b}
+    .ob-content-section__body .fm-bullet-list{margin:.35rem 0 0;padding-left:1.1rem}
+    .ob-content-section__body .fm-bullet-list li{margin-bottom:.28rem;font-size:.86rem;line-height:1.6}
+    .ob-content-section__body .fm-example{margin-top:.45rem;padding:.55rem .65rem;border-radius:8px;background:var(--brand-light);border:1px solid rgba(32,110,251,.12)}
+    .ob-fm-principles{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.65rem}
+    .ob-fm-principles li{display:flex;gap:.65rem;align-items:flex-start;font-size:.88rem;line-height:1.65;color:var(--ink)}
+    .ob-fm-principles__num{flex:0 0 1.5rem;height:1.5rem;border-radius:50%;background:var(--brand);color:#fff;font-size:.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:.1rem}
+    .ob-fm-principles strong{display:block;font-size:.86rem;margin-bottom:.15rem}
+    .ob-content-section__body .fm-framework{margin:0;border:none;border-radius:12px;padding:1rem;background:linear-gradient(145deg,var(--brand-light) 0%,#fff 55%,var(--surface) 100%);box-shadow:none}
     .ob-content-section__body .ob-demo,.ob-content-section__body .ob-meet-invite{margin-top:.85rem}
     .ob-split-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.7rem;margin:.65rem 0}
     .ob-split-card{padding:.8rem .95rem;border-radius:12px;border:1px solid var(--line)}
@@ -1661,77 +1674,80 @@ Best regards,
           ]},
           { id:'m-fm', tab:'First Minute', sections:[
             { title:'First Minute Guide', open:true, content:`
-              <div class="fm-intro">
-                <p>Die First-Minute-Methode ist eine Operationalisierung der ersten 60 Sekunden jedes beruflichen Gesprächs, jeder E-Mail und jeder Meetingeinladung.</p>
-                <div class="highlight"><p><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> Ziel: In 60 Sekunden weiß die Empfängerseite (1) worum es geht, (2) was sie tun soll, (3) was die Lösung ist, und (4) ob jetzt der richtige Moment dafür ist.</p></div>
-              </div>
+              <div class="ob-mod-panel">
+              <p class="ob-mod-lead">Die First-Minute-Methode strukturiert die ersten 60 Sekunden jedes Gesprächs, jeder E-Mail und jeder Meetingeinladung.</p>
 
-              <hr class="md-hr">
-
-              <h3>Drei Grundprinzipien</h3>
-              <div class="fm-principles">
-                <div class="fm-principle">
-                  <div class="fm-principle__head"><span class="fm-principle__num">1</span><strong>Bereite die Empfängerseite vor, bevor Du lieferst.</strong></div>
-                  <p>Niemand teilt Deinen Kontext. Was für Dich offensichtlich ist, ist für die andere Seite eine Black Box. Erst Rahmen, dann Inhalt.</p>
-                </div>
-                <div class="fm-principle">
-                  <div class="fm-principle__head"><span class="fm-principle__num">2</span><strong>Komm sofort zum Punkt.</strong></div>
-                  <p>Arbeitskolleg:innen sind beschäftigt, nicht neugierig. Eine schnelle Pointe schlägt eine elegante Hinführung.</p>
-                </div>
-                <div class="fm-principle">
-                  <div class="fm-principle__head"><span class="fm-principle__num">3</span><strong>Fokus auf Aktionen und Lösungen, nicht auf Probleme.</strong></div>
-                  <p>Meetings verbringen 80 % der Zeit mit der Vergangenheit eines Problems. Das ist verschwendete Energie. Strukturierte Kommunikation kippt das Verhältnis.</p>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-stopwatch"></i><h3>Das Ziel</h3></div>
+                <div class="ob-content-section__body">
+                  <p>In 60 Sekunden weiß die Empfängerseite:</p>
+                  <ol class="learn-list">
+                    <li>worum es geht</li>
+                    <li>was sie tun soll</li>
+                    <li>was die Lösung ist</li>
+                    <li>ob jetzt der richtige Moment dafür ist</li>
+                  </ol>
                 </div>
               </div>
 
-              <hr class="md-hr">
-
-              <h3>Die First-Minute-Architektur</h3>
-              <div class="fm-framework" data-demo="fm-framework" aria-label="First-Minute Framework">
-                <div class="fm-framework__header">
-                  <span class="fm-framework__badge"><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> 60-Sekunden-Framework</span>
-                  <p class="fm-framework__lead">Klick auf einen Schritt — die Details findest du direkt darunter.</p>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-lightbulb"></i><h3>Drei Grundprinzipien</h3></div>
+                <div class="ob-content-section__body">
+                  <ul class="ob-fm-principles">
+                    <li><span class="ob-fm-principles__num">1</span><div><strong>Bereite die Empfängerseite vor, bevor Du lieferst.</strong>Niemand teilt Deinen Kontext. Was für Dich offensichtlich ist, ist für die andere Seite eine Black Box. Erst Rahmen, dann Inhalt.</div></li>
+                    <li><span class="ob-fm-principles__num">2</span><div><strong>Komm sofort zum Punkt.</strong>Arbeitskolleg:innen sind beschäftigt, nicht neugierig. Eine schnelle Pointe schlägt eine elegante Hinführung.</div></li>
+                    <li><span class="ob-fm-principles__num">3</span><div><strong>Fokus auf Aktionen und Lösungen, nicht auf Probleme.</strong>Meetings verbringen 80&nbsp;% der Zeit mit der Vergangenheit eines Problems. Strukturierte Kommunikation kippt das Verhältnis.</div></li>
+                  </ul>
                 </div>
-                <div class="fm-framework__track">
-                  <div class="fm-framework__line" aria-hidden="true"></div>
-                  <div class="fm-framework__steps">
-                    <button type="button" class="fm-framework__step is-active" data-fm-step="1">
-                      <span class="fm-framework__node">1</span>
-                      <span class="fm-framework__label">Time Check</span>
-                      <span class="fm-framework__time">15 Sek</span>
-                    </button>
-                    <span class="fm-framework__arrow" aria-hidden="true">→</span>
-                    <div class="fm-framework__combo">
-                      <button type="button" class="fm-framework__step" data-fm-step="2">
-                        <span class="fm-framework__node">2</span>
-                        <span class="fm-framework__label">Framing</span>
-                        <span class="fm-framework__time">15 Sek</span>
-                      </button>
-                      <span class="fm-framework__plus" aria-hidden="true">+</span>
-                      <button type="button" class="fm-framework__step" data-fm-step="3">
-                        <span class="fm-framework__node">3</span>
-                        <span class="fm-framework__label">Structured Summary</span>
-                        <span class="fm-framework__time">45 Sek</span>
-                      </button>
-                    </div>
-                    <span class="fm-framework__arrow" aria-hidden="true">→</span>
-                    <button type="button" class="fm-framework__step" data-fm-step="4">
-                      <span class="fm-framework__node">4</span>
-                      <span class="fm-framework__label">Validation Checkpoint</span>
-                      <span class="fm-framework__time">5 Sek</span>
-                    </button>
-                    <span class="fm-framework__arrow" aria-hidden="true">→</span>
-                    <div class="fm-framework__step fm-framework__step--end">
-                      <span class="fm-framework__node fm-framework__node--end"><i class="fa-solid fa-comments" aria-hidden="true"></i></span>
-                      <span class="fm-framework__label">Conversation</span>
+              </div>
+
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-diagram-project"></i><h3>60-Sekunden-Framework</h3></div>
+                <div class="ob-content-section__body">
+                  <p style="margin:0 0 .85rem;font-size:.84rem;color:var(--muted)">Klick auf einen Schritt — die Details findest du direkt darunter.</p>
+                  <div class="fm-framework" data-demo="fm-framework" aria-label="First-Minute Framework">
+                    <div class="fm-framework__track">
+                      <div class="fm-framework__line" aria-hidden="true"></div>
+                      <div class="fm-framework__steps">
+                        <button type="button" class="fm-framework__step is-active" data-fm-step="1">
+                          <span class="fm-framework__node">1</span>
+                          <span class="fm-framework__label">Time Check</span>
+                          <span class="fm-framework__time">15 Sek</span>
+                        </button>
+                        <span class="fm-framework__arrow" aria-hidden="true">→</span>
+                        <div class="fm-framework__combo">
+                          <button type="button" class="fm-framework__step" data-fm-step="2">
+                            <span class="fm-framework__node">2</span>
+                            <span class="fm-framework__label">Framing</span>
+                            <span class="fm-framework__time">15 Sek</span>
+                          </button>
+                          <span class="fm-framework__plus" aria-hidden="true">+</span>
+                          <button type="button" class="fm-framework__step" data-fm-step="3">
+                            <span class="fm-framework__node">3</span>
+                            <span class="fm-framework__label">Structured Summary</span>
+                            <span class="fm-framework__time">45 Sek</span>
+                          </button>
+                        </div>
+                        <span class="fm-framework__arrow" aria-hidden="true">→</span>
+                        <button type="button" class="fm-framework__step" data-fm-step="4">
+                          <span class="fm-framework__node">4</span>
+                          <span class="fm-framework__label">Validation Checkpoint</span>
+                          <span class="fm-framework__time">5 Sek</span>
+                        </button>
+                        <span class="fm-framework__arrow" aria-hidden="true">→</span>
+                        <div class="fm-framework__step fm-framework__step--end">
+                          <span class="fm-framework__node fm-framework__node--end"><i class="fa-solid fa-comments" aria-hidden="true"></i></span>
+                          <span class="fm-framework__label">Conversation</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="fm-steps-prose">
-                <div class="fm-step-block fm-step-block--1 is-highlighted" id="fm-step-1">
-                  <h4>1. Time Check — Habe ich den Zeitrahmen geklärt? <span class="fm-step-time">15 Sek</span></h4>
+              <div class="ob-content-section ob-content-section--fm1 is-highlighted" id="fm-step-1">
+                <div class="ob-content-section__head"><i class="fa-solid fa-clock"></i><h3>1. Time Check · 15 Sek</h3></div>
+                <div class="ob-content-section__body">
                   <p>Die häufigste Eröffnung „Hast Du eine Minute?" ist eine Lüge — kaum ein Thema ist in 60 Sekunden inkl. Antwort durch. Stattdessen: Frage nach dem Zeitfenster, das Du wirklich brauchst, oder eher mehr.</p>
                   <ul class="fm-bullet-list">
                     <li>„Hast Du 10 Minuten für eine Entscheidung zum Projekt X?"</li>
@@ -1739,11 +1755,11 @@ Best regards,
                   </ul>
                   <p>Wenn Du fünf Minuten brauchst und nach einer Minute fragst, beschädigst Du Deinen Ruf als verlässliche Kommunikator:in.</p>
                 </div>
+              </div>
 
-                <hr class="md-hr">
-
-                <div class="fm-step-block fm-step-block--2" id="fm-step-2">
-                  <h4>2. Framing — Worum geht es, was will ich, was ist die Pointe? <span class="fm-step-time">15 Sek</span></h4>
+              <div class="ob-content-section ob-content-section--fm2" id="fm-step-2">
+                <div class="ob-content-section__head"><i class="fa-solid fa-bullseye"></i><h3>2. Framing · 15 Sek</h3></div>
+                <div class="ob-content-section__body">
                   <ul class="fm-bullet-list">
                     <li><strong>Context</strong> — Worum geht es? (Projekt, Kunde, Prozess benennen)</li>
                     <li><strong>Intent</strong> — Was will ich vom Gegenüber? (Entscheidung, Input, Genehmigung, FYI)</li>
@@ -1758,22 +1774,22 @@ Best regards,
                     </ul>
                   </div>
                 </div>
+              </div>
 
-                <hr class="md-hr">
-
-                <div class="fm-step-block fm-step-block--3" id="fm-step-3">
-                  <h4>3. Structured Summary — Goal, Problem, Solution <span class="fm-step-time">45 Sek</span></h4>
+              <div class="ob-content-section ob-content-section--fm3" id="fm-step-3">
+                <div class="ob-content-section__head"><i class="fa-solid fa-list-ol"></i><h3>3. Structured Summary · 45 Sek</h3></div>
+                <div class="ob-content-section__body">
                   <ul class="fm-bullet-list">
                     <li><strong>Goal</strong> — Was wollen wir erreichen?</li>
                     <li><strong>Problem</strong> — Was hindert uns daran?</li>
                     <li><strong>Solution</strong> — Was schlage ich vor (oder: woran will ich Hilfe)?</li>
                   </ul>
                 </div>
+              </div>
 
-                <hr class="md-hr">
-
-                <div class="fm-step-block fm-step-block--4" id="fm-step-4">
-                  <h4>4. Validation Checkpoint — Ist jetzt der Moment dafür? <span class="fm-step-time">5 Sek</span></h4>
+              <div class="ob-content-section ob-content-section--fm4" id="fm-step-4">
+                <div class="ob-content-section__head"><i class="fa-solid fa-circle-check"></i><h3>4. Validation Checkpoint · 5 Sek</h3></div>
+                <div class="ob-content-section__body">
                   <p>Nach Framing und Summary: Eine kurze Validierungsfrage, ob die Empfängerseite <strong>ability</strong> (Wissen/Befugnis) und <strong>availability</strong> (Zeit/Bereitschaft) hat.</p>
                   <p>Drei mögliche Fragen:</p>
                   <ul class="fm-bullet-list">
@@ -1783,6 +1799,7 @@ Best regards,
                   </ul>
                   <p>Ohne Checkpoint riskierst Du, jemandem 10 Minuten zu erklären, was sie sowieso nicht entscheiden können — oder jemanden festzuhalten, der gerade auf dem Weg ins nächste Meeting ist.</p>
                 </div>
+              </div>
               </div>
             ` },
             { title:'Structured Summary', open:true, content:`
@@ -1838,6 +1855,7 @@ Best regards,
                   </div>
                   <p style="margin-top:.75rem">Goal und Problem sind identisch — aber die Solution-Formulierung kippt das Gespräch von „Was ist passiert?" auf „Wie geht es weiter?".</p>
                 </div>
+              </div>
               </div>
             ` }
           ]},
@@ -4004,7 +4022,7 @@ Best regards,
         btn.addEventListener('click', () => {
           const step = btn.dataset.fmStep;
           wrap.querySelectorAll('[data-fm-step]').forEach(b => b.classList.toggle('is-active', b.dataset.fmStep === step));
-          panel?.querySelectorAll('.fm-step-block').forEach(block => {
+          panel?.querySelectorAll('[id^="fm-step-"]').forEach(block => {
             block.classList.toggle('is-highlighted', block.id === `fm-step-${step}`);
           });
           document.getElementById(`fm-step-${step}`)?.scrollIntoView({ behavior:'smooth', block:'nearest' });
