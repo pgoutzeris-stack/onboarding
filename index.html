@@ -435,7 +435,7 @@
     .ob-fm-principles li{display:flex;gap:.65rem;align-items:flex-start;font-size:.88rem;line-height:1.65;color:var(--ink)}
     .ob-fm-principles__num{flex:0 0 1.5rem;height:1.5rem;border-radius:50%;background:var(--brand);color:#fff;font-size:.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:.1rem}
     .ob-fm-principles strong{display:block;font-size:.86rem;margin-bottom:.15rem}
-    .ob-content-section__body .fm-framework{margin:0;border:none;border-radius:12px;padding:1rem;background:linear-gradient(145deg,var(--brand-light) 0%,#fff 55%,var(--surface) 100%);box-shadow:none}
+    .ob-content-section__body .fm-framework{margin:0;border:none;border-radius:0;padding:0;background:transparent;box-shadow:none}
     .ob-content-section__body .ob-demo,.ob-content-section__body .ob-meet-invite{margin-top:.85rem}
     .ob-split-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.7rem;margin:.65rem 0}
     .ob-split-card{padding:.8rem .95rem;border-radius:12px;border:1px solid var(--line)}
@@ -580,31 +580,51 @@
     .fm-principle p{margin:0;font-size:.84rem;line-height:1.6;color:var(--muted)}
     .fm-intro{display:grid;gap:.55rem;margin:.25rem 0 .75rem}
     .fm-intro .highlight{margin:0}
-    .fm-framework{position:relative;margin:1.1rem 0 1.35rem;padding:1.15rem 1.2rem 1.25rem;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,var(--brand-light) 0%,#fff 48%,var(--surface) 100%);box-shadow:0 10px 28px rgba(32,110,251,.08);opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease}
+    .fm-framework{position:relative;margin:0;padding:0;opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease}
     .mod-section[open] .fm-framework,.module-tab-panel.is-inview .fm-framework{opacity:1;transform:none}
-    .fm-framework__header{margin-bottom:1rem}
-    .fm-framework__badge{display:inline-flex;align-items:center;gap:.4rem;padding:.28rem .65rem;border-radius:999px;background:var(--brand);color:#fff;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
-    .fm-framework__lead{margin:.55rem 0 0;font-size:.86rem;line-height:1.6;color:var(--muted);max-width:52ch}
-    .fm-framework__track{position:relative;padding:.35rem 0 .15rem}
-    .fm-framework__line{position:absolute;left:4%;right:4%;top:1.35rem;height:3px;border-radius:999px;background:linear-gradient(90deg,#3b82f6,#8b5cf6 38%,#10b981 68%,#f59e0b);opacity:.35}
-    .fm-framework__steps{position:relative;display:flex;align-items:flex-start;justify-content:space-between;gap:.35rem;flex-wrap:wrap}
-    .fm-framework__step{display:flex;flex-direction:column;align-items:center;gap:.35rem;min-width:4.5rem;max-width:7.5rem;padding:0;border:none;background:transparent;cursor:pointer;font-family:inherit;text-align:center;transition:transform .2s ease}
-    .fm-framework__step:hover,.fm-framework__step.is-active{transform:translateY(-2px)}
-    .fm-framework__step--end{cursor:default}
-    .fm-framework__node{width:2rem;height:2rem;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff;border:2px solid var(--brand);color:var(--brand);font-size:.72rem;font-weight:800;box-shadow:0 4px 12px rgba(32,110,251,.15);transition:background .2s,border-color .2s,color .2s,box-shadow .2s}
-    .fm-framework__step.is-active .fm-framework__node,.fm-framework__step:hover .fm-framework__node{background:var(--brand);color:#fff;box-shadow:0 6px 18px rgba(32,110,251,.28)}
-    .fm-framework__node--end{font-size:.75rem}
-    .fm-framework__label{font-size:.72rem;font-weight:700;line-height:1.25;color:var(--ink)}
-    .fm-framework__time{font-size:.64rem;font-weight:700;color:var(--brand);letter-spacing:.03em}
-    .fm-framework__arrow{align-self:center;margin-top:.15rem;font-size:.95rem;font-weight:700;color:var(--muted);flex-shrink:0}
-    .fm-framework__plus{align-self:center;margin-top:.15rem;font-size:.82rem;font-weight:800;color:var(--brand);flex-shrink:0}
-    .fm-framework__combo{display:flex;align-items:flex-start;gap:.25rem;flex-wrap:wrap;justify-content:center}
-    @media (max-width:860px){
-      .fm-framework__line{display:none}
-      .fm-framework__steps{flex-direction:column;align-items:stretch}
-      .fm-framework__arrow,.fm-framework__plus{display:none}
-      .fm-framework__step,.fm-framework__combo{max-width:none;flex-direction:row;justify-content:flex-start;text-align:left;gap:.65rem;padding:.55rem .65rem;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.75)}
-      .fm-framework__label{text-align:left}
+    .fm-framework__shell{border:1px solid var(--line);border-radius:16px;background:#fff;overflow:hidden;box-shadow:0 12px 32px rgba(15,23,42,.06)}
+    .fm-framework__ribbon{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;padding:.65rem 1rem;background:linear-gradient(90deg,#0f172a 0%,#1e3a5f 100%);color:#fff}
+    .fm-framework__ribbon-title{display:flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+    .fm-framework__ribbon-title i{opacity:.85}
+    .fm-framework__ribbon-meta{font-size:.68rem;font-weight:600;opacity:.75;letter-spacing:.04em}
+    .fm-framework__body{padding:1rem 1rem 1.1rem;background:linear-gradient(180deg,var(--brand-light) 0%,#fff 42%)}
+    .fm-framework__timebar{display:flex;height:8px;border-radius:999px;overflow:hidden;margin-bottom:.55rem;box-shadow:inset 0 1px 2px rgba(15,23,42,.08)}
+    .fm-framework__timebar-seg{position:relative;min-width:0;transition:flex .25s ease}
+    .fm-framework__timebar-seg--1{flex:15;background:#3b82f6}
+    .fm-framework__timebar-seg--2{flex:15;background:#8b5cf6}
+    .fm-framework__timebar-seg--3{flex:45;background:#10b981}
+    .fm-framework__timebar-seg--4{flex:5;background:#f59e0b}
+    .fm-framework__timebar-seg.is-active{filter:brightness(1.08);box-shadow:0 0 0 2px rgba(255,255,255,.85),0 0 0 4px currentColor}
+    .fm-framework__timebar-labels{display:flex;justify-content:space-between;gap:.35rem;margin-bottom:1rem;font-size:.62rem;font-weight:700;color:var(--muted);letter-spacing:.03em}
+    .fm-framework__timebar-labels span{flex:1;text-align:center;min-width:0}
+    .fm-framework__timebar-labels span:first-child{text-align:left}
+    .fm-framework__timebar-labels span:last-child{text-align:right}
+    .fm-framework__pipeline{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,2.15fr) auto minmax(0,1fr) auto minmax(0,.85fr);align-items:stretch;gap:.45rem}
+    .fm-fw-card{display:flex;flex-direction:column;align-items:flex-start;gap:.35rem;min-width:0;padding:.75rem .7rem;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer;font-family:inherit;text-align:left;transition:border-color .2s,box-shadow .2s,transform .2s;box-shadow:0 2px 8px rgba(15,23,42,.04)}
+    .fm-fw-card:hover,.fm-fw-card.is-active{transform:translateY(-2px);box-shadow:0 8px 22px rgba(15,23,42,.1)}
+    .fm-fw-card.is-active{border-color:transparent;outline:2px solid var(--fm-accent, var(--brand));outline-offset:-1px}
+    .fm-fw-card[data-fm-step="1"]{--fm-accent:#3b82f6;border-top:3px solid #3b82f6}
+    .fm-fw-card[data-fm-step="2"]{--fm-accent:#8b5cf6;border-top:3px solid #8b5cf6}
+    .fm-fw-card[data-fm-step="3"]{--fm-accent:#10b981;border-top:3px solid #10b981}
+    .fm-fw-card[data-fm-step="4"]{--fm-accent:#f59e0b;border-top:3px solid #f59e0b}
+    .fm-fw-card__top{display:flex;align-items:center;justify-content:space-between;width:100%;gap:.35rem}
+    .fm-fw-card__num{width:1.45rem;height:1.45rem;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--fm-accent, var(--brand));color:#fff;font-size:.68rem;font-weight:800;flex-shrink:0}
+    .fm-fw-card__dur{font-size:.62rem;font-weight:800;color:var(--fm-accent, var(--brand));background:color-mix(in srgb, var(--fm-accent, var(--brand)) 12%, transparent);padding:.18rem .45rem;border-radius:999px;letter-spacing:.03em;white-space:nowrap}
+    .fm-fw-card__title{font-size:.74rem;font-weight:800;line-height:1.25;color:var(--ink)}
+    .fm-fw-card__hint{font-size:.64rem;line-height:1.35;color:var(--muted)}
+    .fm-fw-connector{display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.85rem;font-weight:700;padding-top:1.1rem;opacity:.55}
+    .fm-fw-group{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1.15fr);align-items:stretch;gap:.4rem;padding:.45rem;border:1px dashed rgba(139,92,246,.35);border-radius:14px;background:rgba(139,92,246,.05)}
+    .fm-fw-group__join{display:flex;align-items:center;justify-content:center;width:1.35rem;height:1.35rem;border-radius:50%;background:#8b5cf6;color:#fff;font-size:.72rem;font-weight:800;align-self:center;flex-shrink:0;box-shadow:0 2px 8px rgba(139,92,246,.25)}
+    .fm-fw-outcome{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;padding:.65rem .5rem;border:1px solid var(--line);border-radius:12px;background:linear-gradient(145deg,#f8fafc,#fff);text-align:center;min-height:100%}
+    .fm-fw-outcome__icon{width:2rem;height:2rem;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--brand);color:#fff;font-size:.78rem;box-shadow:0 4px 14px rgba(32,110,251,.22)}
+    .fm-fw-outcome__label{font-size:.68rem;font-weight:800;line-height:1.25;color:var(--ink)}
+    .fm-fw-outcome__sub{font-size:.58rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+    @media (max-width:900px){
+      .fm-framework__pipeline{grid-template-columns:1fr;gap:.55rem}
+      .fm-fw-connector{display:none}
+      .fm-fw-group{grid-template-columns:1fr;gap:.45rem}
+      .fm-fw-group__join{margin:0 auto}
+      .fm-fw-outcome{flex-direction:row;justify-content:flex-start;text-align:left;padding:.75rem .85rem;gap:.65rem}
     }
     .fm-steps-prose{margin:1rem 0 1.25rem}
     .fm-step-block{padding:1rem 1.1rem 1.05rem;border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-bottom:1rem}
@@ -1704,40 +1724,55 @@ Best regards,
               <div class="ob-content-section">
                 <div class="ob-content-section__head"><i class="fa-solid fa-diagram-project"></i><h3>60-Sekunden-Framework</h3></div>
                 <div class="ob-content-section__body">
-                  <p style="margin:0 0 .85rem;font-size:.84rem;color:var(--muted)">Klick auf einen Schritt — die Details findest du direkt darunter.</p>
+                  <p style="margin:0 0 .85rem;font-size:.84rem;color:var(--muted)">Klick auf eine Phase — Details scrollen direkt darunter rein.</p>
                   <div class="fm-framework" data-demo="fm-framework" aria-label="First-Minute Framework">
-                    <div class="fm-framework__track">
-                      <div class="fm-framework__line" aria-hidden="true"></div>
-                      <div class="fm-framework__steps">
-                        <button type="button" class="fm-framework__step is-active" data-fm-step="1">
-                          <span class="fm-framework__node">1</span>
-                          <span class="fm-framework__label">Time Check</span>
-                          <span class="fm-framework__time">15 Sek</span>
-                        </button>
-                        <span class="fm-framework__arrow" aria-hidden="true">→</span>
-                        <div class="fm-framework__combo">
-                          <button type="button" class="fm-framework__step" data-fm-step="2">
-                            <span class="fm-framework__node">2</span>
-                            <span class="fm-framework__label">Framing</span>
-                            <span class="fm-framework__time">15 Sek</span>
-                          </button>
-                          <span class="fm-framework__plus" aria-hidden="true">+</span>
-                          <button type="button" class="fm-framework__step" data-fm-step="3">
-                            <span class="fm-framework__node">3</span>
-                            <span class="fm-framework__label">Structured Summary</span>
-                            <span class="fm-framework__time">45 Sek</span>
-                          </button>
+                    <div class="fm-framework__shell">
+                      <div class="fm-framework__ribbon">
+                        <span class="fm-framework__ribbon-title"><i class="fa-solid fa-layer-group" aria-hidden="true"></i>4-Phasen-Modell</span>
+                        <span class="fm-framework__ribbon-meta">Time Check → Framing + Summary → Validation → Conversation</span>
+                      </div>
+                      <div class="fm-framework__body">
+                        <div class="fm-framework__timebar" aria-hidden="true">
+                          <span class="fm-framework__timebar-seg fm-framework__timebar-seg--1 is-active" data-fm-bar="1"></span>
+                          <span class="fm-framework__timebar-seg fm-framework__timebar-seg--2" data-fm-bar="2"></span>
+                          <span class="fm-framework__timebar-seg fm-framework__timebar-seg--3" data-fm-bar="3"></span>
+                          <span class="fm-framework__timebar-seg fm-framework__timebar-seg--4" data-fm-bar="4"></span>
                         </div>
-                        <span class="fm-framework__arrow" aria-hidden="true">→</span>
-                        <button type="button" class="fm-framework__step" data-fm-step="4">
-                          <span class="fm-framework__node">4</span>
-                          <span class="fm-framework__label">Validation Checkpoint</span>
-                          <span class="fm-framework__time">5 Sek</span>
-                        </button>
-                        <span class="fm-framework__arrow" aria-hidden="true">→</span>
-                        <div class="fm-framework__step fm-framework__step--end">
-                          <span class="fm-framework__node fm-framework__node--end"><i class="fa-solid fa-comments" aria-hidden="true"></i></span>
-                          <span class="fm-framework__label">Conversation</span>
+                        <div class="fm-framework__timebar-labels" aria-hidden="true">
+                          <span>15 Sek</span><span>15 Sek</span><span>45 Sek</span><span>5 Sek</span>
+                        </div>
+                        <div class="fm-framework__pipeline">
+                          <button type="button" class="fm-fw-card is-active" data-fm-step="1">
+                            <span class="fm-fw-card__top"><span class="fm-fw-card__num">1</span><span class="fm-fw-card__dur">15 Sek</span></span>
+                            <span class="fm-fw-card__title">Time Check</span>
+                            <span class="fm-fw-card__hint">Zeitfenster klären</span>
+                          </button>
+                          <span class="fm-fw-connector" aria-hidden="true">→</span>
+                          <div class="fm-fw-group">
+                            <button type="button" class="fm-fw-card" data-fm-step="2">
+                              <span class="fm-fw-card__top"><span class="fm-fw-card__num">2</span><span class="fm-fw-card__dur">15 Sek</span></span>
+                              <span class="fm-fw-card__title">Framing</span>
+                              <span class="fm-fw-card__hint">Context · Intent · Key Message</span>
+                            </button>
+                            <span class="fm-fw-group__join" aria-hidden="true">+</span>
+                            <button type="button" class="fm-fw-card" data-fm-step="3">
+                              <span class="fm-fw-card__top"><span class="fm-fw-card__num">3</span><span class="fm-fw-card__dur">45 Sek</span></span>
+                              <span class="fm-fw-card__title">Structured Summary</span>
+                              <span class="fm-fw-card__hint">Goal · Problem · Solution</span>
+                            </button>
+                          </div>
+                          <span class="fm-fw-connector" aria-hidden="true">→</span>
+                          <button type="button" class="fm-fw-card" data-fm-step="4">
+                            <span class="fm-fw-card__top"><span class="fm-fw-card__num">4</span><span class="fm-fw-card__dur">5 Sek</span></span>
+                            <span class="fm-fw-card__title">Validation</span>
+                            <span class="fm-fw-card__hint">Ability &amp; Availability prüfen</span>
+                          </button>
+                          <span class="fm-fw-connector" aria-hidden="true">→</span>
+                          <div class="fm-fw-outcome">
+                            <span class="fm-fw-outcome__icon"><i class="fa-solid fa-comments" aria-hidden="true"></i></span>
+                            <span class="fm-fw-outcome__label">Conversation</span>
+                            <span class="fm-fw-outcome__sub">Ergebnis</span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -4018,15 +4053,16 @@ Best regards,
       if (wrap.dataset.fmBound === '1') return;
       wrap.dataset.fmBound = '1';
       const panel = wrap.closest('.mod-section-body, .sub-accordion-body, .module-tab-panel');
-      wrap.querySelectorAll('[data-fm-step]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const step = btn.dataset.fmStep;
-          wrap.querySelectorAll('[data-fm-step]').forEach(b => b.classList.toggle('is-active', b.dataset.fmStep === step));
-          panel?.querySelectorAll('[id^="fm-step-"]').forEach(block => {
-            block.classList.toggle('is-highlighted', block.id === `fm-step-${step}`);
-          });
-          document.getElementById(`fm-step-${step}`)?.scrollIntoView({ behavior:'smooth', block:'nearest' });
+      const setStep = step => {
+        wrap.querySelectorAll('[data-fm-step]').forEach(b => b.classList.toggle('is-active', b.dataset.fmStep === step));
+        wrap.querySelectorAll('[data-fm-bar]').forEach(bar => bar.classList.toggle('is-active', bar.dataset.fmBar === step));
+        panel?.querySelectorAll('[id^="fm-step-"]').forEach(block => {
+          block.classList.toggle('is-highlighted', block.id === `fm-step-${step}`);
         });
+        document.getElementById(`fm-step-${step}`)?.scrollIntoView({ behavior:'smooth', block:'nearest' });
+      };
+      wrap.querySelectorAll('[data-fm-step]').forEach(btn => {
+        btn.addEventListener('click', () => setStep(btn.dataset.fmStep));
       });
     });
   }
