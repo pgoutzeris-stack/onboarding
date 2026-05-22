@@ -496,6 +496,9 @@
     .it-creds-list dt{font-weight:600;color:var(--muted);font-size:.78rem}
     .it-creds-list dd{margin:0;color:var(--ink)}
     .mod-section-body .learn-list{margin:.25rem 0 0;padding-left:1.15rem}
+    .mod-section-body .md-pre{margin:.65rem 0;padding:.75rem .85rem;background:var(--bg);border:1px solid var(--line);border-radius:8px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.78rem;line-height:1.5;white-space:pre-wrap;color:var(--ink)}
+    .mod-section-body .md-quote{margin:.55rem 0;padding:.55rem .75rem;border-left:3px solid var(--line);color:var(--muted);font-style:italic}
+    .mod-section-body .md-hr{border:none;border-top:1px solid var(--line);margin:1rem 0}
     .mod-section-body .learn-list li{margin-bottom:.4rem;font-size:.92rem;line-height:1.7;color:var(--ink)}
     .mod-section-body h3,.mod-section-body h4{font-size:.95rem;font-weight:600;color:var(--ink);margin:1.1rem 0 .5rem}
     .mod-section-body h3:first-child,.mod-section-body h4:first-child{margin-top:0}
@@ -1542,25 +1545,47 @@ Signature</pre></div>
             ` }
           ]},
           { id:'m-ki', tab:'KI', sections:[
-            { title:'KI-Nutzung: unser digitaler Mitarbeiter', open:true, content:`
-              <div class="highlight"><p><i class="fa-solid fa-robot" aria-hidden="true"></i> KI macht uns schneller, nicht schlauer. Die Verantwortung für Inhalt, Qualität und Vertraulichkeit bleibt bei uns.</p></div>
-              <p>Wir haben verbindliche <strong>AI Rules</strong> – Rechtssicherheit für uns und unsere Kunden. Diese sieben Regeln gelten für alle bei ROOTS, ohne Ausnahme.</p>
-              <h3>Regel 1 · Drei Zonen für Aufgaben</h3>
-              <div class="content-zone-grid">
-                <div class="content-zone"><strong>Zone 1 · Sicherer Datenraum</strong><span><strong>Claude Cowork</strong> – Strategie, Analyse, Deck-Erstellung, Dokumentenarbeit. Vertrauliche Kundendaten und freigegebenes Kundenmaterial gehören ausschließlich hierhin.</span></div>
-                <div class="content-zone"><strong>Zone 2 · Anonymisierte Daten</strong><span>Office- und Produktivitäts-Tools: <strong>MS Copilot</strong>, <strong>Notion</strong>.</span></div>
-                <div class="content-zone"><strong>Zone 3 · Spezial-LLMs</strong><span>Bilder und Marketingtexte (Gemini), Datenanalysen (ChatGPT), Recherche (Perplexity).</span></div>
-              </div>
-              <h3>Die 7 AI Rules</h3>
-              <div class="rule-grid">
-                <div class="rule-item"><div class="rule-num">1</div><div><strong>Wir unterteilen in 3 Zonen.</strong><p>Vertrauliche Kundendaten nur in Zone 1 (Claude Cowork). Siehe Zonen oben.</p></div></div>
-                <div class="rule-item"><div class="rule-num">2</div><div><strong>Diese drei Zonen sind freigegeben. Andere Tools nicht.</strong><p>Blanket Approvals (BDF erteilt, weitere Kunden in Vorbereitung). Jedes andere Tool ist genehmigungspflichtig – neue Anbieter, AI-Features, Erweiterungen. Freigabe durch Richard.</p></div></div>
-                <div class="rule-item"><div class="rule-num">3</div><div><strong>Kein Output ohne eigenes Urteil.</strong><p>Vor dem Prompt: Was will ich? Vor der Übergabe: Fakten, Quellen, Zahlen, Tonalität, IP-Risiken prüfen. Was du nicht selbst geprüft hast, schickst du nicht an den Kunden.</p></div></div>
-                <div class="rule-item"><div class="rule-num">4</div><div><strong>Substanziellen KI-Beitrag kennzeichnen.</strong><p>Inhaltlicher Beitrag → „generated with the use of AI". Hilfsarbeit nach Prüfung ist eigene Beratungsleistung. <em>Im Zweifel: labeln.</em></p></div></div>
-                <div class="rule-item"><div class="rule-num">5</div><div><strong>Weiterbilden, teilen, Cowork ausnutzen.</strong><p>AInauten-Programm: Lernzeit ist Arbeitszeit. In Cowork: Projekte anlegen, claude.md pflegen, Skills entwickeln. Skills, Prompts, Workflows gehören dem Team – Solo-Optimierung ist gegen die Regel.</p></div></div>
-                <div class="rule-item"><div class="rule-num">6</div><div><strong>Effizienzgewinne transparent teilen.</strong><p>Bei T&amp;M buchen wir, was wir gearbeitet haben. Spürbare Beschleunigung erst intern besprechen.</p></div></div>
-                <div class="rule-item"><div class="rule-num">7</div><div><strong>Vorfälle sofort melden.</strong><p>Datenleck, falscher Output, Verstoß gegen Tool-Regeln: Erste Adresse Manuel, Richard wird informiert. Stillschweigen schützt niemanden.</p></div></div>
-              </div>
+            { title:'KI Nutzung', open:true, content:`
+              <p>Wir bei ROOTS haben verbindliche AI Rules, die die Nutzung und den Umgang mit künstlicher Intelligenz regeln und Rechtssicherheit für uns und unsere Kunden schaffen.</p>
+              <p>KI macht uns schneller, nicht schlauer. Die Verantwortung für Inhalt, Qualität und Vertraulichkeit bleibt bei uns.<br>Diese sieben Regeln gelten für alle bei ROOTS, ohne Ausnahme!</p>
+
+              <h3>1. Wir unterteilen in 3 Zonen und Aufgaben:</h3>
+              <h4>Sicherer Datenraum</h4>
+              <p><strong>Zone 1 | Standard-LLM: Claude Cowork.</strong> Strategie, Analyse, Deck-Erstellung, Dokumenten-arbeit. Vertrauliche Kundendaten und freigegebenes Kundenmaterial gehören ausschließlich hierhin.</p>
+              <h4>Anonymisierte Daten</h4>
+              <p><strong>Zone 2 | Office- und Produktivitäts-Tools:</strong> MS Copilot, Notion</p>
+              <p><strong>Zone 3 | Spezial-LLMs:</strong> Bilder und Marketingtexte (Gemini), Datenanalysen (ChatGPT), Recherche (Perplexity)</p>
+
+              <hr class="md-hr">
+
+              <h3>2. Diese drei Zonen sind freigegeben. Andere Tools nicht.</h3>
+              <p>Für das Drei-Zonen-Setup haben wir Blanket Approvals (BDF erteilt, weitere Kunden in Vorbereitung). Jedes andere Tool ist genehmigungspflichtig. Das gilt für neue Anbieter, neue AI-Features in bekann-ten Plattformen und neue Erweiterungen unseres Tool-Stacks. Freigabe durch Richard.</p>
+
+              <hr class="md-hr">
+
+              <h3>3. Kein Output ohne eigenes Urteil und menschliche Prüfung.</h3>
+              <p>AI macht, der Mensch denkt. Vor dem Prompt: Was will ich eigentlich? Wer das nicht weiß, bekommt Brei zurück. Vor der Übergabe: Fakten, Quellen, Zahlen, Tonalität, IP-Risiken geprüft. Halluzinationen sind unser Problem, nicht das des Modells. Was du nicht selbst geprüft hast, schickst du nicht an den Kunden.</p>
+
+              <hr class="md-hr">
+
+              <h3>4. Wenn KI substanziell mitgeschrieben hat: kennzeichnen.</h3>
+              <p>Faustregel: Inhaltlicher Beitrag (Texte, Analysen, Visuals, ganze Folien) wird mit „generated with the use of AI" gelabelt. Hilfsarbeit (Recherche-Zusammenfassung, Strukturierung, Lektorat, Über-setzung), die wir aktiv prüfen und überarbeiten, ist eigene Beratungsleistung und braucht kein Label. Im Zweifel: labeln.</p>
+
+              <hr class="md-hr">
+
+              <h3>5. Weiterbilden, teilen, Cowork ausnutzen.</h3>
+              <p>AInauten-Programm: aktiv nutzen, Lernzeit ist Arbeitszeit. Wer stehen bleibt, wird abgehängt.</p>
+              <p>Was du lernst, teilst du: Insights, gute Prompts, neue Use Cases, gefundene Fallstricke gehören ins Team. In Claude Cowork sauber arbeiten: Projekte anlegen, claude.md pflegen, eigene Skills entwickeln, Templates dokumentieren. Skills, Prompts, Workflows gehören dem Team. Solo-Optimierung ist gegen die Regel.</p>
+
+              <hr class="md-hr">
+
+              <h3>6. Effizienzgewinne werden transparent geteilt.</h3>
+              <p>Bei T&amp;M-Mandaten buchen wir, was wir tatsächlich gearbeitet haben. Spürbare Beschleunigung durch KI sprechen wir erst intern an und gehen erst dann auf den Kunden zu.</p>
+
+              <hr class="md-hr">
+
+              <h3>7. Bei Vorfällen: sofort melden, nicht aussitzen.</h3>
+              <p>Datenleck, falscher Output beim Kunden, Verstoß gegen Tool-Regeln, fragwürdige Anfrage von außen. Erste Adresse: Manuel. Richard wird informiert. Schnelle Meldung schützt den Kunden, ROOTS und dich. Stillschweigen tut keins davon.</p>
             ` },
             { title:'Live-Übung: Welche KI-Zone?', content:`
               <p>Klicke auf ein Szenario – dann siehst du, welche Zone (und welches Tool) bei ROOTS richtig ist.</p>
@@ -1574,90 +1599,132 @@ Signature</pre></div>
             ` }
           ]},
           { id:'m-okr', tab:'OKRs', sections:[
-            { title:'Team Meeting JFX / OKRs – Was ist das?', open:true, content:`
-              <p>Wir verfolgen eine restriktive interne Meetingpolitik. Meetings werden je nach Projektanforderung erstellt – intern haben wir nur einen festen Team-JFX.</p>
-              <div class="highlight"><p><i class="fa-solid fa-calendar-week" aria-hidden="true"></i> Unser <strong>Team Meeting / OKR</strong> findet montags um <strong>9:30 Uhr</strong> statt.</p></div>
-              <h3>Was sind OKRs?</h3>
-              <p>OKRs bestehen aus zwei Teilen:</p>
-              <ul class="learn-list">
-                <li><strong>Objective (O)</strong> – <em>Was</em> will ich erreichen? Ein inspirierendes, outcome-orientiertes, qualitatives Ziel.</li>
-                <li><strong>Key Results (KR)</strong> – <em>Wie</em> messe ich den Fortschritt? 2–5 messbare Ergebnisse, die zeigen, ob das Objective erreicht wurde.</li>
-              </ul>
-              <p>OKRs werden quartalsweise definiert und wöchentlich überprüft. Am Ende des Zyklus wird bewertet, ob die Key Results erreicht wurden:</p>
-              <table>
-                <tr><th>Erreichung</th><th>Bewertung</th></tr>
-                <tr><td>70–100 %</td><td>Erreicht</td></tr>
-                <tr><td>40–70 %</td><td>Teilweise erreicht</td></tr>
-                <tr><td>0–40 %</td><td>Nicht erreicht</td></tr>
-              </table>
-              <p style="margin-top:.65rem"><em>Wird immer 100 % erreicht, sind die Ziele nicht ambitioniert genug.</em></p>
-            ` },
-            { title:'Meetings & Vorbereitung', content:`
-              <p>Der Ablauf unseres Montags-Meetings:</p>
+            { title:'Team Meeting', open:true, content:`
+              <p>Wir verfolgen eine restriktive interne Meetingpolitik. Meetings werden je nach Projektanforderung erstellt.<br>Intern haben wir nur einen festen Team-JFX. Unser "Team Meeting / OKR" am Montagmorgen um 9:30.</p>
+              <p>Der Ablauf ist wie folgt:</p>
               <ol class="learn-list">
                 <li>Teilen der Highlights (und Learnings) der letzten Woche</li>
                 <li>Ein Blick auf die Arbeitszeitverteilung der letzten Woche</li>
                 <li>Ein Blick auf die Umsatzergebnisse der letzten Woche</li>
                 <li>Teilen der geplanten Aufgaben für die angebrochene Woche nach OKRs</li>
               </ol>
-              <p>Zur Vorbereitung trägt jeder am <strong>Freitagabend oder Montagmorgen</strong> die geplanten Aufgaben und die Zielerreichung in das OKR-Board ein.</p>
+              <p>Zur Vorbereitung trägt jeder am Freitagabend oder Montagmorgen die geplanten Aufgaben und die Zielerreichung in das OKR-Board ein.</p>
+
+              <hr class="md-hr">
+
+              <h3>Was sind OKRs</h3>
+              <p>OKRs bestehen aus zwei Teilen:</p>
+              <ul class="learn-list">
+                <li><strong>Objective (O)</strong> – <em>Was</em> will ich erreichen? Ein inspirierendes, outcome-orientiertes, qualitatives Ziel, das Richtung und Motivation gibt.</li>
+                <li><strong>Key Results (KR)</strong> – <em>Wie</em> messe ich den Fortschritt? 2–5 messbare Ergebnisse, qualitativ, die zeigen, ob das Objective erreicht wurde.</li>
+              </ul>
+              <p>Die OKRs werden im Team quartalsweise definiert und wöchentlich überprüft. Am Ende des Zyklus wird bewertet, ob die Key Results erreicht wurden.<br>Dabei gelten 70-100% als erreicht. Wird immer 100% erreicht, sind die Ziele nicht ambitioniert genug. 40-70% gelten als teilweise erreicht und 0-40% als nicht erreicht.</p>
             ` },
-            { title:'Review', content:`
-              <p>OKRs werden quartalsweise reviewed und neu gesetzt. Dein Zielvereinbarungsdokument bildet den Rahmen für persönliche Ziele.</p>
-              <p>Im wöchentlichen JFX prüfen wir den Fortschritt der Key Results und passen Prioritäten bei Bedarf an – transparent, konkret und mit Fokus auf die nächsten Schritte.</p>
-            ` }
           ]},
           { id:'m-comm', tab:'Kommunikation', sections:[
-            { title:'Channels', open:true, content:`
+            { title:'Kommunikationskanäle', open:true, content:`
               <ul class="learn-list">
                 <li><strong>Direkt:</strong> Im Office kommunizieren wir meistens direkt über den Schreibtisch oder setzen uns kurz zu Spontanmeetings zusammen.</li>
                 <li><strong>E-Mail:</strong> ist das Hauptmedium unserer schriftlichen Kommunikation. Wir nutzen sie auch für kurze Austausche, die in anderen Unternehmen typischerweise auf MS Teams laufen. Wundere dich also nicht über sehr kurze, informelle E-Mails.</li>
-                <li><strong>MS Team:</strong> nutzen wir für den schnellen Austausch, z.&nbsp;B. zum Teilen von Links. Dokumente versenden wir eher über E-Mail. Richard verwendet nur selten MS Teams. Sende ihm lieber eine E-Mail.</li>
+                <li><strong>MS Team:</strong> nutzen wir für den schnellen Austausch, z. B. zum Teilen von Links. Dokumente versenden wir eher über E-Mail. Richard verwendet nur selten MS Teams. Sende ihm lieber eine E-Mail.</li>
                 <li><strong>WhatsApp:</strong> wird zu informellen Themen, wie dem Nachkaufen von Süßigkeiten genutzt. Zudem nutzen wir es häufig bei Reisetätigkeit zur Abstimmung.</li>
                 <li><strong>Anrufe/Team Calls:</strong> nutzen wir selten. Meistens werden diese zur Abstimmung im Home-Office oder bei Reisetätigkeit vor oder nach Kundenterminen von Richard genutzt.</li>
               </ul>
             ` },
             { title:'First Minute Guide', content:`
-              <p>Die First-Minute-Methode operationalisiert die ersten 60 Sekunden jedes beruflichen Gesprächs, jeder E-Mail und jeder Meetingeinladung.</p>
-              <div class="highlight"><p><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> <strong>Ziel:</strong> In 60 Sekunden weiß die Empfängerseite (1) worum es geht, (2) was sie tun soll, (3) was die Lösung ist, (4) ob jetzt der richtige Moment ist.</p></div>
+              <p>Die First-Minute-Methode ist eine Operationalisierung der ersten 60 Sekunden jedes beruflichen Gesprächs, jeder E-Mail und jeder Meetingeinladung.</p>
+              <p>Ziel: In 60 Sekunden weiß die Empfängerseite (1) worum es geht, (2) was sie tun soll, (3) was die Lösung ist, und (4) ob jetzt der richtige Moment dafür ist.</p>
+
+              <hr class="md-hr">
+
               <h3>Drei Grundprinzipien</h3>
               <ul class="learn-list">
-                <li><strong>Bereite die Empfängerseite vor, bevor du lieferst.</strong> Niemand teilt deinen Kontext. Was für dich offensichtlich ist, ist für die andere Seite eine Black Box. Erst Rahmen, dann Inhalt.</li>
+                <li><strong>Bereite die Empfängerseite vor, bevor Du lieferst.</strong> Niemand teilt Deinen Kontext. Was für Dich offensichtlich ist, ist für die andere Seite eine Black Box. Erst Rahmen, dann Inhalt.</li>
                 <li><strong>Komm sofort zum Punkt.</strong> Arbeitskolleg:innen sind beschäftigt, nicht neugierig. Eine schnelle Pointe schlägt eine elegante Hinführung.</li>
-                <li><strong>Fokus auf Aktionen und Lösungen, nicht auf Probleme.</strong> Meetings verbringen 80&nbsp;% der Zeit mit der Vergangenheit eines Problems. Das ist verschwendete Energie. Strukturierte Kommunikation kippt das Verhältnis.</li>
+                <li><strong>Fokus auf Aktionen und Lösungen, nicht auf Probleme.</strong> Meetings verbringen 80 % der Zeit mit der Vergangenheit eines Problems. Das ist verschwendete Energie. Strukturierte Kommunikation kippt das Verhältnis.</li>
               </ul>
+
+              <hr class="md-hr">
+
               <h3>Die First-Minute-Architektur</h3>
-              <div class="content-flow">
-                <div class="content-flow__step"><div class="content-flow__label">15 Sek</div><div class="content-flow__body"><strong>Time Check</strong><p>Die häufige Eröffnung „Hast du eine Minute?" ist eine Lüge — kaum ein Thema ist in 60 Sekunden inkl. Antwort durch. Stattdessen: Frage nach dem Zeitfenster, das du wirklich brauchst.</p><p>„Hast du 10 Minuten für eine Entscheidung zum Projekt X?" · „Brauche kurz 5 Minuten für ein FYI."</p></div></div>
-                <div class="content-flow__step"><div class="content-flow__label">15 Sek</div><div class="content-flow__body"><strong>Framing</strong><p><em>Context</em> – worum geht es? · <em>Intent</em> – Entscheidung, Input, Genehmigung, FYI? · <em>Key Message</em> – Kernaussage (Na-und-Test).</p><p><em>Beispiel LT-10:</em> Context: LT-10-Programm · Intent: Problem · Key Message: Wir liefern einen Monat später.</p></div></div>
-                <div class="content-flow__step"><div class="content-flow__label">45 Sek</div><div class="content-flow__body"><strong>Structured Summary (GPS)</strong><p><em>Goal</em> – Was wollen wir erreichen? · <em>Problem</em> – Was hindert uns? · <em>Solution</em> – Vorschlag oder Hilfe?</p></div></div>
-                <div class="content-flow__step"><div class="content-flow__label">5 Sek</div><div class="content-flow__body"><strong>Validation Checkpoint</strong><p>Ability (Wissen/Befugnis) und Availability (Zeit/Bereitschaft) prüfen:</p><ul class="learn-list" style="margin:.35rem 0 0"><li>„Bist du die richtige Person dafür?"</li><li>„Hast du jetzt Zeit, das zu besprechen?"</li><li>„Hast du Fragen zu dem, was ich gerade beschrieben habe?"</li></ul><p style="margin-top:.45rem">Ohne Checkpoint riskierst du, jemandem 10 Minuten zu erklären, was sie sowieso nicht entscheiden können — oder jemanden festzuhalten, der gerade auf dem Weg ins nächste Meeting ist.</p></div></div>
-              </div>
-              <h3>Drei Situationen — drei Solution-Typen</h3>
+              <pre class="md-pre">[Time Check]  →  Framing  +  Structured Summary  →  [Validation Checkpoint]  →  Conversation
+   (15 Sek)        (15 Sek)        (45 Sek)              (5 Sek)</pre>
+
+              <h4>1. Time Check — Habe ich den Zeitrahmen geklärt?</h4>
+              <p>Die häufigste Eröffnung „Hast Du eine Minute?" ist eine Lüge — kaum ein Thema ist in 60 Sekunden inkl. Antwort durch. Stattdessen: Frage nach dem Zeitfenster, das Du wirklich brauchst, oder eher mehr.</p>
               <ul class="learn-list">
-                <li>Du hast ein Problem und brauchst eine Lösung. → Solution = „Hilfst du mir, eine Lösung zu finden?"</li>
-                <li>Du hast ein Problem und schlägst eine Lösung vor. → Solution = dein Vorschlag.</li>
-                <li>Du hattest ein Problem und es ist gelöst. → Solution = was du getan hast und der Status.</li>
+                <li>„Hast Du 10 Minuten für eine Entscheidung zum Projekt X?"</li>
+                <li>„Brauche kurz 5 Minuten für ein FYI."</li>
               </ul>
-              <h3>Vier Ursachen für überkomplexe Zusammenfassungen</h3>
+              <p>Wenn Du fünf Minuten brauchst und nach einer Minute fragst, beschädigst Du Deinen Ruf als verlässliche Kommunikator:in.</p>
+
+              <h4>2. Framing — Worum geht es, was will ich, was ist die Pointe?</h4>
               <ul class="learn-list">
-                <li><strong>Du nimmst an, das Gegenüber denkt wie du.</strong> Es tut es nicht. Starte mit der minimalsten Information, nicht der vollständigsten.</li>
-                <li><strong>Du glaubst, Empfänger braucht alle Details, um dich zu verstehen.</strong> Tut sie nicht. Wenige Worte mit den richtigen Informationen schlagen viele Worte mit allen.</li>
+                <li><strong>Context</strong> — Worum geht es? (Projekt, Kunde, Prozess benennen)</li>
+                <li><strong>Intent</strong> — Was will ich vom Gegenüber? (Entscheidung, Input, Genehmigung, FYI)</li>
+                <li><strong>Key Message</strong> — Was ist die Kernaussage in einem Satz? (Muss den „Na und?"-Test bestehen)</li>
+              </ul>
+              <p>Beispiel:</p>
+              <ul class="learn-list">
+                <li><em>Context:</em> Ich teste das LT-10-Programm.</li>
+                <li><em>Intent:</em> Wir haben ein Problem.</li>
+                <li><em>Key Message:</em> Wir liefern einen Monat später als geplant.</li>
+              </ul>
+
+              <h4>3. Structured Summary — Goal, Problem, Solution</h4>
+              <ul class="learn-list">
+                <li><strong>Goal</strong> — Was wollen wir erreichen?</li>
+                <li><strong>Problem</strong> — Was hindert uns daran?</li>
+                <li><strong>Solution</strong> — Was schlage ich vor (oder: woran will ich Hilfe)?</li>
+              </ul>
+
+              <h4>4. Validation Checkpoint — Ist jetzt der Moment dafür?</h4>
+              <p>Nach Framing und Summary: Eine kurze Validierungsfrage, ob die Empfängerseite <strong>ability</strong> (Wissen/Befugnis) und <strong>availability</strong> (Zeit/Bereitschaft) hat.</p>
+              <p>Drei mögliche Fragen:</p>
+              <ul class="learn-list">
+                <li>„Bist Du die richtige Person dafür?"</li>
+                <li>„Hast Du jetzt Zeit, das zu besprechen?"</li>
+                <li>„Hast Du Fragen zu dem, was ich gerade beschrieben habe?"</li>
+              </ul>
+              <p>Ohne Checkpoint riskierst Du, jemandem 10 Minuten zu erklären, was sie sowieso nicht entscheiden können — oder jemanden festzuhalten, der gerade auf dem Weg ins nächste Meeting ist.</p>
+
+              <hr class="md-hr">
+
+              <h3>Structured Summary im Detail</h3>
+              <h4>Drei Situationen — drei Solution-Typen</h4>
+              <p>Jedes berufliche Gespräch fällt in eine dieser drei Kategorien:</p>
+              <ul class="learn-list">
+                <li>Du hast ein Problem und brauchst eine Lösung. → Solution = „Hilfst Du mir, eine Lösung zu finden?"</li>
+                <li>Du hast ein Problem und schlägst eine Lösung vor. → Solution = Dein Vorschlag.</li>
+                <li>Du hattest ein Problem und es ist gelöst. → Solution = Was Du getan hast und der Status.</li>
+              </ul>
+              <p>High Performers fragen häufig um Rat, kommen aber meist mit ein bis zwei Lösungsideen — nicht „leer". Der Unterschied zwischen „Mach Du das für mich" und „Was hältst Du davon?" ist signifikant.</p>
+
+              <h4>Vier Ursachen für überkomplexe Zusammenfassungen</h4>
+              <p>Wenn Deine Summary nicht in drei Sätze passt, liegt es meist an einer dieser Ursachen:</p>
+              <ul class="learn-list">
+                <li><strong>Du nimmst an, das Gegenüber denkt wie Du.</strong> Es tut es nicht. Starte mit der minimalsten Information, nicht der vollständigsten.</li>
+                <li><strong>Du glaubst, Empfänger braucht alle Details, um Dich zu verstehen.</strong> Tut sie nicht. Wenige Worte mit den richtigen Informationen schlagen viele Worte mit allen.</li>
                 <li><strong>Du beschreibst Variablen und Abhängigkeiten statt das Problem.</strong> Eine späte Lieferung ist die Lösung; die Abhängigkeit selbst ist nicht das Problem.</li>
                 <li><strong>Du fasst mehrere Probleme auf einmal zusammen.</strong> Probleme werden eines nach dem anderen gelöst — also auch eines nach dem anderen geframt.</li>
               </ul>
-              <h3>Beispiel: Komplexes Thema in 30 Sekunden</h3>
+
+              <h4>Beispiel: Komplexes Thema in 30 Sekunden</h4>
               <p>NASA-Engineers vs. Laie. Zwei Engineers erklärten 20 Minuten lang die Komplexität der ISS. Ein fachfremder Zuhörer fasste anschließend zusammen:</p>
               <ul class="learn-list">
-                <li><strong>Goal:</strong> Forschungslabor im All bauen, damit die Menschheit Wichtiges lernt</li>
-                <li><strong>Problem:</strong> Das All ist schwer zu erreichen, 100 Wege dort zu sterben</li>
-                <li><strong>Solution:</strong> Viel Geld, um die Forschenden am Leben zu halten</li>
+                <li><strong>Goal:</strong> Ein Forschungslabor im All bauen, damit die Menschheit Wichtiges lernt.</li>
+                <li><strong>Problem:</strong> Das All ist schwer zu erreichen, und es gibt 100 Wege dort zu sterben.</li>
+                <li><strong>Solution:</strong> Viel Geld ausgeben, um die Forschenden am Leben zu halten.</li>
               </ul>
-              <div class="compare-cols">
-                <div class="compare-col is-bad"><strong>Falsch (Status-Update Fertigung)</strong>„Wir hatten einen Stillstand wegen blockierter Roller, dann mussten wir die Markierungen neu machen, weil das Layout veraltet war …"</div>
-                <div class="compare-col is-good"><strong>Richtig (zukunftsgerichtet)</strong>„Wir haben den Roller-Stillstand gefunden und in 24 Stunden behoben. Produktion läuft wieder. Layout-Doku wird aktualisiert."</div>
-              </div>
-              <p>High Performers fragen häufig um Rat, kommen aber meist mit ein bis zwei Lösungsideen — nicht „leer". Der Unterschied zwischen „Mach du das für mich" und „Was hältst du davon?" ist signifikant.</p>
+              <p>30 Sekunden statt 20 Minuten — und alle haben es verstanden. Jedes Thema lässt sich so reduzieren.</p>
+
+              <h4>Solutions sind zukunftsgerichtet</h4>
+              <p>Eine Solution beendet die Summary mit Blick nach vorn. Der falsche Reflex: chronologisch erklären („Erst kam X, dann Y, dann Z"). Das fixiert die Diskussion auf die Vergangenheit.</p>
+              <p>Falsch (Status-Update Fertigung):</p>
+              <blockquote class="md-quote">„Wir hatten einen Stillstand wegen blockierter Roller, dann mussten wir die Markierungen neu machen, weil das Layout veraltet war …"</blockquote>
+              <p>Richtig:</p>
+              <blockquote class="md-quote">„Wir haben den Roller-Stillstand gefunden und in 24 Stunden behoben. Produktion läuft wieder. Layout-Doku wird aktualisiert."</blockquote>
+              <p>Goal und Problem sind identisch — aber die Solution-Formulierung kippt das ganze Gespräch von „Was ist passiert?" auf „Wie geht es weiter?".</p>
             ` },
             { title:'Live-Übung: First Minute bauen', content:`
               <p>Fülle die Felder aus – dein First-Minute-Script wird live zusammengesetzt.</p>
@@ -1676,7 +1743,7 @@ Signature</pre></div>
                 <div class="ob-fm-output"><h4>Dein Script</h4><p class="ob-fm-script" data-fm="output">Time Check → Framing → GPS → Validation – Felder ausfüllen …</p></div>
               </div>
             ` },
-            { title:'E-Mail Etikette', open:true, content:`
+            { title:'E-Mail Ethikette', open:true, content:`
               <h3>Wann (k)eine E-Mail?</h3>
               <p><strong>Keine E-Mail senden, wenn:</strong></p>
               <ul class="learn-list">
@@ -1684,7 +1751,7 @@ Signature</pre></div>
                 <li>Das Anliegen bis zum nächsten persönlichen Treffen warten kann</li>
                 <li>Es konfliktbehaftet, kontrovers oder emotional ist → persönlich, Telefon oder Video</li>
                 <li>Eine E-Mail-Diskussion zur Debatte wird → in Meeting verlagern</li>
-                <li>Es besser per Teams/Anruf passt (z.&nbsp;B. Single-Line-Updates)</li>
+                <li>Es besser per Teams/Anruf passt (z. B. Single-Line-Updates)</li>
               </ul>
               <p><strong>Stattdessen E-Mail, wenn:</strong></p>
               <ul class="learn-list">
@@ -1693,38 +1760,131 @@ Signature</pre></div>
                 <li>Mehrere Personen denselben Stand brauchen</li>
               </ul>
 
+              <hr class="md-hr">
+
               <h3>Zero Inbox</h3>
               <ul class="learn-list">
-                <li>Plane Zeiten zum Checken der E-Mails im Kalender; 90&nbsp;Min. nach Arbeitsbeginn, vor der Mittagspause und zum Ende des Arbeitstages</li>
+                <li>Plane Zeiten zum Checken der E-Mails im Kalender; 90 Min. nach Arbeitsbeginn, vor der Mittagspause und zum Ende des Arbeitstages</li>
                 <li>Gehe E-Mails immer von alt zu neu durch</li>
-                <li>Lösche unrelevante E-Mails direkt. Beantworte E-Mails die &lt; 2&nbsp;Min. dauern unmittelbar und archiviere sie danach.</li>
-                <li>Für E-Mails deren Beantwortung &gt; 2&nbsp;Min. einnehmen, flagge sie und kategorisiere sie zu <strong>Followup</strong>. Arbeite sie dann später über das Aufgabenfenster ab.</li>
+                <li>Lösche unrelevante E-Mails direkt. Beantworte E-Mails die &lt; 2 Min. dauern unmittelbar und archiviere sie danach.</li>
+                <li>Für E-Mails deren Beantwortung &gt; 2 Min. einnehmen, flagge sie und kategorisiere sie zu <strong>Followup</strong>. Arbeite sie dann später über das Aufgabenfenster ab.</li>
               </ul>
 
-              <h3>Aufbau einer E-Mail · Betreff</h3>
+              <hr class="md-hr">
+
+              <h3>Aufbau einer E-Mail</h3>
+              <h4>Betreff</h4>
               <p><strong>Betreff = Urgency (optional) + CTA + Thema + Grund</strong></p>
-              <p>z.&nbsp;B. „[URGENT] Genehmigen Veröffentlichung Zahlen Q4"</p>
+              <p>z. B. „[URGENT] Genehmigen Veröffentlichung Zahlen Q4"</p>
               <ul class="learn-list">
                 <li><strong>DE.</strong> Aktion, Unterschrift, Info, Entscheidung, Anfrage, Genehmigen, Rücksprache etc.</li>
                 <li><strong>EN.</strong> Action, Sign, Info, Decision, Request, to Approve etc.</li>
                 <li>Max. ca. 72 Zeichen, damit auf Mobile nicht abgeschnitten</li>
                 <li>Nie leer lassen</li>
-                <li>Passt die ganze E-Mail in den Betreff → in den Betreff packen (z.&nbsp;B. „Standup verschoben auf 10:00 Uhr morgen — danke!")</li>
+                <li>Passt die ganze E-Mail in den Betreff → in den Betreff packen (z. B. „Standup verschoben auf 10:00 Uhr morgen — danke!")</li>
               </ul>
-              <p><strong>Vermeide:</strong> False Urgency (überstrapaziertes [URGENT]) · Clickbait („Du wirst nicht glauben…") · Bait-and-Switch · reine Labels wie „FYI", „Update", „Here you go"</p>
+              <p><strong>Vermeide:</strong></p>
+              <ul class="learn-list">
+                <li>False Urgency (überstrapaziertes [URGENT])</li>
+                <li>Clickbait („Du wirst nicht glauben…")</li>
+                <li>Bait-and-Switch (Betreff passt nicht zum Inhalt)</li>
+                <li>Reine Labels wie „FYI", „Update", „Here you go"</li>
+              </ul>
 
-              <h3>Body</h3>
+              <h4>Body</h4>
               <p><strong>Body = Begrüßung + Topic + Action + Key message + Time frame + Anzahl Fragen</strong></p>
               <p><strong>Die ersten 5 Zeilen sind kritisch</strong> — annehmen, dass nur diese gelesen werden. Dort gehört rein:</p>
               <ol class="learn-list">
                 <li>Worum geht es?</li>
                 <li>Was soll der/die Empfänger:in tun?</li>
                 <li>Kernbotschaft</li>
-                <li>Bis wann (auch „nicht dringend" explizit nennen — Empfänger überschätzen Dringlichkeit um ~36&nbsp;%)</li>
+                <li>Bis wann (auch „nicht dringend" explizit nennen — Empfänger überschätzen Dringlichkeit um ~36 %)</li>
                 <li>Wie viele Fragen die E-Mail enthält</li>
               </ol>
-              <p>Bei mehreren Themen im Intro: Anzahl + Namen der Themen nennen, dann mit Headern strukturieren.</p>
-              <p>Fragen, Aktionen, Entscheidungen sichtbar machen: auf eigene Zeile · mit Label <strong>Frage:</strong>, <strong>Action:</strong>, <strong>Decision:</strong> · fett oder GROSSBUCHSTABEN (Plain-Text-sicher)</p>
+              <p><strong>Bei mehreren Themen im Intro:</strong> Anzahl + Namen der Themen nennen, dann mit Headern strukturieren.</p>
+
+              <hr class="md-hr">
+
+              <h3>Best Practices</h3>
+              <h4>Länge &amp; Struktur</h4>
+              <ul class="learn-list">
+                <li>So kurz wie möglich — kürzere E-Mails haben &gt; 60 % höhere Antwortrate</li>
+                <li>Faustregel: max. 2x Scrollen am Phone</li>
+                <li>Five-Sentence-Rule für Routine-E-Mails</li>
+                <li>Ein E-Mailverlauf pro Thema — an den ersten Verlauf anknüpfen</li>
+                <li>Bei langen E-Mails: Hauptpunkte in Bullet Points zusammenfassen</li>
+                <li>Whitespace zwischen Absätzen, kurze Absätze (&lt; 4 Zeilen)</li>
+                <li>Punkte statt Paragraphen, sortiert nach Priorität</li>
+                <li>Nummerierte Listen statt Bullets, wenn Empfänger auf einzelne Items antworten soll</li>
+                <li>Headers in langen E-Mails</li>
+              </ul>
+              <h4>Fragen, Aktionen, Entscheidungen sichtbar machen</h4>
+              <ul class="learn-list">
+                <li>Auf eigene Zeile setzen</li>
+                <li>Mit Label versehen: <strong>Frage:</strong>, <strong>Action:</strong>, <strong>Decision:</strong></li>
+                <li>Fett oder GROSSBUCHSTABEN als Label (Plain-Text-sicher)</li>
+                <li>Action-Format: „Wer macht was bis wann"</li>
+                <li>Decision-Format: „Wer hat was entschieden, gültig ab wann"</li>
+                <li>In Gruppen-E-Mails: Personennamen vor jeder Action nennen</li>
+              </ul>
+              <h4>Links, Anhänge, Grafiken</h4>
+              <ul class="learn-list">
+                <li>Hyperlinks statt rohe URLs (⌘ K)</li>
+                <li>Hyperlinks im Fließtext platzieren, nicht gesammelt am Ende</li>
+                <li>Anhänge benennen, Grund nennen, Inhalt zusammenfassen</li>
+                <li>Kerninfo in der E-Mail — nicht nur im Anhang</li>
+                <li>Bilder als Anhang, nicht eingebettet (Mobile-Probleme)</li>
+                <li>Grafiken nur, wenn sie Mehrwert bringen</li>
+              </ul>
+              <h4>Tonalität &amp; Sprache</h4>
+              <ul class="learn-list">
+                <li>Tonfall wird oft falsch interpretiert — kontroverse Themen nicht per E-Mail</li>
+                <li>Bei „heiklen" E-Mails: schreiben, Pause, dann senden — ggf. Zweitleser:in</li>
+                <li>Akronyme beim ersten Mal ausschreiben, besser ganz vermeiden</li>
+                <li>Beim Schreiben in Fremdsprache: kurze Sätze, einfache Worte, ggf. Hinweis ergänzen</li>
+                <li>Emojis je nach Adressat und Kontext (intern eher ja, formal nein)</li>
+                <li>Sarkasmus nur mit Klammer-Hinweis kennzeichnen („I'm joking!")</li>
+                <li>„Bitte" und „Danke" einsetzen — „Thanks!" wirkt oft echter als „Sincerely"</li>
+              </ul>
+              <h4>Reply-Regeln</h4>
+              <ul class="learn-list">
+                <li>Betreff in Replies <strong>nicht</strong> ändern (Ausnahme: falsche Tickets/IDs, RE/FW-Müll)</li>
+                <li>Reply nicht mit „Thank you" beginnen — Folgefragen werden sonst übersehen</li>
+                <li>Bei Diskussionen: <strong>Reply to points</strong> statt Top-Posting; pro Punkt einzeln antworten</li>
+                <li>Reply-All: erst alle eintragen, dann gezielt entfernen, wer nicht mehr nötig ist</li>
+                <li>Antworten zu Fragen anderer wiederholen, damit der Kontext klar ist</li>
+              </ul>
+
+              <hr class="md-hr">
+
+              <h3>Gruppen-E-Mails, Cc, Bcc</h3>
+              <h4>Gruppen-E-Mails</h4>
+              <ul class="learn-list">
+                <li>Personen nach Senioritätsgrad ordnen (z. B. CEO, Senior, Junior, ROOTS Senior, ROOTS Junior)</li>
+                <li>Pro Subgroup separat ansprechen („David &amp; Irina, bitte …")</li>
+                <li>Reply-All-Regel <strong>explizit</strong> festlegen: „Bei Fragen bitte nur an mich, nicht an alle"</li>
+              </ul>
+              <h4>Cc</h4>
+              <ul class="learn-list">
+                <li><strong>Faustregel: Cc nur für FYI-Empfänger verwenden</strong> — alle anderen Empfänger ins An-Feld</li>
+              </ul>
+              <h4>Bcc</h4>
+              <p>Nur 2 legitime Use-Cases:</p>
+              <ol class="learn-list">
+                <li>Datenschutz bei großen Verteilern (Adressen verbergen)</li>
+                <li>Kopie an sich selbst (z. B. für „Waiting"-Kategorie)</li>
+              </ol>
+
+              <hr class="md-hr">
+
+              <h3>Tipps</h3>
+              <ul class="learn-list">
+                <li>Mit <strong>@</strong> können Personen getagged werden, ihre E-Mail Adresse wird dann automatisch eingefügt</li>
+                <li>Füge dich selbst bei <strong>Bcc</strong> ein, um eine Kopie der E-Mail zu haben. Kategorisiere sie ggf. als „Waiting"</li>
+                <li>Templates für wiederkehrende E-Mails anlegen (gleiches Format = schnellere Verarbeitung)</li>
+                <li>Arbeits-E-Mails sind <strong>nicht privat</strong> — nichts schreiben, was vor Gericht oder vor Mama unangenehm wäre</li>
+                <li>Rechtschreibung &amp; Grammatik prüfen, besonders bei externen Empfängern</li>
+              </ul>
 
               <h3 style="margin-top:1.25rem">Live-Beispiel: ROOTS-E-Mail in Outlook</h3>
               <p>Bearbeite die Mail wie in Outlook. Die Checkliste prüft live den ROOTS-Standard — farbige Labels zeigen Topic (blau), Action (grün), Key Message, Time Frame und Fragen.</p>
@@ -1770,27 +1930,8 @@ Signature</pre></div>
                   </div>
                 </div>
               </div>
-
-              <h3>Best Practices</h3>
-              <p><strong>Länge &amp; Struktur:</strong> So kurz wie möglich — kürzere E-Mails haben &gt; 60&nbsp;% höhere Antwortrate · Faustregel: max. 2× Scrollen am Phone · Five-Sentence-Rule · Ein E-Mailverlauf pro Thema · Whitespace zwischen Absätzen · nummerierte Listen wenn Empfänger auf einzelne Items antworten soll</p>
-              <p><strong>Links, Anhänge:</strong> Hyperlinks statt rohe URLs (⌘&nbsp;K) · im Fließtext platzieren · Anhänge benennen, Grund nennen · Kerninfo in der E-Mail — nicht nur im Anhang</p>
-              <p><strong>Reply-Regeln:</strong> Betreff in Replies nicht ändern · Reply nicht mit „Thank you" beginnen · Reply to points statt Top-Posting · Reply-All: erst alle eintragen, dann gezielt entfernen</p>
-              <h3>Gruppen-E-Mails, Cc, Bcc</h3>
-              <ul class="learn-list">
-                <li>Personen nach Senioritätsgrad ordnen · pro Subgroup separat ansprechen · Reply-All-Regel explizit festlegen</li>
-                <li><strong>Cc:</strong> Faustregel: Cc nur für FYI-Empfänger — alle anderen ins An-Feld</li>
-                <li><strong>Bcc:</strong> nur Datenschutz bei großen Verteilern oder Kopie an sich selbst (z.&nbsp;B. „Waiting")</li>
-              </ul>
-              <h3>Tipps</h3>
-              <ul class="learn-list">
-                <li>Mit <strong>@</strong> Personen taggen — E-Mail wird automatisch eingefügt</li>
-                <li>Dich selbst bei <strong>Bcc</strong> einfügen für eine Kopie (ggf. Kategorie „Waiting")</li>
-                <li>Templates für wiederkehrende E-Mails anlegen</li>
-                <li>Arbeits-E-Mails sind <strong>nicht privat</strong> — nichts schreiben, was vor Gericht oder vor Mama unangenehm wäre</li>
-                <li>Rechtschreibung &amp; Grammatik prüfen, besonders bei externen Empfängern</li>
-              </ul>
             ` },
-            { title:'Meeting Etikette', open:true, content:`
+            { title:'Meeting Ethikette', open:true, content:`
               <h3>Braucht es überhaupt ein Meeting?</h3>
               <p><strong>Es braucht kein Meeting, wenn:</strong></p>
               <ul class="learn-list">
@@ -1798,6 +1939,8 @@ Signature</pre></div>
                 <li>Entscheidungsträger nicht zugegen sind</li>
                 <li>und sich noch Zeit mit Feedback gelassen werden kann</li>
               </ul>
+
+              <hr class="md-hr">
 
               <h3>Invitation</h3>
               <p><strong>Subject line:</strong> Context + Intent</p>
@@ -1808,7 +1951,7 @@ Signature</pre></div>
                 <li><strong>Additional Information</strong> (optional: GPS-Summary)</li>
                 <li><strong>Slides</strong></li>
               </ul>
-              <div class="highlight"><p><i class="fa-solid fa-chart-pie" aria-hidden="true"></i> Bain-Studie: Manager:innen verbringen <strong>35&nbsp;%</strong> ihres Arbeitstages in Meetings. Ludic-Studie: Nur <strong>1 von 10</strong> Personen versteht immer den Zweck eines Meetings. Klare Einladungen sind kein Nice-to-have.</p></div>
+              <div class="highlight"><p>Bain-Studie: Manager:innen verbringen 35 % ihres Arbeitstages in Meetings. Ludic-Studie: Nur 1 von 10 Personen versteht immer den Zweck eines Meetings. Klare Einladungen sind kein Nice-to-have.</p></div>
               <p><strong>Nie weiterleiten ohne eigene Einleitung.</strong> Wenn jemand zu einem Meeting hinzugefügt wird: Begrüßen + Grund nennen, sonst sitzt die Person rätselnd dort.</p>
 
               <h3>Erste Minute des Meetings</h3>
@@ -1869,14 +2012,77 @@ Signature</pre></div>
                 </div>
               </div>
             ` },
-            { title:'Präsentationen (McKinsey Chart Clinique)', content:`
+            { title:'Präsentationen', content:`
               <p>Wer eine gute Präsentation hält, überträgt eine Idee in den Kopf des Zuhörers. Das ist das einzige Ziel. Folien, Struktur und Rhetorik sind Mittel dafür — kein Selbstzweck. Präsentationen stehen und fallen mit Inhalt und Narrativ, nicht mit Design oder Bühnenpräsenz.</p>
-              <div class="pres-phases">
-                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-bullseye"></i> Phase 1 · Strategie</div><div class="pres-phase-body"><p><strong>Die drei entscheidenden Fragen:</strong> Was weiß mein Zuhörer bereits? Was soll er nach der Präsentation denken, fühlen oder tun? Welche Barrieren könnte er haben?</p><p><strong>20-Sekunden-Test:</strong> Kernbotschaft in einem Satz — sonst ist das Thema noch nicht durchdrungen.</p></div></div>
-                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-route"></i> Phase 2 · Storyline</div><div class="pres-phase-body"><p>Problem zeigen → Lösungssuche → Aha-Moment → neue Perspektive. <strong>Pyramidenprinzip:</strong> Kernaussage oben, darunter 2–5 stützende Argumente (Logical Group oder Logical Chain), darunter Belege. Logical Group = MECE · Logical Chain = „Wenn A, dann B, deshalb C".</p></div></div>
-                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-chart-column"></i> Phase 3 · Visualisierung</div><div class="pres-phase-body"><p>Grafiken statt langer Sätze · kognitive Belastung minimieren · nicht von der Folie ablesen. Diagrammwahl: Balken (Vergleiche), horizontal bei langen Labels, Kreis max. 2–3 Segmente, Linie für Zeitverläufe · keine irreführenden Achsen.</p></div></div>
-                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-microphone"></i> Phase 4 · Delivery</div><div class="pres-phase-body"><p>Du präsentierst den Inhalt, nicht die Folien · frei sprechen optimal · nicht vom Skript lesen · „Valley of Awkwardness" vermeiden · Vortrag als Audio aufnehmen und z.&nbsp;B. auf dem Nachhauseweg anhören.</p></div></div>
-              </div>
+
+              <hr class="md-hr">
+
+              <h3>Phase 1: Strategie — Ziel und Zuhörer klären</h3>
+              <p><strong>Die drei entscheidenden Fragen:</strong></p>
+              <ul class="learn-list">
+                <li>Was weiß mein Zuhörer bereits? Was interessiert ihn, was nicht?</li>
+                <li>Was soll er nach der Präsentation denken, fühlen oder tun?</li>
+                <li>Welche Barrieren könnte er haben, obwohl alles logisch klingt?</li>
+              </ul>
+              <p><strong>Zuhörer-Profil prüfen:</strong> Relevanz des Themas für ihn, Vorwissen, Rolle (Entscheider, Meinungsführer, Betroffener), Präferenzen (Facts vs. Konzepte vs. Empfehlungen), wahrscheinliche Haltung (positiv bis sehr kritisch).</p>
+              <p><strong>20-Sekunden-Test:</strong> Was ist die Kernbotschaft, wenn nur 20 Sekunden Zeit bleiben? Wenn die Antwort nicht in einem Satz kommt, ist das Thema noch nicht durchdrungen.</p>
+
+              <hr class="md-hr">
+
+              <h3>Phase 2: Storyline — den roten Faden bauen</h3>
+              <p><strong>Die Kernidee zuerst:</strong> Jede starke Präsentation hat eine einzige zentrale Idee, der alles andere untergeordnet ist. Nicht das gesamte Wissen teilen — nur das, was erklärt und mit konkreten Beispielen belebt werden kann.</p>
+              <p><strong>Narrativstruktur:</strong> Menschen folgen Geschichten, nicht Listen. Die wirkungsvollste Struktur: Problem zeigen → Lösungssuche → Aha-Moment → neue Perspektive. Nach der Präsentation soll der Zuhörer die Welt anders sehen als davor.</p>
+              <p><strong>Interesse wecken am Anfang</strong> — mögliche Einstiege:</p>
+              <ul class="learn-list">
+                <li>Problem darstellen</li>
+                <li>Widerspruch aufzeigen</li>
+                <li>These aufstellen</li>
+                <li>Best Practice zeigen</li>
+                <li>Meinungen erfragen</li>
+                <li>Forderung formulieren</li>
+              </ul>
+              <p><strong>Pyramidenprinzip (McKinsey-Logik):</strong> Bottom-up denken, top-down kommunizieren. Die Struktur folgt immer: Kernaussage oben, darunter 2–5 stützende Argumente (Logical Group oder Logical Chain), darunter die Belege.</p>
+              <ul class="learn-list">
+                <li>Logical Group: Mehrere unabhängige Gründe stützen die Aussage ("Warum?") — z.B. drei Vorteile einer Entscheidung. Müssen MECE sein: gegenseitig ausschließend, gemeinsam erschöpfend.</li>
+                <li>Logical Chain: Kausal verknüpfte Argumente ("Wenn A, dann B, deshalb C") — stärker für Empfehlungen.</li>
+              </ul>
+              <p><strong>Folienlogik:</strong> Jede Folie hat eine Kernaussage (kein Gliederungstitel), darunter die Argumente/Analysen als Beleg, optional eine Box für Next Steps oder eine Frage. Storyline zuerst nur mit Kernaussagen skizzieren — Folieninhalte erst danach befüllen.</p>
+
+              <hr class="md-hr">
+
+              <h3>Phase 3: Visualisierung — Folien die wirken</h3>
+              <p><strong>Grundprinzipien:</strong></p>
+              <ul class="learn-list">
+                <li>Grafiken und sortierte Argumente statt langer Sätze</li>
+                <li>Kognitive Belastung minimieren: Visuals müssen intuitiv lesbar sein, ohne Erklärung</li>
+                <li>Nicht von der Folie ablesen — über den Folieninhalt hinaus berichten, Anwendungsbeispiele nennen</li>
+              </ul>
+              <p><strong>Diagrammwahl:</strong></p>
+              <ul class="learn-list">
+                <li>Balkendiagramm (vertikal): Für Vergleiche mit zeitlicher Rangfolge.</li>
+                <li>Balkendiagramm (horizontal): Wenn Kategoriebeschriftungen lang sind.</li>
+                <li>Kreisdiagramm: Nur für nominal skalierte Variablen mit wenigen Ausprägungen (max. 2–3). Bei mehr Segmenten: Balken.</li>
+                <li>Liniendiagramm: Entwicklungen über Zeit.</li>
+                <li>Keine irreführenden Achsen, keine selektiven Zeiträume, die Scheinkorrelationen erzeugen.</li>
+              </ul>
+
+              <hr class="md-hr">
+
+              <h3>Phase 4: Delivery — präsentieren</h3>
+              <p><strong>Die drei Grundprinzipien:</strong></p>
+              <ul class="learn-list">
+                <li>Du präsentierst den Inhalt, nicht die Folien.</li>
+                <li>Auf den Punkt kommen: Kernbotschaft prägnant vortragen, Struktur regelmäßig wiederherstellen — besonders nach interaktiven Elementen.</li>
+                <li>Authentisch bleiben: Nicht verstellen, das fällt auf. Kleine Versprecher sind kein Problem.</li>
+              </ul>
+              <p><strong>Vortragsmodus:</strong></p>
+              <ul class="learn-list">
+                <li>Frei sprechen ist optimal. Stichpunkte als Backup erlaubt.</li>
+                <li>Nicht vom Skript oder Teleprompter lesen — zerstört die Verbindung zum Publikum sofort.</li>
+                <li>Wenn auswendig: Genug üben, bis der Flow automatisch läuft. Der "Valley of Awkwardness" (halb auswendig, halb nicht) ist der schlimmste Zustand.</li>
+                <li>Wenn keine Zeit zum Auswendiglernen: Bullet Points auf Notizzettel, Übergänge zwischen den Punkten kennen.</li>
+                <li>Tipp: Vortrag als Audio aufnehmen und z. B. auf dem Nachhauseweg anhören.</li>
+              </ul>
 
               <h3 style="margin-top:1.25rem">Live-Vergleich: Folien-Titel (PowerPoint)</h3>
               <p>Links: typischer Gliederungstitel. Rechts: ROOTS-Standard mit Kernaussage als Überschrift.</p>
@@ -1915,7 +2121,7 @@ Signature</pre></div>
                   </div>
                 </div>
               </div>
-              <p class="ob-ppt-notes"><i class="fa-solid fa-lightbulb" style="color:var(--brand)"></i> <strong>Merke:</strong> Die Überschrift ist die Botschaft. Der Chart belegt sie – nicht umgekehrt.</p>
+              <p class="ob-ppt-notes"><i class="fa-solid fa-lightbulb" style="color:var(--brand)"></i> Jede Folie hat eine Kernaussage (kein Gliederungstitel) — siehe Folienlogik im MD.</p>
             ` }
           ]}
         ]
@@ -1924,24 +2130,23 @@ Signature</pre></div>
         id:'okr', icon:'fa-solid fa-bullseye', title:'Team Meeting JFX / OKRs',
         sub:'Ziele, Reviews & Meetings',
         content:`
-          <div class="highlight"><p><i class="fa-solid fa-calendar-week" aria-hidden="true"></i> Unser festes <strong>Team Meeting / OKR</strong> findet montags um <strong>9:30 Uhr</strong> statt.</p></div>
-          <h3>Was sind OKRs?</h3>
-          <p><strong>Objectives & Key Results</strong> – unser Rahmen für Zieldefinition und Fortschrittsmessung.</p>
-          <ul>
-            <li><strong>Objective (O):</strong> Was will ich erreichen? – inspirierend, outcome-orientiert, qualitativ.</li>
-            <li><strong>Key Results (KR):</strong> Wie messe ich Fortschritt? – 2–5 messbare Ergebnisse.</li>
-          </ul>
-          <h3>Meeting-Ablauf</h3>
+          <p>Wir verfolgen eine restriktive interne Meetingpolitik. Meetings werden je nach Projektanforderung erstellt.<br>Intern haben wir nur einen festen Team-JFX. Unser "Team Meeting / OKR" am Montagmorgen um 9:30.</p>
+          <p>Der Ablauf ist wie folgt:</p>
           <ol>
-            <li>Highlights und Learnings der letzten Woche</li>
-            <li>Arbeitszeitverteilung der letzten Woche</li>
-            <li>Umsatzergebnisse der letzten Woche</li>
-            <li>Geplante Aufgaben der Woche nach OKRs</li>
+            <li>Teilen der Highlights (und Learnings) der letzten Woche</li>
+            <li>Ein Blick auf die Arbeitszeitverteilung der letzten Woche</li>
+            <li>Ein Blick auf die Umsatzergebnisse der letzten Woche</li>
+            <li>Teilen der geplanten Aufgaben für die angebrochene Woche nach OKRs</li>
           </ol>
-          <h3>Vorbereitung</h3>
-          <p>Am Freitagabend oder Montagmorgen Aufgaben und Zielerreichung im OKR-Board eintragen.</p>
-          <h3>Review & Bewertung</h3>
-          <p>OKRs werden quartalsweise reviewed. 70–100 % = erreicht · 40–70 % = teilweise · 0–40 % = nicht erreicht. Immer 100 % bedeutet: Ziele nicht ambitioniert genug.</p>
+          <p>Zur Vorbereitung trägt jeder am Freitagabend oder Montagmorgen die geplanten Aufgaben und die Zielerreichung in das OKR-Board ein.</p>
+          <hr class="md-hr">
+          <h3>Was sind OKRs</h3>
+          <p>OKRs bestehen aus zwei Teilen:</p>
+          <ul>
+            <li><strong>Objective (O)</strong> – <em>Was</em> will ich erreichen? Ein inspirierendes, outcome-orientiertes, qualitatives Ziel, das Richtung und Motivation gibt.</li>
+            <li><strong>Key Results (KR)</strong> – <em>Wie</em> messe ich den Fortschritt? 2–5 messbare Ergebnisse, qualitativ, die zeigen, ob das Objective erreicht wurde.</li>
+          </ul>
+          <p>Die OKRs werden im Team quartalsweise definiert und wöchentlich überprüft. Am Ende des Zyklus wird bewertet, ob die Key Results erreicht wurden.<br>Dabei gelten 70-100% als erreicht. Wird immer 100% erreicht, sind die Ziele nicht ambitioniert genug. 40-70% gelten als teilweise erreicht und 0-40% als nicht erreicht.</p>
         `
       },
       {
@@ -3181,14 +3386,14 @@ Signature</pre></div>
   };
 
   const FM_EXAMPLE = {
-    time: 'Hast du 10 Minuten für eine Entscheidung zum LT-10-Programm?',
-    context: 'LT-10-Programm',
-    intent: 'Wir haben ein Problem',
-    key: 'Wir liefern einen Monat später als geplant',
-    goal: 'LT-10 pünktlich ausrollen',
-    problem: 'Lieferverzug um einen Monat',
-    solution: 'Scope-Reduktion Phase 2 vorschlagen – brauche dein Go',
-    validation: 'Bist du die richtige Person für diese Entscheidung?',
+    time: 'Hast Du 10 Minuten für eine Entscheidung zum Projekt X?',
+    context: 'Ich teste das LT-10-Programm.',
+    intent: 'Wir haben ein Problem.',
+    key: 'Wir liefern einen Monat später als geplant.',
+    goal: '',
+    problem: '',
+    solution: '',
+    validation: 'Bist Du die richtige Person dafür?',
   };
 
   function getEmailBodyText(root) {
