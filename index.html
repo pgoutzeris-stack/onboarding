@@ -407,6 +407,21 @@
     .mod-section-body .placeholder{color:var(--muted);font-style:italic;font-size:.88rem}
     .mod-section-body p{margin:0 0 .75rem}
     .mod-section-body p:last-child{margin-bottom:0}
+    .mod-section-body h3:not(:first-child){margin:1.45rem 0 .75rem;padding:.6rem 0 .6rem .9rem;border-left:3px solid var(--brand);background:linear-gradient(90deg,var(--brand-light),transparent 62%);border-radius:0 10px 10px 0;font-size:1rem;color:var(--brand-dark)}
+    .mod-section-body h4{margin:1.1rem 0 .5rem;font-size:.92rem;color:var(--ink)}
+    .mod-section-body .learn-list li{margin-bottom:.42rem}
+    .ob-content-section{border:1px solid var(--line);border-radius:14px;background:var(--surface);margin:1rem 0;overflow:hidden}
+    .ob-content-section__head{display:flex;align-items:center;gap:.6rem;padding:.8rem 1.05rem;background:var(--brand-light);border-bottom:1px solid var(--line)}
+    .ob-content-section__head i{color:var(--brand);width:1rem;text-align:center;flex-shrink:0}
+    .ob-content-section__head h3{margin:0;font-size:.9rem;font-weight:700;color:var(--brand-dark);line-height:1.35}
+    .ob-content-section__body{padding:1rem 1.1rem 1.05rem}
+    .ob-content-section__body h4{margin:1rem 0 .45rem;font-size:.86rem}
+    .ob-content-section__body h4:first-child{margin-top:0}
+    .ob-split-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.7rem;margin:.65rem 0}
+    .ob-split-card{padding:.8rem .95rem;border-radius:12px;border:1px solid var(--line)}
+    .ob-split-card strong{display:block;font-size:.82rem;margin-bottom:.35rem;color:var(--ink)}
+    .ob-split-card--do{background:#ecfdf5;border-color:#bbf7d0}
+    .ob-split-card--dont{background:#fef2f2;border-color:#fecaca}
     .mod-section-body .tool-download-list{list-style:none;padding:0;margin:0 0 1rem;display:flex;flex-direction:column;gap:.55rem}
     .mod-section-body .tool-download-list a{display:inline-flex;align-items:center;gap:.45rem;color:var(--brand);font-weight:600;font-size:.92rem;text-decoration:none}
     .mod-section-body .tool-download-list a:hover{text-decoration:underline}
@@ -545,12 +560,32 @@
     .fm-principle p{margin:0;font-size:.84rem;line-height:1.6;color:var(--muted)}
     .fm-intro{display:grid;gap:.55rem;margin:.25rem 0 .75rem}
     .fm-intro .highlight{margin:0}
-    .fm-arch-diagram{margin:.85rem 0 1.1rem;padding:.9rem 1rem;border:1px solid var(--line);border-radius:12px;background:linear-gradient(135deg,var(--brand-light) 0%,var(--surface) 100%);opacity:0;transform:translateY(6px);transition:opacity .35s ease,transform .35s ease}
-    .mod-section[open] .fm-arch-diagram,.module-tab-panel.is-inview .fm-arch-diagram{opacity:1;transform:none}
-    .fm-arch-diagram__row{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .45rem;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.72rem;line-height:1.45;color:var(--ink)}
-    .fm-arch-diagram__chip{padding:.32rem .55rem;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-weight:600;color:var(--brand-dark);white-space:nowrap}
-    .fm-arch-diagram__arrow{color:var(--muted);font-weight:400}
-    .fm-arch-diagram__times{display:flex;flex-wrap:wrap;gap:.35rem 1.2rem;margin-top:.55rem;padding-top:.55rem;border-top:1px dashed var(--line);font-size:.68rem;color:var(--muted)}
+    .fm-framework{position:relative;margin:1.1rem 0 1.35rem;padding:1.15rem 1.2rem 1.25rem;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,var(--brand-light) 0%,#fff 48%,var(--surface) 100%);box-shadow:0 10px 28px rgba(32,110,251,.08);opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease}
+    .mod-section[open] .fm-framework,.module-tab-panel.is-inview .fm-framework{opacity:1;transform:none}
+    .fm-framework__header{margin-bottom:1rem}
+    .fm-framework__badge{display:inline-flex;align-items:center;gap:.4rem;padding:.28rem .65rem;border-radius:999px;background:var(--brand);color:#fff;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+    .fm-framework__lead{margin:.55rem 0 0;font-size:.86rem;line-height:1.6;color:var(--muted);max-width:52ch}
+    .fm-framework__track{position:relative;padding:.35rem 0 .15rem}
+    .fm-framework__line{position:absolute;left:4%;right:4%;top:1.35rem;height:3px;border-radius:999px;background:linear-gradient(90deg,#3b82f6,#8b5cf6 38%,#10b981 68%,#f59e0b);opacity:.35}
+    .fm-framework__steps{position:relative;display:flex;align-items:flex-start;justify-content:space-between;gap:.35rem;flex-wrap:wrap}
+    .fm-framework__step{display:flex;flex-direction:column;align-items:center;gap:.35rem;min-width:4.5rem;max-width:7.5rem;padding:0;border:none;background:transparent;cursor:pointer;font-family:inherit;text-align:center;transition:transform .2s ease}
+    .fm-framework__step:hover,.fm-framework__step.is-active{transform:translateY(-2px)}
+    .fm-framework__step--end{cursor:default}
+    .fm-framework__node{width:2rem;height:2rem;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff;border:2px solid var(--brand);color:var(--brand);font-size:.72rem;font-weight:800;box-shadow:0 4px 12px rgba(32,110,251,.15);transition:background .2s,border-color .2s,color .2s,box-shadow .2s}
+    .fm-framework__step.is-active .fm-framework__node,.fm-framework__step:hover .fm-framework__node{background:var(--brand);color:#fff;box-shadow:0 6px 18px rgba(32,110,251,.28)}
+    .fm-framework__node--end{font-size:.75rem}
+    .fm-framework__label{font-size:.72rem;font-weight:700;line-height:1.25;color:var(--ink)}
+    .fm-framework__time{font-size:.64rem;font-weight:700;color:var(--brand);letter-spacing:.03em}
+    .fm-framework__arrow{align-self:center;margin-top:.15rem;font-size:.95rem;font-weight:700;color:var(--muted);flex-shrink:0}
+    .fm-framework__plus{align-self:center;margin-top:.15rem;font-size:.82rem;font-weight:800;color:var(--brand);flex-shrink:0}
+    .fm-framework__combo{display:flex;align-items:flex-start;gap:.25rem;flex-wrap:wrap;justify-content:center}
+    @media (max-width:860px){
+      .fm-framework__line{display:none}
+      .fm-framework__steps{flex-direction:column;align-items:stretch}
+      .fm-framework__arrow,.fm-framework__plus{display:none}
+      .fm-framework__step,.fm-framework__combo{max-width:none;flex-direction:row;justify-content:flex-start;text-align:left;gap:.65rem;padding:.55rem .65rem;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.75)}
+      .fm-framework__label{text-align:left}
+    }
     .fm-steps-prose{margin:1rem 0 1.25rem}
     .fm-step-block{padding:1rem 1.1rem 1.05rem;border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-bottom:1rem}
     .fm-step-block:last-child{margin-bottom:0}
@@ -558,6 +593,7 @@
     .fm-step-time{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--brand);white-space:nowrap}
     .fm-step-block p{margin:0 0 .55rem;font-size:.88rem;line-height:1.7;color:var(--ink)}
     .fm-step-block p:last-child{margin-bottom:0}
+    .fm-step-block.is-highlighted{box-shadow:0 0 0 2px rgba(32,110,251,.22),0 8px 24px rgba(15,23,42,.06)}
     .fm-step-block--1{border-left:3px solid #3b82f6;background:linear-gradient(90deg,rgba(59,130,246,.05),var(--surface) 42%)}
     .fm-step-block--2{border-left:3px solid #8b5cf6;background:linear-gradient(90deg,rgba(139,92,246,.05),var(--surface) 42%)}
     .fm-step-block--3{border-left:3px solid #10b981;background:linear-gradient(90deg,rgba(16,185,129,.05),var(--surface) 42%)}
@@ -568,7 +604,6 @@
     .ob-outlook-body--ooo{min-height:220px}
     .ob-outlook-ribbon--ooo{background:#faf9f8}
     .ob-outlook-rib-btn.is-active{background:#e8f4fd;border-color:#c7e0f4;color:#0f6cbd;font-weight:600}
-    .fm-arch-diagram__times span{white-space:nowrap}
     .content-flow__step--fm1{border-left:3px solid #3b82f6;background:linear-gradient(90deg,rgba(59,130,246,.06),var(--status-bg) 38%)}
     .content-flow__step--fm2{border-left:3px solid #8b5cf6;background:linear-gradient(90deg,rgba(139,92,246,.06),var(--status-bg) 38%)}
     .content-flow__step--fm3{border-left:3px solid #10b981;background:linear-gradient(90deg,rgba(16,185,129,.06),var(--status-bg) 38%)}
@@ -743,7 +778,7 @@
     .compare-col.is-bad{background:#fef2f2;border:1px solid #fecaca;color:#7f1d1d}
     .compare-col.is-good{background:#ecfdf5;border:1px solid #bbf7d0;color:#14532d}
     .compare-col strong{display:block;font-size:.72rem;text-transform:uppercase;margin-bottom:.35rem;letter-spacing:.04em}
-    @media (prefers-reduced-motion:reduce){.org-node,.org-chart__vline,.org-chart__hline{animation:none!important;opacity:1!important;transform:none!important}.ob-timeline-step{opacity:1!important;transform:none!important;transition:none!important}.ob-timeline-progress{height:100%!important}.content-card,.content-flow__step,.rule-item,.pres-phase,.fm-principle,.fm-arch-diagram{opacity:1!important;transform:none!important;transition:none!important}}
+    @media (prefers-reduced-motion:reduce){.org-node,.org-chart__vline,.org-chart__hline{animation:none!important;opacity:1!important;transform:none!important}.ob-timeline-step{opacity:1!important;transform:none!important;transition:none!important}.ob-timeline-progress{height:100%!important}.content-card,.content-flow__step,.rule-item,.pres-phase,.fm-principle,.fm-framework{opacity:1!important;transform:none!important;transition:none!important}}
   </style>
 </head>
 <body>
@@ -1352,9 +1387,9 @@
       },
       {
         id:'modus', icon:'fa-solid fa-gear', title:'Modus Operandi',
-        sub:'Arbeitsweise, KI & Kommunikation',
+        sub:'Arbeitsrahmen, KI & Kommunikationsstandards',
         submodules:[
-          { id:'m-time', tab:'Arbeitszeit und Arbeitsweise', sections:[
+          { id:'m-time', tab:'Arbeitsrahmen', sections:[
             { title:'Kernarbeitszeiten', open:true, content:`
               <ul class="learn-list">
                 <li>Arbeitsbeginn ist spätestens um 9:00 Uhr</li>
@@ -1433,14 +1468,6 @@ Best regards,
                 <li>Optional: gekürzte Version für interne Absender hinterlegen</li>
                 <li>Speichern – die Notiz läuft automatisch im gewählten Zeitraum</li>
               </ol>
-            ` },
-            { title:'Arbeit im Team und mit dem Einzelnen', content:`
-              <p>Bei ROOTS zählen direkte Abstimmung, Verlässlichkeit und frühzeitiges Feedback. Implizite Erwartungen:</p>
-              <ul class="learn-list">
-                <li>Direkte Kommunikation und kurze Abstimmungswege</li>
-                <li>Feedback ist erwünscht – früh und konkret</li>
-                <li>Verlässlichkeit in Terminen, Deliverables und Follow-ups</li>
-              </ul>
             ` }
           ]},
           { id:'m-ki', tab:'KI', sections:[
@@ -1520,8 +1547,9 @@ Best regards,
               <p>Die OKRs werden im Team quartalsweise definiert und wöchentlich überprüft. Am Ende des Zyklus wird bewertet, ob die Key Results erreicht wurden.<br>Dabei gelten 70-100% als erreicht. Wird immer 100% erreicht, sind die Ziele nicht ambitioniert genug. 40-70% gelten als teilweise erreicht und 0-40% als nicht erreicht.</p>
             ` },
           ]},
-          { id:'m-comm', tab:'Kommunikation', sections:[
+          { id:'m-channels', tab:'Kanäle', sections:[
             { title:'Kommunikationskanäle', open:true, content:`
+              <p class="ob-prose-lead" style="margin:0 0 1rem;font-size:.9rem;line-height:1.65;color:var(--muted)">So erreichen wir uns bei ROOTS — je nach Anlass das passende Medium wählen.</p>
               <div class="content-cards">
                 <div class="content-card content-card--channel"><div class="content-card__icon"><i class="fa-solid fa-comments"></i></div><strong>Direkt:</strong><p>Im Office kommunizieren wir meistens direkt über den Schreibtisch oder setzen uns kurz zu Spontanmeetings zusammen.</p></div>
                 <div class="content-card content-card--channel"><div class="content-card__icon"><i class="fa-solid fa-envelope"></i></div><strong>E-Mail:</strong><p>ist das Hauptmedium unserer schriftlichen Kommunikation. Wir nutzen sie auch für kurze Austausche, die in anderen Unternehmen typischerweise auf MS Teams laufen. Wundere dich also nicht über sehr kurze, informelle E-Mails.</p></div>
@@ -1529,8 +1557,10 @@ Best regards,
                 <div class="content-card content-card--channel"><div class="content-card__icon"><i class="fa-brands fa-whatsapp"></i></div><strong>WhatsApp:</strong><p>wird zu informellen Themen, wie dem Nachkaufen von Süßigkeiten genutzt. Zudem nutzen wir es häufig bei Reisetätigkeit zur Abstimmung.</p></div>
                 <div class="content-card content-card--channel"><div class="content-card__icon"><i class="fa-solid fa-phone"></i></div><strong>Anrufe/Team Calls:</strong><p>nutzen wir selten. Meistens werden diese zur Abstimmung im Home-Office oder bei Reisetätigkeit vor oder nach Kundenterminen von Richard genutzt.</p></div>
               </div>
-            ` },
-            { title:'First Minute Guide', content:`
+            ` }
+          ]},
+          { id:'m-fm', tab:'First Minute', sections:[
+            { title:'First Minute Guide', open:true, content:`
               <div class="fm-intro">
                 <p>Die First-Minute-Methode ist eine Operationalisierung der ersten 60 Sekunden jedes beruflichen Gesprächs, jeder E-Mail und jeder Meetingeinladung.</p>
                 <div class="highlight"><p><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> Ziel: In 60 Sekunden weiß die Empfängerseite (1) worum es geht, (2) was sie tun soll, (3) was die Lösung ist, und (4) ob jetzt der richtige Moment dafür ist.</p></div>
@@ -1557,28 +1587,50 @@ Best regards,
               <hr class="md-hr">
 
               <h3>Die First-Minute-Architektur</h3>
-              <div class="fm-arch-diagram" aria-label="First-Minute-Ablauf">
-                <div class="fm-arch-diagram__row">
-                  <span class="fm-arch-diagram__chip">[Time Check]</span>
-                  <span class="fm-arch-diagram__arrow">→</span>
-                  <span class="fm-arch-diagram__chip">Framing</span>
-                  <span class="fm-arch-diagram__arrow">+</span>
-                  <span class="fm-arch-diagram__chip">Structured Summary</span>
-                  <span class="fm-arch-diagram__arrow">→</span>
-                  <span class="fm-arch-diagram__chip">[Validation Checkpoint]</span>
-                  <span class="fm-arch-diagram__arrow">→</span>
-                  <span class="fm-arch-diagram__chip">Conversation</span>
+              <div class="fm-framework" data-demo="fm-framework" aria-label="First-Minute Framework">
+                <div class="fm-framework__header">
+                  <span class="fm-framework__badge"><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> 60-Sekunden-Framework</span>
+                  <p class="fm-framework__lead">Klick auf einen Schritt — die Details findest du direkt darunter.</p>
                 </div>
-                <div class="fm-arch-diagram__times">
-                  <span>(15 Sek)</span>
-                  <span>(15 Sek)</span>
-                  <span>(45 Sek)</span>
-                  <span>(5 Sek)</span>
+                <div class="fm-framework__track">
+                  <div class="fm-framework__line" aria-hidden="true"></div>
+                  <div class="fm-framework__steps">
+                    <button type="button" class="fm-framework__step is-active" data-fm-step="1">
+                      <span class="fm-framework__node">1</span>
+                      <span class="fm-framework__label">Time Check</span>
+                      <span class="fm-framework__time">15 Sek</span>
+                    </button>
+                    <span class="fm-framework__arrow" aria-hidden="true">→</span>
+                    <div class="fm-framework__combo">
+                      <button type="button" class="fm-framework__step" data-fm-step="2">
+                        <span class="fm-framework__node">2</span>
+                        <span class="fm-framework__label">Framing</span>
+                        <span class="fm-framework__time">15 Sek</span>
+                      </button>
+                      <span class="fm-framework__plus" aria-hidden="true">+</span>
+                      <button type="button" class="fm-framework__step" data-fm-step="3">
+                        <span class="fm-framework__node">3</span>
+                        <span class="fm-framework__label">Structured Summary</span>
+                        <span class="fm-framework__time">45 Sek</span>
+                      </button>
+                    </div>
+                    <span class="fm-framework__arrow" aria-hidden="true">→</span>
+                    <button type="button" class="fm-framework__step" data-fm-step="4">
+                      <span class="fm-framework__node">4</span>
+                      <span class="fm-framework__label">Validation Checkpoint</span>
+                      <span class="fm-framework__time">5 Sek</span>
+                    </button>
+                    <span class="fm-framework__arrow" aria-hidden="true">→</span>
+                    <div class="fm-framework__step fm-framework__step--end">
+                      <span class="fm-framework__node fm-framework__node--end"><i class="fa-solid fa-comments" aria-hidden="true"></i></span>
+                      <span class="fm-framework__label">Conversation</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
               <div class="fm-steps-prose">
-                <div class="fm-step-block fm-step-block--1">
+                <div class="fm-step-block fm-step-block--1 is-highlighted" id="fm-step-1">
                   <h4>1. Time Check — Habe ich den Zeitrahmen geklärt? <span class="fm-step-time">15 Sek</span></h4>
                   <p>Die häufigste Eröffnung „Hast Du eine Minute?" ist eine Lüge — kaum ein Thema ist in 60 Sekunden inkl. Antwort durch. Stattdessen: Frage nach dem Zeitfenster, das Du wirklich brauchst, oder eher mehr.</p>
                   <ul class="fm-bullet-list">
@@ -1590,7 +1642,7 @@ Best regards,
 
                 <hr class="md-hr">
 
-                <div class="fm-step-block fm-step-block--2">
+                <div class="fm-step-block fm-step-block--2" id="fm-step-2">
                   <h4>2. Framing — Worum geht es, was will ich, was ist die Pointe? <span class="fm-step-time">15 Sek</span></h4>
                   <ul class="fm-bullet-list">
                     <li><strong>Context</strong> — Worum geht es? (Projekt, Kunde, Prozess benennen)</li>
@@ -1609,7 +1661,7 @@ Best regards,
 
                 <hr class="md-hr">
 
-                <div class="fm-step-block fm-step-block--3">
+                <div class="fm-step-block fm-step-block--3" id="fm-step-3">
                   <h4>3. Structured Summary — Goal, Problem, Solution <span class="fm-step-time">45 Sek</span></h4>
                   <ul class="fm-bullet-list">
                     <li><strong>Goal</strong> — Was wollen wir erreichen?</li>
@@ -1620,7 +1672,7 @@ Best regards,
 
                 <hr class="md-hr">
 
-                <div class="fm-step-block fm-step-block--4">
+                <div class="fm-step-block fm-step-block--4" id="fm-step-4">
                   <h4>4. Validation Checkpoint — Ist jetzt der Moment dafür? <span class="fm-step-time">5 Sek</span></h4>
                   <p>Nach Framing und Summary: Eine kurze Validierungsfrage, ob die Empfängerseite <strong>ability</strong> (Wissen/Befugnis) und <strong>availability</strong> (Zeit/Bereitschaft) hat.</p>
                   <p>Drei mögliche Fragen:</p>
@@ -1633,7 +1685,7 @@ Best regards,
                 </div>
               </div>
             ` },
-            { title:'Structured Summary', content:`
+            { title:'Structured Summary', open:true, content:`
               <h3>Structured Summary im Detail</h3>
               <h4>Drei Situationen — drei Solution-Typen</h4>
               <p>Jedes berufliche Gespräch fällt in eine dieser drei Kategorien:</p>
@@ -1669,37 +1721,35 @@ Best regards,
               <p>Richtig:</p>
               <blockquote class="md-quote">„Wir haben den Roller-Stillstand gefunden und in 24 Stunden behoben. Produktion läuft wieder. Layout-Doku wird aktualisiert."</blockquote>
               <p>Goal und Problem sind identisch — aber die Solution-Formulierung kippt das ganze Gespräch von „Was ist passiert?" auf „Wie geht es weiter?".</p>
-            ` },
+            ` }
+          ]},
+          { id:'m-email', tab:'E-Mail', sections:[
             { title:'E-Mail Ethikette', open:true, content:`
-              <h3>Wann (k)eine E-Mail?</h3>
-              <p><strong>Keine E-Mail senden, wenn:</strong></p>
-              <ul class="learn-list">
-                <li>Die Frage durch Google, Doku oder eigenes Ausprobieren beantwortbar ist</li>
-                <li>Das Anliegen bis zum nächsten persönlichen Treffen warten kann</li>
-                <li>Es konfliktbehaftet, kontrovers oder emotional ist → persönlich, Telefon oder Video</li>
-                <li>Eine E-Mail-Diskussion zur Debatte wird → in Meeting verlagern</li>
-                <li>Es besser per Teams/Anruf passt (z. B. Single-Line-Updates)</li>
-              </ul>
-              <p><strong>Stattdessen E-Mail, wenn:</strong></p>
-              <ul class="learn-list">
-                <li>Information schriftlich dokumentiert werden muss</li>
-                <li>Empfänger asynchron reagieren soll</li>
-                <li>Mehrere Personen denselben Stand brauchen</li>
-              </ul>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-circle-question"></i><h3>Wann (k)eine E-Mail?</h3></div>
+                <div class="ob-content-section__body">
+                  <div class="ob-split-cards">
+                    <div class="ob-split-card ob-split-card--dont"><strong>Nicht senden, wenn …</strong><ul class="learn-list"><li>Google, Doku oder Ausprobieren reicht</li><li>Es bis zum nächsten Treffen warten kann</li><li>Es emotional oder konfliktbehaftet ist</li><li>Eine Mail-Debatte droht</li><li>Teams/Anruf besser passt</li></ul></div>
+                    <div class="ob-split-card ob-split-card--do"><strong>Senden, wenn …</strong><ul class="learn-list"><li>Information schriftlich dokumentiert werden muss</li><li>Empfänger asynchron reagieren soll</li><li>Mehrere Personen denselben Stand brauchen</li></ul></div>
+                  </div>
+                </div>
+              </div>
 
-              <hr class="md-hr">
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-inbox"></i><h3>Zero Inbox</h3></div>
+                <div class="ob-content-section__body">
+                  <ul class="learn-list">
+                    <li>Plane Zeiten zum Checken der E-Mails im Kalender; 90 Min. nach Arbeitsbeginn, vor der Mittagspause und zum Ende des Arbeitstages</li>
+                    <li>Gehe E-Mails immer von alt zu neu durch</li>
+                    <li>Lösche unrelevante E-Mails direkt. Beantworte E-Mails die &lt; 2 Min. dauern unmittelbar und archiviere sie danach.</li>
+                    <li>Für E-Mails deren Beantwortung &gt; 2 Min. einnehmen, flagge sie und kategorisiere sie zu <strong>Followup</strong>. Arbeite sie dann später über das Aufgabenfenster ab.</li>
+                  </ul>
+                </div>
+              </div>
 
-              <h3>Zero Inbox</h3>
-              <ul class="learn-list">
-                <li>Plane Zeiten zum Checken der E-Mails im Kalender; 90 Min. nach Arbeitsbeginn, vor der Mittagspause und zum Ende des Arbeitstages</li>
-                <li>Gehe E-Mails immer von alt zu neu durch</li>
-                <li>Lösche unrelevante E-Mails direkt. Beantworte E-Mails die &lt; 2 Min. dauern unmittelbar und archiviere sie danach.</li>
-                <li>Für E-Mails deren Beantwortung &gt; 2 Min. einnehmen, flagge sie und kategorisiere sie zu <strong>Followup</strong>. Arbeite sie dann später über das Aufgabenfenster ab.</li>
-              </ul>
-
-              <hr class="md-hr">
-
-              <h3>Aufbau einer E-Mail</h3>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-pen-to-square"></i><h3>Aufbau einer E-Mail</h3></div>
+                <div class="ob-content-section__body">
               <h4>Betreff</h4>
               <p><strong>Betreff = Urgency (optional) + CTA + Thema + Grund</strong></p>
               <p>z. B. „[URGENT] Genehmigen Veröffentlichung Zahlen Q4"</p>
@@ -1729,10 +1779,12 @@ Best regards,
                 <li>Wie viele Fragen die E-Mail enthält</li>
               </ol>
               <p><strong>Bei mehreren Themen im Intro:</strong> Anzahl + Namen der Themen nennen, dann mit Headern strukturieren.</p>
+                </div>
+              </div>
 
-              <hr class="md-hr">
-
-              <h3>Best Practices</h3>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-star"></i><h3>Best Practices</h3></div>
+                <div class="ob-content-section__body">
               <h4>Länge &amp; Struktur</h4>
               <ul class="learn-list">
                 <li>So kurz wie möglich — kürzere E-Mails haben &gt; 60 % höhere Antwortrate</li>
@@ -1778,10 +1830,12 @@ Best regards,
                 <li>Reply-All: erst alle eintragen, dann gezielt entfernen, wer nicht mehr nötig ist</li>
                 <li>Antworten zu Fragen anderer wiederholen, damit der Kontext klar ist</li>
               </ul>
+                </div>
+              </div>
 
-              <hr class="md-hr">
-
-              <h3>Gruppen-E-Mails, Cc, Bcc</h3>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-users"></i><h3>Gruppen-E-Mails, Cc, Bcc</h3></div>
+                <div class="ob-content-section__body">
               <h4>Gruppen-E-Mails</h4>
               <ul class="learn-list">
                 <li>Personen nach Senioritätsgrad ordnen (z. B. CEO, Senior, Junior, ROOTS Senior, ROOTS Junior)</li>
@@ -1798,10 +1852,12 @@ Best regards,
                 <li>Datenschutz bei großen Verteilern (Adressen verbergen)</li>
                 <li>Kopie an sich selbst (z. B. für „Waiting"-Kategorie)</li>
               </ol>
+                </div>
+              </div>
 
-              <hr class="md-hr">
-
-              <h3>Tipps</h3>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-lightbulb"></i><h3>Tipps &amp; Outlook-Beispiel</h3></div>
+                <div class="ob-content-section__body">
               <ul class="learn-list">
                 <li>Mit <strong>@</strong> können Personen getagged werden, ihre E-Mail Adresse wird dann automatisch eingefügt</li>
                 <li>Füge dich selbst bei <strong>Bcc</strong> ein, um eine Kopie der E-Mail zu haben. Kategorisiere sie ggf. als „Waiting"</li>
@@ -1851,19 +1907,26 @@ Best regards,
                   </div>
                 </div>
               </div>
-            ` },
+                </div>
+              </div>
+            ` }
+          ]},
+          { id:'m-meetings', tab:'Meetings', sections:[
             { title:'Meeting Ethikette', open:true, content:`
-              <h3>Braucht es überhaupt ein Meeting?</h3>
-              <p><strong>Es braucht kein Meeting, wenn:</strong></p>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-calendar-xmark"></i><h3>Braucht es überhaupt ein Meeting?</h3></div>
+                <div class="ob-content-section__body">
               <ul class="learn-list">
                 <li>Es lediglich ein Update ist</li>
                 <li>Entscheidungsträger nicht zugegen sind</li>
                 <li>und sich noch Zeit mit Feedback gelassen werden kann</li>
               </ul>
+                </div>
+              </div>
 
-              <hr class="md-hr">
-
-              <h3>Invitation</h3>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-calendar-plus"></i><h3>Invitation</h3></div>
+                <div class="ob-content-section__body">
               <p><strong>Subject line:</strong> Context + Intent</p>
               <p><strong>Body:</strong></p>
               <ul class="learn-list">
@@ -1874,10 +1937,12 @@ Best regards,
               </ul>
               <div class="highlight"><p>Bain-Studie: Manager:innen verbringen 35 % ihres Arbeitstages in Meetings. Ludic-Studie: Nur 1 von 10 Personen versteht immer den Zweck eines Meetings. Klare Einladungen sind kein Nice-to-have.</p></div>
               <p><strong>Nie weiterleiten ohne eigene Einleitung.</strong> Wenn jemand zu einem Meeting hinzugefügt wird: Begrüßen + Grund nennen, sonst sitzt die Person rätselnd dort.</p>
+                </div>
+              </div>
 
-              <hr class="md-hr">
-
-              <h3>Erste Minute des Meetings</h3>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-play"></i><h3>Erste Minute des Meetings</h3></div>
+                <div class="ob-content-section__body">
               <p>Auch wenn Meeting Purpose und Output in der Einladung stehen — am Anfang des Meetings nochmal vorlesen.</p>
               <ul class="learn-list">
                 <li>Nicht alle haben die Einladung gelesen.</li>
@@ -1885,10 +1950,12 @@ Best regards,
                 <li>Alle starten vom selben Punkt.</li>
                 <li>Reduziert Diskussionen über die Vergangenheit eines Problems → Fokus auf Solution.</li>
               </ul>
+                </div>
+              </div>
 
-              <hr class="md-hr">
-
-              <h3>Meetingende</h3>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-flag-checkered"></i><h3>Meetingende</h3></div>
+                <div class="ob-content-section__body">
               <p>Genauso wichtig wie der Start ist das Meetingende. Es sollten immer mind. 5 Minuten am Ende für das Closing reserviert werden. Notfalls sollten Diskussionen gekappt und verschoben werden.</p>
               <ol class="learn-list">
                 <li><strong>Meeting zusammenfassen</strong> – Sehr kurz die wichtigsten besprochenen Punkte rekapitulieren.</li>
@@ -1897,7 +1964,7 @@ Best regards,
                 <li><strong>Danke sagen</strong> – Kurz die Beiträge aller anerkennen.</li>
               </ol>
 
-              <h3 style="margin-top:1.25rem">Beispiel: Kalendereinladung</h3>
+              <h4 style="margin-top:1.15rem">Beispiel: Kalendereinladung</h4>
               <p>So sieht der Einladungstext aus – schlicht wie in Outlook/Teams, ohne Zusatzfarben.</p>
               <div class="ob-meet-invite" data-demo="meeting-invite">
                 <div class="ob-teams-shell">
@@ -1921,13 +1988,17 @@ Best regards,
                   </div>
                 </div>
               </div>
-            ` },
-            { title:'Präsentationen', content:`
-              <p>Wer eine gute Präsentation hält, überträgt eine Idee in den Kopf des Zuhörers. Das ist das einzige Ziel. Folien, Struktur und Rhetorik sind Mittel dafür — kein Selbstzweck. Präsentationen stehen und fallen mit Inhalt und Narrativ, nicht mit Design oder Bühnenpräsenz.</p>
-
-              <hr class="md-hr">
-
-              <h3>Phase 1: Strategie — Ziel und Zuhörer klären</h3>
+                </div>
+              </div>
+            ` }
+          ]},
+          { id:'m-pres', tab:'Präsentationen', sections:[
+            { title:'Präsentationen', open:true, content:`
+              <p style="margin:0 0 1rem;font-size:.9rem;line-height:1.65;color:var(--muted)">Wer eine gute Präsentation hält, überträgt eine Idee in den Kopf des Zuhörers. Folien, Struktur und Rhetorik sind Mittel — kein Selbstzweck.</p>
+              <div class="pres-phases">
+              <div class="pres-phase">
+                <div class="pres-phase-head"><i class="fa-solid fa-bullseye"></i> Phase 1: Strategie</div>
+                <div class="pres-phase-body">
               <p><strong>Die drei entscheidenden Fragen:</strong></p>
               <ul class="learn-list">
                 <li>Was weiß mein Zuhörer bereits? Was interessiert ihn, was nicht?</li>
@@ -1936,10 +2007,11 @@ Best regards,
               </ul>
               <p><strong>Zuhörer-Profil prüfen:</strong> Relevanz des Themas für ihn, Vorwissen, Rolle (Entscheider, Meinungsführer, Betroffener), Präferenzen (Facts vs. Konzepte vs. Empfehlungen), wahrscheinliche Haltung (positiv bis sehr kritisch).</p>
               <p><strong>20-Sekunden-Test:</strong> Was ist die Kernbotschaft, wenn nur 20 Sekunden Zeit bleiben? Wenn die Antwort nicht in einem Satz kommt, ist das Thema noch nicht durchdrungen.</p>
-
-              <hr class="md-hr">
-
-              <h3>Phase 2: Storyline — den roten Faden bauen</h3>
+                </div>
+              </div>
+              <div class="pres-phase">
+                <div class="pres-phase-head"><i class="fa-solid fa-route"></i> Phase 2: Storyline</div>
+                <div class="pres-phase-body">
               <p><strong>Die Kernidee zuerst:</strong> Jede starke Präsentation hat eine einzige zentrale Idee, der alles andere untergeordnet ist. Nicht das gesamte Wissen teilen — nur das, was erklärt und mit konkreten Beispielen belebt werden kann.</p>
               <p><strong>Narrativstruktur:</strong> Menschen folgen Geschichten, nicht Listen. Die wirkungsvollste Struktur: Problem zeigen → Lösungssuche → Aha-Moment → neue Perspektive. Nach der Präsentation soll der Zuhörer die Welt anders sehen als davor.</p>
               <p><strong>Interesse wecken am Anfang</strong> — mögliche Einstiege:</p>
@@ -1957,10 +2029,11 @@ Best regards,
                 <li>Logical Chain: Kausal verknüpfte Argumente ("Wenn A, dann B, deshalb C") — stärker für Empfehlungen.</li>
               </ul>
               <p><strong>Folienlogik:</strong> Jede Folie hat eine Kernaussage (kein Gliederungstitel), darunter die Argumente/Analysen als Beleg, optional eine Box für Next Steps oder eine Frage. Storyline zuerst nur mit Kernaussagen skizzieren — Folieninhalte erst danach befüllen.</p>
-
-              <hr class="md-hr">
-
-              <h3>Phase 3: Visualisierung — Folien die wirken</h3>
+                </div>
+              </div>
+              <div class="pres-phase">
+                <div class="pres-phase-head"><i class="fa-solid fa-chart-column"></i> Phase 3: Visualisierung</div>
+                <div class="pres-phase-body">
               <p><strong>Grundprinzipien:</strong></p>
               <ul class="learn-list">
                 <li>Grafiken und sortierte Argumente statt langer Sätze</li>
@@ -1975,10 +2048,11 @@ Best regards,
                 <li>Liniendiagramm: Entwicklungen über Zeit.</li>
                 <li>Keine irreführenden Achsen, keine selektiven Zeiträume, die Scheinkorrelationen erzeugen.</li>
               </ul>
-
-              <hr class="md-hr">
-
-              <h3>Phase 4: Delivery — präsentieren</h3>
+                </div>
+              </div>
+              <div class="pres-phase">
+                <div class="pres-phase-head"><i class="fa-solid fa-microphone"></i> Phase 4: Delivery</div>
+                <div class="pres-phase-body">
               <p><strong>Die drei Grundprinzipien:</strong></p>
               <ul class="learn-list">
                 <li>Du präsentierst den Inhalt, nicht die Folien.</li>
@@ -1993,8 +2067,10 @@ Best regards,
                 <li>Wenn keine Zeit zum Auswendiglernen: Bullet Points auf Notizzettel, Übergänge zwischen den Punkten kennen.</li>
                 <li>Tipp: Vortrag als Audio aufnehmen und z. B. auf dem Nachhauseweg anhören.</li>
               </ul>
-
-              <p class="ob-ppt-notes"><i class="fa-solid fa-lightbulb" style="color:var(--brand)"></i> Jede Folie hat eine Kernaussage (kein Gliederungstitel) — siehe Folienlogik im MD.</p>
+              <p class="ob-ppt-notes"><i class="fa-solid fa-lightbulb" style="color:var(--brand)"></i> Jede Folie hat eine Kernaussage (kein Gliederungstitel) — siehe Folienlogik oben.</p>
+                </div>
+              </div>
+              </div>
             ` }
           ]}
         ]
@@ -3761,6 +3837,24 @@ Best regards,
     });
   }
 
+  function bindFmFramework(scope) {
+    const root = scope || document;
+    root.querySelectorAll('[data-demo="fm-framework"]').forEach(wrap => {
+      if (wrap.dataset.fmBound === '1') return;
+      wrap.dataset.fmBound = '1';
+      const panel = wrap.closest('.mod-section-body, .sub-accordion-body, .module-tab-panel');
+      wrap.querySelectorAll('[data-fm-step]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const step = btn.dataset.fmStep;
+          wrap.querySelectorAll('[data-fm-step]').forEach(b => b.classList.toggle('is-active', b.dataset.fmStep === step));
+          panel?.querySelectorAll('.fm-step-block').forEach(block => {
+            block.classList.toggle('is-highlighted', block.id === `fm-step-${step}`);
+          });
+          document.getElementById(`fm-step-${step}`)?.scrollIntoView({ behavior:'smooth', block:'nearest' });
+        });
+      });
+    });
+  }
   function bindInteractiveDemos(scope) {
     const el = scope || document.getElementById('modal-body');
     if (!el) return;
@@ -3768,6 +3862,7 @@ Best regards,
     el.querySelectorAll('[data-demo="ki-zones"]').forEach(bindKiZoneDemo);
     el.querySelectorAll('[data-demo="comfort-zones"]').forEach(bindComfortZoneDemo);
     el.querySelectorAll('[data-demo="slide-compare"]').forEach(bindSlideCompareDemo);
+    bindFmFramework(el);
   }
 
   function bindModuleAccordions() {
