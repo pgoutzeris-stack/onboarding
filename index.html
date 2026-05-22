@@ -556,7 +556,60 @@
     @keyframes orgFadeIn{from{opacity:0}to{opacity:1}}
     @keyframes orgLineV{to{transform:scaleY(1)}}
     @keyframes orgLineH{to{transform:scaleX(1)}}
-    @media (prefers-reduced-motion:reduce){.org-node,.org-chart__vline,.org-chart__hline{animation:none!important;opacity:1!important;transform:none!important}.ob-timeline-step{opacity:1!important;transform:none!important;transition:none!important}.ob-timeline-progress{height:100%!important}}
+    .content-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.65rem;margin:.75rem 0}
+    .content-card{border:1px solid var(--line);border-radius:10px;padding:.85rem .9rem;background:var(--surface);opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease}
+    .content-card__icon{width:2rem;height:2rem;border-radius:8px;background:var(--brand-light);color:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:.45rem;font-size:.85rem}
+    .content-card strong{display:block;font-size:.88rem;color:var(--ink);margin-bottom:.25rem}
+    .content-card p{margin:0;font-size:.84rem;line-height:1.55;color:var(--muted)}
+    .module-tab-panel.is-inview .content-card{opacity:1;transform:none}
+    .module-tab-panel.is-inview .content-card:nth-child(1){transition-delay:40ms}
+    .module-tab-panel.is-inview .content-card:nth-child(2){transition-delay:90ms}
+    .module-tab-panel.is-inview .content-card:nth-child(3){transition-delay:140ms}
+    .module-tab-panel.is-inview .content-card:nth-child(4){transition-delay:190ms}
+    .module-tab-panel.is-inview .content-card:nth-child(5){transition-delay:240ms}
+    .module-tab-panel.is-inview .content-card:nth-child(6){transition-delay:290ms}
+    .content-flow{display:flex;flex-direction:column;gap:.5rem;margin:.85rem 0}
+    .content-flow__step{display:grid;grid-template-columns:4.5rem minmax(0,1fr);gap:.65rem;align-items:start;padding:.7rem .85rem;border:1px solid var(--line);border-radius:10px;background:var(--status-bg);opacity:0;transform:translateX(-6px);transition:opacity .35s ease,transform .35s ease}
+    .content-flow__label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--brand);padding-top:.15rem}
+    .content-flow__body{font-size:.88rem;line-height:1.6;color:var(--ink)}
+    .content-flow__body p{margin:0 0 .35rem}
+    .content-flow__body p:last-child{margin-bottom:0}
+    .module-tab-panel.is-inview .content-flow__step{opacity:1;transform:none}
+    .module-tab-panel.is-inview .content-flow__step:nth-child(1){transition-delay:50ms}
+    .module-tab-panel.is-inview .content-flow__step:nth-child(2){transition-delay:120ms}
+    .module-tab-panel.is-inview .content-flow__step:nth-child(3){transition-delay:190ms}
+    .module-tab-panel.is-inview .content-flow__step:nth-child(4){transition-delay:260ms}
+    .content-zone-grid{display:grid;gap:.65rem;margin:.75rem 0}
+    .content-zone{border-left:4px solid var(--brand);padding:.75rem .9rem;background:var(--brand-light);border-radius:0 10px 10px 0}
+    .content-zone strong{display:block;font-size:.88rem;color:var(--brand-dark);margin-bottom:.2rem}
+    .content-zone span{font-size:.82rem;color:var(--ink);line-height:1.55}
+    .rule-grid{display:grid;gap:.55rem;margin:.75rem 0}
+    .rule-item{display:flex;gap:.65rem;padding:.7rem .8rem;border:1px solid var(--line);border-radius:10px;background:var(--bg);opacity:0;transform:translateY(6px);transition:opacity .35s ease,transform .35s ease}
+    .rule-num{flex:0 0 1.75rem;height:1.75rem;border-radius:50%;background:var(--brand);color:#fff;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:.05rem}
+    .rule-item strong{display:block;font-size:.86rem;color:var(--ink);margin-bottom:.2rem}
+    .rule-item p{margin:0;font-size:.84rem;line-height:1.55;color:var(--muted)}
+    .module-tab-panel.is-inview .rule-item{opacity:1;transform:none}
+    .module-tab-panel.is-inview .rule-item:nth-child(1){transition-delay:30ms}
+    .module-tab-panel.is-inview .rule-item:nth-child(2){transition-delay:70ms}
+    .module-tab-panel.is-inview .rule-item:nth-child(3){transition-delay:110ms}
+    .module-tab-panel.is-inview .rule-item:nth-child(4){transition-delay:150ms}
+    .module-tab-panel.is-inview .rule-item:nth-child(5){transition-delay:190ms}
+    .module-tab-panel.is-inview .rule-item:nth-child(6){transition-delay:230ms}
+    .module-tab-panel.is-inview .rule-item:nth-child(7){transition-delay:270ms}
+    .pres-phases{display:flex;flex-direction:column;gap:.65rem;margin:.75rem 0}
+    .pres-phase{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg);opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease}
+    .pres-phase-head{padding:.72rem .95rem;background:var(--surface);font-weight:700;font-size:.86rem;color:var(--brand);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:.5rem}
+    .pres-phase-body{padding:.85rem .95rem}
+    .module-tab-panel.is-inview .pres-phase{opacity:1;transform:none}
+    .module-tab-panel.is-inview .pres-phase:nth-child(1){transition-delay:40ms}
+    .module-tab-panel.is-inview .pres-phase:nth-child(2){transition-delay:100ms}
+    .module-tab-panel.is-inview .pres-phase:nth-child(3){transition-delay:160ms}
+    .module-tab-panel.is-inview .pres-phase:nth-child(4){transition-delay:220ms}
+    .tag-list{display:flex;flex-wrap:wrap;gap:.35rem;margin:.5rem 0 0;padding:0;list-style:none}
+    .tag-list li{font-size:.72rem;font-weight:600;padding:.22rem .55rem;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+    .tag-list li.is-do{background:#ecfdf5;border-color:#bbf7d0;color:#15803d}
+    .tag-list li.is-dont{background:#fef2f2;border-color:#fecaca;color:#b91c1c}
+    @media (prefers-reduced-motion:reduce){.org-node,.org-chart__vline,.org-chart__hline{animation:none!important;opacity:1!important;transform:none!important}.ob-timeline-step{opacity:1!important;transform:none!important;transition:none!important}.ob-timeline-progress{height:100%!important}.content-card,.content-flow__step,.rule-item,.pres-phase{opacity:1!important;transform:none!important;transition:none!important}}
   </style>
 </head>
 <body>
@@ -1321,7 +1374,7 @@ Signature</pre></div>
               </ul>
             ` },
             { title:'Arbeit im Team und mit dem Einzelnen', content:`
-              <p class="placeholder">Platzhalter: Implizite Normen, Zusammenarbeit im Team und Erwartungen an Feedback-Kultur.</p>
+              <p>Bei ROOTS zählen direkte Abstimmung, Verlässlichkeit und frühzeitiges Feedback. Implizite Erwartungen:</p>
               <ul class="learn-list">
                 <li>Direkte Kommunikation und kurze Abstimmungswege</li>
                 <li>Feedback ist erwünscht – früh und konkret</li>
@@ -1331,70 +1384,153 @@ Signature</pre></div>
           ]},
           { id:'m-ki', tab:'KI', sections:[
             { title:'KI-Nutzung: unser digitaler Mitarbeiter', open:true, content:`
-              <p class="placeholder">Platzhalter: Wie wir KI im Beratungsalltag einsetzen und was das für deine Arbeit bedeutet.</p>
-              <div class="highlight"><p><i class="fa-solid fa-robot" aria-hidden="true"></i> KI beschleunigt – ersetzt aber nicht dein Denken. Nutze Tools bewusst und verantwortungsvoll.</p></div>
-              <h3 style="font-size:.92rem;margin:1rem 0 .4rem;color:var(--brand)">AI Rules</h3>
-              <ul class="learn-list">
-                <li>Keine Kundendaten in öffentliche KI-Tools</li>
-                <li>Outputs immer kritisch prüfen</li>
-                <li>Transparenz gegenüber Team und Kunden, wo relevant</li>
-              </ul>
+              <div class="highlight"><p><i class="fa-solid fa-robot" aria-hidden="true"></i> KI macht uns schneller, nicht schlauer. Die Verantwortung für Inhalt, Qualität und Vertraulichkeit bleibt bei uns.</p></div>
+              <p>Wir haben verbindliche <strong>AI Rules</strong>, die Nutzung und Umgang mit künstlicher Intelligenz regeln und Rechtssicherheit für uns und unsere Kunden schaffen. Diese sieben Regeln gelten für alle bei ROOTS – ohne Ausnahme.</p>
+              <h3>Drei Zonen für Aufgaben</h3>
+              <div class="content-zone-grid">
+                <div class="content-zone"><strong>Zone 1 · Sicherer Datenraum</strong><span><strong>Claude Cowork</strong> – Strategie, Analyse, Deck-Erstellung, Dokumentenarbeit. Vertrauliche Kundendaten und freigegebenes Kundenmaterial gehören ausschließlich hierhin.</span></div>
+                <div class="content-zone"><strong>Zone 2 · Anonymisierte Daten</strong><span>Office- und Produktivitäts-Tools wie <strong>MS Copilot</strong> und <strong>Notion</strong>.</span></div>
+                <div class="content-zone"><strong>Zone 3 · Spezial-LLMs</strong><span>Bilder und Marketingtexte (Gemini), Datenanalysen (ChatGPT), Recherche (Perplexity).</span></div>
+              </div>
+              <h3>Die 7 AI Rules</h3>
+              <div class="rule-grid">
+                <div class="rule-item"><div class="rule-num">2</div><div><strong>Diese drei Zonen sind freigegeben. Andere Tools nicht.</strong><p>Jedes andere Tool ist genehmigungspflichtig – neue Anbieter, AI-Features und Erweiterungen. Freigabe durch Richard.</p></div></div>
+                <div class="rule-item"><div class="rule-num">3</div><div><strong>Kein Output ohne eigenes Urteil.</strong><p>AI macht, der Mensch denkt. Fakten, Quellen, Zahlen, Tonalität und IP-Risiken prüfen. Halluzinationen sind unser Problem.</p></div></div>
+                <div class="rule-item"><div class="rule-num">4</div><div><strong>Substanziellen KI-Beitrag kennzeichnen.</strong><p>Inhaltlicher Beitrag wird mit „generated with the use of AI" gelabelt. Hilfsarbeit nach Prüfung ist eigene Beratungsleistung.</p></div></div>
+                <div class="rule-item"><div class="rule-num">5</div><div><strong>Weiterbilden, teilen, Cowork ausnutzen.</strong><p>AInauten-Programm aktiv nutzen. Insights, Prompts und Workflows gehören ins Team – Skills und Templates dokumentieren.</p></div></div>
+                <div class="rule-item"><div class="rule-num">6</div><div><strong>Effizienzgewinne transparent teilen.</strong><p>Bei T&amp;M-Mandaten buchen wir, was wir tatsächlich gearbeitet haben. Spürbare Beschleunigung erst intern besprechen.</p></div></div>
+                <div class="rule-item"><div class="rule-num">7</div><div><strong>Vorfälle sofort melden.</strong><p>Datenleck, falscher Output, Verstoß gegen Tool-Regeln: Erste Adresse Manuel, Richard wird informiert.</p></div></div>
+              </div>
             ` }
           ]},
           { id:'m-okr', tab:'OKRs', sections:[
             { title:'Team Meeting JFX / OKRs – Was ist das?', open:true, content:`
-              <p class="placeholder">Platzhalter: Bedeutung von JFX und OKRs bei ROOTS.</p>
-              <p><strong>OKRs</strong> = Objectives & Key Results. <strong>JFX</strong> = wöchentliches Team-Alignment zu Prioritäten und Blockern.</p>
+              <p>Wir verfolgen eine restriktive interne Meetingpolitik. Meetings werden je nach Projektanforderung erstellt – intern haben wir nur einen festen Team-JFX.</p>
+              <div class="highlight"><p><i class="fa-solid fa-calendar-week" aria-hidden="true"></i> Unser <strong>Team Meeting / OKR</strong> findet montags um <strong>9:30 Uhr</strong> statt.</p></div>
+              <h3>Was sind OKRs?</h3>
+              <p>OKRs bestehen aus zwei Teilen:</p>
+              <ul class="learn-list">
+                <li><strong>Objective (O)</strong> – <em>Was</em> will ich erreichen? Ein inspirierendes, outcome-orientiertes, qualitatives Ziel.</li>
+                <li><strong>Key Results (KR)</strong> – <em>Wie</em> messe ich den Fortschritt? 2–5 messbare Ergebnisse, die zeigen, ob das Objective erreicht wurde.</li>
+              </ul>
+              <p>OKRs werden quartalsweise definiert und wöchentlich überprüft. Am Ende des Zyklus wird bewertet, ob die Key Results erreicht wurden:</p>
+              <table>
+                <tr><th>Erreichung</th><th>Bewertung</th></tr>
+                <tr><td>70–100 %</td><td>Erreicht</td></tr>
+                <tr><td>40–70 %</td><td>Teilweise erreicht</td></tr>
+                <tr><td>0–40 %</td><td>Nicht erreicht</td></tr>
+              </table>
+              <p style="margin-top:.65rem"><em>Wird immer 100 % erreicht, sind die Ziele nicht ambitioniert genug.</em></p>
             ` },
             { title:'Meetings & Vorbereitung', content:`
-              <p class="placeholder">Platzhalter: Ablauf, Rollen und Erwartungen an Updates im JFX.</p>
-              <ul class="learn-list">
-                <li>Check-in, OKR-Update, Projektstatus, Blocker & Support</li>
-                <li>Kurze, konkrete Updates mitbringen</li>
-                <li>Blocker klar benennen – idealerweise mit Lösungsvorschlag</li>
-              </ul>
+              <p>Der Ablauf unseres Montags-Meetings:</p>
+              <ol class="learn-list">
+                <li>Teilen der Highlights (und Learnings) der letzten Woche</li>
+                <li>Ein Blick auf die Arbeitszeitverteilung der letzten Woche</li>
+                <li>Ein Blick auf die Umsatzergebnisse der letzten Woche</li>
+                <li>Teilen der geplanten Aufgaben für die angebrochene Woche nach OKRs</li>
+              </ol>
+              <p>Zur Vorbereitung trägt jeder am <strong>Freitagabend oder Montagmorgen</strong> die geplanten Aufgaben und die Zielerreichung in das OKR-Board ein.</p>
             ` },
             { title:'Review', content:`
-              <p class="placeholder">Platzhalter: Quartals-Reviews, Zielvereinbarung und persönliche Ziele.</p>
               <p>OKRs werden quartalsweise reviewed und neu gesetzt. Dein Zielvereinbarungsdokument bildet den Rahmen für persönliche Ziele.</p>
+              <p>Im wöchentlichen JFX prüfen wir den Fortschritt der Key Results und passen Prioritäten bei Bedarf an – transparent, konkret und mit Fokus auf die nächsten Schritte.</p>
             ` }
           ]},
           { id:'m-comm', tab:'Kommunikation', sections:[
             { title:'Channels', open:true, content:`
-              <p class="placeholder">Platzhalter: Wann welcher Kanal – Direkt, Anruf, Teams, E-Mail, Meeting, WhatsApp.</p>
-              <table>
-                <tr><th>Kanal</th><th>Wann</th></tr>
-                <tr><td>Direkt / vor Ort</td><td>Schnelle Abstimmung im Büro</td></tr>
-                <tr><td>Anruf / Call</td><td>Dringend oder komplex in Kurzform</td></tr>
-                <tr><td>Teams Chat</td><td>Täglicher Austausch, schnelle Fragen</td></tr>
-                <tr><td>E-Mail</td><td>Formell, Kunden, Dokumentation</td></tr>
-                <tr><td>Meeting</td><td>Entscheidungen, komplexe Themen</td></tr>
-                <tr><td>WhatsApp</td><td>Nur Dringendes außerhalb der Arbeitszeit</td></tr>
-              </table>
+              <p>Bei ROOTS nutzen wir je nach Situation unterschiedliche Kanäle – hier die wichtigsten:</p>
+              <div class="content-cards">
+                <div class="content-card"><div class="content-card__icon"><i class="fa-solid fa-comments"></i></div><strong>Direkt</strong><p>Im Office kommunizieren wir meist direkt über den Schreibtisch oder in kurzen Spontanmeetings.</p></div>
+                <div class="content-card"><div class="content-card__icon"><i class="fa-solid fa-envelope"></i></div><strong>E-Mail</strong><p>Hauptmedium unserer schriftlichen Kommunikation – auch für kurze Austausche, die woanders oft über Teams laufen.</p></div>
+                <div class="content-card"><div class="content-card__icon"><i class="fa-brands fa-microsoft"></i></div><strong>MS Teams</strong><p>Schneller Austausch, z.&nbsp;B. zum Teilen von Links. Dokumente versenden wir eher per E-Mail. Richard nutzt Teams selten – lieber E-Mail.</p></div>
+                <div class="content-card"><div class="content-card__icon"><i class="fa-brands fa-whatsapp"></i></div><strong>WhatsApp</strong><p>Informelle Themen (z.&nbsp;B. Nachkaufen von Süßigkeiten) und Abstimmung bei Reisetätigkeit.</p></div>
+                <div class="content-card"><div class="content-card__icon"><i class="fa-solid fa-phone"></i></div><strong>Anrufe / Team Calls</strong><p>Selten genutzt – meist zur Abstimmung im Home-Office oder bei Reisetätigkeit vor/nach Kundenterminen (häufig von Richard).</p></div>
+              </div>
             ` },
             { title:'First Minute Guide', content:`
-              <p class="placeholder">Platzhalter: Reaktionszeiten und Prioritäten bei eingehenden Anfragen.</p>
-              <p>Teams-Nachrichten innerhalb von ca. 4h, E-Mails an Kunden innerhalb von 24h – je nach Kontext anpassen.</p>
+              <p>Die First-Minute-Methode operationalisiert die ersten 60 Sekunden jedes beruflichen Gesprächs, jeder E-Mail und jeder Meetingeinladung.</p>
+              <div class="highlight"><p><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> <strong>Ziel:</strong> In 60 Sekunden weiß die Empfängerseite (1) worum es geht, (2) was sie tun soll, (3) was die Lösung ist, und (4) ob jetzt der richtige Moment dafür ist.</p></div>
+              <h3>Drei Grundprinzipien</h3>
+              <ul class="learn-list">
+                <li><strong>Bereite die Empfängerseite vor, bevor du lieferst.</strong> Niemand teilt deinen Kontext.</li>
+                <li><strong>Komm sofort zum Punkt.</strong> Eine schnelle Pointe schlägt eine elegante Hinführung.</li>
+                <li><strong>Fokus auf Aktionen und Lösungen, nicht auf Probleme.</strong> Strukturierte Kommunikation kippt das Verhältnis.</li>
+              </ul>
+              <h3>Die First-Minute-Architektur</h3>
+              <div class="content-flow">
+                <div class="content-flow__step"><div class="content-flow__label">15 Sek</div><div class="content-flow__body"><strong>Time Check</strong><p>Habe ich den Zeitrahmen geklärt? Statt „Hast du eine Minute?" lieber: „Hast du 10 Minuten für eine Entscheidung zum Projekt X?"</p></div></div>
+                <div class="content-flow__step"><div class="content-flow__label">15 Sek</div><div class="content-flow__body"><strong>Framing</strong><p><em>Context</em> – worum geht es? · <em>Intent</em> – was will ich? · <em>Key Message</em> – Kernaussage in einem Satz (Na-und-Test).</p></div></div>
+                <div class="content-flow__step"><div class="content-flow__label">45 Sek</div><div class="content-flow__body"><strong>Structured Summary</strong><p><em>Goal</em> – Was wollen wir erreichen? · <em>Problem</em> – Was hindert uns? · <em>Solution</em> – Was schlage ich vor?</p></div></div>
+                <div class="content-flow__step"><div class="content-flow__label">5 Sek</div><div class="content-flow__body"><strong>Validation Checkpoint</strong><p>„Bist du die richtige Person?" · „Hast du jetzt Zeit?" · „Hast du Fragen dazu?"</p></div></div>
+              </div>
+              <h3>Solution-Typen</h3>
+              <ul class="learn-list">
+                <li>Problem + brauche Hilfe → „Hilfst du mir, eine Lösung zu finden?"</li>
+                <li>Problem + Vorschlag → dein Lösungsvorschlag</li>
+                <li>Problem gelöst → was getan wurde und aktueller Status</li>
+              </ul>
+              <p>Solutions sind zukunftsgerichtet – nicht chronologisch erklären, sondern mit Blick nach vorn abschließen.</p>
             ` },
             { title:'E-Mail Etikette', content:`
-              <p class="placeholder">Platzhalter: Betreff, Struktur, Anrede und Follow-up-Standards.</p>
-              <ul class="learn-list">
-                <li>Klare Betreffzeilen und eine Kernaussage pro Mail</li>
-                <li>Professioneller Ton – präzise und freundlich</li>
-                <li>Zero-Inbox als Ziel, nicht als Stressfaktor</li>
+              <h3>Wann (k)eine E-Mail?</h3>
+              <ul class="tag-list">
+                <li class="is-dont">Keine E-Mail bei Google-/Doku-Lösungen</li>
+                <li class="is-dont">Nicht bei Konflikt oder Emotion → persönlich/Telefon</li>
+                <li class="is-dont">Nicht wenn Diskussion eskaliert → Meeting</li>
+                <li class="is-do">Ja bei dokumentationspflichtiger Info</li>
+                <li class="is-do">Ja bei asynchroner Reaktion</li>
+                <li class="is-do">Ja wenn mehrere denselben Stand brauchen</li>
               </ul>
+              <h3>Zero Inbox</h3>
+              <ul class="learn-list">
+                <li>E-Mail-Zeiten im Kalender planen: 90 Min. nach Arbeitsbeginn, vor Mittagspause, Tagesende</li>
+                <li>Von alt nach neu durcharbeiten</li>
+                <li>Unrelevantes löschen; Antworten &lt; 2 Min. sofort erledigen und archivieren</li>
+                <li>Antworten &gt; 2 Min. flaggen und als <strong>Followup</strong> später abarbeiten</li>
+              </ul>
+              <h3>Betreff</h3>
+              <p><strong>Betreff = Urgency (optional) + CTA + Thema + Grund</strong> – z.&nbsp;B. „[URGENT] Genehmigen Veröffentlichung Zahlen Q4". Max. ca. 72 Zeichen.</p>
+              <h3>Body – die ersten 5 Zeilen</h3>
+              <ol class="learn-list">
+                <li>Worum geht es?</li>
+                <li>Was soll der/die Empfänger:in tun?</li>
+                <li>Kernbotschaft</li>
+                <li>Bis wann (auch „nicht dringend" explizit nennen)</li>
+                <li>Wie viele Fragen die E-Mail enthält</li>
+              </ol>
+              <p>Fragen, Aktionen und Entscheidungen sichtbar machen – mit Labels wie <strong>Frage:</strong>, <strong>Action:</strong>, <strong>Decision:</strong> auf eigener Zeile.</p>
             ` },
             { title:'Meeting Etikette', content:`
-              <p class="placeholder">Platzhalter: Erwartungen an Vorbereitung, Teilnahme und Nachbereitung.</p>
+              <h3>Braucht es überhaupt ein Meeting?</h3>
+              <p>Kein Meeting, wenn es nur ein Update ist, Entscheidungsträger fehlen oder sich noch Zeit mit Feedback gelassen werden kann.</p>
+              <h3>Invitation</h3>
+              <p><strong>Subject line:</strong> Context + Intent</p>
               <ul class="learn-list">
-                <li>Pünktlich und vorbereitet</li>
-                <li>Laptop zu (außer für Notizen)</li>
-                <li>Aktiv mitdenken und Entscheidungen dokumentieren</li>
+                <li><strong>Meeting purpose</strong> – wofür das Meeting da ist (eine Zeile)</li>
+                <li><strong>Meeting output</strong> – erwartetes Ergebnis (eine Zeile)</li>
+                <li><strong>Additional Information</strong> – optional GPS-Summary</li>
+                <li><strong>Slides</strong> – wenn relevant</li>
               </ul>
+              <p>Nie weiterleiten ohne eigene Einleitung. Wer neu hinzugefügt wird: begrüßen und Grund nennen.</p>
+              <h3>Erste Minute des Meetings</h3>
+              <p>Meeting Purpose und Output am Anfang nochmal vorlesen – auch wenn sie in der Einladung stehen. Alle starten vom selben Punkt, Fokus auf Solutions.</p>
+              <h3>Meetingende – mind. 5 Minuten Closing</h3>
+              <ol class="learn-list">
+                <li>Meeting kurz zusammenfassen</li>
+                <li>Output-Status bestätigen (Ziel erreicht? Follow-up nötig?)</li>
+                <li>Entscheidungen &amp; Aufgaben rekapitulieren – wer macht was bis wann</li>
+                <li>Danke sagen</li>
+              </ol>
             ` },
             { title:'Präsentationen (McKinsey Chart Clinique)', content:`
-              <p class="placeholder">Platzhalter: ROOTS-Standards für Charts und Storylines – Verweis auf Chart Clinique.</p>
-              <p>Eine klare Botschaft pro Slide, konsistente Formatierung und saubere Datenherleitung.</p>
+              <p>Wer eine gute Präsentation hält, überträgt eine Idee in den Kopf des Zuhörers. Folien, Struktur und Rhetorik sind Mittel – kein Selbstzweck.</p>
+              <div class="pres-phases">
+                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-bullseye"></i> Phase 1 · Strategie</div><div class="pres-phase-body"><p>Was weiß der Zuhörer? Was soll er danach denken, fühlen oder tun? Welche Barrieren könnte er haben?</p><p><strong>20-Sekunden-Test:</strong> Kernbotschaft in einem Satz – sonst ist das Thema noch nicht durchdrungen.</p></div></div>
+                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-route"></i> Phase 2 · Storyline</div><div class="pres-phase-body"><p>Eine zentrale Idee, der alles untergeordnet ist. Narrativ: Problem → Lösungssuche → Aha-Moment → neue Perspektive.</p><p><strong>Pyramidenprinzip:</strong> Kernaussage oben, darunter 2–5 stützende Argumente (Logical Group oder Logical Chain), darunter Belege. Jede Folie hat eine Kernaussage – keine Gliederungstitel.</p></div></div>
+                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-chart-column"></i> Phase 3 · Visualisierung</div><div class="pres-phase-body"><p>Grafiken statt langer Sätze, kognitive Belastung minimieren, nicht von der Folie ablesen.</p><ul class="learn-list"><li>Balken (vertikal): Vergleiche mit zeitlicher Rangfolge</li><li>Balken (horizontal): lange Kategoriebeschriftungen</li><li>Kreis: max. 2–3 Segmente, sonst Balken</li><li>Linie: Entwicklung über Zeit</li></ul></div></div>
+                <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-microphone"></i> Phase 4 · Delivery</div><div class="pres-phase-body"><p>Du präsentierst den Inhalt, nicht die Folien. Auf den Punkt kommen, authentisch bleiben.</p><p>Frei sprechen ist optimal; Stichpunkte als Backup. Nicht vom Skript lesen. Tipp: Vortrag als Audio aufnehmen und wiederholen.</p></div></div>
+              </div>
             ` }
           ]}
         ]
@@ -1403,21 +1539,24 @@ Signature</pre></div>
         id:'okr', icon:'fa-solid fa-bullseye', title:'Team Meeting JFX / OKRs',
         sub:'Ziele, Reviews & Meetings',
         content:`
+          <div class="highlight"><p><i class="fa-solid fa-calendar-week" aria-hidden="true"></i> Unser festes <strong>Team Meeting / OKR</strong> findet montags um <strong>9:30 Uhr</strong> statt.</p></div>
           <h3>Was sind OKRs?</h3>
-          <p><strong>Objectives & Key Results</strong> – unser Rahmen für Zieldefinition und Fortschrittsmessung. Objectives sind inspirierend und qualitativ, Key Results sind messbar.</p>
-          <h3>JFX – Joint Focus Execution</h3>
-          <p>Unser wöchentliches Team-Alignment-Meeting. Hier besprechen wir Prioritäten, Blocker und nächste Schritte.</p>
-          <h3>Meeting-Struktur</h3>
+          <p><strong>Objectives & Key Results</strong> – unser Rahmen für Zieldefinition und Fortschrittsmessung.</p>
           <ul>
-            <li><strong>Check-in:</strong> Wie geht's jedem? (5 Min)</li>
-            <li><strong>OKR-Update:</strong> Status der Key Results (10 Min)</li>
-            <li><strong>Projektstatus:</strong> Kurze Updates pro Projekt (15 Min)</li>
-            <li><strong>Blocker & Support:</strong> Was braucht wer? (10 Min)</li>
+            <li><strong>Objective (O):</strong> Was will ich erreichen? – inspirierend, outcome-orientiert, qualitativ.</li>
+            <li><strong>Key Results (KR):</strong> Wie messe ich Fortschritt? – 2–5 messbare Ergebnisse.</li>
           </ul>
+          <h3>Meeting-Ablauf</h3>
+          <ol>
+            <li>Highlights und Learnings der letzten Woche</li>
+            <li>Arbeitszeitverteilung der letzten Woche</li>
+            <li>Umsatzergebnisse der letzten Woche</li>
+            <li>Geplante Aufgaben der Woche nach OKRs</li>
+          </ol>
           <h3>Vorbereitung</h3>
-          <p>Komm mit kurzen, konkreten Updates. Formuliere Blocker klar und bring wenn möglich Lösungsvorschläge mit.</p>
-          <h3>Review</h3>
-          <p>Quartalsweise reviewen wir OKRs und setzen neue. Dein Zielvereinbarungsdokument ist der Rahmen für deine persönlichen Ziele.</p>
+          <p>Am Freitagabend oder Montagmorgen Aufgaben und Zielerreichung im OKR-Board eintragen.</p>
+          <h3>Review & Bewertung</h3>
+          <p>OKRs werden quartalsweise reviewed. 70–100 % = erreicht · 40–70 % = teilweise · 0–40 % = nicht erreicht. Immer 100 % bedeutet: Ziele nicht ambitioniert genug.</p>
         `
       },
       {
@@ -1427,7 +1566,7 @@ Signature</pre></div>
           <h3>Zeitmanagement</h3>
           <ul>
             <li><strong>Time Blocking:</strong> Reserviere feste Blöcke für Deep Work</li>
-            <li><strong>Zero Inbox:</strong> E-Mails täglich abarbeiten, Ordnerstruktur nutzen</li>
+            <li><strong>Zero Inbox:</strong> E-Mail-Zeiten im Kalender (90 Min. morgens, vor Mittag, Tagesende) – von alt nach neu, &lt; 2 Min. sofort erledigen</li>
             <li><strong>Prioritäten:</strong> Was ist dringend? Was ist wichtig? Unterschied kennen.</li>
           </ul>
           <h3>Resilienz im Beratungsalltag</h3>
@@ -1452,7 +1591,7 @@ Signature</pre></div>
             <li><i class="fa-solid fa-microphone" aria-hidden="true"></i> Masters of Scale – Reid Hoffman</li>
           </ul>
           <h3>Präsentationen (McKinsey Chart Clinique)</h3>
-          <p>Wird ausführlich in Woche 2 behandelt. Grundregel: Jede Folie hat eine Botschaft. Diese steht als Überschrift.</p>
+          <p>Wird ausführlich in Woche 2 behandelt. Grundregel: Jede Folie hat eine Botschaft als Überschrift. Vier Phasen: Strategie → Storyline → Visualisierung → Delivery.</p>
         `
       },
       {
@@ -1548,28 +1687,36 @@ Signature</pre></div>
         id:'chartklinik', icon:'fa-solid fa-chart-column', title:'McKinsey Chart Clinique',
         sub:'Daten überzeugend visualisieren',
         content:`
-          <div class="highlight"><p><i class="fa-solid fa-chart-bar" aria-hidden="true"></i> Die Chart Clinique ist eine der wichtigsten Methoden in der Beratungspraxis. Du lernst, Daten in überzeugende, klare Visualisierungen zu übersetzen.</p></div>
+          <div class="highlight"><p><i class="fa-solid fa-chart-bar" aria-hidden="true"></i> Präsentationen übertragen eine Idee in den Kopf des Zuhörers – Folien sind Mittel, kein Selbstzweck.</p></div>
           <h3>Das Grundprinzip</h3>
           <p>Jede Folie hat <strong>eine Botschaft</strong>. Diese steht als Überschrift – nicht als Titel.</p>
           <ul>
-            <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> Schlechte Überschrift: "Marktanteile 2024"</li>
-            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Gute Überschrift: "ROOTS hat seinen Marktanteil in 2024 um 12% gesteigert"</li>
+            <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> Schlechte Überschrift: „Marktanteile 2024"</li>
+            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Gute Überschrift: „ROOTS hat seinen Marktanteil in 2024 um 12 % gesteigert"</li>
           </ul>
+          <h3>Vier Phasen einer starken Präsentation</h3>
+          <div class="pres-phases">
+            <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-bullseye"></i> Strategie</div><div class="pres-phase-body"><p>Was weiß der Zuhörer? Was soll er danach denken oder tun? <strong>20-Sekunden-Test:</strong> Kernbotschaft in einem Satz.</p></div></div>
+            <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-route"></i> Storyline</div><div class="pres-phase-body"><p>Problem → Lösungssuche → Aha-Moment. Pyramidenprinzip: Kernaussage oben, 2–5 Argumente, dann Belege (MECE).</p></div></div>
+            <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-chart-column"></i> Visualisierung</div><div class="pres-phase-body"><p>Grafiken statt langer Sätze. Nicht von der Folie ablesen – über den Inhalt hinaus berichten.</p></div></div>
+            <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-microphone"></i> Delivery</div><div class="pres-phase-body"><p>Frei sprechen, authentisch bleiben. Stichpunkte als Backup – nicht vom Skript lesen.</p></div></div>
+          </div>
           <h3>Chart-Typen & wann welcher</h3>
           <table>
             <tr><th>Chart-Typ</th><th>Wann nutzen</th></tr>
-            <tr><td>Balken</td><td>Vergleich von Kategorien</td></tr>
+            <tr><td>Balken (vertikal)</td><td>Vergleiche mit zeitlicher Rangfolge</td></tr>
+            <tr><td>Balken (horizontal)</td><td>Lange Kategoriebeschriftungen</td></tr>
+            <tr><td>Kreis</td><td>Max. 2–3 Segmente – sonst Balken</td></tr>
             <tr><td>Linie</td><td>Entwicklung über Zeit</td></tr>
             <tr><td>Wasserfall</td><td>Aufbau eines Ergebnisses</td></tr>
             <tr><td>Scatter</td><td>Korrelationen</td></tr>
-            <tr><td>Mekko</td><td>Marktstruktur / Segmentierung</td></tr>
           </table>
           <h3>Tipps</h3>
           <ul>
             <li>Weniger ist mehr – ein Gedanke pro Chart</li>
             <li>Farbe hat Bedeutung – nutze sie gezielt</li>
             <li>Beschriftungen direkt am Chart, nicht in Legenden</li>
-            <li>Quelle immer angeben</li>
+            <li>Quelle immer angeben – keine irreführenden Achsen</li>
           </ul>
         `
       },
