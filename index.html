@@ -408,15 +408,22 @@
     .mod-section-body p{margin:0 0 .75rem}
     .mod-section-body p:last-child{margin-bottom:0}
     .mod-section-body h3:not(:first-child){margin:1.45rem 0 .75rem;padding:.6rem 0 .6rem .9rem;border-left:3px solid var(--brand);background:linear-gradient(90deg,var(--brand-light),transparent 62%);border-radius:0 10px 10px 0;font-size:1rem;color:var(--brand-dark)}
+    .mod-section-body .ob-content-section__head h3{margin:0;padding:0;border-left:none;background:transparent;border-radius:0;font-size:.9rem;color:var(--brand-dark)}
     .mod-section-body h4{margin:1.1rem 0 .5rem;font-size:.92rem;color:var(--ink)}
     .mod-section-body .learn-list li{margin-bottom:.42rem}
-    .ob-content-section{border:1px solid var(--line);border-radius:14px;background:var(--surface);margin:1rem 0;overflow:hidden}
+    .ob-content-section{border:1px solid var(--line);border-radius:14px;background:var(--surface);margin:0 0 .85rem;overflow:hidden}
+    .ob-content-section:last-child{margin-bottom:0}
+    .ob-mod-lead{margin:0 0 1rem;font-size:.9rem;line-height:1.65;color:var(--muted)}
     .ob-content-section__head{display:flex;align-items:center;gap:.6rem;padding:.8rem 1.05rem;background:var(--brand-light);border-bottom:1px solid var(--line)}
     .ob-content-section__head i{color:var(--brand);width:1rem;text-align:center;flex-shrink:0}
     .ob-content-section__head h3{margin:0;font-size:.9rem;font-weight:700;color:var(--brand-dark);line-height:1.35}
     .ob-content-section__body{padding:1rem 1.1rem 1.05rem}
-    .ob-content-section__body h4{margin:1rem 0 .45rem;font-size:.86rem}
+    .ob-content-section__body > :last-child{margin-bottom:0}
+    .ob-content-section__body h4{margin:1rem 0 .45rem;font-size:.86rem;font-weight:600;color:var(--ink)}
     .ob-content-section__body h4:first-child{margin-top:0}
+    .ob-content-section__body .highlight{margin:.75rem 0 0}
+    .ob-content-section__body .highlight p{margin:0}
+    .ob-content-section__body .ob-demo,.ob-content-section__body .ob-meet-invite{margin-top:.85rem}
     .ob-split-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.7rem;margin:.65rem 0}
     .ob-split-card{padding:.8rem .95rem;border-radius:12px;border:1px solid var(--line)}
     .ob-split-card strong{display:block;font-size:.82rem;margin-bottom:.35rem;color:var(--ink)}
@@ -1472,49 +1479,67 @@ Best regards,
           ]},
           { id:'m-ki', tab:'KI', sections:[
             { title:'KI Nutzung', open:true, content:`
-              <p>Wir bei ROOTS haben verbindliche AI Rules, die die Nutzung und den Umgang mit künstlicher Intelligenz regeln und Rechtssicherheit für uns und unsere Kunden schaffen.</p>
-              <p>KI macht uns schneller, nicht schlauer. Die Verantwortung für Inhalt, Qualität und Vertraulichkeit bleibt bei uns.<br>Diese sieben Regeln gelten für alle bei ROOTS, ohne Ausnahme!</p>
+              <p class="ob-mod-lead">Wir bei ROOTS haben verbindliche AI Rules, die Nutzung und Umgang mit KI regeln. KI macht uns schneller, nicht schlauer — Verantwortung für Inhalt, Qualität und Vertraulichkeit bleibt bei uns. Diese sieben Regeln gelten für alle, ohne Ausnahme.</p>
 
-              <h3>1. Wir unterteilen in 3 Zonen und Aufgaben:</h3>
-              <h4>Sicherer Datenraum</h4>
-              <p><strong>Zone 1 | Standard-LLM: Claude Cowork.</strong> Strategie, Analyse, Deck-Erstellung, Dokumenten-arbeit. Vertrauliche Kundendaten und freigegebenes Kundenmaterial gehören ausschließlich hierhin.</p>
-              <h4>Anonymisierte Daten</h4>
-              <p><strong>Zone 2 | Office- und Produktivitäts-Tools:</strong> MS Copilot, Notion</p>
-              <p><strong>Zone 3 | Spezial-LLMs:</strong> Bilder und Marketingtexte (Gemini), Datenanalysen (ChatGPT), Recherche (Perplexity)</p>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-layer-group"></i><h3>1. Drei Zonen und Aufgaben</h3></div>
+                <div class="ob-content-section__body">
+                  <h4>Sicherer Datenraum</h4>
+                  <p><strong>Zone 1 | Standard-LLM: Claude Cowork.</strong> Strategie, Analyse, Deck-Erstellung, Dokumentenarbeit. Vertrauliche Kundendaten und freigegebenes Kundenmaterial gehören ausschließlich hierhin.</p>
+                  <h4>Anonymisierte Daten</h4>
+                  <p><strong>Zone 2 | Office- und Produktivitäts-Tools:</strong> MS Copilot, Notion</p>
+                  <p><strong>Zone 3 | Spezial-LLMs:</strong> Bilder und Marketingtexte (Gemini), Datenanalysen (ChatGPT), Recherche (Perplexity)</p>
+                </div>
+              </div>
 
-              <hr class="md-hr">
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-shield-check"></i><h3>2. Nur freigegebene Zonen — andere Tools nicht</h3></div>
+                <div class="ob-content-section__body">
+                  <p>Für das Drei-Zonen-Setup haben wir Blanket Approvals (BDF erteilt, weitere Kunden in Vorbereitung). Jedes andere Tool ist genehmigungspflichtig — neue Anbieter, neue AI-Features in bekannten Plattformen und Erweiterungen des Tool-Stacks. Freigabe durch Richard.</p>
+                </div>
+              </div>
 
-              <h3>2. Diese drei Zonen sind freigegeben. Andere Tools nicht.</h3>
-              <p>Für das Drei-Zonen-Setup haben wir Blanket Approvals (BDF erteilt, weitere Kunden in Vorbereitung). Jedes andere Tool ist genehmigungspflichtig. Das gilt für neue Anbieter, neue AI-Features in bekann-ten Plattformen und neue Erweiterungen unseres Tool-Stacks. Freigabe durch Richard.</p>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-user-check"></i><h3>3. Kein Output ohne eigenes Urteil</h3></div>
+                <div class="ob-content-section__body">
+                  <p>AI macht, der Mensch denkt. Vor dem Prompt: Was will ich eigentlich? Vor der Übergabe: Fakten, Quellen, Zahlen, Tonalität, IP-Risiken prüfen. Halluzinationen sind unser Problem. Was du nicht selbst geprüft hast, schickst du nicht an den Kunden.</p>
+                </div>
+              </div>
 
-              <hr class="md-hr">
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-tag"></i><h3>4. KI-Beiträge kennzeichnen</h3></div>
+                <div class="ob-content-section__body">
+                  <p>Faustregel: Inhaltlicher Beitrag (Texte, Analysen, Visuals, ganze Folien) wird mit „generated with the use of AI" gelabelt. Hilfsarbeit (Recherche, Strukturierung, Lektorat, Übersetzung), die wir aktiv prüfen und überarbeiten, ist eigene Beratungsleistung und braucht kein Label. Im Zweifel: labeln.</p>
+                </div>
+              </div>
 
-              <h3>3. Kein Output ohne eigenes Urteil und menschliche Prüfung.</h3>
-              <p>AI macht, der Mensch denkt. Vor dem Prompt: Was will ich eigentlich? Wer das nicht weiß, bekommt Brei zurück. Vor der Übergabe: Fakten, Quellen, Zahlen, Tonalität, IP-Risiken geprüft. Halluzinationen sind unser Problem, nicht das des Modells. Was du nicht selbst geprüft hast, schickst du nicht an den Kunden.</p>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-graduation-cap"></i><h3>5. Weiterbilden, teilen, Cowork nutzen</h3></div>
+                <div class="ob-content-section__body">
+                  <p>AInauten-Programm: aktiv nutzen, Lernzeit ist Arbeitszeit. Wer stehen bleibt, wird abgehängt.</p>
+                  <p>Was du lernst, teilst du: Insights, Prompts, Use Cases und Fallstricke gehören ins Team. In Claude Cowork sauber arbeiten: Projekte anlegen, claude.md pflegen, Skills entwickeln, Templates dokumentieren. Solo-Optimierung ist gegen die Regel.</p>
+                </div>
+              </div>
 
-              <hr class="md-hr">
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-chart-line"></i><h3>6. Effizienzgewinne transparent teilen</h3></div>
+                <div class="ob-content-section__body">
+                  <p>Bei T&amp;M-Mandaten buchen wir, was wir tatsächlich gearbeitet haben. Spürbare Beschleunigung durch KI sprechen wir erst intern an und gehen erst dann auf den Kunden zu.</p>
+                </div>
+              </div>
 
-              <h3>4. Wenn KI substanziell mitgeschrieben hat: kennzeichnen.</h3>
-              <p>Faustregel: Inhaltlicher Beitrag (Texte, Analysen, Visuals, ganze Folien) wird mit „generated with the use of AI" gelabelt. Hilfsarbeit (Recherche-Zusammenfassung, Strukturierung, Lektorat, Über-setzung), die wir aktiv prüfen und überarbeiten, ist eigene Beratungsleistung und braucht kein Label. Im Zweifel: labeln.</p>
-
-              <hr class="md-hr">
-
-              <h3>5. Weiterbilden, teilen, Cowork ausnutzen.</h3>
-              <p>AInauten-Programm: aktiv nutzen, Lernzeit ist Arbeitszeit. Wer stehen bleibt, wird abgehängt.</p>
-              <p>Was du lernst, teilst du: Insights, gute Prompts, neue Use Cases, gefundene Fallstricke gehören ins Team. In Claude Cowork sauber arbeiten: Projekte anlegen, claude.md pflegen, eigene Skills entwickeln, Templates dokumentieren. Skills, Prompts, Workflows gehören dem Team. Solo-Optimierung ist gegen die Regel.</p>
-
-              <hr class="md-hr">
-
-              <h3>6. Effizienzgewinne werden transparent geteilt.</h3>
-              <p>Bei T&amp;M-Mandaten buchen wir, was wir tatsächlich gearbeitet haben. Spürbare Beschleunigung durch KI sprechen wir erst intern an und gehen erst dann auf den Kunden zu.</p>
-
-              <hr class="md-hr">
-
-              <h3>7. Bei Vorfällen: sofort melden, nicht aussitzen.</h3>
-              <p>Datenleck, falscher Output beim Kunden, Verstoß gegen Tool-Regeln, fragwürdige Anfrage von außen. Erste Adresse: Manuel. Richard wird informiert. Schnelle Meldung schützt den Kunden, ROOTS und dich. Stillschweigen tut keins davon.</p>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-triangle-exclamation"></i><h3>7. Vorfälle sofort melden</h3></div>
+                <div class="ob-content-section__body">
+                  <p>Datenleck, falscher Output beim Kunden, Verstoß gegen Tool-Regeln, fragwürdige Anfrage von außen. Erste Adresse: Manuel. Richard wird informiert. Schnelle Meldung schützt den Kunden, ROOTS und dich.</p>
+                </div>
+              </div>
             ` },
             { title:'Live-Übung: Welche KI-Zone?', content:`
-              <p>Klicke auf ein Szenario – dann siehst du, welche Zone (und welches Tool) bei ROOTS richtig ist.</p>
+              <p class="ob-mod-lead">Klicke auf ein Szenario – dann siehst du, welche Zone (und welches Tool) bei ROOTS richtig ist.</p>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-gamepad"></i><h3>Zone-Quiz</h3></div>
+                <div class="ob-content-section__body">
               <div class="ob-zone-quiz" data-demo="ki-zones">
                 <div class="ob-zone-item" data-answer="Zone 1 · Claude Cowork"><strong>Strategie-Deck mit Danone-Kundendaten analysieren</strong><span>Vertrauliche Kundendaten, Deck-Erstellung</span><div class="ob-zone-answer"></div></div>
                 <div class="ob-zone-item" data-answer="Zone 2 · MS Copilot / Notion"><strong>Meeting-Notizen anonymisiert zusammenfassen</strong><span>Keine Kundennamen, interne Produktivität</span><div class="ob-zone-answer"></div></div>
@@ -1522,34 +1547,44 @@ Best regards,
                 <div class="ob-zone-item" data-answer="Zone 3 · Gemini"><strong>Visual-Konzept für internen Workshop erstellen</strong><span>Bilder/Marketingtexte ohne Kundendaten</span><div class="ob-zone-answer"></div></div>
                 <div class="ob-zone-item" data-answer="Genehmigungspflichtig · Richard"><strong>Neues KI-Plugin in PowerPoint testen</strong><span>Neues Tool / neues AI-Feature</span><div class="ob-zone-answer"></div></div>
               </div>
+                </div>
+              </div>
             ` }
           ]},
           { id:'m-okr', tab:'OKRs', sections:[
             { title:'Team Meeting', open:true, content:`
-              <p>Wir verfolgen eine restriktive interne Meetingpolitik. Meetings werden je nach Projektanforderung erstellt.<br>Intern haben wir nur einen festen Team-JFX. Unser "Team Meeting / OKR" am Montagmorgen um 9:30.</p>
-              <p>Der Ablauf ist wie folgt:</p>
-              <ol class="learn-list">
-                <li>Teilen der Highlights (und Learnings) der letzten Woche</li>
-                <li>Ein Blick auf die Arbeitszeitverteilung der letzten Woche</li>
-                <li>Ein Blick auf die Umsatzergebnisse der letzten Woche</li>
-                <li>Teilen der geplanten Aufgaben für die angebrochene Woche nach OKRs</li>
-              </ol>
-              <p>Zur Vorbereitung trägt jeder am Freitagabend oder Montagmorgen die geplanten Aufgaben und die Zielerreichung in das OKR-Board ein.</p>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-users"></i><h3>Team Meeting / OKR · Montag 9:30</h3></div>
+                <div class="ob-content-section__body">
+                  <p>Wir verfolgen eine restriktive interne Meetingpolitik. Meetings werden je nach Projektanforderung erstellt. Intern haben wir nur einen festen Team-JFX.</p>
+                  <p><strong>Ablauf:</strong></p>
+                  <ol class="learn-list">
+                    <li>Teilen der Highlights (und Learnings) der letzten Woche</li>
+                    <li>Ein Blick auf die Arbeitszeitverteilung der letzten Woche</li>
+                    <li>Ein Blick auf die Umsatzergebnisse der letzten Woche</li>
+                    <li>Teilen der geplanten Aufgaben für die angebrochene Woche nach OKRs</li>
+                  </ol>
+                  <p>Zur Vorbereitung trägt jeder am Freitagabend oder Montagmorgen die geplanten Aufgaben und die Zielerreichung in das OKR-Board ein.</p>
+                </div>
+              </div>
 
-              <hr class="md-hr">
-
-              <h3>Was sind OKRs</h3>
-              <p>OKRs bestehen aus zwei Teilen:</p>
-              <ul class="learn-list">
-                <li><strong>Objective (O)</strong> – <em>Was</em> will ich erreichen? Ein inspirierendes, outcome-orientiertes, qualitatives Ziel, das Richtung und Motivation gibt.</li>
-                <li><strong>Key Results (KR)</strong> – <em>Wie</em> messe ich den Fortschritt? 2–5 messbare Ergebnisse, qualitativ, die zeigen, ob das Objective erreicht wurde.</li>
-              </ul>
-              <p>Die OKRs werden im Team quartalsweise definiert und wöchentlich überprüft. Am Ende des Zyklus wird bewertet, ob die Key Results erreicht wurden.<br>Dabei gelten 70-100% als erreicht. Wird immer 100% erreicht, sind die Ziele nicht ambitioniert genug. 40-70% gelten als teilweise erreicht und 0-40% als nicht erreicht.</p>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-bullseye"></i><h3>Was sind OKRs?</h3></div>
+                <div class="ob-content-section__body">
+                  <p>OKRs bestehen aus zwei Teilen:</p>
+                  <ul class="learn-list">
+                    <li><strong>Objective (O)</strong> – <em>Was</em> will ich erreichen? Ein inspirierendes, outcome-orientiertes, qualitatives Ziel, das Richtung und Motivation gibt.</li>
+                    <li><strong>Key Results (KR)</strong> – <em>Wie</em> messe ich den Fortschritt? 2–5 messbare Ergebnisse, qualitativ, die zeigen, ob das Objective erreicht wurde.</li>
+                  </ul>
+                  <p>Die OKRs werden im Team quartalsweise definiert und wöchentlich überprüft. Am Ende des Zyklus wird bewertet, ob die Key Results erreicht wurden.</p>
+                  <p>Dabei gelten 70–100&nbsp;% als erreicht. Wird immer 100&nbsp;% erreicht, sind die Ziele nicht ambitioniert genug. 40–70&nbsp;% gelten als teilweise erreicht und 0–40&nbsp;% als nicht erreicht.</p>
+                </div>
+              </div>
             ` },
           ]},
           { id:'m-channels', tab:'Kanäle', sections:[
             { title:'Kommunikationskanäle', open:true, content:`
-              <p class="ob-prose-lead" style="margin:0 0 1rem;font-size:.9rem;line-height:1.65;color:var(--muted)">So erreichen wir uns bei ROOTS — je nach Anlass das passende Medium wählen.</p>
+              <p class="ob-mod-lead">So erreichen wir uns bei ROOTS — je nach Anlass das passende Medium wählen.</p>
               <div class="content-cards">
                 <div class="content-card content-card--channel"><div class="content-card__icon"><i class="fa-solid fa-comments"></i></div><strong>Direkt:</strong><p>Im Office kommunizieren wir meistens direkt über den Schreibtisch oder setzen uns kurz zu Spontanmeetings zusammen.</p></div>
                 <div class="content-card content-card--channel"><div class="content-card__icon"><i class="fa-solid fa-envelope"></i></div><strong>E-Mail:</strong><p>ist das Hauptmedium unserer schriftlichen Kommunikation. Wir nutzen sie auch für kurze Austausche, die in anderen Unternehmen typischerweise auf MS Teams laufen. Wundere dich also nicht über sehr kurze, informelle E-Mails.</p></div>
@@ -1995,11 +2030,11 @@ Best regards,
           ]},
           { id:'m-pres', tab:'Präsentationen', sections:[
             { title:'Präsentationen', open:true, content:`
-              <p style="margin:0 0 1rem;font-size:.9rem;line-height:1.65;color:var(--muted)">Wer eine gute Präsentation hält, überträgt eine Idee in den Kopf des Zuhörers. Folien, Struktur und Rhetorik sind Mittel — kein Selbstzweck.</p>
-              <div class="pres-phases">
-              <div class="pres-phase">
-                <div class="pres-phase-head"><i class="fa-solid fa-bullseye"></i> Phase 1: Strategie</div>
-                <div class="pres-phase-body">
+              <p class="ob-mod-lead">Wer eine gute Präsentation hält, überträgt eine Idee in den Kopf des Zuhörers. Folien, Struktur und Rhetorik sind Mittel — kein Selbstzweck.</p>
+
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-bullseye"></i><h3>Phase 1: Strategie</h3></div>
+                <div class="ob-content-section__body">
               <p><strong>Die drei entscheidenden Fragen:</strong></p>
               <ul class="learn-list">
                 <li>Was weiß mein Zuhörer bereits? Was interessiert ihn, was nicht?</li>
@@ -2010,9 +2045,10 @@ Best regards,
               <p><strong>20-Sekunden-Test:</strong> Was ist die Kernbotschaft, wenn nur 20 Sekunden Zeit bleiben? Wenn die Antwort nicht in einem Satz kommt, ist das Thema noch nicht durchdrungen.</p>
                 </div>
               </div>
-              <div class="pres-phase">
-                <div class="pres-phase-head"><i class="fa-solid fa-route"></i> Phase 2: Storyline</div>
-                <div class="pres-phase-body">
+
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-route"></i><h3>Phase 2: Storyline</h3></div>
+                <div class="ob-content-section__body">
               <p><strong>Die Kernidee zuerst:</strong> Jede starke Präsentation hat eine einzige zentrale Idee, der alles andere untergeordnet ist. Nicht das gesamte Wissen teilen — nur das, was erklärt und mit konkreten Beispielen belebt werden kann.</p>
               <p><strong>Narrativstruktur:</strong> Menschen folgen Geschichten, nicht Listen. Die wirkungsvollste Struktur: Problem zeigen → Lösungssuche → Aha-Moment → neue Perspektive. Nach der Präsentation soll der Zuhörer die Welt anders sehen als davor.</p>
               <p><strong>Interesse wecken am Anfang</strong> — mögliche Einstiege:</p>
@@ -2032,9 +2068,10 @@ Best regards,
               <p><strong>Folienlogik:</strong> Jede Folie hat eine Kernaussage (kein Gliederungstitel), darunter die Argumente/Analysen als Beleg, optional eine Box für Next Steps oder eine Frage. Storyline zuerst nur mit Kernaussagen skizzieren — Folieninhalte erst danach befüllen.</p>
                 </div>
               </div>
-              <div class="pres-phase">
-                <div class="pres-phase-head"><i class="fa-solid fa-chart-column"></i> Phase 3: Visualisierung</div>
-                <div class="pres-phase-body">
+
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-chart-column"></i><h3>Phase 3: Visualisierung</h3></div>
+                <div class="ob-content-section__body">
               <p><strong>Grundprinzipien:</strong></p>
               <ul class="learn-list">
                 <li>Grafiken und sortierte Argumente statt langer Sätze</li>
@@ -2051,9 +2088,10 @@ Best regards,
               </ul>
                 </div>
               </div>
-              <div class="pres-phase">
-                <div class="pres-phase-head"><i class="fa-solid fa-microphone"></i> Phase 4: Delivery</div>
-                <div class="pres-phase-body">
+
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-microphone"></i><h3>Phase 4: Delivery</h3></div>
+                <div class="ob-content-section__body">
               <p><strong>Die drei Grundprinzipien:</strong></p>
               <ul class="learn-list">
                 <li>Du präsentierst den Inhalt, nicht die Folien.</li>
@@ -2068,9 +2106,8 @@ Best regards,
                 <li>Wenn keine Zeit zum Auswendiglernen: Bullet Points auf Notizzettel, Übergänge zwischen den Punkten kennen.</li>
                 <li>Tipp: Vortrag als Audio aufnehmen und z. B. auf dem Nachhauseweg anhören.</li>
               </ul>
-              <p class="ob-ppt-notes"><i class="fa-solid fa-lightbulb" style="color:var(--brand)"></i> Jede Folie hat eine Kernaussage (kein Gliederungstitel) — siehe Folienlogik oben.</p>
+              <div class="highlight"><p><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Jede Folie hat eine Kernaussage (kein Gliederungstitel) — siehe Folienlogik in Phase 2.</p></div>
                 </div>
-              </div>
               </div>
             ` }
           ]}
