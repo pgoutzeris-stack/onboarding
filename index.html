@@ -770,15 +770,25 @@
     .ob-slide__title{font-size:.95rem;font-weight:700;line-height:1.35;color:var(--ink);margin-bottom:.65rem}
     .ob-slide__chart{flex:1;border-radius:6px;background:linear-gradient(180deg,#e2e8f0 0%,#f8fafc 100%);display:flex;align-items:flex-end;gap:.35rem;padding:.55rem .6rem .45rem}
     .ob-slide__bar{flex:1;background:var(--brand);border-radius:3px 3px 0 0;opacity:.85}
-    .ob-zone-quiz{display:grid;gap:.55rem}
-    .ob-zone-item{border:1px solid var(--line);border-radius:10px;padding:.75rem;background:var(--bg);cursor:pointer;transition:border-color .2s,background .2s}
-    .ob-zone-item:hover{border-color:var(--brand);background:var(--brand-light)}
-    .ob-zone-item.is-correct{border-color:#86efac;background:#ecfdf5}
-    .ob-zone-item.is-wrong{border-color:#fca5a5;background:#fef2f2}
-    .ob-zone-item strong{display:block;font-size:.84rem;margin-bottom:.2rem}
-    .ob-zone-item span{font-size:.78rem;color:var(--muted)}
-    .ob-zone-answer{margin-top:.45rem;font-size:.78rem;font-weight:600;color:var(--brand-dark);display:none}
-    .ob-zone-item.is-correct .ob-zone-answer,.ob-zone-item.is-wrong .ob-zone-answer{display:block}
+    .ob-mod-panel{display:flex;flex-direction:column;gap:0}
+    .ob-content-sub{padding-top:.85rem;margin-top:.85rem;border-top:1px dashed var(--line)}
+    .ob-content-sub:first-child{padding-top:0;margin-top:0;border-top:none}
+    .ob-zone-quiz{display:flex;flex-direction:column;gap:.75rem}
+    .ob-zone-quiz__head{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.65rem .85rem;border:1px solid var(--line);border-radius:10px;background:var(--bg);font-size:.8rem;color:var(--muted)}
+    .ob-zone-quiz__score{font-weight:700;color:var(--brand-dark)}
+    .ob-zone-card{border:1px solid var(--line);border-radius:12px;padding:.85rem .95rem;background:var(--bg)}
+    .ob-zone-card.is-done{border-color:rgba(32,110,251,.25);background:var(--surface)}
+    .ob-zone-card__num{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--brand);margin-bottom:.35rem}
+    .ob-zone-card__text{margin:0 0 .7rem;font-size:.86rem;line-height:1.6;color:var(--ink)}
+    .ob-zone-card__choices{display:flex;flex-wrap:wrap;gap:.4rem}
+    .ob-zone-pick{padding:.38rem .65rem;border:1px solid var(--line);border-radius:999px;background:#fff;font-family:inherit;font-size:.72rem;font-weight:600;color:var(--ink);cursor:pointer;transition:all .15s}
+    .ob-zone-pick:hover:not(:disabled){border-color:var(--brand);color:var(--brand);background:var(--brand-light)}
+    .ob-zone-pick:disabled{cursor:default;opacity:.85}
+    .ob-zone-pick.is-correct{border-color:#86efac;background:#ecfdf5;color:#15803d}
+    .ob-zone-pick.is-wrong{border-color:#fca5a5;background:#fef2f2;color:#b91c1c}
+    .ob-zone-card__feedback{margin-top:.65rem;padding:.55rem .7rem;border-radius:8px;font-size:.78rem;line-height:1.5;font-weight:600}
+    .ob-zone-card__feedback.is-ok{background:#ecfdf5;color:#15803d;border:1px solid #bbf7d0}
+    .ob-zone-card__feedback.is-fail{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca}
     .compare-cols{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.75rem 0}
     @media (max-width:720px){.compare-cols{grid-template-columns:1fr}}
     .compare-col{border-radius:10px;padding:.75rem .85rem;font-size:.84rem;line-height:1.6}
@@ -1479,7 +1489,8 @@ Best regards,
           ]},
           { id:'m-ki', tab:'KI', sections:[
             { title:'KI Nutzung', open:true, content:`
-              <p class="ob-mod-lead">Wir bei ROOTS haben verbindliche AI Rules, die Nutzung und Umgang mit KI regeln. KI macht uns schneller, nicht schlauer — Verantwortung für Inhalt, Qualität und Vertraulichkeit bleibt bei uns. Diese sieben Regeln gelten für alle, ohne Ausnahme.</p>
+              <div class="ob-mod-panel">
+              <p class="ob-mod-lead">Verbindliche AI Rules für Rechtssicherheit — KI macht uns schneller, nicht schlauer. Verantwortung bleibt bei uns.</p>
 
               <div class="ob-content-section">
                 <div class="ob-content-section__head"><i class="fa-solid fa-layer-group"></i><h3>1. Drei Zonen und Aufgaben</h3></div>
@@ -1534,25 +1545,78 @@ Best regards,
                   <p>Datenleck, falscher Output beim Kunden, Verstoß gegen Tool-Regeln, fragwürdige Anfrage von außen. Erste Adresse: Manuel. Richard wird informiert. Schnelle Meldung schützt den Kunden, ROOTS und dich.</p>
                 </div>
               </div>
-            ` },
-            { title:'Live-Übung: Welche KI-Zone?', content:`
-              <p class="ob-mod-lead">Klicke auf ein Szenario – dann siehst du, welche Zone (und welches Tool) bei ROOTS richtig ist.</p>
-              <div class="ob-content-section">
-                <div class="ob-content-section__head"><i class="fa-solid fa-gamepad"></i><h3>Zone-Quiz</h3></div>
-                <div class="ob-content-section__body">
-              <div class="ob-zone-quiz" data-demo="ki-zones">
-                <div class="ob-zone-item" data-answer="Zone 1 · Claude Cowork"><strong>Strategie-Deck mit Danone-Kundendaten analysieren</strong><span>Vertrauliche Kundendaten, Deck-Erstellung</span><div class="ob-zone-answer"></div></div>
-                <div class="ob-zone-item" data-answer="Zone 2 · MS Copilot / Notion"><strong>Meeting-Notizen anonymisiert zusammenfassen</strong><span>Keine Kundennamen, interne Produktivität</span><div class="ob-zone-answer"></div></div>
-                <div class="ob-zone-item" data-answer="Zone 3 · Perplexity"><strong>Branchentrend-Recherche für FMCG-Marketing</strong><span>Öffentliche Recherche, keine Kundendaten</span><div class="ob-zone-answer"></div></div>
-                <div class="ob-zone-item" data-answer="Zone 3 · Gemini"><strong>Visual-Konzept für internen Workshop erstellen</strong><span>Bilder/Marketingtexte ohne Kundendaten</span><div class="ob-zone-answer"></div></div>
-                <div class="ob-zone-item" data-answer="Genehmigungspflichtig · Richard"><strong>Neues KI-Plugin in PowerPoint testen</strong><span>Neues Tool / neues AI-Feature</span><div class="ob-zone-answer"></div></div>
               </div>
+            ` },
+            { title:'Live-Übung: Welche KI-Zone?', open:true, content:`
+              <p class="ob-mod-lead">5 Alltagsfälle aus der ROOTS-Beratung — wähle pro Fall die richtige Zone. Erst raten, dann die Antwort prüfen.</p>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-gamepad"></i><h3>KI-Zonen-Quiz</h3></div>
+                <div class="ob-content-section__body">
+                  <div class="ob-zone-quiz" data-demo="ki-zones">
+                    <div class="ob-zone-quiz__head"><span>Wähle die passende Zone pro Fall</span><span class="ob-zone-quiz__score" data-zone-score>0 / 5</span></div>
+                    <div class="ob-zone-card" data-zone-q data-answer="zone1" data-explain="Vertrauliche Kundendaten und Deck-Arbeit gehören ausschließlich in Claude Cowork (Zone 1).">
+                      <div class="ob-zone-card__num">Fall 1 · Kundenprojekt</div>
+                      <p class="ob-zone-card__text">Du strukturierst ein Q4-Steering-Deck für Danone mit Umsatz- und Marktdaten aus dem Kunden-SharePoint.</p>
+                      <div class="ob-zone-card__choices">
+                        <button type="button" class="ob-zone-pick" data-zone-pick="zone1">Zone 1</button>
+                        <button type="button" class="ob-zone-pick" data-zone-pick="zone2">Zone 2</button>
+                        <button type="button" class="ob-zone-pick" data-zone-pick="zone3">Zone 3</button>
+                        <button type="button" class="ob-zone-pick" data-zone-pick="approval">Genehmigung</button>
+                      </div>
+                      <div class="ob-zone-card__feedback" hidden></div>
+                    </div>
+                    <div class="ob-zone-card" data-zone-q data-answer="zone2" data-explain="Interne, anonymisierte Meeting-Notizen ohne Kundennamen → Zone 2 (Copilot / Notion).">
+                      <div class="ob-zone-card__num">Fall 2 · Intern</div>
+                      <p class="ob-zone-card__text">Du fasst die Montags-OKR-Highlights aus dem Team-Meeting zusammen — ohne Kundennamen, nur interne Projekt-Codes.</p>
+                      <div class="ob-zone-card__choices">
+                        <button type="button" class="ob-zone-pick" data-zone-pick="zone1">Zone 1</button>
+                        <button type="button" class="ob-zone-pick" data-zone-pick="zone2">Zone 2</button>
+                        <button type="button" class="ob-zone-pick" data-zone-pick="zone3">Zone 3</button>
+                        <button type="button" class="ob-zone-pick" data-zone-pick="approval">Genehmigung</button>
+                      </div>
+                      <div class="ob-zone-card__feedback" hidden></div>
+                    </div>
+                    <div class="ob-zone-card" data-zone-q data-answer="zone3" data-explain="Öffentliche Branchenrecherche ohne Kundendaten → Zone 3 · Perplexity.">
+                      <div class="ob-zone-card__num">Fall 3 · Recherche</div>
+                      <p class="ob-zone-card__text">Du recherchierst FMCG-Marketing-Trends in Europa für einen anonymen Pitch-Hintergrund — keine Kundendaten im Prompt.</p>
+                      <div class="ob-zone-card__choices">
+                        <button type="button" class="ob-zone-pick" data-zone-pick="zone1">Zone 1</button>
+                        <button type="button" class="ob-zone-pick" data-zone-pick="zone2">Zone 2</button>
+                        <button type="button" class="ob-zone-pick" data-zone-pick="zone3">Zone 3</button>
+                        <button type="button" class="ob-zone-pick" data-zone-pick="approval">Genehmigung</button>
+                      </div>
+                      <div class="ob-zone-card__feedback" hidden></div>
+                    </div>
+                    <div class="ob-zone-card" data-zone-q data-answer="zone3" data-explain="Visual-/Marketingtexte ohne Kundendaten → Zone 3 · Gemini.">
+                      <div class="ob-zone-card__num">Fall 4 · Visual</div>
+                      <p class="ob-zone-card__text">Du erstellst ein Moodboard-Visual und Headline-Varianten für einen internen ROOTS-Workshop — ohne Kundenbezug.</p>
+                      <div class="ob-zone-card__choices">
+                        <button type="button" class="ob-zone-pick" data-zone-pick="zone1">Zone 1</button>
+                        <button type="button" class="ob-zone-pick" data-zone-pick="zone2">Zone 2</button>
+                        <button type="button" class="ob-zone-pick" data-zone-pick="zone3">Zone 3</button>
+                        <button type="button" class="ob-zone-pick" data-zone-pick="approval">Genehmigung</button>
+                      </div>
+                      <div class="ob-zone-card__feedback" hidden></div>
+                    </div>
+                    <div class="ob-zone-card" data-zone-q data-answer="approval" data-explain="Neues KI-Plugin = neues Tool/Feature → genehmigungspflichtig, Freigabe durch Richard.">
+                      <div class="ob-zone-card__num">Fall 5 · Neues Tool</div>
+                      <p class="ob-zone-card__text">Ein neues KI-Plugin für PowerPoint verspricht schnellere Chart-Erstellung — du willst es im Mandat testen.</p>
+                      <div class="ob-zone-card__choices">
+                        <button type="button" class="ob-zone-pick" data-zone-pick="zone1">Zone 1</button>
+                        <button type="button" class="ob-zone-pick" data-zone-pick="zone2">Zone 2</button>
+                        <button type="button" class="ob-zone-pick" data-zone-pick="zone3">Zone 3</button>
+                        <button type="button" class="ob-zone-pick" data-zone-pick="approval">Genehmigung</button>
+                      </div>
+                      <div class="ob-zone-card__feedback" hidden></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             ` }
           ]},
           { id:'m-okr', tab:'OKRs', sections:[
             { title:'Team Meeting', open:true, content:`
+              <div class="ob-mod-panel">
               <div class="ob-content-section">
                 <div class="ob-content-section__head"><i class="fa-solid fa-users"></i><h3>Team Meeting / OKR · Montag 9:30</h3></div>
                 <div class="ob-content-section__body">
@@ -1579,6 +1643,7 @@ Best regards,
                   <p>Die OKRs werden im Team quartalsweise definiert und wöchentlich überprüft. Am Ende des Zyklus wird bewertet, ob die Key Results erreicht wurden.</p>
                   <p>Dabei gelten 70–100&nbsp;% als erreicht. Wird immer 100&nbsp;% erreicht, sind die Ziele nicht ambitioniert genug. 40–70&nbsp;% gelten als teilweise erreicht und 0–40&nbsp;% als nicht erreicht.</p>
                 </div>
+              </div>
               </div>
             ` },
           ]},
@@ -1721,45 +1786,64 @@ Best regards,
               </div>
             ` },
             { title:'Structured Summary', open:true, content:`
-              <h3>Structured Summary im Detail</h3>
-              <h4>Drei Situationen — drei Solution-Typen</h4>
-              <p>Jedes berufliche Gespräch fällt in eine dieser drei Kategorien:</p>
-              <ul class="learn-list">
-                <li>Du hast ein Problem und brauchst eine Lösung. → Solution = „Hilfst Du mir, eine Lösung zu finden?"</li>
-                <li>Du hast ein Problem und schlägst eine Lösung vor. → Solution = Dein Vorschlag.</li>
-                <li>Du hattest ein Problem und es ist gelöst. → Solution = Was Du getan hast und der Status.</li>
-              </ul>
-              <p>High Performers fragen häufig um Rat, kommen aber meist mit ein bis zwei Lösungsideen — nicht „leer". Der Unterschied zwischen „Mach Du das für mich" und „Was hältst Du davon?" ist signifikant.</p>
+              <div class="ob-mod-panel">
+              <p class="ob-mod-lead">GPS (Goal · Problem · Solution) in drei Sätzen — das Herzstück der First Minute.</p>
 
-              <h4>Vier Ursachen für überkomplexe Zusammenfassungen</h4>
-              <p>Wenn Deine Summary nicht in drei Sätze passt, liegt es meist an einer dieser Ursachen:</p>
-              <ul class="learn-list">
-                <li><strong>Du nimmst an, das Gegenüber denkt wie Du.</strong> Es tut es nicht. Starte mit der minimalsten Information, nicht der vollständigsten.</li>
-                <li><strong>Du glaubst, Empfänger braucht alle Details, um Dich zu verstehen.</strong> Tut sie nicht. Wenige Worte mit den richtigen Informationen schlagen viele Worte mit allen.</li>
-                <li><strong>Du beschreibst Variablen und Abhängigkeiten statt das Problem.</strong> Eine späte Lieferung ist die Lösung; die Abhängigkeit selbst ist nicht das Problem.</li>
-                <li><strong>Du fasst mehrere Probleme auf einmal zusammen.</strong> Probleme werden eines nach dem anderen gelöst — also auch eines nach dem anderen geframt.</li>
-              </ul>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-list-check"></i><h3>Drei Situationen — drei Solution-Typen</h3></div>
+                <div class="ob-content-section__body">
+                  <p>Jedes berufliche Gespräch fällt in eine dieser drei Kategorien:</p>
+                  <ul class="learn-list">
+                    <li>Du hast ein Problem und brauchst eine Lösung. → Solution = „Hilfst Du mir, eine Lösung zu finden?"</li>
+                    <li>Du hast ein Problem und schlägst eine Lösung vor. → Solution = Dein Vorschlag.</li>
+                    <li>Du hattest ein Problem und es ist gelöst. → Solution = Was Du getan hast und der Status.</li>
+                  </ul>
+                  <p>High Performers fragen häufig um Rat, kommen aber meist mit ein bis zwei Lösungsideen — nicht „leer". Der Unterschied zwischen „Mach Du das für mich" und „Was hältst Du davon?" ist signifikant.</p>
+                </div>
+              </div>
 
-              <h4>Beispiel: Komplexes Thema in 30 Sekunden</h4>
-              <p>NASA-Engineers vs. Laie. Zwei Engineers erklärten 20 Minuten lang die Komplexität der ISS. Ein fachfremder Zuhörer fasste anschließend zusammen:</p>
-              <ul class="learn-list">
-                <li><strong>Goal:</strong> Ein Forschungslabor im All bauen, damit die Menschheit Wichtiges lernt.</li>
-                <li><strong>Problem:</strong> Das All ist schwer zu erreichen, und es gibt 100 Wege dort zu sterben.</li>
-                <li><strong>Solution:</strong> Viel Geld ausgeben, um die Forschenden am Leben zu halten.</li>
-              </ul>
-              <p>30 Sekunden statt 20 Minuten — und alle haben es verstanden. Jedes Thema lässt sich so reduzieren.</p>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-scissors"></i><h3>Vier Ursachen für überkomplexe Summaries</h3></div>
+                <div class="ob-content-section__body">
+                  <p>Wenn Deine Summary nicht in drei Sätze passt, liegt es meist an einer dieser Ursachen:</p>
+                  <ul class="learn-list">
+                    <li><strong>Du nimmst an, das Gegenüber denkt wie Du.</strong> Es tut es nicht. Starte mit der minimalsten Information, nicht der vollständigsten.</li>
+                    <li><strong>Du glaubst, Empfänger braucht alle Details, um Dich zu verstehen.</strong> Tut sie nicht. Wenige Worte mit den richtigen Informationen schlagen viele Worte mit allen.</li>
+                    <li><strong>Du beschreibst Variablen und Abhängigkeiten statt das Problem.</strong> Eine späte Lieferung ist die Lösung; die Abhängigkeit selbst ist nicht das Problem.</li>
+                    <li><strong>Du fasst mehrere Probleme auf einmal zusammen.</strong> Probleme werden eines nach dem anderen gelöst — also auch eines nach dem anderen geframt.</li>
+                  </ul>
+                </div>
+              </div>
 
-              <h4>Solutions sind zukunftsgerichtet</h4>
-              <p>Eine Solution beendet die Summary mit Blick nach vorn. Der falsche Reflex: chronologisch erklären („Erst kam X, dann Y, dann Z"). Das fixiert die Diskussion auf die Vergangenheit.</p>
-              <p>Falsch (Status-Update Fertigung):</p>
-              <blockquote class="md-quote">„Wir hatten einen Stillstand wegen blockierter Roller, dann mussten wir die Markierungen neu machen, weil das Layout veraltet war …"</blockquote>
-              <p>Richtig:</p>
-              <blockquote class="md-quote">„Wir haben den Roller-Stillstand gefunden und in 24 Stunden behoben. Produktion läuft wieder. Layout-Doku wird aktualisiert."</blockquote>
-              <p>Goal und Problem sind identisch — aber die Solution-Formulierung kippt das ganze Gespräch von „Was ist passiert?" auf „Wie geht es weiter?".</p>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-rocket"></i><h3>Beispiel: Komplexes Thema in 30 Sekunden</h3></div>
+                <div class="ob-content-section__body">
+                  <p>NASA-Engineers vs. Laie. Zwei Engineers erklärten 20 Minuten lang die Komplexität der ISS. Ein fachfremder Zuhörer fasste anschließend zusammen:</p>
+                  <ul class="learn-list">
+                    <li><strong>Goal:</strong> Ein Forschungslabor im All bauen, damit die Menschheit Wichtiges lernt.</li>
+                    <li><strong>Problem:</strong> Das All ist schwer zu erreichen, und es gibt 100 Wege dort zu sterben.</li>
+                    <li><strong>Solution:</strong> Viel Geld ausgeben, um die Forschenden am Leben zu halten.</li>
+                  </ul>
+                  <p>30 Sekunden statt 20 Minuten — und alle haben es verstanden. Jedes Thema lässt sich so reduzieren.</p>
+                </div>
+              </div>
+
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-forward"></i><h3>Solutions sind zukunftsgerichtet</h3></div>
+                <div class="ob-content-section__body">
+                  <p>Eine Solution beendet die Summary mit Blick nach vorn. Der falsche Reflex: chronologisch erklären („Erst kam X, dann Y, dann Z"). Das fixiert die Diskussion auf die Vergangenheit.</p>
+                  <div class="ob-split-cards">
+                    <div class="ob-split-card ob-split-card--dont"><strong>Falsch · Status-Update</strong><blockquote class="md-quote" style="margin:.35rem 0 0">„Wir hatten einen Stillstand wegen blockierter Roller, dann mussten wir die Markierungen neu machen …"</blockquote></div>
+                    <div class="ob-split-card ob-split-card--do"><strong>Richtig · Solution-first</strong><blockquote class="md-quote" style="margin:.35rem 0 0">„Wir haben den Roller-Stillstand in 24 Stunden behoben. Produktion läuft wieder. Layout-Doku wird aktualisiert."</blockquote></div>
+                  </div>
+                  <p style="margin-top:.75rem">Goal und Problem sind identisch — aber die Solution-Formulierung kippt das Gespräch von „Was ist passiert?" auf „Wie geht es weiter?".</p>
+                </div>
+              </div>
             ` }
           ]},
           { id:'m-email', tab:'E-Mail', sections:[
             { title:'E-Mail Ethikette', open:true, content:`
+              <div class="ob-mod-panel">
               <div class="ob-content-section">
                 <div class="ob-content-section__head"><i class="fa-solid fa-circle-question"></i><h3>Wann (k)eine E-Mail?</h3></div>
                 <div class="ob-content-section__body">
@@ -1783,9 +1867,8 @@ Best regards,
               </div>
 
               <div class="ob-content-section">
-                <div class="ob-content-section__head"><i class="fa-solid fa-pen-to-square"></i><h3>Aufbau einer E-Mail</h3></div>
+                <div class="ob-content-section__head"><i class="fa-solid fa-pen-to-square"></i><h3>Aufbau · Betreff</h3></div>
                 <div class="ob-content-section__body">
-              <h4>Betreff</h4>
               <p><strong>Betreff = Urgency (optional) + CTA + Thema + Grund</strong></p>
               <p>z. B. „[URGENT] Genehmigen Veröffentlichung Zahlen Q4"</p>
               <ul class="learn-list">
@@ -1802,8 +1885,12 @@ Best regards,
                 <li>Bait-and-Switch (Betreff passt nicht zum Inhalt)</li>
                 <li>Reine Labels wie „FYI", „Update", „Here you go"</li>
               </ul>
+                </div>
+              </div>
 
-              <h4>Body</h4>
+              <div class="ob-content-section">
+                <div class="ob-content-section__head"><i class="fa-solid fa-align-left"></i><h3>Aufbau · Body</h3></div>
+                <div class="ob-content-section__body">
               <p><strong>Body = Begrüßung + Topic + Action + Key message + Time frame + Anzahl Fragen</strong></p>
               <p><strong>Die ersten 5 Zeilen sind kritisch</strong> — annehmen, dass nur diese gelesen werden. Dort gehört rein:</p>
               <ol class="learn-list">
@@ -1944,10 +2031,12 @@ Best regards,
               </div>
                 </div>
               </div>
+              </div>
             ` }
           ]},
           { id:'m-meetings', tab:'Meetings', sections:[
             { title:'Meeting Ethikette', open:true, content:`
+              <div class="ob-mod-panel">
               <div class="ob-content-section">
                 <div class="ob-content-section__head"><i class="fa-solid fa-calendar-xmark"></i><h3>Braucht es überhaupt ein Meeting?</h3></div>
                 <div class="ob-content-section__body">
@@ -2026,10 +2115,12 @@ Best regards,
               </div>
                 </div>
               </div>
+              </div>
             ` }
           ]},
           { id:'m-pres', tab:'Präsentationen', sections:[
             { title:'Präsentationen', open:true, content:`
+              <div class="ob-mod-panel">
               <p class="ob-mod-lead">Wer eine gute Präsentation hält, überträgt eine Idee in den Kopf des Zuhörers. Folien, Struktur und Rhetorik sind Mittel — kein Selbstzweck.</p>
 
               <div class="ob-content-section">
@@ -2108,6 +2199,7 @@ Best regards,
               </ul>
               <div class="highlight"><p><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Jede Folie hat eine Kernaussage (kein Gliederungstitel) — siehe Folienlogik in Phase 2.</p></div>
                 </div>
+              </div>
               </div>
             ` }
           ]}
@@ -3827,24 +3919,51 @@ Best regards,
     updateFirstMinuteDemo(root);
   }
 
+  const KI_ZONE_ANSWERS = {
+    zone1: 'Zone 1 · Claude Cowork',
+    zone2: 'Zone 2 · MS Copilot / Notion',
+    zone3: 'Zone 3 · Spezial-LLM (z. B. Perplexity, Gemini, ChatGPT)',
+    approval: 'Genehmigungspflichtig · Richard',
+  };
+
   function bindKiZoneDemo(root) {
     if (root.dataset.bound === '1') return;
     root.dataset.bound = '1';
-    root.querySelectorAll('.ob-zone-item').forEach(item => {
-      item.addEventListener('click', () => {
-        const ans = item.dataset.answer || '';
-        const box = item.querySelector('.ob-zone-answer');
-        item.classList.add('is-correct');
-        if (box) box.textContent = '✓ ' + ans;
-        root.querySelectorAll('.ob-zone-item').forEach(other => {
-          if (other !== item && !other.classList.contains('is-correct')) {
-            other.classList.add('is-wrong');
-            const oa = other.querySelector('.ob-zone-answer');
-            if (oa && !oa.textContent) oa.textContent = '→ ' + (other.dataset.answer || '');
+    const scoreEl = root.querySelector('[data-zone-score]');
+    const cards = root.querySelectorAll('[data-zone-q]');
+    let score = 0;
+
+    function refreshScore() {
+      if (scoreEl) scoreEl.textContent = score + ' / ' + cards.length;
+    }
+
+    cards.forEach(card => {
+      const correct = card.dataset.answer || '';
+      const explain = card.dataset.explain || KI_ZONE_ANSWERS[correct] || '';
+      const feedback = card.querySelector('.ob-zone-card__feedback');
+      card.querySelectorAll('[data-zone-pick]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (card.dataset.answered === '1') return;
+          card.dataset.answered = '1';
+          card.classList.add('is-done');
+          const pick = btn.dataset.zonePick || '';
+          const isCorrect = pick === correct;
+          if (isCorrect) score++;
+          card.querySelectorAll('[data-zone-pick]').forEach(b => {
+            b.disabled = true;
+            b.classList.toggle('is-correct', b.dataset.zonePick === correct);
+            b.classList.toggle('is-wrong', b === btn && !isCorrect);
+          });
+          if (feedback) {
+            feedback.hidden = false;
+            feedback.className = 'ob-zone-card__feedback ' + (isCorrect ? 'is-ok' : 'is-fail');
+            feedback.textContent = (isCorrect ? '✓ Richtig — ' : '✗ Richtig: ' + (KI_ZONE_ANSWERS[correct] || correct) + ' — ') + explain;
           }
+          refreshScore();
         });
       });
     });
+    refreshScore();
   }
 
   function bindSlideCompareDemo(root) {
