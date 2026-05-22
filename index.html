@@ -291,15 +291,15 @@
     }
     .week-title{font-size:1.1rem;font-weight:700}
     .week-prog{margin-left:auto;font-size:.85rem;color:var(--muted)}
-    .module-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
-    .tile{background:var(--bg);border-radius:var(--radius-dash);box-shadow:var(--shadow-dash);padding:1.4rem;cursor:pointer;transition:all .25s;border:2px solid transparent;position:relative;overflow:hidden}
+    .module-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem}
+    .tile{background:var(--bg);border-radius:var(--radius-dash);box-shadow:var(--shadow-dash);padding:1.65rem 1.5rem;cursor:pointer;transition:all .25s;border:2px solid transparent;position:relative;overflow:hidden}
     .tile::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .3s}
     .tile:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);border-color:var(--brand-light)}
     .tile:hover::before{transform:scaleX(1)}
     /* Tile – nicht erledigt: grau/gedämpft */
     .tile-icon{color:var(--muted);font-size:1.25rem;margin-bottom:.85rem;line-height:1;transition:color .25s}
     .tile-title{font-size:.95rem;font-weight:600;margin-bottom:.35rem}
-    .tile-sub{font-size:.8rem;color:var(--muted);margin-bottom:.85rem;line-height:1.5}
+    .tile-sub{font-size:.8rem;color:var(--muted);margin-bottom:1rem;line-height:1.65}
     .tile-progress{display:flex;align-items:center;gap:.6rem}
     .tile-prog-bar{flex:1;height:5px;background:var(--line);border-radius:999px;overflow:hidden}
     .tile-prog-fill{height:100%;border-radius:999px;background:var(--line);transition:width .5s}
@@ -369,14 +369,14 @@
     .module-tab.active{background:var(--brand);border-color:var(--brand);color:#fff}
     .module-tab-panel{display:none;animation:fadeIn .2s ease}
     .module-tab-panel.active{display:block}
-    .sub-accordion{border:1px solid var(--line);border-radius:12px;margin-bottom:.85rem;overflow:hidden;background:var(--bg);box-shadow:0 1px 3px rgba(15,23,42,.04)}
-    .sub-accordion summary{padding:1.05rem 1.25rem;font-size:1.05rem;font-weight:600;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:1rem;background:var(--surface);color:var(--ink);user-select:none}
+    .sub-accordion{border:1px solid var(--line);border-radius:12px;margin-bottom:1.1rem;overflow:hidden;background:var(--bg);box-shadow:0 1px 3px rgba(15,23,42,.04)}
+    .sub-accordion summary{padding:1.2rem 1.35rem;font-size:1.05rem;font-weight:600;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:1rem;background:var(--surface);color:var(--ink);user-select:none}
     .sub-accordion summary::-webkit-details-marker{display:none}
     .sub-accordion-title{flex:1;line-height:1.4}
     .sub-accordion-chevron{font-size:.8rem;color:var(--muted);transition:transform .25s ease,color .25s ease;flex-shrink:0}
     .sub-accordion[open] summary{border-bottom:1px solid var(--line);background:var(--brand-light)}
     .sub-accordion[open] summary .sub-accordion-chevron{transform:rotate(180deg);color:var(--brand)}
-    .sub-accordion-body{padding:1.25rem 1.35rem 1.4rem}
+    .sub-accordion-body{padding:1.45rem 1.5rem 1.65rem}
     .sub-accordion-body h3{font-size:1.05rem;font-weight:700;margin:1.15rem 0 .55rem;color:var(--ink)}
     .sub-accordion-body h3:first-child{margin-top:0}
     .sub-accordion-body p,.sub-accordion-body li{font-size:1rem;color:var(--ink);line-height:1.75}
@@ -399,8 +399,8 @@
     .mod-section-chevron{font-size:.75rem;color:var(--muted);transition:transform .25s ease,color .2s ease;flex-shrink:0}
     .mod-section summary:hover,.mod-section summary:hover .sub-accordion-title{color:var(--brand)}
     .mod-divider{display:block;width:100%;height:0;margin:1rem 0;border:none;border-top:1px solid var(--line)}
-    .mod-section-body{padding:0 0 1.1rem;color:var(--ink)}
-    .mod-section-body p,.mod-section-body li{font-size:.92rem;line-height:1.7;color:var(--ink)}
+    .mod-section-body{padding:0 0 1.35rem;color:var(--ink)}
+    .mod-section-body p,.mod-section-body li{font-size:.92rem;line-height:1.75;color:var(--ink)}
     .mod-section-body table{width:100%;border-collapse:collapse;font-size:.85rem;margin:.65rem 0}
     .mod-section-body th{background:var(--surface);padding:.55rem .75rem;text-align:left;font-weight:600;border:1px solid var(--line)}
     .mod-section-body td{padding:.5rem .75rem;border:1px solid var(--line);color:var(--ink)}
@@ -430,7 +430,7 @@
     .mod-section-body .md-pre{margin:.65rem 0;padding:.75rem .85rem;background:var(--bg);border:1px solid var(--line);border-radius:8px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.78rem;line-height:1.5;white-space:pre-wrap;color:var(--ink)}
     .mod-section-body .md-quote{margin:.55rem 0;padding:.55rem .75rem;border-left:3px solid var(--line);color:var(--muted);font-style:italic}
     .mod-section-body .md-hr{border:none;border-top:1px solid var(--line);margin:1rem 0}
-    .mod-section-body .learn-list li{margin-bottom:.4rem;font-size:.92rem;line-height:1.7;color:var(--ink)}
+    .mod-section-body .learn-list li{margin-bottom:.65rem;font-size:.92rem;line-height:1.75;color:var(--ink)}
     .mod-section-body h3,.mod-section-body h4{font-size:.95rem;font-weight:600;color:var(--ink);margin:1.1rem 0 .5rem}
     .mod-section-body h3:first-child,.mod-section-body h4:first-child{margin-top:0}
     .team-roster{display:grid;gap:.45rem;margin-top:.5rem}
@@ -493,7 +493,7 @@
     .ob-timeline{position:relative;padding-left:1.75rem}
     .ob-timeline::before{content:'';position:absolute;left:6px;top:4px;bottom:4px;width:2px;background:var(--line);border-radius:999px}
     .ob-timeline-progress{position:absolute;left:6px;top:4px;width:2px;height:0;background:var(--brand);border-radius:999px}
-    .ob-timeline-step{position:relative;padding:0 0 1.1rem 1rem;opacity:0;transform:translateY(6px);transition:opacity .38s ease,transform .38s ease}
+    .ob-timeline-step{position:relative;padding:0 0 1.35rem 1rem;opacity:0;transform:translateY(6px);transition:opacity .38s ease,transform .38s ease}
     .ob-timeline-step.is-visible{opacity:1;transform:none}
     .ob-timeline-step::before{content:'';position:absolute;left:calc(-1.75rem + 2px);top:.3rem;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2.5px solid var(--line);box-sizing:border-box;z-index:2;transition:border-color .3s ease,background .3s ease}
     .ob-timeline-step.is-visible::before{border-color:var(--brand);background:var(--brand-light)}
@@ -502,8 +502,8 @@
     @keyframes orgFadeIn{from{opacity:0}to{opacity:1}}
     @keyframes orgLineV{to{transform:scaleY(1)}}
     @keyframes orgLineH{to{transform:scaleX(1)}}
-    .content-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.65rem;margin:.75rem 0}
-    .content-card{border:1px solid var(--line);border-radius:10px;padding:.85rem .9rem;background:var(--surface);opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease}
+    .content-cards{display:flex;flex-direction:column;gap:.85rem;margin:1rem 0 1.25rem}
+    .content-card{border:1px solid var(--line);border-radius:14px;padding:1rem 1.15rem;background:var(--surface);opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease}
     .content-card__icon{width:2rem;height:2rem;border-radius:8px;background:var(--brand-light);color:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:.45rem;font-size:.85rem}
     .content-card strong{display:block;font-size:.88rem;color:var(--ink);margin-bottom:.25rem}
     .content-card p{margin:0;font-size:.84rem;line-height:1.55;color:var(--muted)}
@@ -514,8 +514,8 @@
     .module-tab-panel.is-inview .content-card:nth-child(4){transition-delay:190ms}
     .module-tab-panel.is-inview .content-card:nth-child(5){transition-delay:240ms}
     .module-tab-panel.is-inview .content-card:nth-child(6){transition-delay:290ms}
-    .content-flow{display:flex;flex-direction:column;gap:.5rem;margin:.85rem 0}
-    .content-flow__step{display:grid;grid-template-columns:4.5rem minmax(0,1fr);gap:.65rem;align-items:start;padding:.7rem .85rem;border:1px solid var(--line);border-radius:10px;background:var(--status-bg);opacity:0;transform:translateX(-6px);transition:opacity .35s ease,transform .35s ease}
+    .content-flow{display:flex;flex-direction:column;gap:.85rem;margin:1.1rem 0 1.25rem}
+    .content-flow__step{display:grid;grid-template-columns:4.5rem minmax(0,1fr);gap:.85rem;align-items:start;padding:1rem 1.1rem;border:1px solid var(--line);border-radius:12px;background:var(--status-bg);opacity:0;transform:translateX(-6px);transition:opacity .35s ease,transform .35s ease}
     .content-flow__label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--brand);padding-top:.15rem}
     .content-flow__body{font-size:.88rem;line-height:1.6;color:var(--ink)}
     .content-flow__body p{margin:0 0 .35rem}
@@ -537,20 +537,20 @@
     .mod-section[open] .content-flow__step:nth-child(2){transition-delay:130ms}
     .mod-section[open] .content-flow__step:nth-child(3){transition-delay:210ms}
     .mod-section[open] .content-flow__step:nth-child(4){transition-delay:290ms}
-    .fm-principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.65rem;margin:.75rem 0}
-    .fm-principle{border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;background:var(--surface);opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease}
+    .fm-principles{display:flex;flex-direction:column;gap:.85rem;margin:1rem 0 1.25rem}
+    .fm-principle{border:1px solid var(--line);border-radius:14px;padding:1.05rem 1.15rem;background:var(--surface);opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease}
     .fm-principle__head{display:flex;align-items:center;gap:.55rem;margin-bottom:.45rem}
     .fm-principle__num{width:1.75rem;height:1.75rem;border-radius:50%;background:var(--brand);color:#fff;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
     .fm-principle__head strong{font-size:.88rem;color:var(--ink);line-height:1.35}
     .fm-principle p{margin:0;font-size:.84rem;line-height:1.6;color:var(--muted)}
     .fm-intro{display:grid;gap:.55rem;margin:.25rem 0 .75rem}
     .fm-intro .highlight{margin:0}
-    .fm-arch-diagram{margin:.75rem 0;padding:.9rem 1rem;border:1px solid var(--line);border-radius:12px;background:linear-gradient(135deg,var(--brand-light) 0%,var(--surface) 100%);opacity:0;transform:translateY(6px);transition:opacity .35s ease,transform .35s ease}
+    .fm-arch-diagram{margin:1rem 0 1.25rem;padding:1.15rem 1.25rem;border:1px solid var(--line);border-radius:14px;background:linear-gradient(135deg,var(--brand-light) 0%,var(--surface) 100%);opacity:0;transform:translateY(6px);transition:opacity .35s ease,transform .35s ease}
     .mod-section[open] .fm-arch-diagram,.module-tab-panel.is-inview .fm-arch-diagram{opacity:1;transform:none}
-    .fm-arch-diagram__row{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .45rem;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.72rem;line-height:1.45;color:var(--ink)}
-    .fm-arch-diagram__chip{padding:.32rem .55rem;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-weight:600;color:var(--brand-dark);white-space:nowrap}
-    .fm-arch-diagram__arrow{color:var(--muted);font-weight:400}
-    .fm-arch-diagram__times{display:flex;flex-wrap:wrap;gap:.35rem 1.2rem;margin-top:.55rem;padding-top:.55rem;border-top:1px dashed var(--line);font-size:.68rem;color:var(--muted)}
+    .fm-arch-diagram__row{display:flex;flex-direction:column;align-items:stretch;gap:.55rem;font-family:inherit;font-size:.82rem;line-height:1.45;color:var(--ink)}
+    .fm-arch-diagram__chip{padding:.55rem .85rem;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-weight:600;color:var(--brand-dark);text-align:center}
+    .fm-arch-diagram__arrow{display:none}
+    .fm-arch-diagram__times{display:flex;flex-wrap:wrap;gap:.45rem 1rem;margin-top:.75rem;padding-top:.75rem;border-top:1px dashed var(--line);font-size:.72rem;color:var(--muted)}
     .fm-arch-diagram__times span{white-space:nowrap}
     .content-flow__step--fm1{border-left:3px solid #3b82f6;background:linear-gradient(90deg,rgba(59,130,246,.06),var(--status-bg) 38%)}
     .content-flow__step--fm2{border-left:3px solid #8b5cf6;background:linear-gradient(90deg,rgba(139,92,246,.06),var(--status-bg) 38%)}
@@ -595,6 +595,20 @@
     .tag-list li{font-size:.72rem;font-weight:600;padding:.22rem .55rem;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
     .tag-list li.is-do{background:#ecfdf5;border-color:#bbf7d0;color:#15803d}
     .tag-list li.is-dont{background:#fef2f2;border-color:#fecaca;color:#b91c1c}
+    .ob-comfort-framework{display:grid;grid-template-columns:minmax(220px,280px) minmax(0,1fr);gap:1.25rem;align-items:center;margin:1.25rem 0;padding:1.15rem 1.25rem;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+    @media (max-width:720px){.ob-comfort-framework{grid-template-columns:1fr}}
+    .ob-comfort-rings{position:relative;width:240px;height:240px;margin:0 auto;border-radius:50%;background:conic-gradient(from 0deg,#fecaca 0 33%,#bbf7d0 33% 66%,#bfdbfe 66% 100%);display:flex;align-items:center;justify-content:center}
+    .ob-comfort-ring{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;border:2px solid rgba(255,255,255,.85)}
+    .ob-comfort-ring:hover,.ob-comfort-ring.is-active{transform:scale(1.02);box-shadow:0 8px 24px rgba(15,23,42,.12)}
+    .ob-comfort-ring--panic{inset:0;background:rgba(254,226,226,.55)}
+    .ob-comfort-ring--growth{inset:28px;background:rgba(220,252,231,.72)}
+    .ob-comfort-ring--comfort{inset:56px;background:rgba(219,234,254,.92);font-size:.72rem;font-weight:700;color:#1e3a8a;padding:.5rem;line-height:1.35}
+    .ob-comfort-ring--growth .ob-comfort-ring__label,.ob-comfort-ring--panic .ob-comfort-ring__label{font-size:.62rem;font-weight:700;line-height:1.25;padding:.35rem;color:var(--ink);pointer-events:none}
+    .ob-comfort-ring__label{display:block}
+    .ob-comfort-panel{min-height:160px;padding:1rem 1.1rem;border-radius:12px;background:var(--brand-light);border:1px solid rgba(32,110,251,.12)}
+    .ob-comfort-panel h4{margin:0 0 .45rem;font-size:.88rem;color:var(--brand-dark)}
+    .ob-comfort-panel p{margin:0;font-size:.84rem;line-height:1.65;color:var(--ink)}
+    .ob-comfort-hint{margin:.75rem 0 0;font-size:.78rem;color:var(--muted);line-height:1.55}
     .ob-demo{border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden;margin:1rem 0;box-shadow:0 2px 8px rgba(15,23,42,.04)}
     .ob-demo-head{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.75rem 1rem;background:var(--brand-light);border-bottom:1px solid var(--line);flex-wrap:wrap}
     .ob-demo-head strong{font-size:.86rem;color:var(--brand-dark)}
@@ -827,7 +841,7 @@
   <div class="dash-main" id="dash-view-personal">
     <div class="greeting">
       <h1 id="greeting-text">Hallo!</h1>
-      <p>Willkommen bei ROOTS – dein persönlicher Onboarding-Plan. Starte mit Orga/Admin, arbeite dann den Lernpfad durch und zum Schluss die Module Kunden & Projekte.</p>
+      <p>Willkommen bei ROOTS – dein persönlicher Onboarding-Plan. Starte mit den To-do's, arbeite dann den Lernpfad durch und zum Schluss die Module Kunden & Projekte.</p>
     </div>
 
     <div class="progress-card">
@@ -840,8 +854,8 @@
     </div>
 
     <div class="week-header">
-      <span class="week-badge week-badge--orga">Orga/Admin</span>
-      <span class="week-title">Administration & IT-Setup</span>
+      <span class="week-badge week-badge--orga">To-do's</span>
+      <span class="week-title">To-do's & IT-Setup</span>
       <span class="week-prog" id="modules-prog-orga">0 / 0 Aufgaben</span>
     </div>
     <div class="module-grid" id="grid-modules-orga"></div>
@@ -1107,14 +1121,16 @@
     }).join('');
   }
 
+  const ROOTS_LINKEDIN = 'https://de.linkedin.com/company/roots-brand-strategy-consultants-gmbh';
+
   /* ════════════════════════════════════════════════════
      MODULE & TODOS KONFIGURATION
      ════════════════════════════════════════════════ */
   const MODULES = {
     week1: [
       {
-        id:'orga-admin', icon:'fa-solid fa-list-check', title:'Orga / Admin',
-        sub:'Admin, IT-Setup, Tools & weitere Aufgaben',
+        id:'orga-admin', icon:'fa-solid fa-list-check', title:"To-do's",
+        sub:'Organisation, IT-Setup, Tools & weitere Aufgaben',
         orgaTodos: true
       },
       {
@@ -1165,7 +1181,7 @@
                   <div class="ob-timeline-step"><div class="ob-timeline-step__title">Insight ROOTS</div><p class="ob-timeline-step__desc">Du lernst ROOTS von innen kennen.</p></div>
                   <div class="ob-timeline-step"><div class="ob-timeline-step__title">Modus Operandi</div><p class="ob-timeline-step__desc">Prozesse, Tools und Gewohnheiten, die dir den Alltag als Consultant erleichtern und dich schnell ins Team integrieren.</p></div>
                   <div class="ob-timeline-step"><div class="ob-timeline-step__title">Kunden Insights</div><p class="ob-timeline-step__desc">Ein erster Blick auf unser Kundenportfolio, wie wir mit ihnen zusammenarbeiten und was du über sie wissen solltest.</p></div>
-                  <div class="ob-timeline-step"><div class="ob-timeline-step__title">Admin & IT To-Dos</div><p class="ob-timeline-step__desc">In dieser ersten Woche richtest du Rechner, Tools und Zugänge ein, damit du arbeitsfähig bist.</p></div>
+                  <div class="ob-timeline-step"><div class="ob-timeline-step__title">To-do's</div><p class="ob-timeline-step__desc">In dieser ersten Woche richtest du Rechner, Tools und Zugänge ein, damit du arbeitsfähig bist.</p></div>
                   <div class="ob-timeline-step"><div class="ob-timeline-step__title">Shadowen</div><p class="ob-timeline-step__desc">Du begleitest Kollegen in echte Kundentermine und bekommst so einen direkten Eindruck vom Beratungsalltag.</p></div>
                 </div>
               </div>
@@ -1179,6 +1195,31 @@
                   <div class="ob-timeline-step"><div class="ob-timeline-step__title">Shadowen</div><p class="ob-timeline-step__desc">Weiterer Praxisbezug im Beratungsalltag.</p></div>
                 </div>
               </div>
+            ` },
+            { title:'Woche 3: Wie geht\'s weiter?', content:`
+              <p>Dein Einstieg ist der Anfang. Die folgenden Meilensteine sind Richtwerte – dein Tempo hängt von Projekt, Rolle und Entwicklung ab.</p>
+              <div class="ob-timeline-wrap">
+                <div class="ob-timeline" data-timeline>
+                  <div class="ob-timeline-progress"></div>
+                  <div class="ob-timeline-step"><div class="ob-timeline-step__title">Ab 1 Jahr · Kundenprojekte</div><p class="ob-timeline-step__desc">Du arbeitest aktiv in Kunden- und internen Projekten mit, übernimmst zunehmend Verantwortung und entwickelst dich Richtung Teilprojektleitung – intern wie beim Kunden.</p></div>
+                  <div class="ob-timeline-step"><div class="ob-timeline-step__title">Ab 3 Jahren · Projektleitung</div><p class="ob-timeline-step__desc">Aufbauende To-do's und Verantwortung bis zur eigenständigen Projektleitung – inklusive eigenständiger Ausarbeitung von Deliverables und Kundenkommunikation.</p></div>
+                </div>
+              </div>
+              <hr class="md-hr">
+              <h3>Komfortzone · Wachstumszone · Panikzone</h3>
+              <p>Am Anfang wirst du dich eher in der <strong>Komfortzone</strong> aufhalten – das ist normal. Ziel ist die <strong>Wachstumszone</strong>: neue Aufgaben, die herausfordernd, aber machbar sind. Die <strong>Panikzone</strong> versuchen wir zu vermeiden – zu viel Unbekanntes ohne Support.</p>
+              <div class="ob-comfort-framework" data-demo="comfort-zones">
+                <div class="ob-comfort-rings" aria-label="Komfort-, Wachstums- und Panikzone">
+                  <button type="button" class="ob-comfort-ring ob-comfort-ring--panic" data-zone="panic" aria-label="Panikzone"><span class="ob-comfort-ring__label">Panikzone</span></button>
+                  <button type="button" class="ob-comfort-ring ob-comfort-ring--growth" data-zone="growth" aria-label="Wachstumszone"><span class="ob-comfort-ring__label">Wachstumszone</span></button>
+                  <button type="button" class="ob-comfort-ring ob-comfort-ring--comfort is-active" data-zone="comfort" aria-label="Komfortzone">Komfortzone</button>
+                </div>
+                <div class="ob-comfort-panel" data-comfort-panel>
+                  <h4>Komfortzone</h4>
+                  <p>Hier fühlst du dich sicher: bekannte Aufgaben, klare Anleitung, viel Shadowing. Gut für den Start – aber langfristig zu wenig Wachstum.</p>
+                </div>
+              </div>
+              <p class="ob-comfort-hint">Klicke auf die Ringe, um die Bedeutung jeder Zone zu sehen. Dein Mentor hilft dir, bewusst in die Wachstumszone zu kommen – ohne in die Panikzone zu rutschen.</p>
             ` }
           ]},
           { id:'w-wishes', tab:'Deine Wünsche', sections:[
@@ -1318,7 +1359,7 @@
             ` },
             { title:'Urlaubsregelung', content:`
               <ul class="learn-list">
-                <li>Es gelten die vertraglich festgelegten Urlaubstage (typisch 30 Tage) und Fristen (typisch innerhalb der ersten 2 Monate des neuen Jahres)</li>
+                <li>Es gilt das, was im Vertrag vereinbart ist (Urlaubstage und Beantragungsfristen).</li>
                 <li>Urlaube sollten möglichst früh im Vorfeld beantragt werden, um eine gute Projektplanung sicherstellen zu können</li>
                 <li>Der 24.12. ist ein von ROOTS geschenkter halber freier Tag – er wird automatisch im Team-Kalender eingetragen</li>
                 <li>Die Werktage zwischen Weihnachten und Neujahr sind Betriebsferien, werden für alle automatisch im Team-Kalender eingetragen und von deinen Urlaubstagen abgezogen</li>
@@ -1345,14 +1386,6 @@ Thank you for your patience and understanding. I will get back to you as soon as
 
 Best regards,
 Signature</pre></div>
-            ` },
-            { title:'Bei Krankheit', content:`
-              <ul class="learn-list">
-                <li>Grundsätzlich gilt: Arzttermine sollen außerhalb der Arbeitszeit liegen; nur wenn der Termin medizinisch notwendig und anders nicht sinnvoll zu bekommen ist, darf er während der Arbeitszeit stattfinden</li>
-                <li>Bei Arbeitsunfähigkeit musst du dich bei Richard unverzüglich krankmelden und das Projektteam informieren</li>
-                <li>Informiere zudem den Steuerberater (<a href="mailto:SYakubets@tw-ratingen.de">SYakubets@tw-ratingen.de</a>) per E-Mail über die Krankheitsdauer</li>
-                <li>Für die Krankschreibung ab dem dritten Tag benötigst du eine ärztliche Feststellung</li>
-              </ul>
             ` },
             { title:'Arbeit im Team und mit dem Einzelnen', content:`
               <p>Bei ROOTS zählen direkte Abstimmung, Verlässlichkeit und frühzeitiges Feedback. Implizite Erwartungen:</p>
@@ -1479,21 +1512,11 @@ Signature</pre></div>
               <h3>Die First-Minute-Architektur</h3>
               <div class="fm-arch-diagram" aria-label="First-Minute-Ablauf">
                 <div class="fm-arch-diagram__row">
-                  <span class="fm-arch-diagram__chip">[Time Check]</span>
-                  <span class="fm-arch-diagram__arrow">→</span>
-                  <span class="fm-arch-diagram__chip">Framing</span>
-                  <span class="fm-arch-diagram__arrow">+</span>
-                  <span class="fm-arch-diagram__chip">Structured Summary</span>
-                  <span class="fm-arch-diagram__arrow">→</span>
-                  <span class="fm-arch-diagram__chip">[Validation Checkpoint]</span>
-                  <span class="fm-arch-diagram__arrow">→</span>
+                  <span class="fm-arch-diagram__chip">Time Check · 15 Sek</span>
+                  <span class="fm-arch-diagram__chip">Framing · 15 Sek</span>
+                  <span class="fm-arch-diagram__chip">Structured Summary (GPS) · 45 Sek</span>
+                  <span class="fm-arch-diagram__chip">Validation Checkpoint · 5 Sek</span>
                   <span class="fm-arch-diagram__chip">Conversation</span>
-                </div>
-                <div class="fm-arch-diagram__times">
-                  <span>(15 Sek)</span>
-                  <span>(15 Sek)</span>
-                  <span>(45 Sek)</span>
-                  <span>(5 Sek)</span>
                 </div>
               </div>
 
@@ -1555,9 +1578,8 @@ Signature</pre></div>
                   </div>
                 </div>
               </div>
-
-              <hr class="md-hr">
-
+            ` },
+            { title:'Structured Summary', content:`
               <h3>Structured Summary im Detail</h3>
               <h4>Drei Situationen — drei Solution-Typen</h4>
               <p>Jedes berufliche Gespräch fällt in eine dieser drei Kategorien:</p>
@@ -1593,24 +1615,6 @@ Signature</pre></div>
               <p>Richtig:</p>
               <blockquote class="md-quote">„Wir haben den Roller-Stillstand gefunden und in 24 Stunden behoben. Produktion läuft wieder. Layout-Doku wird aktualisiert."</blockquote>
               <p>Goal und Problem sind identisch — aber die Solution-Formulierung kippt das ganze Gespräch von „Was ist passiert?" auf „Wie geht es weiter?".</p>
-
-              <hr class="md-hr">
-              <h3>Übung: First Minute bauen</h3>
-              <p>Fülle die Felder aus – dein First-Minute-Script wird live aus Time Check, Framing, GPS und Validation zusammengesetzt.</p>
-              <div class="ob-fm-layout" data-demo="first-minute">
-                <div class="ob-fm-fields">
-                  <div class="ob-fm-field"><label>Time Check</label><input type="text" data-fm="time" placeholder="Hast Du 10 Minuten für …?"></div>
-                  <div class="ob-fm-field"><label>Context</label><input type="text" data-fm="context" placeholder="Projekt / Kunde / Prozess"></div>
-                  <div class="ob-fm-field"><label>Intent</label><input type="text" data-fm="intent" placeholder="Entscheidung, Input, FYI …"></div>
-                  <div class="ob-fm-field"><label>Key Message</label><input type="text" data-fm="key" placeholder="Kernaussage in einem Satz"></div>
-                  <div class="ob-fm-field"><label>Goal</label><input type="text" data-fm="goal" placeholder="Was wollen wir erreichen?"></div>
-                  <div class="ob-fm-field"><label>Problem</label><input type="text" data-fm="problem" placeholder="Was hindert uns?"></div>
-                  <div class="ob-fm-field"><label>Solution</label><input type="text" data-fm="solution" placeholder="Vorschlag oder Bitte um Hilfe"></div>
-                  <div class="ob-fm-field"><label>Validation</label><input type="text" data-fm="validation" placeholder="Bist Du die richtige Person? / Hast Du Zeit?"></div>
-                  <button type="button" class="ob-demo-action" data-fm="load-example"><i class="fa-solid fa-wand-magic-sparkles"></i> LT-10-Beispiel laden</button>
-                </div>
-                <div class="ob-fm-output"><h4>Dein Script</h4><p class="ob-fm-script" data-fm="output">Time Check → Framing → GPS → Validation – Felder ausfüllen …</p></div>
-              </div>
             ` },
             { title:'E-Mail Ethikette', open:true, content:`
               <h3>Wann (k)eine E-Mail?</h3>
@@ -1690,11 +1694,8 @@ Signature</pre></div>
               <h4>Fragen, Aktionen, Entscheidungen sichtbar machen</h4>
               <ul class="learn-list">
                 <li>Auf eigene Zeile setzen</li>
-                <li>Mit Label versehen: <strong>Frage:</strong>, <strong>Action:</strong>, <strong>Decision:</strong></li>
-                <li>Fett oder GROSSBUCHSTABEN als Label (Plain-Text-sicher)</li>
-                <li>Action-Format: „Wer macht was bis wann"</li>
-                <li>Decision-Format: „Wer hat was entschieden, gültig ab wann"</li>
-                <li>In Gruppen-E-Mails: Personennamen vor jeder Action nennen</li>
+                <li>Klar benennen, wer was bis wann erledigt</li>
+                <li>In Gruppen-E-Mails: Personennamen vor jeder Aufgabe nennen</li>
               </ul>
               <h4>Links, Anhänge, Grafiken</h4>
               <ul class="learn-list">
@@ -1814,7 +1815,7 @@ Signature</pre></div>
               <ul class="learn-list">
                 <li><strong>Meeting purpose</strong> (one line describing what the meeting is for)</li>
                 <li><strong>Meeting output</strong> (one line stating the expected outcome or output of the meeting)</li>
-                <li><strong>Additional Information</strong> (optional: GPS-Summary)</li>
+                <li><strong>Additional Information</strong> (optional: GPS als ein Satz, z.&nbsp;B. „Goal: Steering-ready Deck bis Fr 17:00 — Problem: KPI-Zeile 14 ungeklärt — Solution: Entscheidung im Call, Julia signiert bis Fr 15:00")</li>
                 <li><strong>Slides</strong></li>
               </ul>
               <div class="highlight"><p>Bain-Studie: Manager:innen verbringen 35 % ihres Arbeitstages in Meetings. Ludic-Studie: Nur 1 von 10 Personen versteht immer den Zweck eines Meetings. Klare Einladungen sind kein Nice-to-have.</p></div>
@@ -1857,8 +1858,8 @@ Signature</pre></div>
                         <div class="ob-teams-desc">
                           <div class="ob-meet-block"><strong>Meeting Purpose</strong>Freigabe der Q4-KPIs und Abstimmung der offenen Punkte für das Steering Deck.</div>
                           <div class="ob-meet-block"><strong>Meeting Output</strong>Signierte KPI-Tabellen + Action List (wer / was / bis wann) für Deck-Finalisierung.</div>
-                          <div class="ob-meet-block"><strong>Additional Information (GPS)</strong>Goal: Steering-ready Deck bis Fr 17:00<br>Problem: KPI-Zeile 14 ungeklärt<br>Solution: Entscheidung im Call, Julia signiert bis Fr 15:00</div>
-                          <div class="ob-meet-block"><strong>Slides:</strong> KPI_Draft_v3.pptx · SharePoint</div>
+                          <div class="ob-meet-block"><strong>Additional Information</strong>Goal: Steering-ready Deck bis Fr 17:00 — Problem: KPI-Zeile 14 ungeklärt — Solution: Entscheidung im Call, Julia signiert bis Fr 15:00</div>
+                          <div class="ob-meet-block"><strong>Slides</strong><a href="#">KPI_Draft_v3.pptx</a> · SharePoint</div>
                           <p style="margin:.85rem 0 0;font-size:.82rem;color:#605e5c"><em>Reply-All: Bei Fragen bitte nur an Max, nicht an alle.</em></p>
                         </div>
                       </div>
@@ -1939,43 +1940,6 @@ Signature</pre></div>
                 <li>Tipp: Vortrag als Audio aufnehmen und z. B. auf dem Nachhauseweg anhören.</li>
               </ul>
 
-              <h3 style="margin-top:1.25rem">Live-Vergleich: Folien-Titel (PowerPoint)</h3>
-              <p>Links: typischer Gliederungstitel. Rechts: ROOTS-Standard mit Kernaussage als Überschrift.</p>
-              <div class="ob-ppt-stage" data-demo="slide-compare">
-                <div class="ob-ppt-window">
-                  <div class="ob-ppt-titlebar"><strong><i class="fa-solid fa-chart-simple"></i> Präsentation1.pptx – Folie 3</strong><span>Folienansicht</span></div>
-                  <div class="ob-ppt-toolbar"><span>Start</span><span>Einfügen</span><span>Entwurf</span></div>
-                  <div class="ob-ppt-canvas-wrap">
-                    <div class="ob-ppt-slide is-bad">
-                      <span class="ob-ppt-slide__badge">✗ Gliederungstitel</span>
-                      <h5 class="ob-ppt-slide__title">Marktanteile 2024</h5>
-                      <div class="ob-ppt-chart">
-                        <div class="ob-ppt-chart__col"><div class="ob-ppt-chart__bar" style="height:42%"></div><div class="ob-ppt-chart__lbl">Q1</div></div>
-                        <div class="ob-ppt-chart__col"><div class="ob-ppt-chart__bar" style="height:68%"></div><div class="ob-ppt-chart__lbl">Q2</div></div>
-                        <div class="ob-ppt-chart__col"><div class="ob-ppt-chart__bar" style="height:55%"></div><div class="ob-ppt-chart__lbl">Q3</div></div>
-                        <div class="ob-ppt-chart__col"><div class="ob-ppt-chart__bar" style="height:61%"></div><div class="ob-ppt-chart__lbl">Q4</div></div>
-                      </div>
-                      <ul class="ob-ppt-bullets"><li>Verschiedene Segmente</li><li>Daten aus interner Analyse</li><li>Stand November</li></ul>
-                      <div class="ob-ppt-foot">Keine Quelle · Legende fehlt · Titel sagt nichts aus</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="ob-ppt-window">
-                  <div class="ob-ppt-titlebar"><strong><i class="fa-solid fa-chart-simple"></i> Präsentation1.pptx – Folie 3</strong><span>Folienansicht</span></div>
-                  <div class="ob-ppt-toolbar"><span>Start</span><span>Einfügen</span><span>Entwurf</span></div>
-                  <div class="ob-ppt-canvas-wrap">
-                    <div class="ob-ppt-slide is-good">
-                      <span class="ob-ppt-slide__badge">✓ Kernaussage</span>
-                      <h5 class="ob-ppt-slide__title">ROOTS steigerte den Marktanteil in Premium-Segmenten 2024 um 12&nbsp;Prozentpunkte</h5>
-                      <div class="ob-ppt-chart">
-                        <div class="ob-ppt-chart__col"><div class="ob-ppt-chart__val">18%</div><div class="ob-ppt-chart__bar" style="height:38%"></div><div class="ob-ppt-chart__lbl">2023</div></div>
-                        <div class="ob-ppt-chart__col"><div class="ob-ppt-chart__val">30%</div><div class="ob-ppt-chart__bar is-hi" style="height:62%"></div><div class="ob-ppt-chart__lbl">2024</div></div>
-                      </div>
-                      <div class="ob-ppt-foot">Quelle: Nielsen RMS Q4/2024 · Premium FMCG-Segmente DACH · Δ +12 pp YoY</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
               <p class="ob-ppt-notes"><i class="fa-solid fa-lightbulb" style="color:var(--brand)"></i> Jede Folie hat eine Kernaussage (kein Gliederungstitel) — siehe Folienlogik im MD.</p>
             ` }
           ]}
@@ -2198,21 +2162,11 @@ Signature</pre></div>
       { kind:'link', label:'Personalfragebogen öffnen (SharePoint)', url:'https://rootsconsultants.sharepoint.com/:w:/s/ROOTSBrandStrategyConsultantsGmbH/IQDnwQ1HJFpmQan1WM2YidXyAWngEwvKyidnKHX57Dc5ozg?e=j2nqa2' },
       { kind:'link', label:'An Steuerberater senden', url:'mailto:SYakubets@tw-ratingen.de?subject=Personalfragebogen' },
     ],
-    admin_7: [
-      { kind:'link', label:'E-Mail an rerbler@roots-consultants.com', url:'mailto:rerbler@roots-consultants.com?subject=Krankmeldung', button:true },
-      { kind:'link', label:'E-Mail an SYakubets@tw-ratingen.de', url:'mailto:SYakubets@tw-ratingen.de?subject=Krankmeldung', button:true },
-    ],
     admin_3: [
       { kind:'access', label:'DATEV Arbeitnehmer-Online', url:'https://www.datev.de/web/de/berufliches/arbeitnehmer-online/' },
     ],
-    admin_5: [
-      { kind:'download', label:'Zielvereinbarungs-Template', url:'' },
-      { kind:'link', label:'SharePoint Vorlagen', url:'' },
-    ],
-    admin_6: [
-      { kind:'link', label:'Urlaub eintragen', url:'' },
-      { kind:'access', label:'Freigabe Richard', url:'' },
-    ],
+    admin_5: [],
+    admin_6: [],
     it_1: [
       { kind:'link', label:'Authenticator – App Store', url:'https://apps.apple.com/app/microsoft-authenticator/id983156458', button:true },
       { kind:'link', label:'Authenticator – Google Play', url:'https://play.google.com/store/apps/details?id=com.azure.authenticator', button:true },
@@ -2239,7 +2193,7 @@ Signature</pre></div>
     it_9: [],
     it_10: [],
     w_1: [
-      { kind:'link', label:'ROOTS auf LinkedIn', url:'https://www.linkedin.com/company/roots-consultants' },
+      { kind:'link', label:'ROOTS auf LinkedIn', url: ROOTS_LINKEDIN },
     ],
   };
 
@@ -2418,17 +2372,20 @@ Signature</pre></div>
         </ul>
       ` },
     ]},
-    { section:'Admin', items:[
+    { section:'Organisation', items:[
       { id:'admin_1', text:'Aushändigungen mit Seriennummern und Unterschrift bestätigen lassen', handoverDoc:true },
       { id:'admin_2', text:'Personalfragebogen ausfüllen und an Steuerberater senden', detail:`
         <p>Öffne den Personalfragebogen in SharePoint, fülle ihn aus und sende ihn anschließend an den Steuerberater.</p>
       ` },
-      { id:'admin_7', text:'Im Krankheitsfall', detail:`
-        <p>Bitte gib sofort Bescheid und reiche ab dem ersten Tag die AU digital ein. Schicke deine Krankmeldung per E-Mail an beide Adressen unten.</p>
-      ` },
       { id:'admin_3', text:'DATEV Arbeitnehmer-Online Zugang einrichten' },
-      { id:'admin_5', text:'Zielvereinbarungsdokument ausfüllen (Template vorher kopieren und lokal abspeichern)' },
-      { id:'admin_6', text:'Urlaubstage eintragen und von Richard genehmigen lassen' },
+      { id:'admin_5', text:'Zielvereinbarung ausfüllen und unterschreiben lassen', goalAgreementDoc:true },
+      { id:'admin_6', text:'Urlaubstage eintragen und von Richard genehmigen lassen', detail:`
+        <p>Trage deine Urlaubstage in der Urlaubsplanung ein und lasse sie von Richard genehmigen. Genehmigte Tage erscheinen automatisch im Team-Kalender.</p>
+        <div class="orga-action-buttons">
+          <a href="#" class="orga-action-btn" onclick="event.stopPropagation();openRootsIntranetView('vacation');return false;"><i class="fa-solid fa-umbrella-beach" aria-hidden="true"></i> Urlaubsplanung öffnen</a>
+          <a href="#" class="orga-action-btn orga-action-btn--ghost" onclick="event.stopPropagation();openRootsIntranetView('teamkalender');return false;"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> Team-Kalender öffnen</a>
+        </div>
+      ` },
     ]},
     { section:'Weitere', items:[
       { id:'w_1', text:'ROOTS bei LinkedIn folgen und im Profil hinzufügen' },
@@ -2788,6 +2745,324 @@ Signature</pre></div>
     });
   }
 
+  const GOAL_AGREEMENT_ROWS = 4;
+  const GOAL_AGREEMENT_STORAGE_PREFIX = 'roots-goal-agreement-doc';
+  let goalAgreementSaveTimer = null;
+  let goalAgreementPads = null;
+
+  function getGoalAgreementStorageKey() {
+    return `${GOAL_AGREEMENT_STORAGE_PREFIX}-${currentUserId || 'guest'}`;
+  }
+
+  function defaultGoalAgreementData() {
+    const today = new Date().toISOString().slice(0, 10);
+    const year = String(new Date().getFullYear());
+    return {
+      employee: userName || '',
+      supervisor: '',
+      period: year,
+      agreementDate: today,
+      goals: Array.from({ length: GOAL_AGREEMENT_ROWS }, () => ({ objective: '', metric: '', deadline: '' })),
+      development: '',
+      signatures: { employee: null, supervisor: null },
+      signMeta: {
+        employee: { name: userName || '', date: today },
+        supervisor: { name: '', date: today },
+      },
+    };
+  }
+
+  function loadGoalAgreementData() {
+    try {
+      const raw = localStorage.getItem(getGoalAgreementStorageKey());
+      if (!raw) return defaultGoalAgreementData();
+      const parsed = JSON.parse(raw);
+      const base = defaultGoalAgreementData();
+      return {
+        ...base,
+        ...parsed,
+        goals: Array.from({ length: GOAL_AGREEMENT_ROWS }, (_, i) => ({
+          objective: parsed.goals?.[i]?.objective || '',
+          metric: parsed.goals?.[i]?.metric || '',
+          deadline: parsed.goals?.[i]?.deadline || '',
+        })),
+        signMeta: { ...base.signMeta, ...(parsed.signMeta || {}) },
+        signatures: { employee: parsed.signatures?.employee || null, supervisor: parsed.signatures?.supervisor || null },
+      };
+    } catch {
+      return defaultGoalAgreementData();
+    }
+  }
+
+  function persistGoalAgreementData(data) {
+    try { localStorage.setItem(getGoalAgreementStorageKey(), JSON.stringify(data)); } catch (_) {}
+  }
+
+  function scheduleGoalAgreementSave() {
+    clearTimeout(goalAgreementSaveTimer);
+    goalAgreementSaveTimer = setTimeout(() => {
+      persistGoalAgreementData(collectGoalAgreementFormData());
+    }, 350);
+  }
+
+  function collectGoalAgreementFormData() {
+    const root = document.getElementById('goal-agreement-doc');
+    if (!root) return loadGoalAgreementData();
+    const data = loadGoalAgreementData();
+    data.employee = root.querySelector('[data-field="ga-employee"]')?.value?.trim() || '';
+    data.supervisor = root.querySelector('[data-field="ga-supervisor"]')?.value?.trim() || '';
+    data.period = root.querySelector('[data-field="ga-period"]')?.value?.trim() || '';
+    data.agreementDate = root.querySelector('[data-field="ga-date"]')?.value || data.agreementDate;
+    data.development = root.querySelector('[data-field="ga-development"]')?.value?.trim() || '';
+    data.goals = Array.from({ length: GOAL_AGREEMENT_ROWS }, (_, i) => ({
+      objective: root.querySelector(`[data-field="ga-objective-${i}"]`)?.value?.trim() || '',
+      metric: root.querySelector(`[data-field="ga-metric-${i}"]`)?.value?.trim() || '',
+      deadline: root.querySelector(`[data-field="ga-deadline-${i}"]`)?.value?.trim() || '',
+    }));
+    data.signMeta.employee.name = root.querySelector('[data-field="ga-employee-sign-name"]')?.value?.trim() || '';
+    data.signMeta.employee.date = root.querySelector('[data-field="ga-employee-sign-date"]')?.value || '';
+    data.signMeta.supervisor.name = root.querySelector('[data-field="ga-supervisor-sign-name"]')?.value?.trim() || '';
+    data.signMeta.supervisor.date = root.querySelector('[data-field="ga-supervisor-sign-date"]')?.value || '';
+    if (goalAgreementPads?.employee) data.signatures.employee = goalAgreementPads.employee.toDataURL();
+    if (goalAgreementPads?.supervisor) data.signatures.supervisor = goalAgreementPads.supervisor.toDataURL();
+    return data;
+  }
+
+  function renderGoalAgreementDocumentHtml() {
+    const goalRows = Array.from({ length: GOAL_AGREEMENT_ROWS }, (_, i) => `
+      <tr>
+        <td>${i + 1}</td>
+        <td><input type="text" data-field="ga-objective-${i}" placeholder="Ziel / Key Result" autocomplete="off"/></td>
+        <td><input type="text" data-field="ga-metric-${i}" placeholder="Messkriterium" autocomplete="off"/></td>
+        <td><input type="text" data-field="ga-deadline-${i}" placeholder="Termin" autocomplete="off"/></td>
+      </tr>`).join('');
+    return `
+      <p class="handover-intro">Zielvereinbarung live ausfüllen – Änderungen werden automatisch gespeichert. Danach als PDF herunterladen oder drucken.</p>
+      <div class="handover-toolbar">
+        <button type="button" class="handover-btn" id="goal-agreement-download-btn"><i class="fa-solid fa-file-pdf"></i> PDF herunterladen</button>
+        <button type="button" class="handover-btn handover-btn--ghost" id="goal-agreement-print-btn"><i class="fa-solid fa-print"></i> Drucken</button>
+        <button type="button" class="handover-btn handover-btn--ghost" id="goal-agreement-reset-btn">Zurücksetzen</button>
+      </div>
+      <div class="handover-doc" id="goal-agreement-doc">
+        <div class="handover-doc__header">
+          <div class="handover-doc__header-text">
+            <div class="handover-doc__brand">ROOTS Brand Strategy Consultants GmbH</div>
+            <h3 class="handover-doc__title">Zielvereinbarung</h3>
+          </div>
+          <img src="https://roots-consultants.de/wp-content/uploads/2025/04/Roots-Brand-Strategy-Consultants-Logo.svg" class="handover-doc__logo" alt="ROOTS" crossorigin="anonymous" onerror="this.onerror=null;this.src='https://roots-consultants.de/wp-content/uploads/2025/08/1630566728264.jpeg'">
+        </div>
+        <div class="handover-doc__meta">
+          <div class="handover-field"><label>Mitarbeiter/in</label><input type="text" data-field="ga-employee" autocomplete="name"/></div>
+          <div class="handover-field"><label>Vorgesetzte/r</label><input type="text" data-field="ga-supervisor" autocomplete="off"/></div>
+          <div class="handover-field"><label>Zeitraum</label><input type="text" data-field="ga-period" placeholder="z. B. 2026" autocomplete="off"/></div>
+          <div class="handover-field"><label>Datum</label><input type="date" data-field="ga-date"/></div>
+        </div>
+        <div class="handover-doc__section-title">Ziele & Key Results</div>
+        <table>
+          <thead><tr><th>#</th><th>Ziel / Key Result</th><th>Messkriterium</th><th>Termin</th></tr></thead>
+          <tbody>${goalRows}</tbody>
+        </table>
+        <div class="handover-doc__section-title">Entwicklungsziele</div>
+        <textarea data-field="ga-development" rows="4" style="width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:8px;padding:.65rem .75rem;font-family:inherit;font-size:.9rem;resize:vertical" placeholder="Persönliche Entwicklungsziele, Skills, Verantwortungsbereiche …"></textarea>
+        <div class="handover-doc__section-title">Unterschriften</div>
+        <div class="handover-signatures">
+          <div class="handover-sign-block">
+            <label>Mitarbeiter/in</label>
+            <div class="handover-sign-canvas-wrap">
+              <canvas class="handover-sign-canvas" id="goal-agreement-sign-employee" width="400" height="144"></canvas>
+              <button type="button" class="handover-sign-clear" data-ga-sign-clear="employee">Löschen</button>
+            </div>
+            <div class="handover-sign-meta">
+              <div class="handover-field"><label>Name</label><input type="text" data-field="ga-employee-sign-name" autocomplete="off"/></div>
+              <div class="handover-field"><label>Datum</label><input type="date" data-field="ga-employee-sign-date"/></div>
+            </div>
+          </div>
+          <div class="handover-sign-block">
+            <label>Vorgesetzte/r</label>
+            <div class="handover-sign-canvas-wrap">
+              <canvas class="handover-sign-canvas" id="goal-agreement-sign-supervisor" width="400" height="144"></canvas>
+              <button type="button" class="handover-sign-clear" data-ga-sign-clear="supervisor">Löschen</button>
+            </div>
+            <div class="handover-sign-meta">
+              <div class="handover-field"><label>Name</label><input type="text" data-field="ga-supervisor-sign-name" autocomplete="off"/></div>
+              <div class="handover-field"><label>Datum</label><input type="date" data-field="ga-supervisor-sign-date"/></div>
+            </div>
+          </div>
+        </div>
+        <p class="handover-doc__footer">Mit meiner Unterschrift bestätige ich die vereinbarten Ziele und Entwicklungsfelder.</p>
+      </div>`;
+  }
+
+  function applyGoalAgreementDataToForm(data) {
+    const root = document.getElementById('goal-agreement-doc');
+    if (!root) return;
+    root.querySelector('[data-field="ga-employee"]').value = data.employee || '';
+    root.querySelector('[data-field="ga-supervisor"]').value = data.supervisor || '';
+    root.querySelector('[data-field="ga-period"]').value = data.period || '';
+    root.querySelector('[data-field="ga-date"]').value = data.agreementDate || '';
+    root.querySelector('[data-field="ga-development"]').value = data.development || '';
+    data.goals.forEach((g, i) => {
+      root.querySelector(`[data-field="ga-objective-${i}"]`).value = g.objective || '';
+      root.querySelector(`[data-field="ga-metric-${i}"]`).value = g.metric || '';
+      root.querySelector(`[data-field="ga-deadline-${i}"]`).value = g.deadline || '';
+    });
+    root.querySelector('[data-field="ga-employee-sign-name"]').value = data.signMeta?.employee?.name || '';
+    root.querySelector('[data-field="ga-employee-sign-date"]').value = data.signMeta?.employee?.date || '';
+    root.querySelector('[data-field="ga-supervisor-sign-name"]').value = data.signMeta?.supervisor?.name || '';
+    root.querySelector('[data-field="ga-supervisor-sign-date"]').value = data.signMeta?.supervisor?.date || '';
+  }
+
+  function buildPrintableGoalAgreementClone(source) {
+    const data = collectGoalAgreementFormData();
+    const fmtDate = d => {
+      if (!d) return '';
+      const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d);
+      return m ? `${m[3]}.${m[2]}.${m[1]}` : d;
+    };
+    const sourceCanvases = source.querySelectorAll('canvas');
+    const sigDataUrl = (canv) => {
+      if (canv && canv.width > 0 && canv.height > 0) {
+        try { return canv.toDataURL('image/png'); } catch(_) {}
+      }
+      return '';
+    };
+    const employeeSig = sigDataUrl(sourceCanvases[0]);
+    const supervisorSig = sigDataUrl(sourceCanvases[1]);
+    const BRAND = '#1f4d8f';
+    const INK = '#111';
+    const MUTED = '#666';
+    const LINE = '#d8d8d8';
+    const BRAND_LIGHT = '#eaf1fb';
+    const goalRows = data.goals.map((g, i) => `
+      <tr>
+        <td style="border:1px solid ${LINE};padding:6px 8px;width:28px;text-align:center;font-weight:600">${i+1}</td>
+        <td style="border:1px solid ${LINE};padding:6px 8px">${(g.objective||'').replace(/</g,'&lt;')}</td>
+        <td style="border:1px solid ${LINE};padding:6px 8px">${(g.metric||'').replace(/</g,'&lt;')}</td>
+        <td style="border:1px solid ${LINE};padding:6px 8px">${(g.deadline||'').replace(/</g,'&lt;')}</td>
+      </tr>`).join('');
+    const sigBlock = (label, name, date, sigUrl) => `
+      <div style="flex:1;min-width:0">
+        <div style="font-size:9.5px;font-weight:700;color:${MUTED};text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">${label}</div>
+        <div style="height:72px;border:1px solid ${LINE};border-radius:3px;background:#fff;margin-bottom:8px;${sigUrl ? `background:url('${sigUrl}') center/contain no-repeat` : ''}"></div>
+        <div style="display:flex;gap:14px;font-size:11px">
+          <div style="flex:1"><div style="font-size:9px;color:${MUTED};margin-bottom:2px;text-transform:uppercase;letter-spacing:.04em">Name</div><div style="border-bottom:1px solid ${INK};padding:2px 0;min-height:18px">${(name||'').replace(/</g,'&lt;')}</div></div>
+          <div style="width:90px"><div style="font-size:9px;color:${MUTED};margin-bottom:2px;text-transform:uppercase;letter-spacing:.04em">Datum</div><div style="border-bottom:1px solid ${INK};padding:2px 0;min-height:18px">${fmtDate(date)}</div></div>
+        </div>
+      </div>`;
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = `font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:11.5px;line-height:1.55;background:#fff;padding:0;box-sizing:border-box;color:${INK}`;
+    wrapper.innerHTML = `
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:22px;padding-bottom:14px;border-bottom:3px solid ${BRAND}">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:${BRAND};margin-bottom:6px">ROOTS Brand Strategy Consultants GmbH</div>
+          <div style="font-size:22px;font-weight:700;color:${INK};margin:0;line-height:1.15">Zielvereinbarung</div>
+        </div>
+        <img src="https://roots-consultants.de/wp-content/uploads/2025/04/Roots-Brand-Strategy-Consultants-Logo.svg" alt="ROOTS" style="display:block;width:140px;height:auto;flex:0 0 140px;object-fit:contain">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 28px;margin-bottom:18px">
+        <div><div style="font-size:9.5px;font-weight:700;color:${MUTED};text-transform:uppercase;margin-bottom:4px">Mitarbeiter/in</div><div style="border-bottom:1px solid ${INK};padding:3px 0;min-height:20px">${(data.employee||'').replace(/</g,'&lt;')}</div></div>
+        <div><div style="font-size:9.5px;font-weight:700;color:${MUTED};text-transform:uppercase;margin-bottom:4px">Vorgesetzte/r</div><div style="border-bottom:1px solid ${INK};padding:3px 0;min-height:20px">${(data.supervisor||'').replace(/</g,'&lt;')}</div></div>
+        <div><div style="font-size:9.5px;font-weight:700;color:${MUTED};text-transform:uppercase;margin-bottom:4px">Zeitraum</div><div style="border-bottom:1px solid ${INK};padding:3px 0;min-height:20px">${(data.period||'').replace(/</g,'&lt;')}</div></div>
+        <div><div style="font-size:9.5px;font-weight:700;color:${MUTED};text-transform:uppercase;margin-bottom:4px">Datum</div><div style="border-bottom:1px solid ${INK};padding:3px 0;min-height:20px">${fmtDate(data.agreementDate)}</div></div>
+      </div>
+      <div style="font-size:10px;font-weight:700;margin:18px 0 8px;color:${BRAND};text-transform:uppercase;letter-spacing:.07em">Ziele & Key Results</div>
+      <table style="width:100%;border-collapse:collapse;font-size:11px;margin-bottom:12px"><thead><tr>
+        <th style="background:${BRAND_LIGHT};color:${BRAND};border:1px solid ${BRAND_LIGHT};padding:8px;text-align:left">#</th>
+        <th style="background:${BRAND_LIGHT};color:${BRAND};border:1px solid ${BRAND_LIGHT};padding:8px;text-align:left">Ziel / Key Result</th>
+        <th style="background:${BRAND_LIGHT};color:${BRAND};border:1px solid ${BRAND_LIGHT};padding:8px;text-align:left">Messkriterium</th>
+        <th style="background:${BRAND_LIGHT};color:${BRAND};border:1px solid ${BRAND_LIGHT};padding:8px;text-align:left">Termin</th>
+      </tr></thead><tbody>${goalRows}</tbody></table>
+      <div style="font-size:10px;font-weight:700;margin:18px 0 8px;color:${BRAND};text-transform:uppercase;letter-spacing:.07em">Entwicklungsziele</div>
+      <div style="border:1px solid ${LINE};border-radius:4px;padding:10px;min-height:72px;white-space:pre-wrap">${(data.development||'').replace(/</g,'&lt;')}</div>
+      <div style="font-size:10px;font-weight:700;margin:18px 0 10px;color:${BRAND};text-transform:uppercase;letter-spacing:.07em">Unterschriften</div>
+      <div style="display:flex;gap:28px;margin-bottom:14px">
+        ${sigBlock('Mitarbeiter/in', data.signMeta?.employee?.name, data.signMeta?.employee?.date, employeeSig)}
+        ${sigBlock('Vorgesetzte/r', data.signMeta?.supervisor?.name, data.signMeta?.supervisor?.date, supervisorSig)}
+      </div>
+      <div style="margin-top:18px;padding-top:10px;border-top:2px solid ${BRAND_LIGHT};font-size:10px;color:${MUTED};font-style:italic">Mit meiner Unterschrift bestätige ich die vereinbarten Ziele und Entwicklungsfelder.</div>`;
+    return wrapper;
+  }
+
+  async function downloadGoalAgreementPdf() {
+    const el = document.getElementById('goal-agreement-doc');
+    if (!el || typeof html2pdf === 'undefined') {
+      showToast('PDF-Export nicht verfügbar', 'error');
+      return;
+    }
+    persistGoalAgreementData(collectGoalAgreementFormData());
+    const clone = buildPrintableGoalAgreementClone(el);
+    clone.style.width = '190mm';
+    document.body.appendChild(clone);
+    try {
+      const safeName = (collectGoalAgreementFormData().employee || 'Zielvereinbarung').replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '_');
+      await html2pdf().set({
+        margin: [12, 12, 14, 12],
+        filename: `ROOTS_Zielvereinbarung_${safeName || 'Mitarbeiter'}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      }).from(clone).save();
+      showToast('Zielvereinbarung als PDF gespeichert', 'success');
+    } catch (e) {
+      showToast('PDF-Export fehlgeschlagen', 'error');
+    } finally {
+      clone.remove();
+    }
+  }
+
+  function printGoalAgreementDoc() {
+    const el = document.getElementById('goal-agreement-doc');
+    if (!el) return;
+    persistGoalAgreementData(collectGoalAgreementFormData());
+    const clone = buildPrintableGoalAgreementClone(el);
+    const root = document.getElementById('handover-print-root') || (() => {
+      const n = document.createElement('div');
+      n.id = 'handover-print-root';
+      document.body.appendChild(n);
+      return n;
+    })();
+    root.innerHTML = '';
+    root.appendChild(clone);
+    window.print();
+  }
+
+  function initGoalAgreementDocument() {
+    const root = document.getElementById('goal-agreement-doc');
+    if (!root || root.dataset.inited === '1') return;
+    root.dataset.inited = '1';
+    const data = loadGoalAgreementData();
+    applyGoalAgreementDataToForm(data);
+    goalAgreementPads = {
+      employee: initSignaturePad(document.getElementById('goal-agreement-sign-employee'), data.signatures?.employee, scheduleGoalAgreementSave),
+      supervisor: initSignaturePad(document.getElementById('goal-agreement-sign-supervisor'), data.signatures?.supervisor, scheduleGoalAgreementSave),
+    };
+    root.querySelectorAll('input, textarea').forEach(inp => {
+      inp.addEventListener('input', scheduleGoalAgreementSave);
+      inp.addEventListener('change', scheduleGoalAgreementSave);
+    });
+    root.querySelectorAll('[data-ga-sign-clear]').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        goalAgreementPads[btn.dataset.gaSignClear]?.clear();
+        scheduleGoalAgreementSave();
+      });
+    });
+    document.getElementById('goal-agreement-download-btn')?.addEventListener('click', e => { e.stopPropagation(); downloadGoalAgreementPdf(); });
+    document.getElementById('goal-agreement-print-btn')?.addEventListener('click', e => { e.stopPropagation(); printGoalAgreementDoc(); });
+    document.getElementById('goal-agreement-reset-btn')?.addEventListener('click', e => {
+      e.stopPropagation();
+      if (!confirm('Alle Eingaben und Unterschriften zurücksetzen?')) return;
+      try { localStorage.removeItem(getGoalAgreementStorageKey()); } catch (_) {}
+      delete root.dataset.inited;
+      goalAgreementPads = null;
+      const section = root.closest('.mod-section-body');
+      if (section) {
+        section.innerHTML = renderGoalAgreementDocumentHtml();
+        initGoalAgreementDocument();
+      }
+    });
+  }
+
   async function loadImageAsDataUrl(url) {
     return new Promise(resolve => {
       const img = new Image();
@@ -3050,12 +3325,14 @@ Signature</pre></div>
   function renderOrgaTodoItem(item, openFirst) {
     const checked = completedTodos.includes(item.id);
     const isHandover = item.handoverDoc || item.id === 'admin_1';
+    const isGoalAgreement = item.goalAgreementDoc || item.id === 'admin_5';
     const isItApps = Array.isArray(item.itApps) && item.itApps.length;
-    const linksHtml = (isHandover || isItApps) ? '' : renderOrgaActionLinks(item.id);
+    const linksHtml = (isHandover || isGoalAgreement || isItApps) ? '' : renderOrgaActionLinks(item.id);
     const detailHtml = isHandover ? renderHandoverDocumentHtml()
+      : isGoalAgreement ? renderGoalAgreementDocumentHtml()
       : isItApps ? renderItAppsInstallHtml(item.itApps)
       : (item.detail || '');
-    const linksAfterDetail = !isHandover && !isItApps && (ORGA_ACTIONS[item.id] || []).some(a => a.button);
+    const linksAfterDetail = !isHandover && !isGoalAgreement && !isItApps && (ORGA_ACTIONS[item.id] || []).some(a => a.button);
     const bodyParts = (linksAfterDetail ? [detailHtml, linksHtml] : [linksHtml, detailHtml]).filter(Boolean).join('');
     const bodyHtml = bodyParts || '<p class="placeholder">Keine weiteren Details.</p>';
     return `
@@ -3097,6 +3374,7 @@ Signature</pre></div>
     bindOrgaModAccordions();
     bindModuleModalTabs();
     initHandoverDocument();
+    initGoalAgreementDocument();
     bindItAppCredentials();
   }
 
@@ -3146,7 +3424,7 @@ Signature</pre></div>
       + `<p style="margin:2px 0">${sep}</p>`
       + `<p style="margin:0 0 2px"><a href="tel:[Telefonnummer]" style="color:rgb(0,120,212);font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;text-decoration:none">[Telefonnummer eintragen]</a></p>`
       + `<p style="margin:0 0 2px"><a href="mailto:${email}" style="color:rgb(0,120,212);font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;text-decoration:none">${email}</a></p>`
-      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px"><a href="https://www.roots-consultants.com/" style="color:#000">Website</a>&nbsp;I <a href="https://www.linkedin.com/company/roots-consultants" style="color:#000">LinkedIn</a></p>`
+      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px"><a href="https://www.roots-consultants.com/" style="color:#000">Website</a>&nbsp;I <a href="${ROOTS_LINKEDIN}" style="color:#000">LinkedIn</a></p>`
       + `<p style="margin:2px 0">${sep}</p>`
       + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px"><b>Mehr über ROOTS:</b></p>`
       + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:5.5pt;margin:0">&nbsp;</p>`
@@ -3249,13 +3527,10 @@ Signature</pre></div>
       cc: 'rod.mitecki@roots-consultants.com',
       subject: 'Freigabe Q4-KPI Danone Steering Deck – bitte bis Fr, 15:00 Uhr',
       bodyHtml: `<p>Hallo Julia,</p>
-<p>ich bitte um Freigabe der Q4-KPIs für das Danone-Steering Deck (Anhang A).</p>
-<p><strong>Action:</strong> Bitte prüfe die Tabellen und gib sie bis Freitag, 15:00 Uhr frei – alternativ markierst du Rückfragen direkt in der Datei.</p>
+<p>ich bitte um Freigabe der Q4-KPIs für das Danone-Steering Deck (Anhang A). Bitte prüfe die Tabellen und gib sie bis Freitag, 15:00 Uhr frei – alternativ markierst du Rückfragen direkt in der Datei.</p>
 <p>Ohne signierte KPIs können wir das Deck nicht finalisieren. Für heute besteht keine Dringlichkeit; maßgeblich ist die Deadline am Freitag, 15:00 Uhr.</p>
-<p>Die Mail enthält eine Rückfrage (siehe unten).</p>
-<p>&nbsp;</p>
-<p><strong>Frage:</strong> Entspricht die Organic-Growth-Angabe in Zeile 14 dem Last Read (4,2&nbsp;% vs. 4,8&nbsp;%)?</p>
-<p><strong>Action:</strong> Julia – KPI-Freigabe bis Fr, 15:00 Uhr &nbsp;|&nbsp; Rod – Layout-Update nach Freigabe bis Mo, 10:00 Uhr</p>
+<p>Offene Rückfrage: Entspricht die Organic-Growth-Angabe in Zeile 14 dem Last Read (4,2&nbsp;% vs. 4,8&nbsp;%)?</p>
+<p>Julia gibt die KPIs bis Freitag, 15:00 Uhr frei. Rod aktualisiert das Layout nach Freigabe bis Montag, 10:00 Uhr.</p>
 <p>Viele Grüße</p>`,
     },
     bad: {
@@ -3300,14 +3575,13 @@ Signature</pre></div>
         return lines.length >= 4 && /^(hallo|guten tag|liebe|lieber)/i.test(lines[0]) && lines[1] && !/^action:/i.test(lines[1]) && lines[1].length > 15;
       })() },
       { label: 'Professionelle Anrede (kein „Hi")', ok: !/^hi[\s,!?]/i.test(bodyLower) && /^(hallo|guten tag|liebe|lieber)/im.test(body.trim()) },
-      { label: 'Action: – Was soll getan werden', ok: /action:/i.test(bodyLower) },
-      { label: 'Kernbotschaft im Fließtext (nicht nur Label)', ok: /finalisieren|kern|wichtig|ohne signierte|zusammenfassung/i.test(bodyLower) },
+      { label: 'Klare Bitte / Aufgabe im Fließtext', ok: /freigabe|bitte|prüf|genehmig|signier|deadline|bis (montag|dienstag|mittwoch|donnerstag|freitag|fr|mo|di|mi|do)/i.test(bodyLower) },
+      { label: 'Kernbotschaft im Fließtext (nicht nur Labels)', ok: /finalisieren|kern|wichtig|ohne signierte|kpi|deck/i.test(bodyLower) },
       { label: 'Zeitrahmen oder Deadline (auch „nicht dringend")', ok: /deadline|bis (montag|dienstag|mittwoch|donnerstag|freitag|fr|mo|di|mi|do)|nicht dringend|15:00|17:00/i.test(bodyLower) },
-      { label: 'Anzahl Fragen genannt', ok: /rückfrage|fragen:|eine frage|\d+\s*frage/i.test(bodyLower) },
-      { label: 'Frage: auf eigener Zeile', ok: /frage:/i.test(bodyLower) },
-      { label: 'Action-Format: Wer macht was bis wann', ok: /action:.*(\||bis|–|-)/i.test(bodyLower) || /action:.*\d/.test(bodyLower) },
+      { label: 'Verantwortlichkeiten benannt (wer macht was bis wann)', ok: /julia|rod|bis (montag|dienstag|mittwoch|donnerstag|freitag|fr|mo|di|mi|do)|15:00|10:00/i.test(bodyLower) },
       { label: 'Professioneller Abschluss (kein „Thanks/lg")', ok: !/thanks|lg|best,|cheers/i.test(bodyLower) && /viele grüße|beste grüße|freundliche grüße|mit freundlichen grüßen/i.test(bodyLower) },
       { label: 'Keine englischen Struktur-Labels (TOPIC:/KEY MESSAGE:)', ok: !/topic:|key message:|time frame:/i.test(bodyLower) },
+      { label: 'Keine rohen Action:/Frage:-Labels', ok: !/^action:|^frage:/im.test(bodyLower) },
       { label: 'Kurz & scanbar (Five-Sentence-Zone)', ok: body.split('\n').filter(l => l.trim()).slice(0, 12).join(' ').length >= 40 && body.length <= 2200 },
     ];
     list.innerHTML = checks.map(c => `<li class="${c.ok ? 'is-ok' : ''}"><i class="fa-solid ${c.ok ? 'fa-circle-check' : 'fa-circle'}"></i><span>${c.label}</span></li>`).join('');
@@ -3396,12 +3670,35 @@ Signature</pre></div>
     root.dataset.bound = '1';
   }
 
+  const COMFORT_ZONE_COPY = {
+    comfort: { title: 'Komfortzone', text: 'Hier fühlst du dich sicher: bekannte Aufgaben, klare Anleitung, viel Shadowing. Gut für den Start – aber langfristig zu wenig Wachstum.' },
+    growth: { title: 'Wachstumszone', text: 'Neue, herausfordernde Aufgaben mit klarem Support – genau hier entwickelst du dich weiter. Ziel ist es, bewusst Zeit in dieser Zone zu verbringen.' },
+    panic: { title: 'Panikzone', text: 'Zu viel Unbekanntes ohne Vorbereitung oder Backup – Überforderung statt Lernen. Diese Zone versuchen wir aktiv zu vermeiden; sprich früh mit deinem Mentor.' },
+  };
+
+  function bindComfortZoneDemo(root) {
+    if (root.dataset.bound === '1') return;
+    root.dataset.bound = '1';
+    const panel = root.querySelector('[data-comfort-panel]');
+    root.querySelectorAll('[data-zone]').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const key = btn.dataset.zone;
+        root.querySelectorAll('[data-zone]').forEach(b => b.classList.toggle('is-active', b === btn));
+        const copy = COMFORT_ZONE_COPY[key] || COMFORT_ZONE_COPY.comfort;
+        if (panel) {
+          panel.innerHTML = `<h4>${copy.title}</h4><p>${copy.text}</p>`;
+        }
+      });
+    });
+  }
+
   function bindInteractiveDemos(scope) {
     const el = scope || document.getElementById('modal-body');
     if (!el) return;
     el.querySelectorAll('[data-demo="email-editor"]').forEach(bindEmailEditorDemo);
-    el.querySelectorAll('[data-demo="first-minute"]').forEach(bindFirstMinuteDemo);
     el.querySelectorAll('[data-demo="ki-zones"]').forEach(bindKiZoneDemo);
+    el.querySelectorAll('[data-demo="comfort-zones"]').forEach(bindComfortZoneDemo);
     el.querySelectorAll('[data-demo="slide-compare"]').forEach(bindSlideCompareDemo);
   }
 
