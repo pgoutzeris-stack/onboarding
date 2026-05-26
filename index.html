@@ -9,6 +9,7 @@
 
   <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/circular-std" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" crossorigin="anonymous" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous"></script>
 
@@ -220,8 +221,12 @@
     .mgmt-progress-status{font-size:.68rem;color:var(--muted);text-align:right;line-height:1.35}
     .mgmt-list{display:flex;flex-direction:column;gap:1rem}
     .mgmt-card{border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--shadow-dash);overflow:visible;display:flex;flex-direction:column}
-    .mgmt-section-header{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:1rem;align-items:center;padding:1rem 1.15rem;border-bottom:1px solid var(--line)}
+    .mgmt-section-header{display:grid;grid-template-columns:minmax(0,1fr) minmax(190px,220px);gap:1rem;align-items:center;padding:1rem 1.15rem;border-bottom:1px solid var(--line)}
     @media (max-width:768px){.mgmt-section-header{grid-template-columns:1fr}}
+    .mgmt-progress-wrap{display:grid;gap:.45rem;justify-items:stretch}
+    .mgmt-live-btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;width:100%;padding:.42rem .75rem;border-radius:999px;border:1px solid rgba(32,110,251,.18);background:#fff;color:var(--brand-dark);font-size:.68rem;font-weight:700;font-family:inherit;cursor:pointer;transition:border-color .18s ease,background .18s ease,transform .18s ease}
+    .mgmt-live-btn i{font-size:.62rem;color:var(--brand)}
+    .mgmt-live-btn:hover{border-color:var(--brand);background:var(--brand-light);transform:translateY(-1px)}
     .mgmt-metrics{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.45rem}
     .mgmt-metrics span{font-size:.68rem;font-weight:700;color:var(--muted);background:var(--surface-alt);border:1px solid rgba(15,23,42,.08);padding:.16rem .45rem;border-radius:999px;white-space:nowrap}
     .mgmt-metrics strong{color:var(--ink);font-weight:800}
@@ -262,19 +267,22 @@
     #dash-view-manage .mgmt-meta-select .dropdown-option{width:100%;border:1px solid transparent;border-radius:10px;background:transparent;color:var(--ink);padding:.55rem .65rem;text-align:left;font-size:.74rem;font-weight:700;font-family:inherit;cursor:pointer}
     #dash-view-manage .mgmt-meta-select .dropdown-option:hover{background:var(--surface);border-color:rgba(15,23,42,.06)}
     #dash-view-manage .mgmt-meta-select .dropdown-option.active{background:var(--brand-light);color:var(--brand-dark);border-color:rgba(32,110,251,.18)}
-    .mgmt-roots-row{display:grid;grid-template-columns:auto auto minmax(0,1fr) minmax(148px,190px) auto;gap:.55rem;align-items:start;padding:.6rem 0;border-bottom:1px solid var(--line);transition:background .15s ease}
+    .mgmt-roots-row{display:grid;grid-template-columns:auto auto minmax(0,1fr) minmax(148px,190px) auto;gap:.55rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line);transition:background .15s ease}
     .mgmt-roots-row:last-child{border-bottom:none}
-    @media (max-width:720px){.mgmt-roots-row{grid-template-columns:auto auto minmax(0,1fr);grid-template-areas:"drag check text text" "assign assign assign delete";gap:.4rem .55rem}.mgmt-roots-row .mgmt-assign-field{grid-area:assign;min-width:0}.mgmt-roots-row .mgmt-pt-delete{grid-area:delete;justify-self:end}}
+    @media (max-width:720px){.mgmt-roots-row{grid-template-columns:auto auto minmax(0,1fr);grid-template-areas:"drag check text text" "assign assign assign delete";gap:.4rem .55rem;align-items:start}.mgmt-roots-row .mgmt-assign-field{grid-area:assign;min-width:0;align-self:stretch}.mgmt-roots-row .mgmt-pt-delete{grid-area:delete;justify-self:end}}
     .mgmt-roots-row:hover{background:rgba(32,110,251,.02)}
     .mgmt-roots-row.is-dragging{opacity:.55;background:var(--brand-light)}
     .mgmt-roots-row.is-drop-target{box-shadow:inset 0 -2px 0 var(--brand);background:rgba(32,110,251,.04)}
-    .mgmt-pt-drag,.mgmt-pt-delete{border:none;background:transparent;color:var(--muted);cursor:pointer;padding:.25rem .05rem;font-size:.72rem;line-height:1;flex-shrink:0;opacity:.45;transition:opacity .15s ease,color .15s ease}
+    .mgmt-pt-drag,.mgmt-pt-delete{border:none;background:transparent;color:var(--muted);cursor:pointer;font-size:.72rem;line-height:1;flex-shrink:0;opacity:.45;transition:opacity .15s ease,color .15s ease,background .15s ease,border-color .15s ease}
     .mgmt-roots-row:hover .mgmt-pt-drag,.mgmt-roots-row:hover .mgmt-pt-delete{opacity:1}
-    .mgmt-pt-drag{cursor:grab;padding-top:.42rem}
+    .mgmt-pt-drag{width:24px;height:34px;display:inline-flex;align-items:center;justify-content:center;padding:0;cursor:grab;align-self:center}
     .mgmt-pt-drag:active{cursor:grabbing}
-    .mgmt-pt-delete{color:#b91c1c;padding-top:.42rem}
-    .mgmt-pt-delete:hover{color:#dc2626}
-    .mgmt-pt-text{width:100%;border:1px solid transparent;border-radius:8px;background:transparent;color:var(--ink);font-size:.8rem;line-height:1.45;padding:.35rem .45rem;font-family:inherit;resize:none;min-height:1.8rem;max-height:6rem;field-sizing:content;transition:border-color .15s ease,background .15s ease,box-shadow .15s ease}
+    .mgmt-roots-check{display:flex;align-items:center;justify-content:center;align-self:center}
+    .mgmt-assign-field{align-self:center;display:flex;align-items:center}
+    .mgmt-pt-delete.action-btn-small{width:28px;height:28px;min-height:28px;border-radius:8px;border:1px solid transparent;display:inline-flex;align-items:center;justify-content:center;padding:0;align-self:center;color:var(--muted)}
+    .mgmt-pt-delete.delete-btn:hover{background:var(--line);color:#dc2626;border-color:rgba(220,38,38,.12);opacity:1}
+    .mgmt-pt-delete i{font-size:.95rem;line-height:1}
+    .mgmt-pt-text{align-self:center;width:100%;border:1px solid transparent;border-radius:8px;background:transparent;color:var(--ink);font-size:.8rem;line-height:1.45;padding:.45rem .55rem;font-family:inherit;resize:none;min-height:34px;max-height:6rem;field-sizing:content;transition:border-color .15s ease,background .15s ease,box-shadow .15s ease}
     .mgmt-pt-text:hover{border-color:rgba(15,23,42,.08);background:#fff}
     .mgmt-pt-text:focus{outline:none;border-color:rgba(32,110,251,.24);background:#fff;box-shadow:0 0 0 3px var(--brand-light)}
     .mgmt-roots-row.is-done .mgmt-pt-text{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(100,116,139,.45);background:transparent}
@@ -285,6 +293,19 @@
     .mgmt-todo-history-item:last-child{border-bottom:none}
     .mgmt-todo-history-item strong{color:var(--brand-dark)}
     .mgmt-todo-history-empty{font-size:.7rem;color:var(--muted);padding:.2rem 0}
+    .live-preview-banner{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;padding:.7rem 1rem;margin:0 0 1rem;border:1px solid rgba(32,110,251,.16);border-radius:12px;background:linear-gradient(90deg,var(--brand-light),#fff 72%)}
+    .live-preview-banner[hidden]{display:none!important}
+    .live-preview-banner__copy{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;font-size:.82rem;color:var(--ink)}
+    .live-preview-banner__dot{font-size:.45rem;color:#10b981;animation:livePulse 1.6s ease-in-out infinite}
+    .live-preview-banner__sync{font-size:.68rem;font-weight:700;color:var(--brand);background:#fff;border:1px solid rgba(32,110,251,.12);padding:.16rem .45rem;border-radius:999px}
+    .mgmt-live-back-btn{display:inline-flex;align-items:center;gap:.35rem;padding:.45rem .85rem;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:.72rem;font-weight:700;font-family:inherit;cursor:pointer}
+    .mgmt-live-back-btn:hover{border-color:rgba(32,110,251,.22);background:var(--brand-light);color:var(--brand-dark)}
+    .roots-sync-wrap{display:flex;align-items:center;justify-content:flex-end;min-height:28px}
+    .roots-sync-pill{display:inline-flex;align-items:center;gap:.35rem;padding:.28rem .6rem;border-radius:999px;border:1px solid rgba(32,110,251,.14);background:#fff;color:var(--brand-dark);font-size:.66rem;font-weight:700;white-space:nowrap}
+    .roots-sync-pill--live i{font-size:.45rem;color:#10b981}
+    @keyframes livePulse{0%,100%{opacity:1}50%{opacity:.35}}
+    body.body-live-preview #dash-view-manage{display:none!important}
+    body.body-live-preview #dash-view-personal{display:block!important}
     .week-header{display:flex;align-items:center;gap:.75rem;margin:2rem 0 1rem}
     .week-badge{padding:.3rem .85rem;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:.01em}
     .week-badge--orga{background:var(--brand-light);color:var(--brand)}
@@ -1022,6 +1043,14 @@
   </header>
 
   <div class="dash-main" id="dash-view-personal">
+    <div id="live-preview-banner" class="live-preview-banner" hidden>
+      <div class="live-preview-banner__copy">
+        <i class="fa-solid fa-circle live-preview-banner__dot" aria-hidden="true"></i>
+        <span>Live-Ansicht · <strong id="live-preview-name"></strong></span>
+        <span id="live-preview-sync" class="live-preview-banner__sync">Synchronisiert</span>
+      </div>
+      <button type="button" class="mgmt-live-back-btn" id="btn-close-live-preview"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Zurück zur Verwaltung</button>
+    </div>
     <div class="greeting">
       <h1 id="greeting-text">Hallo!</h1>
       <p>Willkommen bei ROOTS – dein persönlicher Onboarding-Plan. Starte mit den To-do's, arbeite dann den Lernpfad durch und zum Schluss die Module Kunden & Projekte.</p>
@@ -1126,6 +1155,8 @@
   let currentUserId = null;
   let completedModules = [];
   let completedTodos   = [];
+  let dashboardPreview = null;
+  let livePreviewChannel = null;
   let currentModuleId  = null;
   let mgmtState = { users: [], teamMembers: [], progressByUser: {}, channel: null, menusBound: false, todoEditorsBound: false };
   const mgmtParticipantTodoSaveTimers = {};
@@ -1154,10 +1185,114 @@
     }, 3000);
   }
 
+  function isDashboardPreviewMode() {
+    return !!dashboardPreview;
+  }
+
+  function getActiveCompletedModules() {
+    return dashboardPreview ? dashboardPreview.completedModules : completedModules;
+  }
+
+  function getActiveCompletedTodos() {
+    return dashboardPreview ? dashboardPreview.completedTodos : completedTodos;
+  }
+
+  function updateLiveSyncIndicator(state) {
+    const bannerSync = document.getElementById('live-preview-sync');
+    const headerSync = document.getElementById('roots-sync-status');
+    const label = state === 'syncing' ? 'Aktualisiert…' : 'Synchronisiert';
+    if (bannerSync) bannerSync.textContent = label;
+    if (headerSync && dashboardPreview) {
+      headerSync.innerHTML = `<span class="roots-sync-pill roots-sync-pill--live"><i class="fa-solid fa-circle" aria-hidden="true"></i> Live · ${label}</span>`;
+    } else if (headerSync) {
+      headerSync.innerHTML = '';
+    }
+  }
+
+  function teardownLivePreviewRealtime() {
+    if (livePreviewChannel) {
+      sb.removeChannel(livePreviewChannel);
+      livePreviewChannel = null;
+    }
+  }
+
+  function applyDashboardPreviewState() {
+    if (!dashboardPreview) return;
+    const firstName = dashboardPreview.userName.split(' ')[0] || dashboardPreview.userName;
+    document.getElementById('greeting-text').textContent = `Hallo, ${firstName}`;
+    document.getElementById('live-preview-name').textContent = dashboardPreview.userName;
+    document.getElementById('header-sub').textContent = `Live · ${dashboardPreview.userName}`;
+    renderModules();
+    updateProgress();
+    updateLiveSyncIndicator('synced');
+  }
+
+  function bindLivePreviewRealtime(userId) {
+    teardownLivePreviewRealtime();
+    livePreviewChannel = sb.channel(`onboarding-live-${userId}`)
+      .on('postgres_changes', {
+        event: 'UPDATE',
+        schema: 'onboarding',
+        table: 'user_progress',
+        filter: `user_id=eq.${userId}`,
+      }, payload => {
+        if (!dashboardPreview || payload.new?.user_id !== userId) return;
+        dashboardPreview.completedModules = payload.new.completed_modules || [];
+        dashboardPreview.completedTodos = payload.new.completed_todos || [];
+        mgmtState.progressByUser[userId] = { ...getMgmtProgressRow(userId), ...payload.new };
+        updateLiveSyncIndicator('syncing');
+        applyDashboardPreviewState();
+        refreshOrgaModalIfOpen();
+        setTimeout(() => updateLiveSyncIndicator('synced'), 350);
+      })
+      .subscribe();
+  }
+
+  async function openMgmtLivePreview(userId) {
+    const user = mgmtState.users.find(u => u.id === userId);
+    if (!user) return;
+    const prog = getMgmtProgressRow(userId);
+    closeDashModalDirect();
+    dashboardPreview = {
+      userId,
+      userName: user.full_name || user.email || 'Teilnehmer',
+      userPosition: user.position || '',
+      completedModules: [...(prog.completed_modules || [])],
+      completedTodos: [...(prog.completed_todos || [])],
+    };
+    document.getElementById('live-preview-banner').hidden = false;
+    document.body.classList.add('body-live-preview');
+    document.getElementById('dash-view-manage').style.display = 'none';
+    document.getElementById('dash-view-personal').style.display = 'block';
+    applyDashboardPreviewState();
+    bindLivePreviewRealtime(userId);
+    document.getElementById('dash-view-personal').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  window.openMgmtLivePreview = openMgmtLivePreview;
+
+  function closeMgmtLivePreview() {
+    if (!dashboardPreview) return;
+    const userId = dashboardPreview.userId;
+    teardownLivePreviewRealtime();
+    dashboardPreview = null;
+    document.getElementById('live-preview-banner').hidden = true;
+    document.body.classList.remove('body-live-preview');
+    document.getElementById('dash-view-personal').style.display = 'none';
+    document.getElementById('dash-view-manage').style.display = 'block';
+    document.getElementById('header-sub').textContent = 'Onboarding-Fortschritt · Verwaltung';
+    updateLiveSyncIndicator(null);
+    closeDashModalDirect();
+    if (userId && mgmtState.users.some(u => u.id === userId)) refreshMgmtFromState();
+  }
+  window.closeMgmtLivePreview = closeMgmtLivePreview;
+
   function showLoginScreen() {
+    closeMgmtLivePreview();
     document.body.classList.remove('body-dashboard');
+    document.body.classList.remove('body-live-preview');
     document.getElementById('screen-dashboard').style.display = 'none';
     document.getElementById('screen-login').style.display = 'flex';
+    document.getElementById('live-preview-banner').hidden = true;
     document.getElementById('modal-overlay').classList.remove('open');
     document.body.style.overflow = '';
     document.getElementById('dash-view-personal').style.display = 'block';
@@ -1170,6 +1305,7 @@
   }
 
   function showManagementDashboard() {
+    closeMgmtLivePreview();
     document.getElementById('screen-login').style.display = 'none';
     document.getElementById('screen-dashboard').style.display = 'block';
     document.body.classList.add('body-dashboard');
@@ -1184,6 +1320,7 @@
   }
 
   function showDashboard() {
+    closeMgmtLivePreview();
     document.getElementById('screen-login').style.display = 'none';
     document.getElementById('screen-dashboard').style.display = 'block';
     document.body.classList.add('body-dashboard');
@@ -1570,7 +1707,7 @@
       </span>
       <textarea class="mgmt-pt-text" rows="1" data-pt-text data-user-id="${userId}" data-todo-id="${item.id}" aria-label="To-do-Text">${escapeHtml(item.text)}</textarea>
       ${renderMgmtAssignDropdown(userId, item.id, item.owner || '')}
-      <button type="button" class="mgmt-pt-delete" data-pt-delete="${item.id}" data-pt-user="${userId}" aria-label="To-do löschen" title="Löschen"><i class="fa-solid fa-trash-can" aria-hidden="true"></i></button>
+      <button type="button" class="mgmt-pt-delete action-btn-small delete-btn" data-pt-delete="${item.id}" data-pt-user="${userId}" aria-label="To-do löschen" title="Löschen"><i class="ri-delete-bin-line" aria-hidden="true"></i></button>
     </div>`;
   }
 
@@ -1669,6 +1806,9 @@
           </div>
         </div>
         <div class="mgmt-progress-wrap">
+          <button type="button" class="mgmt-live-btn" data-mgmt-live="${u.id}" aria-label="Live-Ansicht für ${escapeHtml(u.full_name || u.email || 'Teilnehmer')}">
+            <i class="fa-solid fa-signal" aria-hidden="true"></i> Live-Ansicht
+          </button>
           <div class="mgmt-progress-top">
             <span class="mgmt-progress-pct">${stats.pct}%</span>
             <span class="mgmt-progress-status">${escapeHtml(stats.status)}</span>
@@ -1970,6 +2110,11 @@
       scheduleParticipantTodoAutosave(userId, 'edit');
     });
     list.addEventListener('click', (e) => {
+      const liveBtn = e.target.closest('[data-mgmt-live]');
+      if (liveBtn?.dataset.mgmtLive) {
+        openMgmtLivePreview(liveBtn.dataset.mgmtLive);
+        return;
+      }
       const addBtn = e.target.closest('[data-pt-add]');
       if (addBtn) {
         addMgmtParticipantTodo(addBtn.dataset.ptUser, decodeURIComponent(addBtn.dataset.ptAdd || ''));
@@ -3803,7 +3948,7 @@ Best regards,
   const MODULE_PROJECT_IDS = ['kunden', 'projektbriefing'];
   const MODULE_TAB_IDS = [...MODULE_PATH_IDS, ...MODULE_PROJECT_IDS];
 
-  function getOrgaTodoStats(todos = completedTodos) {
+  function getOrgaTodoStats(todos = getActiveCompletedTodos()) {
     const items = TODOS.flatMap(s => s.items);
     const done = items.filter(i => todos.includes(i.id)).length;
     return { items, done, total: items.length, pct: items.length ? Math.round(done / items.length * 100) : 0 };
@@ -4674,7 +4819,8 @@ Best regards,
   }
 
   function renderOrgaTodoItem(item, openFirst) {
-    const checked = completedTodos.includes(item.id);
+    const checked = getActiveCompletedTodos().includes(item.id);
+    const previewDisabled = isDashboardPreviewMode();
     const isHandover = item.handoverDoc || item.id === 'admin_1';
     const isGoalAgreement = item.goalAgreementDoc || item.id === 'admin_5';
     const isItApps = Array.isArray(item.itApps) && item.itApps.length;
@@ -4690,7 +4836,7 @@ Best regards,
       <details class="mod-section orga-mod-item${checked ? ' is-done' : ''}"${openFirst ? ' open' : ''}>
         <summary>
           <label class="orga-mod-check" onclick="event.stopPropagation()">
-            <input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleTodoItem('${item.id}'); this.closest('.mod-section').classList.toggle('is-done', this.checked)"/>
+            <input type="checkbox" ${checked ? 'checked' : ''}${previewDisabled ? ' disabled' : ''} onchange="toggleTodoItem('${item.id}'); this.closest('.mod-section').classList.toggle('is-done', this.checked)"/>
           </label>
           <span class="sub-accordion-title">${item.text}</span>
           <i class="fa-solid fa-chevron-down mod-section-chevron" aria-hidden="true"></i>
@@ -5291,8 +5437,8 @@ Best regards,
   function renderTile(grid, m) {
     const orgaStats = m.orgaTodos ? getOrgaTodoStats() : null;
     const done = m.orgaTodos
-      ? (orgaStats.pct === 100 || completedModules.includes(m.id))
-      : completedModules.includes(m.id);
+      ? (orgaStats.pct === 100 || getActiveCompletedModules().includes(m.id))
+      : getActiveCompletedModules().includes(m.id);
     const pct = m.orgaTodos ? orgaStats.pct : (done ? 100 : 0);
     const badge = done
       ? '<i class="fa-solid fa-check"></i> Erledigt'
@@ -5329,10 +5475,10 @@ Best regards,
     const mains = getAllDashboardModules().filter(m =>
       MODULE_ORGA_IDS.includes(m.id) || MODULE_PATH_IDS.includes(m.id) || MODULE_PROJECT_IDS.includes(m.id));
     const orgaStats = getOrgaTodoStats();
-    const orgaDone = orgaStats.pct === 100 || completedModules.includes('orga-admin');
+    const orgaDone = orgaStats.pct === 100 || getActiveCompletedModules().includes('orga-admin');
     const learnDone = mains
       .filter(m => MODULE_PATH_IDS.includes(m.id) || MODULE_PROJECT_IDS.includes(m.id))
-      .filter(m => completedModules.includes(m.id)).length;
+      .filter(m => getActiveCompletedModules().includes(m.id)).length;
     const learnTotal = MODULE_PATH_IDS.length + MODULE_PROJECT_IDS.length;
     const total = 1 + learnTotal;
     const done = (orgaDone ? 1 : 0) + learnDone;
@@ -5342,9 +5488,9 @@ Best regards,
     const status = pct === 0 ? "Du hast gerade erst begonnen – los geht's!" : pct < 34 ? 'Guter Start! Weiter so.' : pct < 67 ? 'Du machst großartige Fortschritte.' : pct < 100 ? 'Fast geschafft! Noch ein bisschen.' : 'Onboarding abgeschlossen! Herzlichen Glückwunsch.';
     document.getElementById('prog-status').textContent = status;
     const pathMods = getAllDashboardModules().filter(m => MODULE_PATH_IDS.includes(m.id));
-    const pathDone = pathMods.filter(m => completedModules.includes(m.id)).length;
+    const pathDone = pathMods.filter(m => getActiveCompletedModules().includes(m.id)).length;
     const projMods = getAllDashboardModules().filter(m => MODULE_PROJECT_IDS.includes(m.id));
-    const projDone = projMods.filter(m => completedModules.includes(m.id)).length;
+    const projDone = projMods.filter(m => getActiveCompletedModules().includes(m.id)).length;
     const progEl = document.getElementById('modules-prog');
     if (progEl) progEl.textContent = `${pathDone} / ${pathMods.length} Module`;
     const progProj = document.getElementById('modules-prog-project');
@@ -5397,12 +5543,16 @@ Best regards,
     if (id === 'welcome') hydrateTeamRoster();
     const orgaStats = mod.orgaTodos ? getOrgaTodoStats() : null;
     const done = mod.orgaTodos
-      ? (orgaStats.pct === 100 || completedModules.includes(id))
-      : completedModules.includes(id);
+      ? (orgaStats.pct === 100 || getActiveCompletedModules().includes(id))
+      : getActiveCompletedModules().includes(id);
     const btn = document.getElementById('btn-done-module');
-    btn.style.display = '';
-    btn.innerHTML = done ? '<i class="fa-solid fa-circle-check"></i> Bereits erledigt' : '<i class="fa-solid fa-check"></i> Als erledigt markieren';
-    btn.style.background = done ? 'var(--brand-dark)' : '';
+    if (isDashboardPreviewMode()) {
+      btn.style.display = 'none';
+    } else {
+      btn.style.display = '';
+      btn.innerHTML = done ? '<i class="fa-solid fa-circle-check"></i> Bereits erledigt' : '<i class="fa-solid fa-check"></i> Als erledigt markieren';
+      btn.style.background = done ? 'var(--brand-dark)' : '';
+    }
     const modalBox = document.getElementById('dash-modal-box');
     modalBox.classList.add('dash-modal--fixed');
     document.getElementById('modal-overlay').classList.add('open');
@@ -5423,7 +5573,7 @@ Best regards,
     renderSigPreview();
     restoreModuleTab(activeTab);
     const orgaStats = getOrgaTodoStats();
-    const done = orgaStats.pct === 100 || completedModules.includes('orga-admin');
+    const done = orgaStats.pct === 100 || getActiveCompletedModules().includes('orga-admin');
     const btn = document.getElementById('btn-done-module');
     btn.innerHTML = done ? '<i class="fa-solid fa-circle-check"></i> Bereits erledigt' : '<i class="fa-solid fa-check"></i> Als erledigt markieren';
     btn.style.background = done ? 'var(--brand-dark)' : '';
@@ -5447,7 +5597,10 @@ Best regards,
 
   async function markDone() {
     if (!currentModuleId) return;
-    
+    if (isDashboardPreviewMode()) {
+      showToast('Nur Leseansicht – der Teilnehmer markiert Module selbst', 'info');
+      return;
+    }
     if (!completedModules.includes(currentModuleId)) {
       completedModules.push(currentModuleId);
       
@@ -5471,7 +5624,12 @@ Best regards,
   }
 
   async function toggleTodoItem(id) {
-    if (completedTodos.includes(id)) {
+    if (isDashboardPreviewMode()) {
+      showToast('Nur Leseansicht – der Teilnehmer bearbeitet To-dos selbst', 'info');
+      refreshOrgaModalIfOpen();
+      return;
+    }
+    if (getActiveCompletedTodos().includes(id)) {
       completedTodos = completedTodos.filter(t => t !== id);
     } else {
       completedTodos.push(id);
@@ -5654,6 +5812,7 @@ Best regards,
     }
   });
 
+  document.getElementById('btn-close-live-preview')?.addEventListener('click', closeMgmtLivePreview);
   document.getElementById('modal-overlay').addEventListener('click', function (ev) {
     if (ev.target === document.getElementById('modal-overlay')) closeDashModalDirect();
   });
