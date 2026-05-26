@@ -319,13 +319,18 @@
     .roots-sync-wrap{display:flex;align-items:center;justify-content:flex-end;min-height:28px}
     .roots-sync-pill{display:inline-flex;align-items:center;gap:.35rem;padding:.28rem .6rem;border-radius:999px;border:1px solid rgba(32,110,251,.14);background:#fff;color:var(--brand-dark);font-size:.66rem;font-weight:700;white-space:nowrap}
     .roots-sync-pill--live i{font-size:.45rem;color:#10b981}
-    /* autosave badge — SOP tool style */
-    .autosave-badge{display:none;align-items:center;gap:.4rem;height:32px;padding:0 .75rem;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--muted);font-size:.72rem;font-weight:500;white-space:nowrap;transition:color .2s,border-color .2s}
-    .autosave-badge.is-visible{display:inline-flex}
-    .autosave-badge i{font-size:.72rem}
-    .autosave-badge.is-saving{color:var(--brand);border-color:rgba(32,110,251,.3)}
-    .autosave-badge.is-saved{color:#059669;border-color:#bbf7d0}
-    .autosave-badge.is-error{color:#dc2626;border-color:#fecaca}
+    /* header mgmt action buttons — SOP tool style */
+    .header-action-btn{height:36px;padding:0 14px;font-size:.82rem;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;flex-shrink:0;cursor:pointer;font-family:inherit;font-weight:600;border-radius:999px;transition:all .18s ease}
+    .header-btn-save{background:var(--brand);color:#fff;border:none;box-shadow:0 2px 8px rgba(32,110,251,.25)}
+    .header-btn-save:hover:not(:disabled){background:var(--brand-dark)}
+    .header-btn-save:disabled{opacity:.65;cursor:default}
+    .header-btn-revision{background:var(--bg);border:1px solid var(--line);color:var(--ink);font-weight:500}
+    .header-btn-revision:hover{border-color:rgba(32,110,251,.3);box-shadow:0 2px 8px rgba(15,23,42,.07)}
+    #header-mgmt-actions{display:none;align-items:center;gap:8px}
+    #header-mgmt-actions.is-visible{display:flex}
+    .header-history-wrap{position:relative;display:inline-flex;flex-shrink:0}
+    .header-history-menu{position:absolute;top:calc(100% + 8px);right:0;width:min(340px,calc(100vw - 2rem));padding:.45rem;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.98);box-shadow:0 16px 32px rgba(15,23,42,.14);display:none;z-index:200}
+    .header-history-menu.open{display:block}
     @keyframes livePulse{0%,100%{opacity:1}50%{opacity:.35}}
     body.body-live-preview #dash-view-manage{display:none!important}
     body.body-live-preview #dash-view-personal{display:block!important}
@@ -1090,7 +1095,23 @@
       <span class="header-sub" id="header-sub">Dein persönlicher Einstiegsplan</span>
     </div>
     <div class="header-right">
-      <span id="global-autosave-badge" class="autosave-badge" aria-live="polite"></span>
+      <div id="header-mgmt-actions">
+        <div class="header-history-wrap">
+          <button type="button" id="global-history-btn" class="header-action-btn header-btn-revision" onclick="toggleGlobalHistoryMenu(event)" aria-label="Versionsverlauf anzeigen">
+            <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
+            Verlauf
+          </button>
+          <div class="header-history-menu dropdown-menu" id="global-history-menu">
+            <div class="mgmt-todo-history-list" id="global-history-list">
+              <div class="mgmt-todo-history-empty">Versionsverlauf wird geladen…</div>
+            </div>
+          </div>
+        </div>
+        <button type="button" id="global-autosave-btn" class="header-action-btn header-btn-save" aria-live="polite" disabled>
+          <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
+          Speichern
+        </button>
+      </div>
       <div id="roots-sync-status" class="roots-sync-wrap" aria-live="polite"></div>
     </div>
   </header>
@@ -1350,6 +1371,8 @@
     document.body.style.overflow = '';
     document.getElementById('dash-view-personal').style.display = 'block';
     document.getElementById('dash-view-manage').style.display = 'none';
+    const hma = document.getElementById('header-mgmt-actions');
+    if (hma) hma.classList.remove('is-visible');
     document.getElementById('form-login').reset();
     const loginBtn = document.getElementById('btn-login');
     if (loginBtn) setLoading(loginBtn, false, 'fa-solid fa-arrow-right-to-bracket', 'Anmelden');
@@ -1365,6 +1388,8 @@
     document.getElementById('dash-view-personal').style.display = 'none';
     document.getElementById('dash-view-manage').style.display = 'block';
     document.getElementById('header-sub').textContent = 'Onboarding-Fortschritt · Verwaltung';
+    const hma = document.getElementById('header-mgmt-actions');
+    if (hma) hma.classList.add('is-visible');
     window.RootsUser._loadAndMount(sb);
     initManagementView().catch(function (err) {
       console.error(err);
@@ -1380,6 +1405,8 @@
     document.getElementById('dash-view-personal').style.display = 'block';
     document.getElementById('dash-view-manage').style.display = 'none';
     document.getElementById('header-sub').textContent = 'Dein persönlicher Einstiegsplan';
+    const hma2 = document.getElementById('header-mgmt-actions');
+    if (hma2) hma2.classList.remove('is-visible');
     window.RootsUser._loadAndMount(sb);
     initDashboardView().catch(function (err) {
       console.error(err);
@@ -1589,27 +1616,37 @@
   }
 
   let _autosaveBadgeTimer = null;
+  let _mgmtActiveUserId = null;
+
   function updateMgmtParticipantTodoSaveIndicator(userId, state) {
-    const el = document.getElementById('global-autosave-badge');
-    if (!el) return;
+    const btn = document.getElementById('global-autosave-btn');
+    if (!btn) return;
+    if (userId) _mgmtActiveUserId = userId;
     clearTimeout(_autosaveBadgeTimer);
-    el.classList.remove('is-saving', 'is-saved', 'is-error');
-    el.classList.add('is-visible');
+    btn.disabled = false;
+    btn.style.background = '';
     if (state === 'saving') {
-      el.classList.add('is-saving');
-      el.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Speichert…';
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Speichert…';
       return;
     }
     if (state === 'error') {
-      el.classList.add('is-error');
-      el.innerHTML = '<i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Speichern fehlgeschlagen';
-      _autosaveBadgeTimer = setTimeout(() => el.classList.remove('is-visible'), 5000);
+      btn.style.background = '#dc2626';
+      btn.innerHTML = '<i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Fehler';
+      _autosaveBadgeTimer = setTimeout(() => {
+        btn.style.background = '';
+        btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i> Speichern';
+        btn.disabled = true;
+      }, 5000);
       return;
     }
     const meta = mgmtParticipantTodoSaveMeta[userId];
-    el.classList.add('is-saved');
-    el.innerHTML = `<i class="fa-solid fa-circle-check" aria-hidden="true"></i> Gespeichert${meta ? ' · ' + escapeHtml(meta.name) : ''}`;
-    _autosaveBadgeTimer = setTimeout(() => el.classList.remove('is-visible'), 4000);
+    const name = meta ? escapeHtml(meta.name.split(' ')[0]) : '';
+    btn.innerHTML = `<i class="fa-solid fa-circle-check" aria-hidden="true"></i> Gespeichert${name ? ' · ' + name : ''}`;
+    _autosaveBadgeTimer = setTimeout(() => {
+      btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i> Speichern';
+      btn.disabled = true;
+    }, 3500);
   }
 
   function setMgmtParticipantTodosState(userId, todos, extraFields) {
@@ -1673,11 +1710,35 @@
   function closeMgmtMenus() {
     document.querySelectorAll('#dash-view-manage .dropdown-menu.open').forEach(menu => menu.classList.remove('open'));
     closeMgmtHistoryMenus();
+    const globalMenu = document.getElementById('global-history-menu');
+    if (globalMenu) globalMenu.classList.remove('open');
   }
 
   function closeMgmtHistoryMenus() {
     document.querySelectorAll('#dash-view-manage .mgmt-history-menu.open').forEach(menu => menu.classList.remove('open'));
+    const globalMenu = document.getElementById('global-history-menu');
+    if (globalMenu) globalMenu.classList.remove('open');
   }
+
+  function toggleGlobalHistoryMenu(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const menu = document.getElementById('global-history-menu');
+    if (!menu) return;
+    const shouldOpen = !menu.classList.contains('open');
+    document.querySelectorAll('.dropdown-menu.open').forEach(m => m.classList.remove('open'));
+    closeMgmtHistoryMenus();
+    if (shouldOpen && _mgmtActiveUserId) {
+      menu.classList.add('open');
+      const listEl = document.getElementById('global-history-list');
+      if (listEl) loadMgmtParticipantTodoHistory(_mgmtActiveUserId, listEl);
+    } else if (shouldOpen) {
+      menu.classList.add('open');
+      const listEl = document.getElementById('global-history-list');
+      if (listEl) listEl.innerHTML = '<div class="mgmt-todo-history-empty">Kein Teilnehmer ausgewählt.</div>';
+    }
+  }
+  window.toggleGlobalHistoryMenu = toggleGlobalHistoryMenu;
 
   function toggleMgmtHistoryMenu(event, userId) {
     event.preventDefault();
@@ -1808,20 +1869,6 @@
       <div class="mgmt-roots-toolbar__left">
         <span class="mgmt-toolbar-label">ROOTS To-do-Liste</span>
         <span class="mgmt-chip">${doneCount}/${todos.length} erledigt</span>
-      </div>
-      <div class="mgmt-roots-toolbar__right">
-        <div class="mgmt-dropdown-wrap">
-          <button type="button" class="mgmt-dropdown-wrap__trigger" onclick="toggleMgmtHistoryMenu(event, '${userId}')" aria-label="Versionsverlauf anzeigen">
-            <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
-            <span>Versionsverlauf</span>
-            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
-          </button>
-          <div class="mgmt-history-menu dropdown-menu" id="mgmt-history-menu-${saveId}">
-            <div class="mgmt-todo-history-list" id="mgmt-history-${saveId}">
-              <div class="mgmt-todo-history-empty">Versionsverlauf wird geladen…</div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>`;
   }
@@ -2001,8 +2048,11 @@
     if (!error) {
       mgmtParticipantTodoSaveMeta[userId] = { name: changedByName, at: new Date().toISOString() };
       updateMgmtParticipantTodoSaveIndicator(userId, 'saved');
-      const historyMenu = document.getElementById(`mgmt-history-menu-${userId.slice(0, 8)}`);
-      if (historyMenu?.classList.contains('open')) loadMgmtParticipantTodoHistory(userId);
+      const globalMenu = document.getElementById('global-history-menu');
+      if (globalMenu?.classList.contains('open') && _mgmtActiveUserId === userId) {
+        const listEl = document.getElementById('global-history-list');
+        if (listEl) loadMgmtParticipantTodoHistory(userId, listEl);
+      }
     }
     return error;
   }
@@ -2039,8 +2089,8 @@
     }, 700);
   }
 
-  async function loadMgmtParticipantTodoHistory(userId) {
-    const container = document.getElementById(`mgmt-history-${userId.slice(0, 8)}`);
+  async function loadMgmtParticipantTodoHistory(userId, containerOverride) {
+    const container = containerOverride || document.getElementById(`mgmt-history-${userId.slice(0, 8)}`);
     if (!container) return;
     container.innerHTML = '<div class="mgmt-todo-history-empty">Lade Verlauf…</div>';
     const { data, error } = await sb.schema('onboarding').from('participant_todo_history')
