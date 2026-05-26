@@ -193,19 +193,56 @@
     .mgmt-stat-label{font-size:.75rem;color:var(--muted);margin-bottom:.25rem}
     .mgmt-stat-value{font-size:1.35rem;font-weight:700;color:var(--ink)}
     .mgmt-list{display:flex;flex-direction:column;gap:.75rem}
-    .mgmt-card{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-dash);padding:1rem 1.15rem;box-shadow:var(--shadow-dash);display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:1rem;align-items:center}
-    @media (max-width:768px){.mgmt-card{grid-template-columns:1fr}}
-    .mgmt-user{display:flex;align-items:center;gap:.85rem;min-width:0}
+    .mgmt-card-head .mgmt-user{display:flex;align-items:center;gap:.85rem;min-width:0}
     .mgmt-user-meta{min-width:0}
     .mgmt-user-name{font-size:.95rem;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .mgmt-user-sub{font-size:.78rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .mgmt-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.45rem .65rem;font-size:.72rem;color:var(--muted);margin-top:.45rem}
     .mgmt-metrics strong{color:var(--ink);font-weight:600}
-    .mgmt-progress-wrap{min-width:0}
+    .mgmt-card-head .mgmt-progress-wrap{min-width:0}
     .mgmt-progress-top{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:.35rem}
     .mgmt-progress-pct{font-size:1.1rem;font-weight:700;color:var(--brand)}
     .mgmt-progress-status{font-size:.72rem;color:var(--muted);text-align:right;line-height:1.35}
     .mgmt-empty{text-align:center;padding:2.5rem 1rem;color:var(--muted);background:var(--bg);border:1px dashed var(--line);border-radius:var(--radius-dash)}
+    .mgmt-notifications{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.25rem}
+    .mgmt-notifications[hidden]{display:none!important}
+    .mgmt-notif{display:flex;align-items:flex-start;gap:.65rem;padding:.7rem .9rem;border-radius:12px;border:1px solid var(--line);background:var(--bg);font-size:.82rem;line-height:1.45;color:var(--ink)}
+    .mgmt-notif i{margin-top:.1rem;flex-shrink:0}
+    .mgmt-notif--warn{border-color:#fde68a;background:#fffbeb}
+    .mgmt-notif--warn i{color:#d97706}
+    .mgmt-notif--info{border-color:#bfdbfe;background:#eff6ff}
+    .mgmt-notif--info i{color:var(--brand)}
+    .mgmt-notif--success{border-color:#bbf7d0;background:#ecfdf5}
+    .mgmt-notif--success i{color:var(--success)}
+    .mgmt-notif button{margin-left:auto;flex-shrink:0;border:none;background:transparent;color:var(--brand);font-size:.75rem;font-weight:700;cursor:pointer;font-family:inherit;padding:0}
+    .mgmt-summary--4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    @media (max-width:1100px){.mgmt-summary--4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    .mgmt-card{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-dash);padding:1rem 1.15rem 1.1rem;box-shadow:var(--shadow-dash);display:flex;flex-direction:column;gap:1rem}
+    .mgmt-card-head{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:1rem;align-items:center}
+    @media (max-width:768px){.mgmt-card-head{grid-template-columns:1fr}}
+    .mgmt-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.45rem .65rem;font-size:.72rem;color:var(--muted);margin-top:.45rem}
+    @media (max-width:900px){.mgmt-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    .mgmt-section-label{display:flex;align-items:center;justify-content:space-between;gap:.5rem;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:.55rem}
+    .mgmt-section-label span{font-weight:800;color:var(--brand);text-transform:none;letter-spacing:0}
+    .mgmt-roots-groups{display:grid;gap:.55rem}
+    .mgmt-roots-group{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+    .mgmt-roots-group summary{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.55rem .75rem;cursor:pointer;font-size:.78rem;font-weight:700;color:var(--ink);list-style:none}
+    .mgmt-roots-group summary::-webkit-details-marker{display:none}
+    .mgmt-roots-group__count{font-size:.68rem;font-weight:700;color:var(--muted)}
+    .mgmt-roots-items{padding:.35rem .75rem .65rem;display:grid;gap:.35rem}
+    .mgmt-roots-item{display:flex;align-items:flex-start;gap:.55rem;font-size:.8rem;line-height:1.45;color:var(--ink)}
+    .mgmt-roots-item.is-done{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(100,116,139,.45)}
+    .mgmt-roots-item__owner{flex-shrink:0;font-size:.62rem;font-weight:700;color:var(--brand);background:var(--brand-light);padding:.12rem .4rem;border-radius:999px;margin-top:.12rem}
+    .mgmt-roots-check{flex-shrink:0;display:flex;padding-top:.05rem}
+    .mgmt-roots-check input[type="checkbox"]{-webkit-appearance:none;appearance:none;width:16px;height:16px;margin:0;border:1.5px solid var(--line);border-radius:50%;background:var(--bg);cursor:pointer;transition:border-color .2s,background .2s}
+    .mgmt-roots-check input[type="checkbox"]:checked{border-color:var(--brand);background:var(--brand);box-shadow:inset 0 0 0 3px #fff}
+    .mgmt-card-actions{display:flex;justify-content:flex-end}
+    .mgmt-open-btn{border:1px solid var(--line);background:#fff;color:var(--brand-dark);font-size:.75rem;font-weight:700;padding:.45rem .75rem;border-radius:999px;cursor:pointer;font-family:inherit}
+    .mgmt-open-btn:hover{border-color:var(--brand);background:var(--brand-light)}
+    .mgmt-modal-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.65rem;margin-bottom:1rem}
+    @media (max-width:768px){.mgmt-modal-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    .mgmt-modal-stat{padding:.75rem .85rem;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+    .mgmt-modal-stat__label{font-size:.68rem;color:var(--muted);margin-bottom:.2rem}
+    .mgmt-modal-stat__value{font-size:1rem;font-weight:700;color:var(--ink)}
     .week-header{display:flex;align-items:center;gap:.75rem;margin:2rem 0 1rem}
     .week-badge{padding:.3rem .85rem;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:.01em}
     .week-badge--orga{background:var(--brand-light);color:var(--brand)}
@@ -980,16 +1017,18 @@
   <div class="dash-main" id="dash-view-manage" style="display:none">
     <div class="greeting">
       <h1 id="mgmt-greeting-text">Onboarding Verwaltung</h1>
-      <p>Fortschritt aller Mitarbeitenden mit Leserechten im Onboarding-Prozess.</p>
+      <p>Fortschritt aller Mitarbeitenden mit Leserechten — inklusive ROOTS-To-dos pro Teilnehmer.</p>
     </div>
-    <div class="mgmt-summary">
+    <div id="mgmt-notifications" class="mgmt-notifications" hidden></div>
+    <div class="mgmt-summary mgmt-summary--4">
       <div class="mgmt-stat"><div class="mgmt-stat-label">Mitarbeitende (Lesen)</div><div class="mgmt-stat-value" id="mgmt-count">—</div></div>
       <div class="mgmt-stat"><div class="mgmt-stat-label">Durchschnittlicher Fortschritt</div><div class="mgmt-stat-value" id="mgmt-avg">—</div></div>
+      <div class="mgmt-stat"><div class="mgmt-stat-label">ROOTS-To-dos offen</div><div class="mgmt-stat-value" id="mgmt-roots-open">—</div></div>
       <div class="mgmt-stat"><div class="mgmt-stat-label">Abgeschlossen</div><div class="mgmt-stat-value" id="mgmt-done-count">—</div></div>
     </div>
     <div class="week-header">
-      <span class="week-badge week-badge--orga">Übersicht</span>
-      <span class="week-title">Onboarding-Fortschritt pro Person</span>
+      <span class="week-badge week-badge--orga">Bearbeitung</span>
+      <span class="week-title">Teilnehmer & ROOTS-To-do-Liste</span>
     </div>
     <div id="mgmt-user-list" class="mgmt-list">
       <div class="mgmt-empty"><i class="fa-solid fa-circle-notch fa-spin"></i> Lade Fortschrittsdaten…</div>
@@ -1044,6 +1083,8 @@
   let completedModules = [];
   let completedTodos   = [];
   let currentModuleId  = null;
+  let mgmtState = { users: [], progressByUser: {}, channel: null };
+  let currentMgmtUserId = null;
 
   /* ── Toasts (Live-Logs) System ──────────────────────── */
   function showToast(msg, type = 'info') {
@@ -1124,89 +1165,168 @@
     return 'Abgeschlossen';
   }
 
-  function calcOnboardingProgress(modules, todos) {
+  function getRootsTodoItems() {
+    return ROOTS_TODOS.flatMap(s => s.items);
+  }
+
+  const ROOTS_TODOS = [
+    { section:'Vor Tag 1 · IT Set-up', phase:'pre', items:[
+      { id:'roots_pre_wlan', text:'WLAN Fritzbox 4040 JI zum Mac hinzufügen', owner:'Pano' },
+      { id:'roots_pre_ms', text:'Microsoft-Lizenz erwerben', owner:'Richard' },
+      { id:'roots_pre_claude', text:'Claude-Lizenz erwerben', owner:'Manuel' },
+      { id:'roots_pre_chatgpt', text:'ChatGPT-Lizenz erwerben', owner:'Richard' },
+      { id:'roots_pre_email', text:'E-Mail anlegen', owner:'Richard' },
+      { id:'roots_pre_team_list', text:'In team@roots-consultants E-Mail-Liste aufnehmen', owner:'Pano' },
+      { id:'roots_pre_teams', text:'Relevante Teams-Kanäle freischalten', owner:'Richard' },
+    ]},
+    { section:'Vor Tag 1 · Admin', phase:'pre', items:[
+      { id:'roots_pre_oka', text:'Zum OKA-Board, Urlaubsliste, Ressourcenkalkulation hinzufügen', owner:'Rod' },
+      { id:'roots_pre_okr', text:'Team Meeting / OKR weiterleiten', owner:'Richard' },
+      { id:'roots_pre_meetings', text:'Meetings einstellen (Welcome, Insight, Modus, Kunden, Projektbriefing)', owner:'Meeting Owner' },
+      { id:'roots_pre_reviews', text:'Jahresgespräche einstellen (1 Wo · 14 T · 3 Mo · 6 Mo)', owner:'Richard' },
+      { id:'roots_pre_pleo', text:'Pleo-Karte aktivieren', owner:'Richard' },
+      { id:'roots_pre_hardware', text:'Schlüssel, Chip, Laptop, Dongle, Handy, Merch bereitlegen', owner:'Richard' },
+    ]},
+    { section:'Vor Tag 1 · Weitere', phase:'pre', items:[
+      { id:'roots_pre_ainauten', text:'AINAUTEN-Lizenz erwerben', owner:'Richard' },
+      { id:'roots_pre_welcome', text:'Welcome-E-Mail an New Hire senden', owner:'Richard' },
+    ]},
+    { section:'1. Woche', phase:'week1', items:[
+      { id:'roots_w1_photo', text:'Foto mit Team und Richard', owner:'Team' },
+      { id:'roots_w1_whatsapp', text:'Zur WhatsApp-Gruppe (Team ROOTS) hinzufügen', owner:'Team' },
+      { id:'roots_w1_website', text:'Profilfoto auf Webseite hochladen', owner:'Pano' },
+      { id:'roots_w1_linkedin', text:'LinkedIn Welcome Post erstellen und hochladen', owner:'Team' },
+    ]},
+  ];
+
+  function calcOnboardingProgress(modules, todos, rootsTodos) {
     const mods = Array.isArray(modules) ? modules : [];
     const tds = Array.isArray(todos) ? todos : [];
+    const rts = Array.isArray(rootsTodos) ? rootsTodos : [];
     const orgaItems = TODOS.flatMap(s => s.items);
+    const rootsItems = getRootsTodoItems();
     const orgaDoneCount = orgaItems.filter(i => tds.includes(i.id)).length;
     const orgaTotal = orgaItems.length;
     const orgaPct = orgaTotal ? Math.round(orgaDoneCount / orgaTotal * 100) : 0;
     const orgaDone = orgaPct === 100 || mods.includes('orga-admin');
-    const learnIds = [...MODULE_PATH_IDS, ...MODULE_PROJECT_IDS];
-    const learnDone = learnIds.filter(id => mods.includes(id)).length;
-    const learnTotal = learnIds.length;
-    const total = 1 + learnTotal;
-    const done = (orgaDone ? 1 : 0) + learnDone;
-    const pct = total > 0 ? Math.round(done / total * 100) : 0;
     const pathDone = MODULE_PATH_IDS.filter(id => mods.includes(id)).length;
     const projDone = MODULE_PROJECT_IDS.filter(id => mods.includes(id)).length;
+    const learnTotal = MODULE_PATH_IDS.length + MODULE_PROJECT_IDS.length;
+    const learnDone = pathDone + projDone;
+    const rootsDoneCount = rootsItems.filter(i => rts.includes(i.id)).length;
+    const rootsTotal = rootsItems.length;
+    const rootsPct = rootsTotal ? Math.round(rootsDoneCount / rootsTotal * 100) : 0;
+    const totalUnits = orgaTotal + rootsTotal + learnTotal;
+    const doneUnits = orgaDoneCount + rootsDoneCount + learnDone;
+    const pct = totalUnits > 0 ? Math.round(doneUnits / totalUnits * 100) : 0;
     return {
       pct,
       orgaDoneCount,
       orgaTotal,
       orgaPct,
+      orgaDone,
+      rootsDoneCount,
+      rootsTotal,
+      rootsPct,
       pathDone,
       pathTotal: MODULE_PATH_IDS.length,
       projDone,
       projTotal: MODULE_PROJECT_IDS.length,
+      learnDone,
+      learnTotal,
       status: progressStatusText(pct),
     };
   }
 
-  async function initManagementView() {
-    const listEl = document.getElementById('mgmt-user-list');
-    if (!listEl) return;
-    listEl.innerHTML = '<div class="mgmt-empty"><i class="fa-solid fa-circle-notch fa-spin"></i> Lade Fortschrittsdaten…</div>';
+  function getMgmtProgressRow(userId) {
+    return mgmtState.progressByUser[userId] || {
+      user_id: userId,
+      completed_modules: [],
+      completed_todos: [],
+      completed_roots_todos: [],
+    };
+  }
 
-    const [{ data: readers, error: readersErr }, { data: progressRows, error: progErr }] = await Promise.all([
-      sb.schema('users').from('profiles')
-        .select('id, full_name, email, position, avatar_url, app_role')
-        .eq('app_role', 'reader')
-        .order('full_name'),
-      sb.schema('onboarding').from('user_progress')
-        .select('user_id, completed_modules, completed_todos, updated_at'),
-    ]);
+  function getMgmtRootsCompleted(userId) {
+    const row = getMgmtProgressRow(userId);
+    return Array.isArray(row.completed_roots_todos) ? row.completed_roots_todos : [];
+  }
 
-    if (readersErr) throw readersErr;
-    if (progErr) throw progErr;
+  function buildMgmtNotifications(rows) {
+    const notes = [];
+    rows.forEach(({ user, stats }) => {
+      const name = user.full_name || user.email || 'Teilnehmer';
+      const openPre = getRootsTodoItems().filter(i => {
+        const sec = ROOTS_TODOS.find(s => s.items.some(it => it.id === i.id));
+        return sec?.phase === 'pre' && !getMgmtRootsCompleted(user.id).includes(i.id);
+      }).length;
+      if (openPre > 0) {
+        notes.push({ type:'warn', icon:'fa-triangle-exclamation', text:`${name}: ${openPre} ROOTS-To-do(s) vor Tag 1 noch offen`, userId:user.id });
+      }
+      if (stats.orgaPct >= 40 && stats.rootsPct < 25) {
+        notes.push({ type:'info', icon:'fa-circle-info', text:`${name}: Teilnehmer-Fortschritt (${stats.orgaPct}%) überholt ROOTS-Vorbereitung (${stats.rootsPct}%)`, userId:user.id });
+      }
+      if (stats.pct >= 100) {
+        notes.push({ type:'success', icon:'fa-circle-check', text:`${name}: Onboarding vollständig abgeschlossen`, userId:user.id });
+      }
+    });
+    return notes.slice(0, 10);
+  }
 
-    const progressByUser = {};
-    (progressRows || []).forEach(row => { progressByUser[row.user_id] = row; });
-
-    const users = readers || [];
-    const managerName = window.RootsUser?._p?.full_name?.split(' ')[0] || 'Team';
-    document.getElementById('mgmt-greeting-text').textContent = `Hallo, ${managerName}`;
-
-    if (!users.length) {
-      listEl.innerHTML = '<div class="mgmt-empty">Keine Mitarbeitenden mit Leserechten gefunden.</div>';
-      document.getElementById('mgmt-count').textContent = '0';
-      document.getElementById('mgmt-avg').textContent = '—';
-      document.getElementById('mgmt-done-count').textContent = '0';
+  function renderMgmtNotifications(rows) {
+    const wrap = document.getElementById('mgmt-notifications');
+    if (!wrap) return;
+    const notes = buildMgmtNotifications(rows);
+    if (!notes.length) {
+      wrap.hidden = true;
+      wrap.innerHTML = '';
       return;
     }
-
-    const rows = users.map(u => {
-      const prog = progressByUser[u.id];
-      const stats = calcOnboardingProgress(prog?.completed_modules, prog?.completed_todos);
-      return { user: u, prog, stats };
+    wrap.hidden = false;
+    wrap.innerHTML = notes.map(n => `<div class="mgmt-notif mgmt-notif--${n.type}">
+      <i class="fa-solid ${n.icon}" aria-hidden="true"></i>
+      <span>${escapeHtml(n.text)}</span>
+      <button type="button" data-mgmt-open="${n.userId}">Anzeigen</button>
+    </div>`).join('');
+    wrap.querySelectorAll('[data-mgmt-open]').forEach(btn => {
+      btn.addEventListener('click', () => openMgmtParticipantModal(btn.dataset.mgmtOpen));
     });
+  }
 
-    const avg = Math.round(rows.reduce((sum, r) => sum + r.stats.pct, 0) / rows.length);
-    const doneCount = rows.filter(r => r.stats.pct >= 100).length;
-    document.getElementById('mgmt-count').textContent = String(rows.length);
-    document.getElementById('mgmt-avg').textContent = avg + '%';
-    document.getElementById('mgmt-done-count').textContent = String(doneCount);
+  function renderMgmtRootsTodoList(userId, openFirstSection) {
+    const completed = getMgmtRootsCompleted(userId);
+    return `<div class="mgmt-roots-groups">${ROOTS_TODOS.map((sec, idx) => {
+      const done = sec.items.filter(i => completed.includes(i.id)).length;
+      const open = openFirstSection ? idx === 0 : done < sec.items.length;
+      const itemsHtml = sec.items.map(item => {
+        const checked = completed.includes(item.id);
+        return `<div class="mgmt-roots-item${checked ? ' is-done' : ''}">
+          <span class="mgmt-roots-check">
+            <input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleMgmtRootsTodo('${userId}', '${item.id}', this)" aria-label="${escapeHtml(item.text)}"/>
+          </span>
+          <span>${escapeHtml(item.text)}</span>
+          ${item.owner ? `<span class="mgmt-roots-item__owner">${escapeHtml(item.owner)}</span>` : ''}
+        </div>`;
+      }).join('');
+      return `<details class="mgmt-roots-group"${open ? ' open' : ''}>
+        <summary><span>${escapeHtml(sec.section)}</span><span class="mgmt-roots-group__count">${done}/${sec.items.length}</span></summary>
+        <div class="mgmt-roots-items">${itemsHtml}</div>
+      </details>`;
+    }).join('')}</div>`;
+  }
 
-    listEl.innerHTML = rows.map(({ user: u, stats }) => {
-      const av = window.RootsUser?._avatarSpan(u.avatar_url, u.full_name, 40) || '';
-      return `<article class="mgmt-card">
+  function renderMgmtUserCard({ user: u, stats }) {
+    const av = window.RootsUser?._avatarSpan(u.avatar_url, u.full_name, 40) || '';
+    return `<article class="mgmt-card" data-mgmt-user="${u.id}">
+      <div class="mgmt-card-head">
         <div class="mgmt-user">
           ${av}
           <div class="mgmt-user-meta">
             <div class="mgmt-user-name">${escapeHtml(u.full_name || u.email || '—')}</div>
             <div class="mgmt-user-sub">${escapeHtml(u.position || '—')}${u.email ? ' · ' + escapeHtml(u.email) : ''}</div>
             <div class="mgmt-metrics">
-              <span>Orga: <strong>${stats.orgaDoneCount}/${stats.orgaTotal}</strong></span>
+              <span>Teilnehmer: <strong>${stats.orgaDoneCount}/${stats.orgaTotal}</strong></span>
+              <span>ROOTS: <strong>${stats.rootsDoneCount}/${stats.rootsTotal}</strong></span>
               <span>Lernpfad: <strong>${stats.pathDone}/${stats.pathTotal}</strong></span>
               <span>Projekte: <strong>${stats.projDone}/${stats.projTotal}</strong></span>
             </div>
@@ -1219,8 +1339,188 @@
           </div>
           <div class="prog-bar-wrap"><div class="prog-bar" style="width:${stats.pct}%"></div></div>
         </div>
-      </article>`;
-    }).join('');
+      </div>
+      <div class="mgmt-card-section">
+        <div class="mgmt-section-label">ROOTS To-dos <span>${stats.rootsDoneCount} / ${stats.rootsTotal} erledigt</span></div>
+        ${renderMgmtRootsTodoList(u.id, true)}
+      </div>
+      <div class="mgmt-card-actions">
+        <button type="button" class="mgmt-open-btn" onclick="openMgmtParticipantModal('${u.id}')"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Detailansicht</button>
+      </div>
+    </article>`;
+  }
+
+  function updateMgmtSummary(rows) {
+    const avg = rows.length ? Math.round(rows.reduce((sum, r) => sum + r.stats.pct, 0) / rows.length) : 0;
+    const doneCount = rows.filter(r => r.stats.pct >= 100).length;
+    const rootsOpen = rows.reduce((sum, r) => sum + (r.stats.rootsTotal - r.stats.rootsDoneCount), 0);
+    document.getElementById('mgmt-count').textContent = String(rows.length);
+    document.getElementById('mgmt-avg').textContent = rows.length ? avg + '%' : '—';
+    document.getElementById('mgmt-roots-open').textContent = String(rootsOpen);
+    document.getElementById('mgmt-done-count').textContent = String(doneCount);
+  }
+
+  function renderMgmtUserList(rows) {
+    const listEl = document.getElementById('mgmt-user-list');
+    if (!listEl) return;
+    listEl.innerHTML = rows.map(renderMgmtUserCard).join('');
+    updateMgmtSummary(rows);
+    renderMgmtNotifications(rows);
+  }
+
+  function refreshMgmtFromState() {
+    const rows = mgmtState.users.map(u => {
+      const prog = getMgmtProgressRow(u.id);
+      const stats = calcOnboardingProgress(prog.completed_modules, prog.completed_todos, prog.completed_roots_todos);
+      return { user: u, prog, stats };
+    });
+    renderMgmtUserList(rows);
+    if (currentMgmtUserId && document.getElementById('modal-overlay')?.classList.contains('open')) {
+      openMgmtParticipantModal(currentMgmtUserId, true);
+    }
+  }
+
+  function teardownMgmtRealtime() {
+    if (mgmtState.channel) {
+      sb.removeChannel(mgmtState.channel);
+      mgmtState.channel = null;
+    }
+  }
+
+  function bindMgmtRealtime() {
+    teardownMgmtRealtime();
+    mgmtState.channel = sb.channel('onboarding-mgmt-progress')
+      .on('postgres_changes', { event:'*', schema:'onboarding', table:'user_progress' }, payload => {
+        const row = payload.new || payload.old;
+        if (!row?.user_id || !mgmtState.users.some(u => u.id === row.user_id)) return;
+        if (payload.new) mgmtState.progressByUser[row.user_id] = { ...getMgmtProgressRow(row.user_id), ...payload.new };
+        const user = mgmtState.users.find(u => u.id === row.user_id);
+        refreshMgmtFromState();
+        if (payload.eventType === 'UPDATE' && user && payload.new?.user_id !== currentUserId) {
+          const oldRow = payload.old || {};
+          const newRow = payload.new || {};
+          const participantChanged = JSON.stringify(oldRow.completed_todos || []) !== JSON.stringify(newRow.completed_todos || [])
+            || JSON.stringify(oldRow.completed_modules || []) !== JSON.stringify(newRow.completed_modules || []);
+          if (participantChanged) {
+            const stats = calcOnboardingProgress(newRow.completed_modules, newRow.completed_todos, newRow.completed_roots_todos);
+            showToast(`${user.full_name || 'Teilnehmer'}: Fortschritt ${stats.pct}% (${stats.orgaDoneCount}/${stats.orgaTotal} To-dos)`, 'info');
+          }
+        }
+      })
+      .subscribe();
+  }
+
+  async function persistMgmtRootsTodos(userId, completed) {
+    const payload = {
+      completed_roots_todos: completed,
+      updated_at: new Date().toISOString(),
+    };
+    const { data: existing, error: readErr } = await sb.schema('onboarding').from('user_progress')
+      .select('user_id')
+      .eq('user_id', userId)
+      .maybeSingle();
+    if (readErr) return readErr;
+    if (!existing) {
+      const { error } = await sb.schema('onboarding').from('user_progress').insert({
+        user_id: userId,
+        completed_modules: [],
+        completed_todos: [],
+        ...payload,
+      });
+      return error;
+    }
+    const { error } = await sb.schema('onboarding').from('user_progress').update(payload).eq('user_id', userId);
+    return error;
+  }
+
+  async function toggleMgmtRootsTodo(userId, todoId, inputEl) {
+    const row = getMgmtProgressRow(userId);
+    let completed = [...getMgmtRootsCompleted(userId)];
+    const checked = completed.includes(todoId);
+    if (checked) completed = completed.filter(id => id !== todoId);
+    else completed.push(todoId);
+    mgmtState.progressByUser[userId] = { ...row, completed_roots_todos: completed };
+    if (inputEl) inputEl.closest('.mgmt-roots-item')?.classList.toggle('is-done', !checked);
+    refreshMgmtFromState();
+    const error = await persistMgmtRootsTodos(userId, completed);
+    if (error) {
+      console.error('[ROOTS] ROOTS-To-do Speicherfehler:', error);
+      showToast('ROOTS-To-do konnte nicht gespeichert werden', 'error');
+      await initManagementView();
+      return;
+    }
+    const user = mgmtState.users.find(u => u.id === userId);
+    const item = getRootsTodoItems().find(i => i.id === todoId);
+    showToast(`${user?.full_name || 'Teilnehmer'}: „${item?.text || 'To-do'}“ ${checked ? 'wieder offen' : 'erledigt'}`, checked ? 'info' : 'success');
+  }
+  window.toggleMgmtRootsTodo = toggleMgmtRootsTodo;
+
+  function renderMgmtParticipantModalBody(userId, stats) {
+    const user = mgmtState.users.find(u => u.id === userId);
+    return `<div class="mgmt-modal-stats">
+      <div class="mgmt-modal-stat"><div class="mgmt-modal-stat__label">Gesamt</div><div class="mgmt-modal-stat__value">${stats.pct}%</div></div>
+      <div class="mgmt-modal-stat"><div class="mgmt-modal-stat__label">Teilnehmer-To-dos</div><div class="mgmt-modal-stat__value">${stats.orgaDoneCount}/${stats.orgaTotal}</div></div>
+      <div class="mgmt-modal-stat"><div class="mgmt-modal-stat__label">ROOTS-To-dos</div><div class="mgmt-modal-stat__value">${stats.rootsDoneCount}/${stats.rootsTotal}</div></div>
+      <div class="mgmt-modal-stat"><div class="mgmt-modal-stat__label">Module</div><div class="mgmt-modal-stat__value">${stats.learnDone}/${stats.learnTotal}</div></div>
+    </div>
+    <p style="margin:0 0 .85rem;font-size:.84rem;color:var(--muted)">${escapeHtml(user?.full_name || user?.email || 'Teilnehmer')}: ROOTS-Aufgaben vor und während des Onboardings — abhaken synchronisiert den Gesamtfortschritt.</p>
+    ${renderMgmtRootsTodoList(userId, true)}`;
+  }
+
+  function openMgmtParticipantModal(userId, silent) {
+    currentMgmtUserId = userId;
+    currentModuleId = null;
+    const user = mgmtState.users.find(u => u.id === userId);
+    const prog = getMgmtProgressRow(userId);
+    const stats = calcOnboardingProgress(prog.completed_modules, prog.completed_todos, prog.completed_roots_todos);
+    document.getElementById('modal-icon').innerHTML = '<i class="fa-solid fa-list-check"></i>';
+    document.getElementById('modal-title').textContent = user?.full_name || user?.email || 'Teilnehmer';
+    document.getElementById('modal-sub').textContent = `${stats.pct}% Gesamt · ROOTS ${stats.rootsDoneCount}/${stats.rootsTotal} · Teilnehmer ${stats.orgaDoneCount}/${stats.orgaTotal}`;
+    document.getElementById('modal-body').innerHTML = renderMgmtParticipantModalBody(userId, stats);
+    const doneBtn = document.getElementById('btn-done-module');
+    if (doneBtn) doneBtn.style.display = 'none';
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if (!silent) showToast(`Detailansicht: ${user?.full_name || 'Teilnehmer'}`, 'info');
+  }
+  window.openMgmtParticipantModal = openMgmtParticipantModal;
+
+  async function initManagementView() {
+    const listEl = document.getElementById('mgmt-user-list');
+    if (!listEl) return;
+    listEl.innerHTML = '<div class="mgmt-empty"><i class="fa-solid fa-circle-notch fa-spin"></i> Lade Fortschrittsdaten…</div>';
+
+    const [{ data: readers, error: readersErr }, { data: progressRows, error: progErr }] = await Promise.all([
+      sb.schema('users').from('profiles')
+        .select('id, full_name, email, position, avatar_url, app_role')
+        .eq('app_role', 'reader')
+        .order('full_name'),
+      sb.schema('onboarding').from('user_progress')
+        .select('user_id, completed_modules, completed_todos, completed_roots_todos, updated_at'),
+    ]);
+
+    if (readersErr) throw readersErr;
+    if (progErr) throw progErr;
+
+    mgmtState.progressByUser = {};
+    (progressRows || []).forEach(row => { mgmtState.progressByUser[row.user_id] = row; });
+    mgmtState.users = readers || [];
+
+    const managerName = window.RootsUser?._p?.full_name?.split(' ')[0] || 'Team';
+    document.getElementById('mgmt-greeting-text').textContent = `Hallo, ${managerName}`;
+
+    if (!mgmtState.users.length) {
+      listEl.innerHTML = '<div class="mgmt-empty">Keine Mitarbeitenden mit Leserechten gefunden.</div>';
+      document.getElementById('mgmt-count').textContent = '0';
+      document.getElementById('mgmt-avg').textContent = '—';
+      document.getElementById('mgmt-roots-open').textContent = '0';
+      document.getElementById('mgmt-done-count').textContent = '0';
+      renderMgmtNotifications([]);
+      return;
+    }
+
+    refreshMgmtFromState();
+    bindMgmtRealtime();
   }
 
   const ROOTS_LINKEDIN = 'https://de.linkedin.com/company/roots-brand-strategy-consultants-gmbh';
@@ -4349,6 +4649,7 @@ Best regards,
   function openModal(id) {
     const mod = getModuleById(id);
     if (!mod) return;
+    currentMgmtUserId = null;
     currentModuleId = id;
     document.getElementById('modal-icon').innerHTML = `<i class="${mod.icon}"></i>`;
     document.getElementById('modal-title').textContent = mod.title;
@@ -4362,6 +4663,7 @@ Best regards,
       ? (orgaStats.pct === 100 || completedModules.includes(id))
       : completedModules.includes(id);
     const btn = document.getElementById('btn-done-module');
+    btn.style.display = '';
     btn.innerHTML = done ? '<i class="fa-solid fa-circle-check"></i> Bereits erledigt' : '<i class="fa-solid fa-check"></i> Als erledigt markieren';
     btn.style.background = done ? 'var(--brand-dark)' : '';
     const modalBox = document.getElementById('dash-modal-box');
@@ -4396,6 +4698,9 @@ Best regards,
     resetModuleModalFullscreen();
     document.body.style.overflow = '';
     currentModuleId = null;
+    currentMgmtUserId = null;
+    const btn = document.getElementById('btn-done-module');
+    if (btn) btn.style.display = '';
   }
   function closeDashModal(e) {
     if (e && e.target !== document.getElementById('modal-overlay') && e.currentTarget !== document.getElementById('modal-overlay')) return;
@@ -4450,6 +4755,8 @@ Best regards,
   }
 
   async function dashboardLogout() {
+    teardownMgmtRealtime();
+    mgmtState = { users: [], progressByUser: {}, channel: null };
     await sb.auth.signOut();
     userName = '';
     currentUserId = null;
