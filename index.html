@@ -315,6 +315,15 @@
     .dash-modal--fixed .mod-modal-scroll,.dash-modal--fixed .module-tab-panel.modal-scroll{overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:0 0 0 2rem;box-sizing:border-box}
     .dash-modal--fixed .dash-modal-body>.mod-modal-scroll{flex:1;min-height:0}
     .orga-mod-panel{padding-top:.25rem;padding-bottom:1.5rem}
+    .orga-sub-tab-bar{display:flex;flex-wrap:wrap;margin:0 0 .85rem;padding-bottom:.65rem;border-bottom:1px solid var(--line);gap:.35rem}
+    .orga-sub-tab{padding:.45rem .85rem;border:1px solid var(--line);border-radius:999px;background:var(--surface);font-family:inherit;font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap}
+    .orga-sub-tab:hover{border-color:var(--brand);color:var(--brand)}
+    .orga-sub-tab.active{background:var(--brand-light);border-color:var(--brand);color:var(--brand-dark)}
+    .orga-sub-panels{min-height:0}
+    .orga-sub-panel{display:none}
+    .orga-sub-panel.active{display:block;animation:fadeIn .25s ease}
+    .orga-sub-lead{margin:0 0 .85rem;font-size:.84rem;color:var(--muted);line-height:1.55}
+    .orga-mod-panel--nested{padding-top:0;padding-bottom:.5rem}
     .orga-mod-panel .mod-section summary{align-items:center;gap:.75rem}
     .orga-mod-panel .mod-section summary .sub-accordion-title{flex:1;min-width:0}
     .orga-mod-panel .orga-mod-check{flex-shrink:0;display:flex;align-items:center}
@@ -1406,7 +1415,7 @@
     const mods = Array.isArray(modules) ? modules : [];
     const tds = Array.isArray(todos) ? todos : [];
     const rts = Array.isArray(rootsTodos) ? rootsTodos : [];
-    const orgaItems = TODOS.flatMap(s => s.items);
+    const orgaItems = TODOS.flatMap(getOrgaSectionItems);
     const rootsItems = Array.isArray(rootsItemsOverride) && rootsItemsOverride.length
       ? rootsItemsOverride
       : getRootsTodoItems();
@@ -3693,14 +3702,21 @@ Best regards,
   };
 
   const TODOS = [
-    { section:'Tools', items:[
-      { id:'it_1', text:'Microsoft Authenticator' },
-      { id:'it_m365', text:'Microsoft 365', itApps:['m365'] },
-      { id:'it_pleo', text:'Pleo', itApps:['pleo'] },
-      { id:'it_apps', text:'Weitere Apps: Tyme, Claude, ChatGPT', itApps:['tyme','claude','chatgpt'] },
+    { section:'Tools', subsections:[
+      { id:'tools-security', label:'Zugang & Sicherheit', items:[
+        { id:'it_1', text:'Microsoft Authenticator' },
+      ]},
+      { id:'tools-standard', label:'Standard-Apps', items:[
+        { id:'it_m365', text:'Microsoft 365', itApps:['m365'] },
+        { id:'it_pleo', text:'Pleo', itApps:['pleo'] },
+      ]},
+      { id:'tools-more', label:'KI & Produktivität', items:[
+        { id:'it_apps', text:'Weitere Apps: Tyme, Claude, ChatGPT', itApps:['tyme','claude','chatgpt'] },
+      ]},
     ]},
-    { section:'IT-Setup', items:[
-      { id:'tools_laufwerk', text:'Laufwerkstruktur', detail:`
+    { section:'IT-Setup', subsections:[
+      { id:'it-files', label:'Dateien & Laufwerk', items:[
+        { id:'tools_laufwerk', text:'Laufwerkstruktur', detail:`
         <h3>Dateibenennung</h3>
         <h4>Dateien mit Zeitbezug</h4>
         <p>Alles, was an einen Termin, ein Event oder einen Meilenstein gebunden ist (JFX-Decks, Workshops, Meeting-Unterlagen, Statusberichte), bekommt das Datum vorangestellt:</p>
@@ -3767,6 +3783,8 @@ Best regards,
         </ul>
         <p>Auch hier gilt: jede Datei einmal, am richtigen Ort. Wer unsicher ist, fragt vor dem Ablegen — nicht danach.</p>
       ` },
+      ]},
+      { id:'it-microsoft', label:'Microsoft & Sync', items:[
       { id:'it_3', text:'OneDrive mit Apple Finder verbinden', detail:`
         <div class="mod-setup-block">
           <h3>OneDrive installieren</h3>
@@ -3802,6 +3820,8 @@ Best regards,
       ` },
       { id:'it_6', text:'Profilbild in Teams hochladen' },
       { id:'it_7', text:'ROOTS Teams Meetinghintergrund installieren' },
+      ]},
+      { id:'it-device', label:'Mac, Office & Browser', items:[
       { id:'it_8', text:'Mac Setup', detail:`
         <div class="mod-setup-block">
           <h3>Screenshots</h3>
@@ -3849,21 +3869,26 @@ Best regards,
           <li><a href="https://mockuuups.studio/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Mockuuups</a></li>
         </ul>
       ` },
+      ]},
     ]},
-    { section:'Organisation', items:[
-      { id:'admin_1', text:'Aushändigungen mit Seriennummern und Unterschrift bestätigen lassen', handoverDoc:true },
-      { id:'admin_2', text:'Personalfragebogen ausfüllen und an Steuerberater senden', detail:`
+    { section:'Organisation', subsections:[
+      { id:'org-handover', label:'Übergabe & Hardware', items:[
+        { id:'admin_1', text:'Aushändigungen mit Seriennummern und Unterschrift bestätigen lassen', handoverDoc:true },
+      ]},
+      { id:'org-hr', label:'Personal & Verwaltung', items:[
+        { id:'admin_2', text:'Personalfragebogen ausfüllen und an Steuerberater senden', detail:`
         <p>Öffne den Personalfragebogen in SharePoint, fülle ihn aus und sende ihn anschließend an den Steuerberater.</p>
       ` },
-      { id:'admin_3', text:'DATEV Arbeitnehmer-Online Zugang einrichten' },
-      { id:'admin_5', text:'Zielvereinbarung ausfüllen und unterschreiben lassen', goalAgreementDoc:true },
-      { id:'admin_6', text:'Urlaubstage eintragen und von Richard genehmigen lassen', detail:`
+        { id:'admin_3', text:'DATEV Arbeitnehmer-Online Zugang einrichten' },
+        { id:'admin_5', text:'Zielvereinbarung ausfüllen und unterschreiben lassen', goalAgreementDoc:true },
+        { id:'admin_6', text:'Urlaubstage eintragen und von Richard genehmigen lassen', detail:`
         <p>Trage deine Urlaubstage in der Urlaubsplanung ein und lasse sie von Richard genehmigen. Genehmigte Tage erscheinen automatisch im Team-Kalender.</p>
         <div class="orga-action-buttons">
           <a href="#" class="orga-action-btn" onclick="event.stopPropagation();openRootsIntranetView('vacation');return false;"><i class="fa-solid fa-umbrella-beach" aria-hidden="true"></i> Urlaubsplanung öffnen</a>
           <a href="#" class="orga-action-btn orga-action-btn--ghost" onclick="event.stopPropagation();openRootsIntranetView('teamkalender');return false;"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> Team-Kalender öffnen</a>
         </div>
       ` },
+      ]},
     ]},
     { section:'Weitere', items:[
       { id:'w_1', text:'ROOTS bei LinkedIn folgen und im Profil hinzufügen' },
@@ -3930,8 +3955,13 @@ Best regards,
   const MODULE_PROJECT_IDS = ['kunden', 'projektbriefing'];
   const MODULE_TAB_IDS = [...MODULE_PATH_IDS, ...MODULE_PROJECT_IDS];
 
+  function getOrgaSectionItems(sec) {
+    if (sec.subsections) return sec.subsections.flatMap(g => g.items);
+    return sec.items || [];
+  }
+
   function getOrgaTodoStats(todos = getActiveCompletedTodos()) {
-    const items = TODOS.flatMap(s => s.items);
+    const items = TODOS.flatMap(getOrgaSectionItems);
     const done = items.filter(i => todos.includes(i.id)).length;
     return { items, done, total: items.length, pct: items.length ? Math.round(done / items.length * 100) : 0 };
   }
@@ -4852,9 +4882,55 @@ Best regards,
   function bindOrgaTodoInteractions() {
     bindOrgaModAccordions();
     bindModuleModalTabs();
+    bindOrgaSubTabs();
     initHandoverDocument();
     initGoalAgreementDocument();
     bindItAppCredentials();
+  }
+
+  function renderOrgaTodoItemsList(items) {
+    let firstOpen = true;
+    return items.map(item => {
+      const open = firstOpen;
+      if (open) firstOpen = false;
+      return renderOrgaTodoItem(item, open);
+    }).join('');
+  }
+
+  function renderOrgaSectionInner(sec) {
+    if (sec.subsections) {
+      const lead = sec.section === 'IT-Setup'
+        ? '<p class="orga-sub-lead">Schritt für Schritt: zuerst Dateien &amp; Laufwerk verstehen, dann Microsoft-Tools einrichten, danach Mac, Office und Browser.</p>'
+        : sec.section === 'Organisation'
+          ? '<p class="orga-sub-lead">Admin-Themen in zwei Blöcken: Hardware-Übergabe und persönliche HR-/Verwaltungsaufgaben.</p>'
+          : sec.section === 'Tools'
+            ? '<p class="orga-sub-lead">Apps in der Reihenfolge installieren: zuerst Sicherheit, dann Standard-Apps, danach KI &amp; Produktivität.</p>'
+            : '';
+      const subTabs = sec.subsections.map((grp, gi) =>
+        `<button type="button" class="orga-sub-tab${gi === 0 ? ' active' : ''}" data-orga-sub="${grp.id}">${grp.label}</button>`
+      ).join('');
+      const subPanels = sec.subsections.map((grp, gi) =>
+        `<div class="orga-sub-panel${gi === 0 ? ' active' : ''}" data-orga-sub="${grp.id}"><div class="orga-mod-panel orga-mod-panel--nested">${renderOrgaTodoItemsList(grp.items)}</div></div>`
+      ).join('');
+      return `${lead}<div class="orga-sub-tab-bar" role="tablist">${subTabs}</div><div class="orga-sub-panels">${subPanels}</div>`;
+    }
+    return `<div class="orga-mod-panel">${renderOrgaTodoItemsList(sec.items || [])}</div>`;
+  }
+
+  function bindOrgaSubTabs() {
+    const overlay = document.getElementById('modal-overlay');
+    if (!overlay || overlay.dataset.orgaSubBound === '1') return;
+    overlay.dataset.orgaSubBound = '1';
+    overlay.addEventListener('click', e => {
+      const btn = e.target.closest('.orga-sub-tab');
+      if (!btn) return;
+      e.stopPropagation();
+      const subId = btn.dataset.orgaSub;
+      const wrap = btn.closest('.modal-scroll-inner');
+      if (!wrap) return;
+      wrap.querySelectorAll('.orga-sub-tab').forEach(b => b.classList.toggle('active', b === btn));
+      wrap.querySelectorAll('.orga-sub-panel').forEach(p => p.classList.toggle('active', p.dataset.orgaSub === subId));
+    });
   }
 
   function renderOrgaAdminModalBody() {
@@ -4863,13 +4939,7 @@ Best regards,
     ).join('');
     const panelsHtml = TODOS.map((sec, i) => {
       const tabId = orgaSectionTabId(sec.section);
-      let firstOpen = true;
-      const itemsHtml = sec.items.map(item => {
-        const open = firstOpen;
-        if (open) firstOpen = false;
-        return renderOrgaTodoItem(item, open);
-      }).join('');
-      return `<div class="module-tab-panel modal-scroll${i === 0 ? ' active' : ''}" data-sub="${tabId}"><div class="modal-scroll-inner orga-mod-panel">${itemsHtml}</div></div>`;
+      return `<div class="module-tab-panel modal-scroll${i === 0 ? ' active' : ''}" data-sub="${tabId}"><div class="modal-scroll-inner">${renderOrgaSectionInner(sec)}</div></div>`;
     }).join('');
     return `<div class="module-tab-bar" role="tablist">${tabsHtml}</div><div class="module-tab-panels">${panelsHtml}</div>`;
   }
