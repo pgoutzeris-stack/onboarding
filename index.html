@@ -847,7 +847,8 @@
     .ob-comfort-ring--panic.is-active{box-shadow:0 0 0 3px rgba(100,116,139,.3),0 12px 30px rgba(15,23,42,.14)}
     .ob-comfort-ring--growth.is-active{box-shadow:0 0 0 3px rgba(37,99,235,.32),0 12px 30px rgba(15,23,42,.14)}
     .ob-comfort-ring--comfort.is-active{box-shadow:0 0 0 3px rgba(32,110,251,.42),0 12px 30px rgba(15,23,42,.16)}
-    .ob-comfort-framework.is-auto-active .ob-comfort-ring:not(.is-active){filter:saturate(.7) opacity(.92)}
+    .ob-comfort-framework.is-auto-active .ob-comfort-ring:not(.is-active){filter:grayscale(.9) opacity(.5)}
+    .ob-comfort-framework.is-auto-active .ob-comfort-ring:not(.is-active)>.ob-comfort-ring__label{opacity:.45}
     .ob-comfort-panel{min-height:170px;padding:1.15rem 1.25rem;border-radius:14px;background:var(--brand-light);border:1px solid rgba(32,110,251,.14);transition:background .35s ease,border-color .35s ease}
     .ob-comfort-panel[data-zone="growth"]{background:#eef4ff;border-color:rgba(37,99,235,.2)}
     .ob-comfort-panel[data-zone="panic"]{background:#f4f6f9;border-color:var(--line)}
