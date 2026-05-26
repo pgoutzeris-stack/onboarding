@@ -229,7 +229,6 @@
     .mgmt-roots-group summary::-webkit-details-marker{display:none}
     .mgmt-roots-group__count{font-size:.68rem;font-weight:700;color:var(--muted)}
     .mgmt-roots-items{padding:.35rem .75rem .65rem;display:grid;gap:.35rem}
-    .mgmt-roots-item__owner{flex-shrink:0;font-size:.62rem;font-weight:700;color:var(--brand);background:var(--brand-light);padding:.12rem .4rem;border-radius:999px;margin-top:.12rem}
     .mgmt-roots-check{flex-shrink:0;display:flex;padding-top:.05rem}
     .mgmt-roots-check input[type="checkbox"]{-webkit-appearance:none;appearance:none;width:16px;height:16px;margin:0;border:1.5px solid var(--line);border-radius:50%;background:var(--bg);cursor:pointer;transition:border-color .2s,background .2s}
     .mgmt-roots-check input[type="checkbox"]:checked{border-color:var(--brand);background:var(--brand);box-shadow:inset 0 0 0 3px #fff}
@@ -238,19 +237,48 @@
     .mgmt-roots-item__main{min-width:0;display:grid;gap:.45rem}
     .mgmt-roots-item__text{font-size:.82rem;line-height:1.45;color:var(--ink)}
     .mgmt-roots-item.is-done .mgmt-roots-item__text{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(100,116,139,.45)}
-    .mgmt-roots-item__meta{display:flex;flex-wrap:wrap;align-items:flex-end;gap:.55rem}
-    .mgmt-assign-field{min-width:168px;flex:1 1 168px;max-width:240px}
-    .mgmt-assign-label{display:block;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--muted);margin-bottom:.35rem}
-    .mgmt-meta-select{position:relative}
-    .mgmt-meta-select .dropdown-trigger{width:100%;min-height:34px;padding:.45rem .65rem;border:1px solid rgba(32,110,251,.12);border-radius:12px;background:var(--surface-alt);color:var(--ink);font-size:.72rem;font-weight:700;font-family:inherit;display:flex;align-items:center;justify-content:space-between;gap:.45rem;cursor:pointer}
-    .mgmt-meta-select .dropdown-trigger i{font-size:.62rem;color:var(--brand);opacity:.85}
-    .mgmt-meta-select .dropdown-trigger:hover{border-color:rgba(32,110,251,.22);background:#fff}
-    .mgmt-meta-select .dropdown-menu{position:absolute;top:calc(100% + 8px);left:0;right:0;min-width:100%;padding:.45rem;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.98);box-shadow:0 12px 28px rgba(15,23,42,.12);display:none;z-index:30;max-height:220px;overflow-y:auto}
+    .mgmt-roots-item__meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:.45rem;margin-top:.1rem}
+    .mgmt-assign-field{margin-left:auto;flex:0 1 auto;max-width:100%}
+    .mgmt-meta-select{position:relative;display:inline-flex;max-width:100%}
+    .mgmt-meta-select .dropdown-trigger{min-width:0;max-width:220px;min-height:0;padding:.18rem .45rem .18rem .55rem;border:1px solid rgba(32,110,251,.14);border-radius:999px;background:var(--brand-light);color:var(--brand);font-size:.62rem;font-weight:700;font-family:inherit;display:inline-flex;align-items:center;justify-content:space-between;gap:.35rem;cursor:pointer;white-space:nowrap}
+    .mgmt-meta-select .dropdown-trigger span{overflow:hidden;text-overflow:ellipsis}
+    .mgmt-meta-select .dropdown-trigger i{font-size:.55rem;color:var(--brand);opacity:.85;flex-shrink:0}
+    .mgmt-meta-select .dropdown-trigger:hover{border-color:rgba(32,110,251,.28);background:#e8f0ff}
+    .mgmt-meta-select.is-assigned .dropdown-trigger{color:var(--brand-dark);border-color:rgba(32,110,251,.22)}
+    .mgmt-meta-select .dropdown-menu{position:absolute;top:calc(100% + 6px);right:0;left:auto;min-width:190px;padding:.45rem;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.98);box-shadow:0 12px 28px rgba(15,23,42,.12);display:none;z-index:30;max-height:220px;overflow-y:auto}
     .mgmt-meta-select .dropdown-menu.open{display:grid;gap:.3rem}
     .mgmt-meta-select .dropdown-option{width:100%;border:1px solid transparent;border-radius:10px;background:transparent;color:var(--ink);padding:.55rem .65rem;text-align:left;font-size:.74rem;font-weight:700;font-family:inherit;cursor:pointer}
     .mgmt-meta-select .dropdown-option:hover{background:var(--surface);border-color:rgba(15,23,42,.06)}
     .mgmt-meta-select .dropdown-option.active{background:var(--brand-light);color:var(--brand-dark);border-color:rgba(32,110,251,.18)}
     .mgmt-roots-group .mgmt-roots-items{padding:.2rem .85rem .75rem}
+    .mgmt-todo-toolbar{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:.55rem;flex-wrap:wrap}
+    .mgmt-todo-save{font-size:.68rem;color:var(--muted);line-height:1.35}
+    .mgmt-todo-save.is-saving{color:var(--brand);font-weight:700}
+    .mgmt-todo-save.is-error{color:#dc2626;font-weight:700}
+    .mgmt-pt-item{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:.55rem;align-items:start;padding:.55rem 0;border-bottom:1px solid rgba(226,232,240,.75)}
+    .mgmt-pt-item:last-child{border-bottom:none;padding-bottom:.15rem}
+    .mgmt-pt-item.is-dragging{opacity:.45}
+    .mgmt-pt-item.is-drop-target{box-shadow:inset 0 -2px 0 var(--brand)}
+    .mgmt-pt-drag,.mgmt-pt-delete{border:none;background:transparent;color:var(--muted);cursor:pointer;padding:.15rem .1rem;font-size:.78rem;line-height:1;flex-shrink:0}
+    .mgmt-pt-drag{cursor:grab;padding-top:.2rem}
+    .mgmt-pt-drag:active{cursor:grabbing}
+    .mgmt-pt-delete{color:#b91c1c;padding-top:.18rem}
+    .mgmt-pt-delete:hover{color:#dc2626}
+    .mgmt-pt-main{min-width:0;display:grid;gap:.45rem}
+    .mgmt-pt-text{width:100%;border:1px solid transparent;border-radius:10px;background:transparent;color:var(--ink);font-size:.82rem;line-height:1.45;padding:.25rem .45rem;font-family:inherit;resize:vertical;min-height:2rem}
+    .mgmt-pt-text:hover{border-color:rgba(15,23,42,.08);background:rgba(255,255,255,.65)}
+    .mgmt-pt-text:focus{outline:none;border-color:rgba(32,110,251,.28);background:#fff;box-shadow:0 0 0 3px var(--brand-light)}
+    .mgmt-pt-item.is-done .mgmt-pt-text{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(100,116,139,.45)}
+    .mgmt-pt-add{margin-top:.35rem;border:1px dashed rgba(32,110,251,.24);background:rgba(255,255,255,.65);color:var(--brand-dark);font-size:.72rem;font-weight:700;padding:.38rem .65rem;border-radius:999px;cursor:pointer;font-family:inherit}
+    .mgmt-pt-add:hover{border-color:var(--brand);background:var(--brand-light)}
+    .mgmt-todo-history{margin-top:.85rem;border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+    .mgmt-todo-history summary{padding:.55rem .75rem;cursor:pointer;font-size:.72rem;font-weight:700;color:var(--muted);list-style:none}
+    .mgmt-todo-history summary::-webkit-details-marker{display:none}
+    .mgmt-todo-history-list{padding:.15rem .75rem .7rem;display:grid;gap:.35rem;max-height:220px;overflow-y:auto}
+    .mgmt-todo-history-item{font-size:.72rem;line-height:1.45;color:var(--ink);padding:.4rem 0;border-bottom:1px solid rgba(226,232,240,.75)}
+    .mgmt-todo-history-item:last-child{border-bottom:none}
+    .mgmt-todo-history-item strong{color:var(--brand-dark)}
+    .mgmt-todo-history-empty{font-size:.72rem;color:var(--muted);padding:.25rem 0}
     .week-header{display:flex;align-items:center;gap:.75rem;margin:2rem 0 1rem}
     .week-badge{padding:.3rem .85rem;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:.01em}
     .week-badge--orga{background:var(--brand-light);color:var(--brand)}
@@ -1025,7 +1053,7 @@
   <div class="dash-main" id="dash-view-manage" style="display:none">
     <div class="greeting">
       <h1 id="mgmt-greeting-text">Onboarding Verwaltung</h1>
-      <p>Fortschritt aller Mitarbeitenden mit Leserechten — inklusive ROOTS-To-dos pro Teilnehmer.</p>
+      <p>Fortschritt aller Mitarbeitenden mit Leserechten — bearbeitbare ROOTS-To-do-Listen pro Teilnehmer.</p>
     </div>
     <div id="mgmt-notifications" class="mgmt-notifications" hidden></div>
     <div class="mgmt-summary mgmt-summary--4">
@@ -1091,7 +1119,10 @@
   let completedModules = [];
   let completedTodos   = [];
   let currentModuleId  = null;
-  let mgmtState = { users: [], teamMembers: [], progressByUser: {}, channel: null, menusBound: false };
+  let mgmtState = { users: [], teamMembers: [], progressByUser: {}, channel: null, menusBound: false, todoEditorsBound: false };
+  const mgmtParticipantTodoSaveTimers = {};
+  const mgmtParticipantTodoSaveMeta = {};
+  let mgmtParticipantTodoDragId = null;
 
   /* ── Toasts (Live-Logs) System ──────────────────────── */
   function showToast(msg, type = 'info') {
@@ -1206,12 +1237,14 @@
     ]},
   ];
 
-  function calcOnboardingProgress(modules, todos, rootsTodos) {
+  function calcOnboardingProgress(modules, todos, rootsTodos, rootsItemsOverride) {
     const mods = Array.isArray(modules) ? modules : [];
     const tds = Array.isArray(todos) ? todos : [];
     const rts = Array.isArray(rootsTodos) ? rootsTodos : [];
     const orgaItems = TODOS.flatMap(s => s.items);
-    const rootsItems = getRootsTodoItems();
+    const rootsItems = Array.isArray(rootsItemsOverride) && rootsItemsOverride.length
+      ? rootsItemsOverride
+      : getRootsTodoItems();
     const orgaDoneCount = orgaItems.filter(i => tds.includes(i.id)).length;
     const orgaTotal = orgaItems.length;
     const orgaPct = orgaTotal ? Math.round(orgaDoneCount / orgaTotal * 100) : 0;
@@ -1252,6 +1285,130 @@
       completed_todos: [],
       completed_roots_todos: [],
       roots_todo_assignments: {},
+      participant_todos: [],
+    };
+  }
+
+  function buildDefaultParticipantTodos() {
+    let order = 0;
+    return ROOTS_TODOS.flatMap(sec => sec.items.map(item => ({
+      id: item.id,
+      text: item.text,
+      owner: item.owner || '',
+      section: sec.section,
+      phase: sec.phase || '',
+      sort_order: order++,
+    })));
+  }
+
+  function normalizeParticipantTodos(raw) {
+    if (!Array.isArray(raw) || !raw.length) return buildDefaultParticipantTodos();
+    return raw
+      .filter(item => item && item.id && item.text)
+      .map((item, idx) => ({
+        id: String(item.id),
+        text: String(item.text),
+        owner: String(item.owner || ''),
+        section: String(item.section || 'Allgemein'),
+        phase: String(item.phase || ''),
+        sort_order: Number.isFinite(item.sort_order) ? item.sort_order : idx,
+      }))
+      .sort((a, b) => a.sort_order - b.sort_order);
+  }
+
+  function getMgmtParticipantTodos(userId) {
+    const row = getMgmtProgressRow(userId);
+    return normalizeParticipantTodos(row.participant_todos);
+  }
+
+  function getMgmtParticipantTodoSections(userId) {
+    const todos = getMgmtParticipantTodos(userId);
+    const sections = [];
+    const seen = new Set();
+    todos.forEach(item => {
+      if (seen.has(item.section)) return;
+      seen.add(item.section);
+      sections.push({
+        section: item.section,
+        phase: item.phase || ROOTS_TODOS.find(s => s.section === item.section)?.phase || '',
+      });
+    });
+    ROOTS_TODOS.forEach(sec => {
+      if (!seen.has(sec.section)) sections.push({ section: sec.section, phase: sec.phase || '' });
+    });
+    return sections;
+  }
+
+  function reindexParticipantTodoSortOrders(todos) {
+    const grouped = {};
+    todos.forEach(item => {
+      if (!grouped[item.section]) grouped[item.section] = [];
+      grouped[item.section].push(item);
+    });
+    Object.values(grouped).forEach(items => {
+      items.sort((a, b) => a.sort_order - b.sort_order);
+      items.forEach((item, idx) => { item.sort_order = idx; });
+    });
+    return Object.values(grouped).flat();
+  }
+
+  function newParticipantTodoId() {
+    const raw = (crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`).replace(/-/g, '');
+    return `pt_${raw.slice(0, 10)}`;
+  }
+
+  function getMgmtChangedByName() {
+    return window.RootsUser?._p?.full_name || userName || 'Unbekannt';
+  }
+
+  function formatMgmtHistoryTime(iso) {
+    try {
+      return new Date(iso).toLocaleString('de-DE', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
+    } catch (_) {
+      return iso || '';
+    }
+  }
+
+  function getMgmtParticipantTodoChangeLabel(changeType) {
+    const labels = {
+      autosave: 'Autosave',
+      edit: 'Text geändert',
+      add: 'Eintrag hinzugefügt',
+      delete: 'Eintrag gelöscht',
+      reorder: 'Reihenfolge geändert',
+      toggle: 'Status geändert',
+    };
+    return labels[changeType] || 'Gespeichert';
+  }
+
+  function updateMgmtParticipantTodoSaveIndicator(userId, state) {
+    const el = document.getElementById(`mgmt-save-${userId.slice(0, 8)}`);
+    if (!el) return;
+    el.classList.remove('is-saving', 'is-error');
+    if (state === 'saving') {
+      el.textContent = 'Speichert…';
+      el.classList.add('is-saving');
+      return;
+    }
+    if (state === 'error') {
+      el.textContent = 'Speichern fehlgeschlagen';
+      el.classList.add('is-error');
+      return;
+    }
+    const meta = mgmtParticipantTodoSaveMeta[userId];
+    if (!meta) {
+      el.textContent = 'Noch nicht gespeichert';
+      return;
+    }
+    el.textContent = `Gespeichert · ${meta.name} · ${formatMgmtHistoryTime(meta.at)}`;
+  }
+
+  function setMgmtParticipantTodosState(userId, todos, extraFields) {
+    const row = getMgmtProgressRow(userId);
+    mgmtState.progressByUser[userId] = {
+      ...row,
+      participant_todos: reindexParticipantTodoSortOrders([...todos]),
+      ...(extraFields || {}),
     };
   }
 
@@ -1270,24 +1427,30 @@
     return `mgmt-assign-${participantUserId.slice(0, 8)}-${todoId}`;
   }
 
-  function renderMgmtAssignDropdown(participantUserId, todoId) {
+  function getMgmtAssignDisplayName(participantUserId, todoId, defaultOwner) {
+    const assignedId = getMgmtTodoAssignments(participantUserId)[todoId] || '';
+    if (assignedId) return getMgmtTeamMemberName(assignedId);
+    return defaultOwner || 'Zuweisen…';
+  }
+
+  function renderMgmtAssignDropdown(participantUserId, todoId, defaultOwner) {
     const assignments = getMgmtTodoAssignments(participantUserId);
     const current = assignments[todoId] || '';
-    const currentName = getMgmtTeamMemberName(current) || 'Name auswählen…';
+    const displayName = getMgmtAssignDisplayName(participantUserId, todoId, defaultOwner);
     const menuId = mgmtAssignMenuId(participantUserId, todoId);
-    const options = (mgmtState.teamMembers || []).map(member => {
+    const assignees = (mgmtState.teamMembers || []).filter(m => ['admin', 'editor', 'member'].includes(m.app_role));
+    const options = assignees.map(member => {
       const name = member.full_name || member.email || 'Teammitglied';
       const active = member.id === current ? ' active' : '';
       return `<button type="button" class="dropdown-option${active}" onclick="assignMgmtRootsTodo('${participantUserId}', '${todoId}', '${member.id}')">${escapeHtml(name)}</button>`;
     }).join('');
-    const clearOption = current
-      ? `<button type="button" class="dropdown-option" onclick="assignMgmtRootsTodo('${participantUserId}', '${todoId}', '')">Nicht zugewiesen</button>`
+    const clearOption = current && defaultOwner
+      ? `<button type="button" class="dropdown-option" onclick="assignMgmtRootsTodo('${participantUserId}', '${todoId}', '')">Standard: ${escapeHtml(defaultOwner)}</button>`
       : '';
     return `<div class="mgmt-assign-field">
-      <span class="mgmt-assign-label">Zuständig</span>
-      <div class="meta-select mgmt-meta-select">
-        <button type="button" class="dropdown-trigger" onclick="toggleMgmtAssignMenu(event, '${menuId}')">
-          <span>${escapeHtml(currentName)}</span>
+      <div class="meta-select mgmt-meta-select${current ? ' is-assigned' : ''}">
+        <button type="button" class="dropdown-trigger" onclick="toggleMgmtAssignMenu(event, '${menuId}')" aria-label="Zuständigkeit für ${escapeHtml(displayName)} ändern">
+          <span>${escapeHtml(displayName)}</span>
           <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
         </button>
         <div class="dropdown-menu" id="${menuId}">
@@ -1328,9 +1491,8 @@
     const notes = [];
     rows.forEach(({ user, stats }) => {
       const name = user.full_name || user.email || 'Teilnehmer';
-      const openPre = getRootsTodoItems().filter(i => {
-        const sec = ROOTS_TODOS.find(s => s.items.some(it => it.id === i.id));
-        return sec?.phase === 'pre' && !getMgmtRootsCompleted(user.id).includes(i.id);
+      const openPre = getMgmtParticipantTodos(user.id).filter(i => {
+        return i.phase === 'pre' && !getMgmtRootsCompleted(user.id).includes(i.id);
       }).length;
       if (openPre > 0) {
         notes.push({ type:'warn', icon:'fa-triangle-exclamation', text:`${name}: ${openPre} ROOTS-To-do(s) vor Tag 1 noch offen`, userId:user.id });
@@ -1367,31 +1529,77 @@
     });
   }
 
-  function renderMgmtRootsTodoList(userId, openFirstSection) {
+  function renderMgmtParticipantTodoItem(userId, item, completed) {
+    const checked = completed.includes(item.id);
+    return `<div class="mgmt-pt-item mgmt-roots-item${checked ? ' is-done' : ''}" draggable="true" data-pt-user="${userId}" data-pt-id="${item.id}" data-pt-section="${encodeURIComponent(item.section)}">
+      <button type="button" class="mgmt-pt-drag" aria-label="Reihenfolge ändern" title="Ziehen zum Sortieren"><i class="fa-solid fa-grip-vertical" aria-hidden="true"></i></button>
+      <span class="mgmt-roots-check">
+        <input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleMgmtRootsTodo('${userId}', '${item.id}', this)" aria-label="${escapeHtml(item.text)}"/>
+      </span>
+      <div class="mgmt-pt-main">
+        <textarea class="mgmt-pt-text" rows="2" data-pt-text data-user-id="${userId}" data-todo-id="${item.id}" aria-label="To-do-Text">${escapeHtml(item.text)}</textarea>
+        <div class="mgmt-roots-item__meta">
+          ${renderMgmtAssignDropdown(userId, item.id, item.owner || '')}
+        </div>
+      </div>
+      <button type="button" class="mgmt-pt-delete" data-pt-delete="${item.id}" data-pt-user="${userId}" aria-label="To-do löschen" title="Löschen"><i class="fa-solid fa-trash-can" aria-hidden="true"></i></button>
+    </div>`;
+  }
+
+  function renderMgmtTodoSectionInner(userId) {
     const completed = getMgmtRootsCompleted(userId);
-    return `<div class="mgmt-roots-groups">${ROOTS_TODOS.map((sec, idx) => {
-      const done = sec.items.filter(i => completed.includes(i.id)).length;
-      const open = openFirstSection ? idx === 0 : done < sec.items.length;
-      const itemsHtml = sec.items.map(item => {
-        const checked = completed.includes(item.id);
-        return `<div class="mgmt-roots-item${checked ? ' is-done' : ''}">
-          <span class="mgmt-roots-check">
-            <input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleMgmtRootsTodo('${userId}', '${item.id}', this)" aria-label="${escapeHtml(item.text)}"/>
-          </span>
-          <div class="mgmt-roots-item__main">
-            <span class="mgmt-roots-item__text">${escapeHtml(item.text)}</span>
-            <div class="mgmt-roots-item__meta">
-              ${item.owner ? `<span class="mgmt-roots-item__owner">${escapeHtml(item.owner)}</span>` : ''}
-              ${renderMgmtAssignDropdown(userId, item.id)}
-            </div>
-          </div>
-        </div>`;
-      }).join('');
+    const todos = getMgmtParticipantTodos(userId);
+    const sections = getMgmtParticipantTodoSections(userId);
+    return `<div class="mgmt-roots-groups">${sections.map((sec, idx) => {
+      const sectionTodos = todos.filter(item => item.section === sec.section).sort((a, b) => a.sort_order - b.sort_order);
+      const done = sectionTodos.filter(i => completed.includes(i.id)).length;
+      const open = idx === 0 || done < sectionTodos.length;
+      const itemsHtml = sectionTodos.map(item => renderMgmtParticipantTodoItem(userId, item, completed)).join('');
       return `<details class="mgmt-roots-group"${open ? ' open' : ''}>
-        <summary><span>${escapeHtml(sec.section)}</span><span class="mgmt-roots-group__count">${done}/${sec.items.length}</span></summary>
-        <div class="mgmt-roots-items">${itemsHtml}</div>
+        <summary><span>${escapeHtml(sec.section)}</span><span class="mgmt-roots-group__count">${done}/${sectionTodos.length}</span></summary>
+        <div class="mgmt-roots-items" data-pt-section-wrap="${encodeURIComponent(sec.section)}">${itemsHtml || '<div class="mgmt-todo-history-empty">Noch keine Einträge in diesem Abschnitt.</div>'}</div>
+        <div class="mgmt-roots-items" style="padding-top:0">
+          <button type="button" class="mgmt-pt-add" data-pt-add="${encodeURIComponent(sec.section)}" data-pt-user="${userId}"><i class="fa-solid fa-plus" aria-hidden="true"></i> Eintrag hinzufügen</button>
+        </div>
       </details>`;
-    }).join('')}</div>`;
+    }).join('')}</div>
+    <details class="mgmt-todo-history" data-pt-history="${userId}">
+      <summary>Versionsverlauf</summary>
+      <div class="mgmt-todo-history-list" id="mgmt-history-${userId.slice(0, 8)}">
+        <div class="mgmt-todo-history-empty">Versionsverlauf wird beim Öffnen geladen.</div>
+      </div>
+    </details>`;
+  }
+
+  function renderMgmtRootsTodoList(userId) {
+    const todos = getMgmtParticipantTodos(userId);
+    const completed = getMgmtRootsCompleted(userId);
+    const doneCount = todos.filter(t => completed.includes(t.id)).length;
+    const saveId = userId.slice(0, 8);
+    return `<div class="mgmt-todo-toolbar">
+      <div class="mgmt-section-label" style="margin:0">ROOTS To-dos <span>${doneCount} / ${todos.length} erledigt</span></div>
+      <div class="mgmt-todo-save" id="mgmt-save-${saveId}">Noch nicht gespeichert</div>
+    </div>
+    <div data-mgmt-todo-section="${userId}">${renderMgmtTodoSectionInner(userId)}</div>`;
+  }
+
+  function refreshMgmtParticipantTodoSection(userId) {
+    const card = document.querySelector(`[data-mgmt-user="${userId}"]`);
+    const section = card?.querySelector('[data-mgmt-todo-section]');
+    if (!section) return;
+    section.innerHTML = renderMgmtTodoSectionInner(userId);
+    bindParticipantTodoDnD(userId);
+    bindParticipantTodoHistory(userId);
+    updateMgmtSummary(mgmtState.users.map(u => {
+      const prog = getMgmtProgressRow(u.id);
+      const stats = calcOnboardingProgress(
+        prog.completed_modules,
+        prog.completed_todos,
+        prog.completed_roots_todos,
+        getMgmtParticipantTodos(u.id),
+      );
+      return { user: u, prog, stats };
+    }));
   }
 
   function renderMgmtUserCard({ user: u, stats }) {
@@ -1420,8 +1628,7 @@
         </div>
       </div>
       <div class="mgmt-card-section">
-        <div class="mgmt-section-label">ROOTS To-dos <span>${stats.rootsDoneCount} / ${stats.rootsTotal} erledigt</span></div>
-        ${renderMgmtRootsTodoList(u.id, true)}
+        ${renderMgmtRootsTodoList(u.id)}
       </div>
     </article>`;
   }
@@ -1442,12 +1649,22 @@
     listEl.innerHTML = rows.map(renderMgmtUserCard).join('');
     updateMgmtSummary(rows);
     renderMgmtNotifications(rows);
+    rows.forEach(({ user }) => {
+      bindParticipantTodoDnD(user.id);
+      bindParticipantTodoHistory(user.id);
+      updateMgmtParticipantTodoSaveIndicator(user.id, mgmtParticipantTodoSaveMeta[user.id] ? 'saved' : null);
+    });
   }
 
   function refreshMgmtFromState() {
     const rows = mgmtState.users.map(u => {
       const prog = getMgmtProgressRow(u.id);
-      const stats = calcOnboardingProgress(prog.completed_modules, prog.completed_todos, prog.completed_roots_todos);
+      const stats = calcOnboardingProgress(
+        prog.completed_modules,
+        prog.completed_todos,
+        prog.completed_roots_todos,
+        getMgmtParticipantTodos(u.id),
+      );
       return { user: u, prog, stats };
     });
     renderMgmtUserList(rows);
@@ -1475,7 +1692,12 @@
           const participantChanged = JSON.stringify(oldRow.completed_todos || []) !== JSON.stringify(newRow.completed_todos || [])
             || JSON.stringify(oldRow.completed_modules || []) !== JSON.stringify(newRow.completed_modules || []);
           if (participantChanged) {
-            const stats = calcOnboardingProgress(newRow.completed_modules, newRow.completed_todos, newRow.completed_roots_todos);
+            const stats = calcOnboardingProgress(
+              newRow.completed_modules,
+              newRow.completed_todos,
+              newRow.completed_roots_todos,
+              getMgmtParticipantTodos(row.user_id),
+            );
             showToast(`${user.full_name || 'Teilnehmer'}: Fortschritt ${stats.pct}% (${stats.orgaDoneCount}/${stats.orgaTotal} To-dos)`, 'info');
           }
         }
@@ -1497,6 +1719,7 @@
         completed_todos: [],
         completed_roots_todos: [],
         roots_todo_assignments: {},
+        participant_todos: [],
         ...payload,
       });
       return error;
@@ -1509,10 +1732,218 @@
     return persistMgmtProgressFields(userId, { completed_roots_todos: completed });
   }
 
+  async function persistParticipantTodoHistory(userId, snapshot, changeType) {
+    const changedByName = getMgmtChangedByName();
+    const { error } = await sb.schema('onboarding').from('participant_todo_history').insert({
+      participant_user_id: userId,
+      snapshot,
+      changed_by: currentUserId,
+      changed_by_name: changedByName,
+      change_type: changeType || 'autosave',
+    });
+    if (!error) {
+      mgmtParticipantTodoSaveMeta[userId] = { name: changedByName, at: new Date().toISOString() };
+      updateMgmtParticipantTodoSaveIndicator(userId, 'saved');
+    }
+    return error;
+  }
+
+  async function persistParticipantTodosWithHistory(userId, changeType, extraFields) {
+    const row = getMgmtProgressRow(userId);
+    const todos = normalizeParticipantTodos(row.participant_todos?.length ? row.participant_todos : getMgmtParticipantTodos(userId));
+    const fields = {
+      participant_todos: todos,
+      ...(extraFields || {}),
+    };
+    updateMgmtParticipantTodoSaveIndicator(userId, 'saving');
+    const error = await persistMgmtProgressFields(userId, fields);
+    if (error) {
+      updateMgmtParticipantTodoSaveIndicator(userId, 'error');
+      return error;
+    }
+    return persistParticipantTodoHistory(userId, todos, changeType);
+  }
+
+  function scheduleParticipantTodoAutosave(userId, changeType) {
+    clearTimeout(mgmtParticipantTodoSaveTimers[userId]);
+    updateMgmtParticipantTodoSaveIndicator(userId, 'saving');
+    mgmtParticipantTodoSaveTimers[userId] = setTimeout(async () => {
+      const row = getMgmtProgressRow(userId);
+      const todos = normalizeParticipantTodos(row.participant_todos);
+      setMgmtParticipantTodosState(userId, todos);
+      const error = await persistParticipantTodosWithHistory(userId, changeType || 'autosave');
+      if (error) {
+        console.error('[ROOTS] Autosave Fehler:', error);
+        showToast('To-do-Liste konnte nicht gespeichert werden', 'error');
+        updateMgmtParticipantTodoSaveIndicator(userId, 'error');
+      }
+    }, 700);
+  }
+
+  async function loadMgmtParticipantTodoHistory(userId) {
+    const container = document.getElementById(`mgmt-history-${userId.slice(0, 8)}`);
+    if (!container) return;
+    container.innerHTML = '<div class="mgmt-todo-history-empty">Lade Verlauf…</div>';
+    const { data, error } = await sb.schema('onboarding').from('participant_todo_history')
+      .select('changed_by_name, change_type, created_at')
+      .eq('participant_user_id', userId)
+      .order('created_at', { ascending: false })
+      .limit(25);
+    if (error) {
+      container.innerHTML = '<div class="mgmt-todo-history-empty">Versionsverlauf konnte nicht geladen werden.</div>';
+      return;
+    }
+    if (!data?.length) {
+      container.innerHTML = '<div class="mgmt-todo-history-empty">Noch keine gespeicherten Versionen.</div>';
+      return;
+    }
+    container.innerHTML = data.map(row => `<div class="mgmt-todo-history-item"><strong>${escapeHtml(row.changed_by_name || 'Unbekannt')}</strong> · ${escapeHtml(getMgmtParticipantTodoChangeLabel(row.change_type))} · ${escapeHtml(formatMgmtHistoryTime(row.created_at))}</div>`).join('');
+  }
+
+  function bindParticipantTodoHistory(userId) {
+    const details = document.querySelector(`details[data-pt-history="${userId}"]`);
+    if (!details || details.dataset.historyBound === '1') return;
+    details.dataset.historyBound = '1';
+    details.addEventListener('toggle', () => {
+      if (details.open) loadMgmtParticipantTodoHistory(userId);
+    });
+  }
+
+  function bindParticipantTodoDnD(userId) {
+    const card = document.querySelector(`[data-mgmt-user="${userId}"]`);
+    if (!card) return;
+    card.querySelectorAll('.mgmt-pt-item[draggable="true"]').forEach(el => {
+      if (el.dataset.dndBound === '1') return;
+      el.dataset.dndBound = '1';
+      el.addEventListener('dragstart', (e) => {
+        mgmtParticipantTodoDragId = el.dataset.ptId;
+        el.classList.add('is-dragging');
+        e.dataTransfer.effectAllowed = 'move';
+      });
+      el.addEventListener('dragend', () => {
+        el.classList.remove('is-dragging');
+        card.querySelectorAll('.mgmt-pt-item.is-drop-target').forEach(node => node.classList.remove('is-drop-target'));
+        mgmtParticipantTodoDragId = null;
+      });
+      el.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        if (!mgmtParticipantTodoDragId || mgmtParticipantTodoDragId === el.dataset.ptId) return;
+        if (el.dataset.ptSection !== card.querySelector(`[data-pt-id="${mgmtParticipantTodoDragId}"]`)?.dataset.ptSection) return;
+        el.classList.add('is-drop-target');
+      });
+      el.addEventListener('dragleave', () => el.classList.remove('is-drop-target'));
+      el.addEventListener('drop', async (e) => {
+        e.preventDefault();
+        el.classList.remove('is-drop-target');
+        const fromId = mgmtParticipantTodoDragId;
+        const toId = el.dataset.ptId;
+        const section = decodeURIComponent(el.dataset.ptSection || '');
+        if (!fromId || !toId || fromId === toId) return;
+        reorderMgmtParticipantTodos(userId, section, fromId, toId);
+      });
+    });
+  }
+
+  async function reorderMgmtParticipantTodos(userId, section, fromId, toId) {
+    const todos = [...getMgmtParticipantTodos(userId)];
+    const sectionTodos = todos.filter(t => t.section === section).sort((a, b) => a.sort_order - b.sort_order);
+    const fromIdx = sectionTodos.findIndex(t => t.id === fromId);
+    const toIdx = sectionTodos.findIndex(t => t.id === toId);
+    if (fromIdx < 0 || toIdx < 0 || fromIdx === toIdx) return;
+    const [item] = sectionTodos.splice(fromIdx, 1);
+    sectionTodos.splice(toIdx, 0, item);
+    sectionTodos.forEach((todo, idx) => { todo.sort_order = idx; });
+    const merged = [...todos.filter(t => t.section !== section), ...sectionTodos];
+    setMgmtParticipantTodosState(userId, merged);
+    refreshMgmtParticipantTodoSection(userId);
+    const error = await persistParticipantTodosWithHistory(userId, 'reorder');
+    if (error) {
+      console.error('[ROOTS] Sortieren Fehler:', error);
+      showToast('Reihenfolge konnte nicht gespeichert werden', 'error');
+      await initManagementView();
+    }
+  }
+
+  async function addMgmtParticipantTodo(userId, section) {
+    const todos = [...getMgmtParticipantTodos(userId)];
+    const sectionTodos = todos.filter(t => t.section === section);
+    todos.push({
+      id: newParticipantTodoId(),
+      text: 'Neues To-do',
+      owner: sectionTodos[sectionTodos.length - 1]?.owner || '',
+      section,
+      phase: ROOTS_TODOS.find(s => s.section === section)?.phase || sectionTodos[0]?.phase || '',
+      sort_order: sectionTodos.length,
+    });
+    setMgmtParticipantTodosState(userId, todos);
+    refreshMgmtParticipantTodoSection(userId);
+    const error = await persistParticipantTodosWithHistory(userId, 'add');
+    if (error) {
+      showToast('To-do konnte nicht hinzugefügt werden', 'error');
+      await initManagementView();
+      return;
+    }
+    showToast('To-do hinzugefügt', 'success');
+  }
+  window.addMgmtParticipantTodo = addMgmtParticipantTodo;
+
+  async function deleteMgmtParticipantTodo(userId, todoId) {
+    const item = getMgmtParticipantTodos(userId).find(t => t.id === todoId);
+    if (!item) return;
+    if (!confirm(`To-do „${item.text}“ wirklich löschen?`)) return;
+    const todos = getMgmtParticipantTodos(userId).filter(t => t.id !== todoId);
+    const completed = getMgmtRootsCompleted(userId).filter(id => id !== todoId);
+    const assignments = { ...getMgmtTodoAssignments(userId) };
+    delete assignments[todoId];
+    setMgmtParticipantTodosState(userId, todos, {
+      completed_roots_todos: completed,
+      roots_todo_assignments: assignments,
+    });
+    refreshMgmtParticipantTodoSection(userId);
+    const error = await persistParticipantTodosWithHistory(userId, 'delete', {
+      completed_roots_todos: completed,
+      roots_todo_assignments: assignments,
+    });
+    if (error) {
+      showToast('To-do konnte nicht gelöscht werden', 'error');
+      await initManagementView();
+      return;
+    }
+    showToast('To-do gelöscht', 'info');
+  }
+  window.deleteMgmtParticipantTodo = deleteMgmtParticipantTodo;
+
+  function bindMgmtParticipantTodoEditors() {
+    if (mgmtState.todoEditorsBound) return;
+    mgmtState.todoEditorsBound = true;
+    const list = document.getElementById('mgmt-user-list');
+    if (!list) return;
+    list.addEventListener('input', (e) => {
+      const field = e.target.closest('[data-pt-text]');
+      if (!field) return;
+      const userId = field.dataset.userId;
+      const todoId = field.dataset.todoId;
+      const todos = getMgmtParticipantTodos(userId).map(item => item.id === todoId
+        ? { ...item, text: field.value }
+        : item);
+      setMgmtParticipantTodosState(userId, todos);
+      scheduleParticipantTodoAutosave(userId, 'edit');
+    });
+    list.addEventListener('click', (e) => {
+      const addBtn = e.target.closest('[data-pt-add]');
+      if (addBtn) {
+        addMgmtParticipantTodo(addBtn.dataset.ptUser, decodeURIComponent(addBtn.dataset.ptAdd || ''));
+        return;
+      }
+      const delBtn = e.target.closest('[data-pt-delete]');
+      if (delBtn) deleteMgmtParticipantTodo(delBtn.dataset.ptUser, delBtn.dataset.ptDelete);
+    });
+  }
+
   async function sendOnboardingTodoNotification({ assigneeId, participantUserId, todoId }) {
     if (!assigneeId || assigneeId === currentUserId) return null;
     const participant = mgmtState.users.find(u => u.id === participantUserId);
-    const todo = getRootsTodoItems().find(i => i.id === todoId);
+    const todo = getMgmtParticipantTodos(participantUserId).find(i => i.id === todoId);
     const assignerName = window.RootsUser?._p?.full_name || 'Ein Kollege';
     const participantName = participant?.full_name || participant?.email || 'Neuer Mitarbeiter';
     const { error } = await sb.schema('recruiting').from('notifications').insert({
@@ -1572,8 +2003,7 @@
     if (checked) completed = completed.filter(id => id !== todoId);
     else completed.push(todoId);
     mgmtState.progressByUser[userId] = { ...row, completed_roots_todos: completed };
-    if (inputEl) inputEl.closest('.mgmt-roots-item')?.classList.toggle('is-done', !checked);
-    refreshMgmtFromState();
+    if (inputEl) inputEl.closest('.mgmt-pt-item, .mgmt-roots-item')?.classList.toggle('is-done', !checked);
     const error = await persistMgmtRootsTodos(userId, completed);
     if (error) {
       console.error('[ROOTS] ROOTS-To-do Speicherfehler:', error);
@@ -1581,8 +2011,10 @@
       await initManagementView();
       return;
     }
+    await persistParticipantTodoHistory(userId, getMgmtParticipantTodos(userId), 'toggle');
+    refreshMgmtParticipantTodoSection(userId);
     const user = mgmtState.users.find(u => u.id === userId);
-    const item = getRootsTodoItems().find(i => i.id === todoId);
+    const item = getMgmtParticipantTodos(userId).find(i => i.id === todoId);
     showToast(`${user?.full_name || 'Teilnehmer'}: „${item?.text || 'To-do'}“ ${checked ? 'wieder offen' : 'erledigt'}`, checked ? 'info' : 'success');
   }
   window.toggleMgmtRootsTodo = toggleMgmtRootsTodo;
@@ -1598,7 +2030,7 @@
         .eq('app_role', 'reader')
         .order('full_name'),
       sb.schema('onboarding').from('user_progress')
-        .select('user_id, completed_modules, completed_todos, completed_roots_todos, roots_todo_assignments, updated_at'),
+        .select('user_id, completed_modules, completed_todos, completed_roots_todos, roots_todo_assignments, participant_todos, updated_at'),
       sb.schema('users').from('profiles')
         .select('id, full_name, email, position, app_role')
         .in('app_role', ['admin', 'editor', 'member'])
@@ -1613,6 +2045,14 @@
     (progressRows || []).forEach(row => { mgmtState.progressByUser[row.user_id] = row; });
     mgmtState.users = readers || [];
     mgmtState.teamMembers = teamMembers || [];
+
+    await Promise.all((mgmtState.users || []).map(async (u) => {
+      const row = mgmtState.progressByUser[u.id];
+      if (Array.isArray(row?.participant_todos) && row.participant_todos.length) return;
+      const defaults = buildDefaultParticipantTodos();
+      mgmtState.progressByUser[u.id] = { ...getMgmtProgressRow(u.id), participant_todos: defaults };
+      await persistMgmtProgressFields(u.id, { participant_todos: defaults });
+    }));
 
     const managerName = window.RootsUser?._p?.full_name?.split(' ')[0] || 'Team';
     document.getElementById('mgmt-greeting-text').textContent = `Hallo, ${managerName}`;
@@ -1630,6 +2070,7 @@
     refreshMgmtFromState();
     bindMgmtRealtime();
     bindMgmtAssignMenus();
+    bindMgmtParticipantTodoEditors();
   }
 
   const ROOTS_LINKEDIN = 'https://de.linkedin.com/company/roots-brand-strategy-consultants-gmbh';
