@@ -229,8 +229,6 @@
     .mgmt-roots-group summary::-webkit-details-marker{display:none}
     .mgmt-roots-group__count{font-size:.68rem;font-weight:700;color:var(--muted)}
     .mgmt-roots-items{padding:.35rem .75rem .65rem;display:grid;gap:.35rem}
-    .mgmt-roots-item{display:flex;align-items:flex-start;gap:.55rem;font-size:.8rem;line-height:1.45;color:var(--ink)}
-    .mgmt-roots-item.is-done{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(100,116,139,.45)}
     .mgmt-roots-item__owner{flex-shrink:0;font-size:.62rem;font-weight:700;color:var(--brand);background:var(--brand-light);padding:.12rem .4rem;border-radius:999px;margin-top:.12rem}
     .mgmt-roots-check{flex-shrink:0;display:flex;padding-top:.05rem}
     .mgmt-roots-check input[type="checkbox"]{-webkit-appearance:none;appearance:none;width:16px;height:16px;margin:0;border:1.5px solid var(--line);border-radius:50%;background:var(--bg);cursor:pointer;transition:border-color .2s,background .2s}
@@ -243,6 +241,22 @@
     .mgmt-modal-stat{padding:.75rem .85rem;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
     .mgmt-modal-stat__label{font-size:.68rem;color:var(--muted);margin-bottom:.2rem}
     .mgmt-modal-stat__value{font-size:1rem;font-weight:700;color:var(--ink)}
+    .dash-modal.dash-modal--mgmt{max-width:860px}
+    .dash-modal--mgmt .dash-modal-body.mgmt-modal-body{padding:1.35rem 1.75rem 1.65rem;max-height:min(74vh,780px);overflow-y:auto;overflow-x:hidden}
+    .mgmt-modal-panel{display:grid;gap:1.15rem}
+    .mgmt-modal-intro{margin:0;font-size:.84rem;color:var(--muted);line-height:1.55}
+    .mgmt-roots-item{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.65rem;align-items:start;padding:.6rem 0;border-bottom:1px solid rgba(226,232,240,.75)}
+    .mgmt-roots-item:last-child{border-bottom:none;padding-bottom:.15rem}
+    .mgmt-roots-item__main{min-width:0;display:grid;gap:.45rem}
+    .mgmt-roots-item__text{font-size:.82rem;line-height:1.45;color:var(--ink)}
+    .mgmt-roots-item.is-done .mgmt-roots-item__text{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(100,116,139,.45)}
+    .mgmt-roots-item__meta{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem}
+    .mgmt-assign-select{min-width:170px;max-width:100%;font-size:.72rem;padding:.34rem .6rem;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);font-family:inherit;cursor:pointer}
+    .mgmt-assign-select:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-light)}
+    .mgmt-roots-assigned{font-size:.68rem;font-weight:700;color:var(--brand-dark);background:var(--brand-light);padding:.16rem .45rem;border-radius:999px;white-space:nowrap}
+    .mgmt-roots-group .mgmt-roots-items{padding:.2rem .85rem .75rem}
+    .mgmt-card .mgmt-roots-item{grid-template-columns:auto minmax(0,1fr);padding:.45rem 0}
+    .mgmt-card .mgmt-assign-select{display:none}
     .week-header{display:flex;align-items:center;gap:.75rem;margin:2rem 0 1rem}
     .week-badge{padding:.3rem .85rem;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:.01em}
     .week-badge--orga{background:var(--brand-light);color:var(--brand)}
@@ -1083,7 +1097,7 @@
   let completedModules = [];
   let completedTodos   = [];
   let currentModuleId  = null;
-  let mgmtState = { users: [], progressByUser: {}, channel: null };
+  let mgmtState = { users: [], teamMembers: [], progressByUser: {}, channel: null };
   let currentMgmtUserId = null;
 
   /* ── Toasts (Live-Logs) System ──────────────────────── */
@@ -1244,7 +1258,32 @@
       completed_modules: [],
       completed_todos: [],
       completed_roots_todos: [],
+      roots_todo_assignments: {},
     };
+  }
+
+  function getMgmtTodoAssignments(userId) {
+    const raw = getMgmtProgressRow(userId).roots_todo_assignments;
+    return raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {};
+  }
+
+  function getMgmtTeamMemberName(userId) {
+    if (!userId) return '';
+    const member = mgmtState.teamMembers.find(m => m.id === userId);
+    return member?.full_name || member?.email || '';
+  }
+
+  function renderMgmtAssignSelect(participantUserId, todoId) {
+    const assignments = getMgmtTodoAssignments(participantUserId);
+    const current = assignments[todoId] || '';
+    const options = (mgmtState.teamMembers || []).map(member => {
+      const label = escapeHtml(member.full_name || member.email || 'Teammitglied');
+      return `<option value="${member.id}"${member.id === current ? ' selected' : ''}>${label}</option>`;
+    }).join('');
+    return `<select class="mgmt-assign-select" aria-label="To-do zuweisen" onchange="assignMgmtRootsTodo('${participantUserId}', '${todoId}', this.value)">
+      <option value="">Zuweisen…</option>
+      ${options}
+    </select>`;
   }
 
   function getMgmtRootsCompleted(userId) {
@@ -1293,19 +1332,30 @@
     });
   }
 
-  function renderMgmtRootsTodoList(userId, openFirstSection) {
+  function renderMgmtRootsTodoList(userId, openFirstSection, detailMode) {
     const completed = getMgmtRootsCompleted(userId);
+    const assignments = getMgmtTodoAssignments(userId);
     return `<div class="mgmt-roots-groups">${ROOTS_TODOS.map((sec, idx) => {
       const done = sec.items.filter(i => completed.includes(i.id)).length;
       const open = openFirstSection ? idx === 0 : done < sec.items.length;
       const itemsHtml = sec.items.map(item => {
         const checked = completed.includes(item.id);
+        const assigneeId = assignments[item.id] || '';
+        const assigneeName = getMgmtTeamMemberName(assigneeId);
+        const assigneeBadge = assigneeName
+          ? `<span class="mgmt-roots-assigned" title="${escapeHtml(assigneeName)}">→ ${escapeHtml(assigneeName.split(' ')[0] || assigneeName)}</span>`
+          : '';
         return `<div class="mgmt-roots-item${checked ? ' is-done' : ''}">
           <span class="mgmt-roots-check">
             <input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleMgmtRootsTodo('${userId}', '${item.id}', this)" aria-label="${escapeHtml(item.text)}"/>
           </span>
-          <span>${escapeHtml(item.text)}</span>
-          ${item.owner ? `<span class="mgmt-roots-item__owner">${escapeHtml(item.owner)}</span>` : ''}
+          <div class="mgmt-roots-item__main">
+            <span class="mgmt-roots-item__text">${escapeHtml(item.text)}</span>
+            <div class="mgmt-roots-item__meta">
+              ${item.owner ? `<span class="mgmt-roots-item__owner">${escapeHtml(item.owner)}</span>` : ''}
+              ${detailMode ? renderMgmtAssignSelect(userId, item.id) : assigneeBadge}
+            </div>
+          </div>
         </div>`;
       }).join('');
       return `<details class="mgmt-roots-group"${open ? ' open' : ''}>
@@ -1410,11 +1460,8 @@
       .subscribe();
   }
 
-  async function persistMgmtRootsTodos(userId, completed) {
-    const payload = {
-      completed_roots_todos: completed,
-      updated_at: new Date().toISOString(),
-    };
+  async function persistMgmtProgressFields(userId, fields) {
+    const payload = { ...fields, updated_at: new Date().toISOString() };
     const { data: existing, error: readErr } = await sb.schema('onboarding').from('user_progress')
       .select('user_id')
       .eq('user_id', userId)
@@ -1425,6 +1472,8 @@
         user_id: userId,
         completed_modules: [],
         completed_todos: [],
+        completed_roots_todos: [],
+        roots_todo_assignments: {},
         ...payload,
       });
       return error;
@@ -1432,6 +1481,65 @@
     const { error } = await sb.schema('onboarding').from('user_progress').update(payload).eq('user_id', userId);
     return error;
   }
+
+  async function persistMgmtRootsTodos(userId, completed) {
+    return persistMgmtProgressFields(userId, { completed_roots_todos: completed });
+  }
+
+  async function sendOnboardingTodoNotification({ assigneeId, participantUserId, todoId }) {
+    if (!assigneeId || assigneeId === currentUserId) return null;
+    const participant = mgmtState.users.find(u => u.id === participantUserId);
+    const todo = getRootsTodoItems().find(i => i.id === todoId);
+    const assignerName = window.RootsUser?._p?.full_name || 'Ein Kollege';
+    const participantName = participant?.full_name || participant?.email || 'Neuer Mitarbeiter';
+    const { error } = await sb.schema('recruiting').from('notifications').insert({
+      user_id: assigneeId,
+      type: 'onboarding_todo',
+      title: 'Onboarding To-do zugewiesen',
+      message: `${assignerName} hat dir „${todo?.text || 'To-do'}“ für ${participantName} zugewiesen.`,
+      session_id: null,
+      runde: null,
+      meta: {
+        source: 'onboarding',
+        participant_user_id: participantUserId,
+        participant_name: participantName,
+        todo_id: todoId,
+        todo_text: todo?.text || '',
+        assigned_by: currentUserId,
+      },
+    });
+    return error;
+  }
+
+  async function assignMgmtRootsTodo(participantUserId, todoId, assigneeId) {
+    const row = getMgmtProgressRow(participantUserId);
+    const assignments = { ...getMgmtTodoAssignments(participantUserId) };
+    const prevAssignee = assignments[todoId] || '';
+    if (!assigneeId) delete assignments[todoId];
+    else assignments[todoId] = assigneeId;
+    mgmtState.progressByUser[participantUserId] = { ...row, roots_todo_assignments: assignments };
+    refreshMgmtFromState();
+    const error = await persistMgmtProgressFields(participantUserId, { roots_todo_assignments: assignments });
+    if (error) {
+      console.error('[ROOTS] Zuweisung Speicherfehler:', error);
+      showToast('Zuweisung konnte nicht gespeichert werden', 'error');
+      await initManagementView();
+      return;
+    }
+    if (assigneeId && assigneeId !== prevAssignee) {
+      const notifyErr = await sendOnboardingTodoNotification({ assigneeId, participantUserId, todoId });
+      if (notifyErr) {
+        console.error('[ROOTS] Benachrichtigung Fehler:', notifyErr);
+        showToast('Zuweisung gespeichert, Benachrichtigung fehlgeschlagen', 'error');
+        return;
+      }
+      const assigneeName = getMgmtTeamMemberName(assigneeId).split(' ')[0] || 'Teammitglied';
+      showToast(`An ${assigneeName} zugewiesen — Intranet-Benachrichtigung gesendet`, 'success');
+      return;
+    }
+    if (!assigneeId && prevAssignee) showToast('Zuweisung entfernt', 'info');
+  }
+  window.assignMgmtRootsTodo = assignMgmtRootsTodo;
 
   async function toggleMgmtRootsTodo(userId, todoId, inputEl) {
     const row = getMgmtProgressRow(userId);
@@ -1457,14 +1565,16 @@
 
   function renderMgmtParticipantModalBody(userId, stats) {
     const user = mgmtState.users.find(u => u.id === userId);
-    return `<div class="mgmt-modal-stats">
-      <div class="mgmt-modal-stat"><div class="mgmt-modal-stat__label">Gesamt</div><div class="mgmt-modal-stat__value">${stats.pct}%</div></div>
-      <div class="mgmt-modal-stat"><div class="mgmt-modal-stat__label">Teilnehmer-To-dos</div><div class="mgmt-modal-stat__value">${stats.orgaDoneCount}/${stats.orgaTotal}</div></div>
-      <div class="mgmt-modal-stat"><div class="mgmt-modal-stat__label">ROOTS-To-dos</div><div class="mgmt-modal-stat__value">${stats.rootsDoneCount}/${stats.rootsTotal}</div></div>
-      <div class="mgmt-modal-stat"><div class="mgmt-modal-stat__label">Module</div><div class="mgmt-modal-stat__value">${stats.learnDone}/${stats.learnTotal}</div></div>
-    </div>
-    <p style="margin:0 0 .85rem;font-size:.84rem;color:var(--muted)">${escapeHtml(user?.full_name || user?.email || 'Teilnehmer')}: ROOTS-Aufgaben vor und während des Onboardings — abhaken synchronisiert den Gesamtfortschritt.</p>
-    ${renderMgmtRootsTodoList(userId, true)}`;
+    return `<div class="mgmt-modal-panel">
+      <div class="mgmt-modal-stats">
+        <div class="mgmt-modal-stat"><div class="mgmt-modal-stat__label">Gesamt</div><div class="mgmt-modal-stat__value">${stats.pct}%</div></div>
+        <div class="mgmt-modal-stat"><div class="mgmt-modal-stat__label">Teilnehmer-To-dos</div><div class="mgmt-modal-stat__value">${stats.orgaDoneCount}/${stats.orgaTotal}</div></div>
+        <div class="mgmt-modal-stat"><div class="mgmt-modal-stat__label">ROOTS-To-dos</div><div class="mgmt-modal-stat__value">${stats.rootsDoneCount}/${stats.rootsTotal}</div></div>
+        <div class="mgmt-modal-stat"><div class="mgmt-modal-stat__label">Module</div><div class="mgmt-modal-stat__value">${stats.learnDone}/${stats.learnTotal}</div></div>
+      </div>
+      <p class="mgmt-modal-intro">${escapeHtml(user?.full_name || user?.email || 'Teilnehmer')}: ROOTS-Aufgaben abhaken und Teammitgliedern zuweisen — Zuweisungen erscheinen als Benachrichtigung im Intranet.</p>
+      ${renderMgmtRootsTodoList(userId, true, true)}
+    </div>`;
   }
 
   function openMgmtParticipantModal(userId, silent) {
@@ -1473,10 +1583,15 @@
     const user = mgmtState.users.find(u => u.id === userId);
     const prog = getMgmtProgressRow(userId);
     const stats = calcOnboardingProgress(prog.completed_modules, prog.completed_todos, prog.completed_roots_todos);
+    const modalBox = document.getElementById('dash-modal-box');
+    const modalBody = document.getElementById('modal-body');
     document.getElementById('modal-icon').innerHTML = '<i class="fa-solid fa-list-check"></i>';
     document.getElementById('modal-title').textContent = user?.full_name || user?.email || 'Teilnehmer';
     document.getElementById('modal-sub').textContent = `${stats.pct}% Gesamt · ROOTS ${stats.rootsDoneCount}/${stats.rootsTotal} · Teilnehmer ${stats.orgaDoneCount}/${stats.orgaTotal}`;
-    document.getElementById('modal-body').innerHTML = renderMgmtParticipantModalBody(userId, stats);
+    modalBody.className = 'dash-modal-body mgmt-modal-body';
+    modalBody.innerHTML = renderMgmtParticipantModalBody(userId, stats);
+    modalBox?.classList.remove('dash-modal--fixed');
+    modalBox?.classList.add('dash-modal--mgmt');
     const doneBtn = document.getElementById('btn-done-module');
     if (doneBtn) doneBtn.style.display = 'none';
     document.getElementById('modal-overlay').classList.add('open');
@@ -1490,21 +1605,27 @@
     if (!listEl) return;
     listEl.innerHTML = '<div class="mgmt-empty"><i class="fa-solid fa-circle-notch fa-spin"></i> Lade Fortschrittsdaten…</div>';
 
-    const [{ data: readers, error: readersErr }, { data: progressRows, error: progErr }] = await Promise.all([
+    const [{ data: readers, error: readersErr }, { data: progressRows, error: progErr }, { data: teamMembers, error: teamErr }] = await Promise.all([
       sb.schema('users').from('profiles')
         .select('id, full_name, email, position, avatar_url, app_role')
         .eq('app_role', 'reader')
         .order('full_name'),
       sb.schema('onboarding').from('user_progress')
-        .select('user_id, completed_modules, completed_todos, completed_roots_todos, updated_at'),
+        .select('user_id, completed_modules, completed_todos, completed_roots_todos, roots_todo_assignments, updated_at'),
+      sb.schema('users').from('profiles')
+        .select('id, full_name, email, position, app_role')
+        .in('app_role', ['admin', 'editor', 'member'])
+        .order('full_name'),
     ]);
 
     if (readersErr) throw readersErr;
     if (progErr) throw progErr;
+    if (teamErr) throw teamErr;
 
     mgmtState.progressByUser = {};
     (progressRows || []).forEach(row => { mgmtState.progressByUser[row.user_id] = row; });
     mgmtState.users = readers || [];
+    mgmtState.teamMembers = teamMembers || [];
 
     const managerName = window.RootsUser?._p?.full_name?.split(' ')[0] || 'Team';
     document.getElementById('mgmt-greeting-text').textContent = `Hallo, ${managerName}`;
@@ -4693,10 +4814,12 @@ Best regards,
   }
 
   function closeDashModalDirect() {
-    document.getElementById('dash-modal-box')?.classList.remove('dash-modal--fixed');
+    document.getElementById('dash-modal-box')?.classList.remove('dash-modal--fixed', 'dash-modal--mgmt');
     document.getElementById('modal-overlay').classList.remove('open');
     resetModuleModalFullscreen();
     document.body.style.overflow = '';
+    const modalBody = document.getElementById('modal-body');
+    if (modalBody) modalBody.className = 'dash-modal-body';
     currentModuleId = null;
     currentMgmtUserId = null;
     const btn = document.getElementById('btn-done-module');
@@ -4756,7 +4879,7 @@ Best regards,
 
   async function dashboardLogout() {
     teardownMgmtRealtime();
-    mgmtState = { users: [], progressByUser: {}, channel: null };
+    mgmtState = { users: [], teamMembers: [], progressByUser: {}, channel: null };
     await sb.auth.signOut();
     userName = '';
     currentUserId = null;
