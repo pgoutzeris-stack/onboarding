@@ -4912,13 +4912,12 @@ Best regards,
   }
 
   function bindOrgaSubTabs() {
-    const overlay = document.getElementById('modal-overlay');
-    if (!overlay || overlay.dataset.orgaSubBound === '1') return;
-    overlay.dataset.orgaSubBound = '1';
-    overlay.addEventListener('click', e => {
+    const modalBox = document.getElementById('dash-modal-box');
+    if (!modalBox || modalBox.dataset.orgaSubBound === '1') return;
+    modalBox.dataset.orgaSubBound = '1';
+    modalBox.addEventListener('click', e => {
       const btn = e.target.closest('.orga-sub-tab');
       if (!btn) return;
-      e.stopPropagation();
       const subId = btn.dataset.orgaSub;
       const wrap = btn.closest('.modal-scroll-inner');
       if (!wrap) return;
