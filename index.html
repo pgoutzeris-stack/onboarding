@@ -1390,6 +1390,10 @@
       { id:'roots_pre_email', text:'E-Mail anlegen', owner:'Richard' },
       { id:'roots_pre_team_list', text:'In team@roots-consultants E-Mail-Liste aufnehmen', owner:'Pano' },
       { id:'roots_pre_teams', text:'Relevante Teams-Kanäle freischalten', owner:'Richard' },
+      { id:'roots_pre_brevo', text:'Brevo CRM: Account für New Hire anlegen', owner:'Richard' },
+      { id:'roots_pre_asana', text:'Asana: Einladungsmail senden', owner:'Richard' },
+      { id:'roots_pre_google', text:'ROOTS Google-Konto: Zugang für New Hire freischalten (Analytics, Search Console)', owner:'Richard' },
+      { id:'roots_pre_mangools', text:'Mangools: Zugangsdaten mitteilen', owner:'Richard' },
     ]},
     { section:'Vor Tag 1 · Admin', phase:'pre', items:[
       { id:'roots_pre_oka', text:'Zum OKA-Board, Urlaubsliste, Ressourcenkalkulation hinzufügen', owner:'Rod' },
@@ -3452,19 +3456,44 @@ Best regards,
       },
       {
         id:'kunden', icon:'fa-solid fa-building', title:'Kunden Insights',
-        sub:'Teams-Kanäle & Zugänge',
-        content:`
-          <div class="ob-mod-panel">
-            <div class="ob-content-disclaimer"><strong>Zugriff:</strong> Möglicherweise fehlen dir Zugriffsbeschränkungen auf die Teams-Kanäle. Bitte frage deinen Mentor für Zugang.</div>
-            <p class="ob-mod-lead">Direkte Links zu den Microsoft-Teams-Kanälen unserer Kundenprojekte:</p>
-            <div class="ob-kunden-pills">
-              <a class="ob-kunden-pill" href="https://teams.microsoft.com/l/team/19%3AJCcmhNkK8P-QsrcPEN99qCSsIgZN_Bx67QW3_0vnilU1%40thread.tacv2/conversations?groupId=c23cae55-a35f-4f22-bfdf-40d2b4de0664&tenantId=2e437a35-749e-4dab-b000-3f831304fa83" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Beiersdorf</a>
-              <a class="ob-kunden-pill" href="https://teams.microsoft.com/l/team/19%3ATiFLYtc9c91lh9t9e0gqkiMlKSNNN497k7wuVNl7bTU1%40thread.tacv2/conversations?groupId=18c2cdc8-bd0e-43ea-aea6-e0fb2dce5a62&tenantId=2e437a35-749e-4dab-b000-3f831304fa83" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Danone</a>
-              <a class="ob-kunden-pill" href="https://teams.microsoft.com/l/team/19%3A69bcdf6e9f9147f7b5ec10a11dbb431f%40thread.tacv2/conversations?groupId=71240c56-2bfe-4a9f-a9a7-a91712fd44bd&tenantId=2e437a35-749e-4dab-b000-3f831304fa83" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Lidl</a>
-              <span class="ob-kunden-pill is-soon"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Bauhaus<small>(folgt)</small></span>
-            </div>
-          </div>
-        `
+        sub:'Teams-Kanäle, Projekte & Pipeline',
+        submodules:[
+          { id:'k-channels', tab:'Teams-Kanäle', sections:[
+            { title:'Teams-Kanäle', open:true, content:`
+              <div class="ob-content-disclaimer"><strong>Zugriff:</strong> Möglicherweise fehlen dir Berechtigungen auf die Teams-Kanäle. Bitte frage deinen Mentor.</div>
+              <p>Direkte Links zu den Microsoft-Teams-Kanälen unserer Kundenprojekte:</p>
+              <div class="ob-kunden-pills">
+                <a class="ob-kunden-pill" href="https://teams.microsoft.com/l/team/19%3AJCcmhNkK8P-QsrcPEN99qCSsIgZN_Bx67QW3_0vnilU1%40thread.tacv2/conversations?groupId=c23cae55-a35f-4f22-bfdf-40d2b4de0664&tenantId=2e437a35-749e-4dab-b000-3f831304fa83" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Beiersdorf</a>
+                <a class="ob-kunden-pill" href="https://teams.microsoft.com/l/team/19%3ATiFLYtc9c91lh9t9e0gqkiMlKSNNN497k7wuVNl7bTU1%40thread.tacv2/conversations?groupId=18c2cdc8-bd0e-43ea-aea6-e0fb2dce5a62&tenantId=2e437a35-749e-4dab-b000-3f831304fa83" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Danone</a>
+                <a class="ob-kunden-pill" href="https://teams.microsoft.com/l/team/19%3A69bcdf6e9f9147f7b5ec10a11dbb431f%40thread.tacv2/conversations?groupId=71240c56-2bfe-4a9f-a9a7-a91712fd44bd&tenantId=2e437a35-749e-4dab-b000-3f831304fa83" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Lidl</a>
+                <span class="ob-kunden-pill is-soon"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Bauhaus<small>(folgt)</small></span>
+              </div>
+            ` }
+          ]},
+          { id:'k-projekte', tab:'Aktuelle Projekte', sections:[
+            { title:'Aktuelle Projekte', open:true, content:`
+              <p>Intro-Briefings zu den laufenden Projekten – Links führen direkt zur Projektablage im SharePoint.</p>
+              <div class="ob-kunden-pills">
+                <a class="ob-kunden-pill" href="https://rootsconsultants.sharepoint.com/:f:/s/LIDL/EiLQku2RydNBs7d8K7YmU5sB9ojjTnjl12qgYDgSDBtS8g?e=km090q" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Lidl INT „Global"</a>
+                <a class="ob-kunden-pill" href="https://rootsconsultants.sharepoint.com/:f:/s/DanoneTP20640/EnRDic3JRihNlYuot66oLnwBFGGRyboKc-jWEF4PacX2UA?e=X60Slc" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Danone „D2P"</a>
+                <span class="ob-kunden-pill is-soon"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Lidl DE „Sally"<small>(folgt)</small></span>
+                <span class="ob-kunden-pill is-soon"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> METRO „Wholesale Academy"<small>(folgt)</small></span>
+              </div>
+            ` }
+          ]},
+          { id:'k-pipeline', tab:'Pipeline', sections:[
+            { title:'Projekte in Anbahnung', open:true, content:`
+              <p>Diese Projekte befinden sich aktuell in der Anbahnungs- oder Pitchphase. Halte dich auf dem Laufenden und frage deinen Mentor nach aktuellem Stand.</p>
+              <table>
+                <tr><th>Kunde</th><th>Projekt</th><th>Status</th></tr>
+                <tr><td>Lidl INT</td><td>Social Wertbeitrag</td><td>In Anbahnung</td></tr>
+                <tr><td>Lidl INT</td><td>WhatsApp</td><td>In Anbahnung</td></tr>
+                <tr><td>KIT</td><td>Ausschreibung</td><td>Pitch läuft</td></tr>
+                <tr><td>Gropper</td><td>CRM</td><td>In Anbahnung</td></tr>
+              </table>
+            ` }
+          ]}
+        ]
       },
       {
         id:'projektbriefing', icon:'fa-solid fa-clipboard-list', title:'Projektbriefing',
@@ -3692,6 +3721,57 @@ Best regards,
           { label: 'Passwort', value: 'Bei Ersteinrichtung festlegen / von Admin mitgeteilt' }
         ]
       }
+    },
+    brevo: {
+      label: 'Brevo CRM',
+      intro: `
+        <div class="mod-setup-block">
+          <h3>Wozu Brevo?</h3>
+          <p>Brevo ist unser CRM-Tool für Lead-Tracking und Pipeline-Management. Hier pflegen wir Kontakte, Opportunities und E-Mail-Kampagnen.</p>
+        </div>
+      `,
+      downloads: [{ label: 'Brevo öffnen', url: 'https://www.brevo.com/de/' }],
+      creds: {
+        hint: 'Dein Account wird von Richard angelegt – du erhältst eine Einladungsmail.',
+        fields: [
+          { label: 'Login', value: 'Geschäftliche E-Mail-Adresse' },
+          { label: 'Passwort', value: 'Bei Ersteinrichtung festlegen' }
+        ]
+      }
+    },
+    asana: {
+      label: 'Asana',
+      intro: `
+        <div class="mod-setup-block">
+          <h3>Wozu Asana?</h3>
+          <p>Asana nutzen wir als PM-Tool für Projekt- und Aufgabenmanagement. Zugang wird per Einladungslink gesendet.</p>
+        </div>
+      `,
+      downloads: [{ label: 'Asana öffnen', url: 'https://app.asana.com/' }],
+      creds: {
+        hint: 'Du erhältst eine Einladungsmail von ROOTS.',
+        fields: [
+          { label: 'Login', value: 'Geschäftliche E-Mail-Adresse' },
+          { label: 'Passwort', value: 'Bei Ersteinrichtung festlegen' }
+        ]
+      }
+    },
+    mangools: {
+      label: 'Mangools',
+      intro: `
+        <div class="mod-setup-block">
+          <h3>Wozu Mangools?</h3>
+          <p>Mangools ist unser SEO-Tool – für Keyword-Recherche, Ranking-Tracking und Wettbewerbsanalyse.</p>
+        </div>
+      `,
+      downloads: [{ label: 'Mangools öffnen', url: 'https://mangools.com/users/sign_in' }],
+      creds: {
+        hint: 'Zugangsdaten werden dir separat von Richard mitgeteilt.',
+        fields: [
+          { label: 'Login', value: 'Separat mitgeteilt' },
+          { label: 'Passwort', value: 'Separat mitgeteilt' }
+        ]
+      }
     }
   };
 
@@ -3706,6 +3786,15 @@ Best regards,
       ]},
       { id:'tools-more', label:'KI & Produktivität', items:[
         { id:'it_apps', text:'Weitere Apps: Tyme, Claude, ChatGPT', itApps:['tyme','claude','chatgpt'] },
+      ]},
+      { id:'tools-web', label:'Web-Tools & Zugänge', items:[
+        { id:'it_brevo', text:'Brevo CRM', itApps:['brevo'] },
+        { id:'it_asana', text:'Asana PM-Tool', itApps:['asana'] },
+        { id:'it_mangools', text:'Mangools SEO-Tool', itApps:['mangools'] },
+        { id:'it_google', text:'ROOTS Google-Konto einrichten (Analytics, Search Console)', detail:`
+          <p>Melde dich mit der ROOTS Google-Konto-Adresse an, um Zugriff auf Google Analytics und Google Search Console zu erhalten.</p>
+          <p>Zugangsdaten erhältst du von Richard.</p>
+        ` },
       ]},
     ]},
     { section:'IT-Setup', subsections:[
@@ -3882,10 +3971,28 @@ Best regards,
           <a href="#" class="orga-action-btn orga-action-btn--ghost" onclick="event.stopPropagation();openRootsIntranetView('teamkalender');return false;"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> Team-Kalender öffnen</a>
         </div>
       ` },
+        { id:'admin_1on1', text:'1-1 mit Vorgesetztem aufsetzen', detail:`
+          <p>Frequenz und Format gemeinsam definieren. Die Terminserie kommt vom Verantwortlichen.</p>
+        ` },
+        { id:'admin_check2w', text:'2-Wochen-Check-In mit Mentor absolvieren' },
+        { id:'admin_check4w', text:'4-Wochen-Check-In mit Mentor absolvieren' },
       ]},
     ]},
     { section:'Weitere', items:[
       { id:'w_1', text:'ROOTS bei LinkedIn folgen und im Profil hinzufügen' },
+      { id:'w_linkedin_ann', text:'LinkedIn-Vorstellungspost – eigenen Beitrag oder Team-Post koordinieren' },
+      { id:'w_mbti', text:'MBTI-Test ausfüllen und mit Mentor besprechen', detail:`
+        <p>Der MBTI-Test hilft dir und dem Team, Arbeitsstile und Kommunikationspräferenzen besser zu verstehen.</p>
+        <div class="orga-action-buttons">
+          <a href="https://www.16personalities.com/de" target="_blank" rel="noopener noreferrer" class="orga-action-btn orga-action-btn--ghost"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> 16personalities.com öffnen</a>
+        </div>
+      ` },
+      { id:'w_wordpress', text:'Website Backend / WordPress-Zugang einrichten', detail:`
+        <p>Zugang zu WordPress wurde gesendet. Melde dich mit dem erhaltenen Link ein und besprich das Backend mit dem zuständigen Kollegen.</p>
+        <div class="orga-action-buttons">
+          <a href="mailto:alexander.voigt@nirgend.media" class="orga-action-btn orga-action-btn--ghost"><i class="fa-solid fa-envelope" aria-hidden="true"></i> alexander.voigt@nirgend.media</a>
+        </div>
+      ` },
     ]}
   ];
 
