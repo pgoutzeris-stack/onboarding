@@ -790,6 +790,7 @@
     .tag-list li.is-do{background:#ecfdf5;border-color:#bbf7d0;color:#15803d}
     .tag-list li.is-dont{background:#fef2f2;border-color:#fecaca;color:#b91c1c}
     .ob-comfort-framework{display:grid;grid-template-columns:minmax(220px,280px) minmax(0,1fr);gap:1.25rem;align-items:center;margin:1.25rem 0;padding:1.15rem 1.25rem;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+    .ob-comfort-visual{display:flex;flex-direction:column;align-items:center;gap:.5rem}
     @media (max-width:720px){.ob-comfort-framework{grid-template-columns:1fr}}
     .ob-comfort-rings{position:relative;width:240px;height:240px;margin:0 auto;border-radius:50%;background:conic-gradient(from 0deg,#fecaca 0 33%,#bbf7d0 33% 66%,#bfdbfe 66% 100%);display:flex;align-items:center;justify-content:center}
     .ob-comfort-ring{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;border:2px solid rgba(255,255,255,.85)}
@@ -797,12 +798,31 @@
     .ob-comfort-ring--panic{inset:0;background:rgba(254,226,226,.55)}
     .ob-comfort-ring--growth{inset:28px;background:rgba(220,252,231,.72)}
     .ob-comfort-ring--comfort{inset:56px;background:rgba(219,234,254,.92);font-size:.72rem;font-weight:700;color:#1e3a8a;padding:.5rem;line-height:1.35}
-    .ob-comfort-ring--growth .ob-comfort-ring__label,.ob-comfort-ring--panic .ob-comfort-ring__label{font-size:.62rem;font-weight:700;line-height:1.25;padding:.35rem;color:var(--ink);pointer-events:none}
-    .ob-comfort-ring__label{display:block}
+    .ob-comfort-ring--growth .ob-comfort-ring__label,.ob-comfort-ring--panic .ob-comfort-ring__label{display:none}
+    .ob-comfort-ring--comfort{font-size:0;color:transparent}
+    .ob-comfort-ring__label{display:none}
     .ob-comfort-panel{min-height:160px;padding:1rem 1.1rem;border-radius:12px;background:var(--brand-light);border:1px solid rgba(32,110,251,.12)}
     .ob-comfort-panel h4{margin:0 0 .45rem;font-size:.88rem;color:var(--brand-dark)}
     .ob-comfort-panel p{margin:0;font-size:.84rem;line-height:1.65;color:var(--ink)}
     .ob-comfort-hint{margin:.75rem 0 0;font-size:.78rem;color:var(--muted);line-height:1.55}
+    .ob-content-sticker{display:inline-flex;align-items:center;gap:.45rem;margin:0 0 1rem;padding:.45rem .85rem;border-radius:8px;background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;font-size:.78rem;font-weight:700;letter-spacing:.02em;text-transform:none;line-height:1.4}
+    .ob-content-sticker i{font-size:.72rem;opacity:.9}
+    .ob-content-disclaimer{margin:0 0 1rem;padding:.85rem 1rem;border-radius:12px;border:1px solid #fde68a;background:#fffbeb;color:#92400e;font-size:.84rem;line-height:1.6}
+    .ob-content-disclaimer strong{color:#78350f}
+    .ob-kunden-pills{display:flex;flex-wrap:wrap;gap:.65rem;margin:1rem 0 0}
+    .ob-kunden-pill{display:inline-flex;align-items:center;gap:.45rem;padding:.65rem 1.15rem;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:.9rem;font-weight:600;text-decoration:none;transition:all .15s ease;box-shadow:var(--shadow-dash,0 2px 8px rgba(15,23,42,.06))}
+    .ob-kunden-pill:hover{border-color:var(--brand);color:var(--brand);background:var(--brand-light);transform:translateY(-1px)}
+    .ob-kunden-pill.is-soon{opacity:.72;cursor:default;pointer-events:none;background:var(--surface)}
+    .ob-kunden-pill small{font-weight:500;color:var(--muted);margin-left:.15rem}
+    .ob-comfort-framework.is-auto-active .ob-comfort-ring.is-active{box-shadow:0 0 0 3px rgba(32,110,251,.35),0 10px 28px rgba(15,23,42,.14)}
+    .ob-comfort-zone-tags{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;margin-top:.85rem}
+    .ob-comfort-zone-tag{display:inline-flex;align-items:center;padding:.35rem .75rem;border-radius:999px;border:1px solid var(--line);background:var(--bg);font-size:.72rem;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s ease}
+    .ob-comfort-zone-tag.is-active{color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(15,23,42,.12)}
+    .ob-comfort-zone-tag[data-zone-label="comfort"].is-active{background:#2563eb}
+    .ob-comfort-zone-tag[data-zone-label="growth"].is-active{background:#059669}
+    .ob-comfort-zone-tag[data-zone-label="panic"].is-active{background:#dc2626}
+    .mentor-mail-btn{background:var(--bg);color:var(--brand);border:1px solid var(--brand)}
+    .mentor-mail-btn:hover{background:var(--brand-light);filter:none}
     .ob-demo{border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden;margin:1rem 0;box-shadow:0 2px 8px rgba(15,23,42,.04)}
     .ob-demo-head{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.75rem 1rem;background:var(--brand-light);border-bottom:1px solid var(--line);flex-wrap:wrap}
     .ob-demo-head strong{font-size:.86rem;color:var(--brand-dark)}
@@ -2347,17 +2367,24 @@
               <h3>Komfortzone · Wachstumszone · Panikzone</h3>
               <p>Am Anfang wirst du dich eher in der <strong>Komfortzone</strong> aufhalten – das ist normal. Ziel ist die <strong>Wachstumszone</strong>: neue Aufgaben, die herausfordernd, aber machbar sind. Die <strong>Panikzone</strong> versuchen wir zu vermeiden – zu viel Unbekanntes ohne Support.</p>
               <div class="ob-comfort-framework" data-demo="comfort-zones">
-                <div class="ob-comfort-rings" aria-label="Komfort-, Wachstums- und Panikzone">
-                  <button type="button" class="ob-comfort-ring ob-comfort-ring--panic" data-zone="panic" aria-label="Panikzone"><span class="ob-comfort-ring__label">Panikzone</span></button>
-                  <button type="button" class="ob-comfort-ring ob-comfort-ring--growth" data-zone="growth" aria-label="Wachstumszone"><span class="ob-comfort-ring__label">Wachstumszone</span></button>
-                  <button type="button" class="ob-comfort-ring ob-comfort-ring--comfort is-active" data-zone="comfort" aria-label="Komfortzone">Komfortzone</button>
+                <div class="ob-comfort-visual">
+                  <div class="ob-comfort-rings" aria-label="Komfort-, Wachstums- und Panikzone">
+                    <button type="button" class="ob-comfort-ring ob-comfort-ring--panic" data-zone="panic" aria-label="Panikzone"></button>
+                    <button type="button" class="ob-comfort-ring ob-comfort-ring--growth" data-zone="growth" aria-label="Wachstumszone"></button>
+                    <button type="button" class="ob-comfort-ring ob-comfort-ring--comfort is-active" data-zone="comfort" aria-label="Komfortzone"></button>
+                  </div>
+                  <div class="ob-comfort-zone-tags" role="tablist" aria-label="Zonen">
+                    <button type="button" class="ob-comfort-zone-tag is-active" data-zone-label="comfort">Komfortzone</button>
+                    <button type="button" class="ob-comfort-zone-tag" data-zone-label="growth">Wachstumszone</button>
+                    <button type="button" class="ob-comfort-zone-tag" data-zone-label="panic">Panikzone</button>
+                  </div>
                 </div>
                 <div class="ob-comfort-panel" data-comfort-panel>
                   <h4>Komfortzone</h4>
                   <p>Hier fühlst du dich sicher: bekannte Aufgaben, klare Anleitung, viel Shadowing. Gut für den Start – aber langfristig zu wenig Wachstum.</p>
                 </div>
               </div>
-              <p class="ob-comfort-hint">Klicke auf die Ringe, um die Bedeutung jeder Zone zu sehen. Dein Mentor hilft dir, bewusst in die Wachstumszone zu kommen – ohne in die Panikzone zu rutschen.</p>
+              <p class="ob-comfort-hint">Die Zonen wechseln automatisch, wenn du den Abschnitt siehst – oder wähle eine Zone direkt. Dein Mentor hilft dir, bewusst in die Wachstumszone zu kommen – ohne in die Panikzone zu rutschen.</p>
             ` }
           ]},
           { id:'w-wishes', tab:'Deine Wünsche', sections:[
@@ -2408,9 +2435,10 @@
                 <tr><th>Bereich</th><th>Was wir anbieten</th></tr>
                 <tr><td>Consulting</td><td>Strategische Beratungsprojekte für Marketingentscheider</td></tr>
                 <tr><td>Trainings & Coaching</td><td>KI-Schulungen, Capabilities-Aufbau, 1:1-Coaching</td></tr>
-                <tr><td>Software</td><td>Lizenzen & Tools (u.&nbsp;a. über brylliant.one)</td></tr>
+                <tr><td>Software</td><td>Lizenzen & Tools für Beratungsprojekte</td></tr>
               </table>
-              <p style="margin-top:.75rem">Unsere wichtigsten Partner: spezialisierte Freelancer, Tech-Partner Brylliant sowie ausgewählte Agenturen.</p>
+              <div class="ob-content-disclaimer"><strong>Hinweis Brylliant:</strong> Die Partnerschaft mit Brylliant (brylliant.one) wurde eingestellt. Frühere Angaben zu Software-Lizenzen über Brylliant sind nicht mehr aktuell.</div>
+              <p style="margin-top:.75rem">Unsere wichtigsten Partner: spezialisierte Freelancer sowie ausgewählte Agenturen.</p>
             ` },
             { title:'Wen wir beraten', content:`
               <p>Wir arbeiten mit Marketingentscheidern – primär in zwei Profilen:</p>
@@ -3336,13 +3364,9 @@ Best regards,
       {
         id:'tipps', icon:'fa-solid fa-brain', title:'Tipps & Tricks',
         sub:'Berateralltag',
-        content:`
-          <div class="ob-mod-panel">
-          <p class="ob-mod-lead">Praxiswissen für Priorisierung, Zeitmanagement und den Berateralltag bei ROOTS — kompakt und direkt anwendbar.</p>
-
-          <div class="ob-content-section">
-            <div class="ob-content-section__head"><i class="fa-solid fa-list-check"></i><h3>Priorisierung</h3></div>
-            <div class="ob-content-section__body">
+        submodules:[
+          { id:'t-prio', tab:'Priorisierung', sections:[
+            { title:'Priorisierung', open:true, content:`
               <p>Es mangelt in keiner Organisation an Ideen. Es mangelt an der Umsetzung. Das systematische Abarbeiten alter Aufgaben ist der einzige Weg, Raum für Neues zu schaffen.</p>
               <ol class="learn-list">
                 <li>Übernimm dich nicht. Starte in einem ruhigen Tempo aber bleibe stetig dran.</li>
@@ -3350,12 +3374,10 @@ Best regards,
                 <li>Habe EINE Priorität. Arbeite sie ab, reflektiere, wie es gelaufen ist, und wähle dann erst die nächste Priorität.</li>
                 <li>Für jede neue Aufgabe, die du übernimmst, solltest du dir genauso bewusst fragen: <em>„Was lasse ich dafür fallen?"</em></li>
               </ol>
-            </div>
-          </div>
-
-          <div class="ob-content-section">
-            <div class="ob-content-section__head"><i class="fa-solid fa-clock"></i><h3>Zeitmanagement</h3></div>
-            <div class="ob-content-section__body">
+            ` }
+          ]},
+          { id:'t-time', tab:'Zeitmanagement', sections:[
+            { title:'Zeitmanagement', open:true, content:`
               <p>Zeit ist insb. im Consulting eine knappe Resource. Deshalb ist es ratsam klar zu priorisieren und sich die Arbeitszeit gut einzuteilen. Eine einfache Entscheidungshilfe hierfür ist die Eisenhower Matrix.</p>
               <p>Du bewertest deine Aufgaben nach Dringlichkeit und Wichtigkeit.</p>
               <ul class="learn-list">
@@ -3371,12 +3393,10 @@ Best regards,
                 <li>Wo kann ich aufhören, die Zeit anderer in Beschlag zu nehmen? (lange Meetings, nach Updates fragen, etc.)</li>
               </ul>
               <p>Am Start einer Strategieausarbeitung oder eines wichtigen Strategieabschnittes ist es zudem sinnvoll mehrere ununterbrochene Stunden freischaufeln. Ringe mit dem Problem bis du den Hauptteil geknackt hast. Danach kann die Strategieentwicklung bei Bedarf in kürzeren Intervallen weitergeführt werden.</p>
-            </div>
-          </div>
-
-          <div class="ob-content-section">
-            <div class="ob-content-section__head"><i class="fa-solid fa-scale-balanced"></i><h3>Entscheidungen treffen</h3></div>
-            <div class="ob-content-section__body">
+            ` }
+          ]},
+          { id:'t-decide', tab:'Entscheidungen', sections:[
+            { title:'Entscheidungen treffen', open:true, content:`
               <p>Eine Entscheidung ist ein Urteil. Es ist eine Wahl zwischen verschiedenen Alternativen. Selten handelt es sich dabei um eine Wahl zwischen richtig und falsch.</p>
               <p>Es gibt zwei Arten von Entscheidungen:</p>
               <ul class="learn-list">
@@ -3384,21 +3404,17 @@ Best regards,
                 <li>Kaum rückgängig zu machen → sich Zeit nehmen, um gründlich nachzudenken</li>
               </ul>
               <p>Gute Entscheidungen beginnen mit Hypothesen, nicht mit Fakten. Um festzustellen, was ein Fakt ist, muss zunächst eine Entscheidung über die Relevanzkriterien getroffen werden. Zugleich schärft dies auch den Fokus der Analyse (don't bowl the ocean).</p>
-            </div>
-          </div>
-
-          <div class="ob-content-section">
-            <div class="ob-content-section__head"><i class="fa-solid fa-star"></i><h3>Stärken und Schwächen</h3></div>
-            <div class="ob-content-section__body">
+            ` }
+          ]},
+          { id:'t-strength', tab:'Stärken', sections:[
+            { title:'Stärken und Schwächen', open:true, content:`
               <p>Erfolgreiche Führungskräfte fragen niemals: „Wie kommt er mit mir zurecht?" Ihre Frage lautet: „Was bringt er ein?"</p>
               <p>Man kann also nicht auf Schwächen aufbauen. Man muss auf Stärken aufbauen und Ersatz für die eigenen Schwächen finden.</p>
               <p>Frage dich: Worin bin ich gut und was fällt mir leicht, was anderen hingegen relativ schwerfällt?</p>
-            </div>
-          </div>
-
-          <div class="ob-content-section">
-            <div class="ob-content-section__head"><i class="fa-solid fa-heart-pulse"></i><h3>Resilienz</h3></div>
-            <div class="ob-content-section__body">
+            ` }
+          ]},
+          { id:'t-resilience', tab:'Resilienz', sections:[
+            { title:'Resilienz', open:true, content:`
               <p>Consulting ist ein Hochdruckumfeld. Unsicherheit, enge Deadlines, schnell wechselnde Prioritäten, Reisen, etc., all das zehrt Energie. Jedoch kannst und wirst du schnell deine Resilienz erhöhen. Hier folgen ein paar Tipps, die dir dabei helfen sollen.</p>
               <ul class="learn-list">
                 <li>Setze dir selbst Regeln für Work-Live-Balance – niemand anderes Zieht diese Grenze für dich.</li>
@@ -3408,12 +3424,10 @@ Best regards,
                 <li>Trenne Fakten von deinen Interpretationen – deine Reaktion auf ein Ereignis entsteht nicht durch das Ereignis selbst.</li>
                 <li>Beziehe Fehler nicht auf deine Persönlichkeit.</li>
               </ul>
-            </div>
-          </div>
-
-          <div class="ob-content-section">
-            <div class="ob-content-section__head"><i class="fa-solid fa-folder-open"></i><h3>Portfolio</h3></div>
-            <div class="ob-content-section__body">
+            ` }
+          ]},
+          { id:'t-portfolio', tab:'Portfolio', sections:[
+            { title:'Portfolio', open:true, content:`
               <p>Lege dir eine private Projektportfolionotiz an. In dieser sammelst du alle Projekte, an denen du beteiligt warst. Pro Projekt ein bis zwei Sätze.</p>
               <p>Trage ein:</p>
               <ol class="learn-list">
@@ -3423,63 +3437,31 @@ Best regards,
                 <li>Signal für deine Führungserfahrung</li>
               </ol>
               <p>Ein solches Portfolio hilft dir bei der Argumentation in deinen Zielvereinbarungsgespräch.</p>
-            </div>
-          </div>
-
-          <div class="ob-content-section">
-            <div class="ob-content-section__head"><i class="fa-solid fa-book"></i><h3>Buch- &amp; Podcastempfehlungen</h3></div>
-            <div class="ob-content-section__body">
-              <ul class="learn-list">
-                <li><i class="fa-solid fa-book" aria-hidden="true"></i> The McKinsey Way – Ethan Rasiel</li>
-                <li><i class="fa-solid fa-book" aria-hidden="true"></i> Thinking in Bets – Annie Duke</li>
-                <li><i class="fa-solid fa-microphone" aria-hidden="true"></i> How I Built This – Guy Raz</li>
-                <li><i class="fa-solid fa-microphone" aria-hidden="true"></i> Masters of Scale – Reid Hoffman</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="ob-content-section">
-            <div class="ob-content-section__head"><i class="fa-solid fa-chart-column"></i><h3>Präsentationen (McKinsey Chart Clinique)</h3></div>
-            <div class="ob-content-section__body">
+            ` }
+          ]},
+          { id:'t-pres', tab:'Präsentationen', sections:[
+            { title:'Präsentationen (McKinsey Chart Clinique)', open:true, content:`
               <p>Wird ausführlich in Woche 2 behandelt. Grundregel: Jede Folie hat eine Botschaft als Überschrift. Vier Phasen: Strategie → Storyline → Visualisierung → Delivery.</p>
               <div class="highlight"><p><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Details findest du im Modul <strong>Modus Operandi → Präsentationen</strong>.</p></div>
-            </div>
-          </div>
-          </div>
-        `
+            ` }
+          ]}
+        ]
       },
       {
         id:'kunden', icon:'fa-solid fa-building', title:'Kunden Insights',
-        sub:'Portfolio & Deep-Dives',
-        submodules:[
-          { id:'k-overview', tab:'Kundenüberblick', sections:[
-            { title:'Kundenüberblick', open:true, content:`
-              <p>ROOTS betreut internationale Household-Brands – u.&nbsp;a. Danone, Lidl und Beiersdorf. Nutze die Deep-Dives für Details pro Kunde.</p>
-              <div class="highlight"><p><i class="fa-solid fa-thumbtack" aria-hidden="true"></i> Beobachte aktiv Marketingmaßnahmen, Geschäftszahlen und die wirtschaftliche Lage unserer Kunden.</p></div>
-            ` }
-          ]},
-          { id:'k-danone', tab:'Danone', sections:[
-            { title:'Kundenhistorie', open:true, content:`<p class="placeholder">Platzhalter: Langjährige Zusammenarbeit und Projektgeschichte mit Danone.</p><p>Langjährige Zusammenarbeit, diverse Projekte im Bereich Brand Strategy & Marketing Operations.</p>` },
-            { title:'Projektfokus', content:`<p class="placeholder">Platzhalter: Aktuelle strategische Schwerpunkte.</p><p>Brand Strategy & Marketing Operations.</p>` },
-            { title:'Auftraggeber', content:`<p>CMO / Senior Marketing Leadership.</p>` },
-            { title:'Kultur & Arbeitsweise', content:`<p>Internationales, matrixorganisiertes Unternehmen – klare Strukturen, hohe Erwartungen an Qualität und Tempo.</p>` },
-            { title:'Aktuelle Projekte', content:`<p class="placeholder">Platzhalter: Aktuelle Projekte – Details im SharePoint / Projektbriefing.</p>` }
-          ]},
-          { id:'k-lidl', tab:'Lidl', sections:[
-            { title:'Kundenhistorie', open:true, content:`<p class="placeholder">Platzhalter: Zusammenarbeit mit Lidl.</p>` },
-            { title:'Projektfokus', content:`<p>Marketing Effizienz und Brand Experience.</p>` },
-            { title:'Auftraggeber', content:`<p class="placeholder">Platzhalter: Typische Auftraggeber bei Lidl.</p>` },
-            { title:'Kultur & Arbeitsweise', content:`<p>Internationaler Kontext, schnelle Entscheidungswege.</p>` },
-            { title:'Aktuelle Projekte', content:`<p class="placeholder">Platzhalter: Aktuelle Projekte.</p>` }
-          ]},
-          { id:'k-beiersdorf', tab:'Beiersdorf', sections:[
-            { title:'Kundenhistorie', open:true, content:`<p class="placeholder">Platzhalter: Zusammenarbeit mit Beiersdorf.</p>` },
-            { title:'Projektfokus', content:`<p>Consumer Insights & Brand Strategy – starke Eigenmarken (NIVEA, Eucerin u.&nbsp;a.).</p>` },
-            { title:'Auftraggeber', content:`<p class="placeholder">Platzhalter: Typische Auftraggeber.</p>` },
-            { title:'Kultur & Arbeitsweise', content:`<p class="placeholder">Platzhalter: Arbeitsweise und Erwartungen.</p>` },
-            { title:'Aktuelle Projekte', content:`<p class="placeholder">Platzhalter: Aktuelle Projekte.</p>` }
-          ]}
-        ]
+        sub:'Teams-Kanäle & Zugänge',
+        content:`
+          <div class="ob-mod-panel">
+            <div class="ob-content-disclaimer"><strong>Zugriff:</strong> Möglicherweise fehlen dir Zugriffsbeschränkungen auf die Teams-Kanäle. Bitte frage deinen Mentor für Zugang.</div>
+            <p class="ob-mod-lead">Direkte Links zu den Microsoft-Teams-Kanälen unserer Kundenprojekte:</p>
+            <div class="ob-kunden-pills">
+              <a class="ob-kunden-pill" href="https://teams.microsoft.com/l/team/19%3AJCcmhNkK8P-QsrcPEN99qCSsIgZN_Bx67QW3_0vnilU1%40thread.tacv2/conversations?groupId=c23cae55-a35f-4f22-bfdf-40d2b4de0664&tenantId=2e437a35-749e-4dab-b000-3f831304fa83" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Beiersdorf</a>
+              <a class="ob-kunden-pill" href="https://teams.microsoft.com/l/team/19%3ATiFLYtc9c91lh9t9e0gqkiMlKSNNN497k7wuVNl7bTU1%40thread.tacv2/conversations?groupId=18c2cdc8-bd0e-43ea-aea6-e0fb2dce5a62&tenantId=2e437a35-749e-4dab-b000-3f831304fa83" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Danone</a>
+              <a class="ob-kunden-pill" href="https://teams.microsoft.com/l/team/19%3A69bcdf6e9f9147f7b5ec10a11dbb431f%40thread.tacv2/conversations?groupId=71240c56-2bfe-4a9f-a9a7-a91712fd44bd&tenantId=2e437a35-749e-4dab-b000-3f831304fa83" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Lidl</a>
+              <span class="ob-kunden-pill is-soon"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Bauhaus<small>(folgt)</small></span>
+            </div>
+          </div>
+        `
       },
       {
         id:'projektbriefing', icon:'fa-solid fa-clipboard-list', title:'Projektbriefing',
@@ -5024,11 +5006,14 @@ Best regards,
       });
     }));
   }
+  const INSIGHT_ROOTS_STICKER = '<div class="ob-content-sticker" role="note"><i class="fa-solid fa-tag" aria-hidden="true"></i> Stand 2025 — Update folgt im Offsite 2026</div>';
+
   function renderModuleModalBody(mod) {
     if (!mod.submodules) return `<div class="mod-modal-scroll mod-modal-scroll--solo modal-scroll"><div class="modal-scroll-inner">${mod.content || ''}</div></div>`;
     const flat = MODULE_TAB_IDS.includes(mod.id);
     const tabsHtml = mod.submodules.map((sub, i) => `<button type="button" class="module-tab${i === 0 ? ' active' : ''}" data-sub="${sub.id}">${sub.tab}</button>`).join('');
-    const panelsHtml = mod.submodules.map((sub, i) => `<div class="module-tab-panel modal-scroll${i === 0 ? ' active' : ''}" data-sub="${sub.id}"><div class="modal-scroll-inner">${renderSubmoduleAccordions(sub, flat)}</div></div>`).join('');
+    const sticker = mod.id === 'insight' ? INSIGHT_ROOTS_STICKER : '';
+    const panelsHtml = mod.submodules.map((sub, i) => `<div class="module-tab-panel modal-scroll${i === 0 ? ' active' : ''}" data-sub="${sub.id}"><div class="modal-scroll-inner">${sticker}${renderSubmoduleAccordions(sub, flat)}</div></div>`).join('');
     return `<div class="module-tab-bar" role="tablist">${tabsHtml}</div><div class="module-tab-panels">${panelsHtml}</div>`;
   }
 
@@ -5218,17 +5203,54 @@ Best regards,
     if (root.dataset.bound === '1') return;
     root.dataset.bound = '1';
     const panel = root.querySelector('[data-comfort-panel]');
-    root.querySelectorAll('[data-zone]').forEach(btn => {
-      btn.addEventListener('click', e => {
+    const zones = ['comfort', 'growth', 'panic'];
+    let idx = 0;
+    let timer = null;
+
+    function setZone(key) {
+      root.querySelectorAll('[data-zone]').forEach(b => b.classList.toggle('is-active', b.dataset.zone === key));
+      root.querySelectorAll('[data-zone-label]').forEach(b => b.classList.toggle('is-active', b.dataset.zoneLabel === key));
+      root.classList.add('is-auto-active');
+      const copy = COMFORT_ZONE_COPY[key] || COMFORT_ZONE_COPY.comfort;
+      if (panel) panel.innerHTML = `<h4>${copy.title}</h4><p>${copy.text}</p>`;
+    }
+
+    function bindZoneControl(el) {
+      el.addEventListener('click', e => {
         e.stopPropagation();
-        const key = btn.dataset.zone;
-        root.querySelectorAll('[data-zone]').forEach(b => b.classList.toggle('is-active', b === btn));
-        const copy = COMFORT_ZONE_COPY[key] || COMFORT_ZONE_COPY.comfort;
-        if (panel) {
-          panel.innerHTML = `<h4>${copy.title}</h4><p>${copy.text}</p>`;
-        }
+        const key = el.dataset.zone || el.dataset.zoneLabel;
+        if (!key) return;
+        idx = zones.indexOf(key);
+        if (idx < 0) idx = 0;
+        root.dataset.userPaused = '1';
+        if (timer) { clearInterval(timer); timer = null; }
+        setZone(key);
       });
-    });
+    }
+
+    root.querySelectorAll('[data-zone], [data-zone-label]').forEach(bindZoneControl);
+    setZone('comfort');
+
+    const startAuto = () => {
+      if (root.dataset.userPaused === '1' || timer) return;
+      timer = setInterval(() => {
+        idx = (idx + 1) % zones.length;
+        setZone(zones[idx]);
+      }, 3200);
+    };
+    const stopAuto = () => { if (timer) { clearInterval(timer); timer = null; } };
+
+    if ('IntersectionObserver' in window) {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(en => {
+          if (en.isIntersecting) startAuto();
+          else stopAuto();
+        });
+      }, { threshold: 0.4, root: root.closest('.modal-scroll, .module-tab-panel') || null });
+      obs.observe(root);
+    } else {
+      startAuto();
+    }
   }
 
   function bindFmFramework(scope) {
@@ -5393,14 +5415,16 @@ Best regards,
       const callBtn = phoneHref
         ? `<a class="mentor-call-btn" href="tel:${escapeHtml(phoneHref)}"><i class="fa-solid fa-phone" aria-hidden="true"></i> Anrufen</a>`
         : `<span class="mentor-call-btn is-disabled" aria-disabled="true"><i class="fa-solid fa-phone" aria-hidden="true"></i> Keine Telefonnummer</span>`;
+      const mailBtn = mentor.email
+        ? `<a class="mentor-call-btn mentor-mail-btn" href="mailto:${escapeHtml(mentor.email)}"><i class="fa-solid fa-envelope" aria-hidden="true"></i> E-Mail</a>`
+        : `<span class="mentor-call-btn mentor-mail-btn is-disabled" aria-disabled="true"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Keine E-Mail</span>`;
       el.innerHTML = `
         <div class="mentor-card">
           <div class="mentor-card__avatar">${av}</div>
           <div class="mentor-card__body">
             <strong>${escapeHtml(mentor.full_name || 'Onboarding-Mentor')}</strong>
             ${mentor.position ? `<span class="mentor-card__role">${escapeHtml(mentor.position)}</span>` : ''}
-            ${mentor.email ? `<a class="mentor-card__email" href="mailto:${escapeHtml(mentor.email)}"><i class="fa-solid fa-envelope" aria-hidden="true"></i>${escapeHtml(mentor.email)}</a>` : ''}
-            <div class="mentor-card__actions">${callBtn}</div>
+            <div class="mentor-card__actions">${callBtn}${mailBtn}</div>
           </div>
         </div>`;
     } catch (_) {
