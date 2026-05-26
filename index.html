@@ -224,7 +224,7 @@
     .mgmt-section-label{display:flex;align-items:center;justify-content:space-between;gap:.5rem;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:.55rem}
     .mgmt-section-label span{font-weight:800;color:var(--brand);text-transform:none;letter-spacing:0}
     .mgmt-roots-groups{display:grid;gap:.55rem}
-    .mgmt-roots-group{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+    .mgmt-roots-group{border:1px solid var(--line);border-radius:12px;overflow:visible;background:var(--surface)}
     .mgmt-roots-group summary{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.55rem .75rem;cursor:pointer;font-size:.78rem;font-weight:700;color:var(--ink);list-style:none}
     .mgmt-roots-group summary::-webkit-details-marker{display:none}
     .mgmt-roots-group__count{font-size:.68rem;font-weight:700;color:var(--muted)}
@@ -233,30 +233,24 @@
     .mgmt-roots-check{flex-shrink:0;display:flex;padding-top:.05rem}
     .mgmt-roots-check input[type="checkbox"]{-webkit-appearance:none;appearance:none;width:16px;height:16px;margin:0;border:1.5px solid var(--line);border-radius:50%;background:var(--bg);cursor:pointer;transition:border-color .2s,background .2s}
     .mgmt-roots-check input[type="checkbox"]:checked{border-color:var(--brand);background:var(--brand);box-shadow:inset 0 0 0 3px #fff}
-    .mgmt-card-actions{display:flex;justify-content:flex-end}
-    .mgmt-open-btn{border:1px solid var(--line);background:#fff;color:var(--brand-dark);font-size:.75rem;font-weight:700;padding:.45rem .75rem;border-radius:999px;cursor:pointer;font-family:inherit}
-    .mgmt-open-btn:hover{border-color:var(--brand);background:var(--brand-light)}
-    .mgmt-modal-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.65rem;margin-bottom:1rem}
-    @media (max-width:768px){.mgmt-modal-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    .mgmt-modal-stat{padding:.75rem .85rem;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
-    .mgmt-modal-stat__label{font-size:.68rem;color:var(--muted);margin-bottom:.2rem}
-    .mgmt-modal-stat__value{font-size:1rem;font-weight:700;color:var(--ink)}
-    .dash-modal.dash-modal--mgmt{max-width:860px}
-    .dash-modal--mgmt .dash-modal-body.mgmt-modal-body{padding:1.35rem 1.75rem 1.65rem;max-height:min(74vh,780px);overflow-y:auto;overflow-x:hidden}
-    .mgmt-modal-panel{display:grid;gap:1.15rem}
-    .mgmt-modal-intro{margin:0;font-size:.84rem;color:var(--muted);line-height:1.55}
-    .mgmt-roots-item{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.65rem;align-items:start;padding:.6rem 0;border-bottom:1px solid rgba(226,232,240,.75)}
+    .mgmt-roots-item{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.65rem;align-items:start;padding:.55rem 0;border-bottom:1px solid rgba(226,232,240,.75)}
     .mgmt-roots-item:last-child{border-bottom:none;padding-bottom:.15rem}
     .mgmt-roots-item__main{min-width:0;display:grid;gap:.45rem}
     .mgmt-roots-item__text{font-size:.82rem;line-height:1.45;color:var(--ink)}
     .mgmt-roots-item.is-done .mgmt-roots-item__text{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(100,116,139,.45)}
-    .mgmt-roots-item__meta{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem}
-    .mgmt-assign-select{min-width:170px;max-width:100%;font-size:.72rem;padding:.34rem .6rem;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);font-family:inherit;cursor:pointer}
-    .mgmt-assign-select:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-light)}
-    .mgmt-roots-assigned{font-size:.68rem;font-weight:700;color:var(--brand-dark);background:var(--brand-light);padding:.16rem .45rem;border-radius:999px;white-space:nowrap}
+    .mgmt-roots-item__meta{display:flex;flex-wrap:wrap;align-items:flex-end;gap:.55rem}
+    .mgmt-assign-field{min-width:168px;flex:1 1 168px;max-width:240px}
+    .mgmt-assign-label{display:block;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--muted);margin-bottom:.35rem}
+    .mgmt-meta-select{position:relative}
+    .mgmt-meta-select .dropdown-trigger{width:100%;min-height:34px;padding:.45rem .65rem;border:1px solid rgba(32,110,251,.12);border-radius:12px;background:var(--surface-alt);color:var(--ink);font-size:.72rem;font-weight:700;font-family:inherit;display:flex;align-items:center;justify-content:space-between;gap:.45rem;cursor:pointer}
+    .mgmt-meta-select .dropdown-trigger i{font-size:.62rem;color:var(--brand);opacity:.85}
+    .mgmt-meta-select .dropdown-trigger:hover{border-color:rgba(32,110,251,.22);background:#fff}
+    .mgmt-meta-select .dropdown-menu{position:absolute;top:calc(100% + 8px);left:0;right:0;min-width:100%;padding:.45rem;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.98);box-shadow:0 12px 28px rgba(15,23,42,.12);display:none;z-index:30;max-height:220px;overflow-y:auto}
+    .mgmt-meta-select .dropdown-menu.open{display:grid;gap:.3rem}
+    .mgmt-meta-select .dropdown-option{width:100%;border:1px solid transparent;border-radius:10px;background:transparent;color:var(--ink);padding:.55rem .65rem;text-align:left;font-size:.74rem;font-weight:700;font-family:inherit;cursor:pointer}
+    .mgmt-meta-select .dropdown-option:hover{background:var(--surface);border-color:rgba(15,23,42,.06)}
+    .mgmt-meta-select .dropdown-option.active{background:var(--brand-light);color:var(--brand-dark);border-color:rgba(32,110,251,.18)}
     .mgmt-roots-group .mgmt-roots-items{padding:.2rem .85rem .75rem}
-    .mgmt-card .mgmt-roots-item{grid-template-columns:auto minmax(0,1fr);padding:.45rem 0}
-    .mgmt-card .mgmt-assign-select{display:none}
     .week-header{display:flex;align-items:center;gap:.75rem;margin:2rem 0 1rem}
     .week-badge{padding:.3rem .85rem;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:.01em}
     .week-badge--orga{background:var(--brand-light);color:var(--brand)}
@@ -1097,8 +1091,7 @@
   let completedModules = [];
   let completedTodos   = [];
   let currentModuleId  = null;
-  let mgmtState = { users: [], teamMembers: [], progressByUser: {}, channel: null };
-  let currentMgmtUserId = null;
+  let mgmtState = { users: [], teamMembers: [], progressByUser: {}, channel: null, menusBound: false };
 
   /* ── Toasts (Live-Logs) System ──────────────────────── */
   function showToast(msg, type = 'info') {
@@ -1273,17 +1266,57 @@
     return member?.full_name || member?.email || '';
   }
 
-  function renderMgmtAssignSelect(participantUserId, todoId) {
+  function mgmtAssignMenuId(participantUserId, todoId) {
+    return `mgmt-assign-${participantUserId.slice(0, 8)}-${todoId}`;
+  }
+
+  function renderMgmtAssignDropdown(participantUserId, todoId) {
     const assignments = getMgmtTodoAssignments(participantUserId);
     const current = assignments[todoId] || '';
+    const currentName = getMgmtTeamMemberName(current) || 'Name auswählen…';
+    const menuId = mgmtAssignMenuId(participantUserId, todoId);
     const options = (mgmtState.teamMembers || []).map(member => {
-      const label = escapeHtml(member.full_name || member.email || 'Teammitglied');
-      return `<option value="${member.id}"${member.id === current ? ' selected' : ''}>${label}</option>`;
+      const name = member.full_name || member.email || 'Teammitglied';
+      const active = member.id === current ? ' active' : '';
+      return `<button type="button" class="dropdown-option${active}" onclick="assignMgmtRootsTodo('${participantUserId}', '${todoId}', '${member.id}')">${escapeHtml(name)}</button>`;
     }).join('');
-    return `<select class="mgmt-assign-select" aria-label="To-do zuweisen" onchange="assignMgmtRootsTodo('${participantUserId}', '${todoId}', this.value)">
-      <option value="">Zuweisen…</option>
-      ${options}
-    </select>`;
+    const clearOption = current
+      ? `<button type="button" class="dropdown-option" onclick="assignMgmtRootsTodo('${participantUserId}', '${todoId}', '')">Nicht zugewiesen</button>`
+      : '';
+    return `<div class="mgmt-assign-field">
+      <span class="mgmt-assign-label">Zuständig</span>
+      <div class="meta-select mgmt-meta-select">
+        <button type="button" class="dropdown-trigger" onclick="toggleMgmtAssignMenu(event, '${menuId}')">
+          <span>${escapeHtml(currentName)}</span>
+          <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        </button>
+        <div class="dropdown-menu" id="${menuId}">
+          ${options}
+          ${clearOption}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function closeMgmtMenus() {
+    document.querySelectorAll('#dash-view-manage .dropdown-menu.open').forEach(menu => menu.classList.remove('open'));
+  }
+
+  function toggleMgmtAssignMenu(event, menuId) {
+    event.stopPropagation();
+    const menu = document.getElementById(menuId);
+    if (!menu) return;
+    const shouldOpen = !menu.classList.contains('open');
+    closeMgmtMenus();
+    if (shouldOpen) menu.classList.add('open');
+  }
+  window.toggleMgmtAssignMenu = toggleMgmtAssignMenu;
+  window.closeMgmtMenus = closeMgmtMenus;
+
+  function bindMgmtAssignMenus() {
+    if (mgmtState.menusBound) return;
+    mgmtState.menusBound = true;
+    document.addEventListener('click', closeMgmtMenus);
   }
 
   function getMgmtRootsCompleted(userId) {
@@ -1325,26 +1358,22 @@
     wrap.innerHTML = notes.map(n => `<div class="mgmt-notif mgmt-notif--${n.type}">
       <i class="fa-solid ${n.icon}" aria-hidden="true"></i>
       <span>${escapeHtml(n.text)}</span>
-      <button type="button" data-mgmt-open="${n.userId}">Anzeigen</button>
+      <button type="button" data-mgmt-scroll="${n.userId}">Anzeigen</button>
     </div>`).join('');
-    wrap.querySelectorAll('[data-mgmt-open]').forEach(btn => {
-      btn.addEventListener('click', () => openMgmtParticipantModal(btn.dataset.mgmtOpen));
+    wrap.querySelectorAll('[data-mgmt-scroll]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelector(`[data-mgmt-user="${btn.dataset.mgmtScroll}"]`)?.scrollIntoView({ behavior:'smooth', block:'start' });
+      });
     });
   }
 
-  function renderMgmtRootsTodoList(userId, openFirstSection, detailMode) {
+  function renderMgmtRootsTodoList(userId, openFirstSection) {
     const completed = getMgmtRootsCompleted(userId);
-    const assignments = getMgmtTodoAssignments(userId);
     return `<div class="mgmt-roots-groups">${ROOTS_TODOS.map((sec, idx) => {
       const done = sec.items.filter(i => completed.includes(i.id)).length;
       const open = openFirstSection ? idx === 0 : done < sec.items.length;
       const itemsHtml = sec.items.map(item => {
         const checked = completed.includes(item.id);
-        const assigneeId = assignments[item.id] || '';
-        const assigneeName = getMgmtTeamMemberName(assigneeId);
-        const assigneeBadge = assigneeName
-          ? `<span class="mgmt-roots-assigned" title="${escapeHtml(assigneeName)}">→ ${escapeHtml(assigneeName.split(' ')[0] || assigneeName)}</span>`
-          : '';
         return `<div class="mgmt-roots-item${checked ? ' is-done' : ''}">
           <span class="mgmt-roots-check">
             <input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleMgmtRootsTodo('${userId}', '${item.id}', this)" aria-label="${escapeHtml(item.text)}"/>
@@ -1353,7 +1382,7 @@
             <span class="mgmt-roots-item__text">${escapeHtml(item.text)}</span>
             <div class="mgmt-roots-item__meta">
               ${item.owner ? `<span class="mgmt-roots-item__owner">${escapeHtml(item.owner)}</span>` : ''}
-              ${detailMode ? renderMgmtAssignSelect(userId, item.id) : assigneeBadge}
+              ${renderMgmtAssignDropdown(userId, item.id)}
             </div>
           </div>
         </div>`;
@@ -1394,9 +1423,6 @@
         <div class="mgmt-section-label">ROOTS To-dos <span>${stats.rootsDoneCount} / ${stats.rootsTotal} erledigt</span></div>
         ${renderMgmtRootsTodoList(u.id, true)}
       </div>
-      <div class="mgmt-card-actions">
-        <button type="button" class="mgmt-open-btn" onclick="openMgmtParticipantModal('${u.id}')"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Detailansicht</button>
-      </div>
     </article>`;
   }
 
@@ -1425,9 +1451,6 @@
       return { user: u, prog, stats };
     });
     renderMgmtUserList(rows);
-    if (currentMgmtUserId && document.getElementById('modal-overlay')?.classList.contains('open')) {
-      openMgmtParticipantModal(currentMgmtUserId, true);
-    }
   }
 
   function teardownMgmtRealtime() {
@@ -1518,6 +1541,7 @@
     if (!assigneeId) delete assignments[todoId];
     else assignments[todoId] = assigneeId;
     mgmtState.progressByUser[participantUserId] = { ...row, roots_todo_assignments: assignments };
+    closeMgmtMenus();
     refreshMgmtFromState();
     const error = await persistMgmtProgressFields(participantUserId, { roots_todo_assignments: assignments });
     if (error) {
@@ -1563,43 +1587,6 @@
   }
   window.toggleMgmtRootsTodo = toggleMgmtRootsTodo;
 
-  function renderMgmtParticipantModalBody(userId, stats) {
-    const user = mgmtState.users.find(u => u.id === userId);
-    return `<div class="mgmt-modal-panel">
-      <div class="mgmt-modal-stats">
-        <div class="mgmt-modal-stat"><div class="mgmt-modal-stat__label">Gesamt</div><div class="mgmt-modal-stat__value">${stats.pct}%</div></div>
-        <div class="mgmt-modal-stat"><div class="mgmt-modal-stat__label">Teilnehmer-To-dos</div><div class="mgmt-modal-stat__value">${stats.orgaDoneCount}/${stats.orgaTotal}</div></div>
-        <div class="mgmt-modal-stat"><div class="mgmt-modal-stat__label">ROOTS-To-dos</div><div class="mgmt-modal-stat__value">${stats.rootsDoneCount}/${stats.rootsTotal}</div></div>
-        <div class="mgmt-modal-stat"><div class="mgmt-modal-stat__label">Module</div><div class="mgmt-modal-stat__value">${stats.learnDone}/${stats.learnTotal}</div></div>
-      </div>
-      <p class="mgmt-modal-intro">${escapeHtml(user?.full_name || user?.email || 'Teilnehmer')}: ROOTS-Aufgaben abhaken und Teammitgliedern zuweisen — Zuweisungen erscheinen als Benachrichtigung im Intranet.</p>
-      ${renderMgmtRootsTodoList(userId, true, true)}
-    </div>`;
-  }
-
-  function openMgmtParticipantModal(userId, silent) {
-    currentMgmtUserId = userId;
-    currentModuleId = null;
-    const user = mgmtState.users.find(u => u.id === userId);
-    const prog = getMgmtProgressRow(userId);
-    const stats = calcOnboardingProgress(prog.completed_modules, prog.completed_todos, prog.completed_roots_todos);
-    const modalBox = document.getElementById('dash-modal-box');
-    const modalBody = document.getElementById('modal-body');
-    document.getElementById('modal-icon').innerHTML = '<i class="fa-solid fa-list-check"></i>';
-    document.getElementById('modal-title').textContent = user?.full_name || user?.email || 'Teilnehmer';
-    document.getElementById('modal-sub').textContent = `${stats.pct}% Gesamt · ROOTS ${stats.rootsDoneCount}/${stats.rootsTotal} · Teilnehmer ${stats.orgaDoneCount}/${stats.orgaTotal}`;
-    modalBody.className = 'dash-modal-body mgmt-modal-body';
-    modalBody.innerHTML = renderMgmtParticipantModalBody(userId, stats);
-    modalBox?.classList.remove('dash-modal--fixed');
-    modalBox?.classList.add('dash-modal--mgmt');
-    const doneBtn = document.getElementById('btn-done-module');
-    if (doneBtn) doneBtn.style.display = 'none';
-    document.getElementById('modal-overlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-    if (!silent) showToast(`Detailansicht: ${user?.full_name || 'Teilnehmer'}`, 'info');
-  }
-  window.openMgmtParticipantModal = openMgmtParticipantModal;
-
   async function initManagementView() {
     const listEl = document.getElementById('mgmt-user-list');
     if (!listEl) return;
@@ -1642,6 +1629,7 @@
 
     refreshMgmtFromState();
     bindMgmtRealtime();
+    bindMgmtAssignMenus();
   }
 
   const ROOTS_LINKEDIN = 'https://de.linkedin.com/company/roots-brand-strategy-consultants-gmbh';
@@ -4770,7 +4758,6 @@ Best regards,
   function openModal(id) {
     const mod = getModuleById(id);
     if (!mod) return;
-    currentMgmtUserId = null;
     currentModuleId = id;
     document.getElementById('modal-icon').innerHTML = `<i class="${mod.icon}"></i>`;
     document.getElementById('modal-title').textContent = mod.title;
@@ -4814,14 +4801,13 @@ Best regards,
   }
 
   function closeDashModalDirect() {
-    document.getElementById('dash-modal-box')?.classList.remove('dash-modal--fixed', 'dash-modal--mgmt');
+    document.getElementById('dash-modal-box')?.classList.remove('dash-modal--fixed');
     document.getElementById('modal-overlay').classList.remove('open');
     resetModuleModalFullscreen();
     document.body.style.overflow = '';
     const modalBody = document.getElementById('modal-body');
     if (modalBody) modalBody.className = 'dash-modal-body';
     currentModuleId = null;
-    currentMgmtUserId = null;
     const btn = document.getElementById('btn-done-module');
     if (btn) btn.style.display = '';
   }
