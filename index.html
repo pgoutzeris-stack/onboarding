@@ -230,13 +230,20 @@
     .mgmt-metrics{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.45rem}
     .mgmt-metrics span{font-size:.68rem;font-weight:700;color:var(--muted);background:var(--surface-alt);border:1px solid rgba(15,23,42,.08);padding:.16rem .45rem;border-radius:999px;white-space:nowrap}
     .mgmt-metrics strong{color:var(--ink);font-weight:800}
+    .mgmt-mini-bars{display:grid;gap:.28rem;margin-top:.5rem}
+    .mgmt-mini-bar{display:grid;grid-template-columns:5.5rem 2.6rem 1fr;align-items:center;gap:.4rem}
+    .mgmt-mini-bar__label{font-size:.65rem;font-weight:600;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .mgmt-mini-bar__count{font-size:.65rem;font-weight:800;color:var(--ink);text-align:right;white-space:nowrap}
+    .mgmt-mini-bar__track{height:4px;border-radius:999px;background:var(--line);overflow:hidden;min-width:0}
+    .mgmt-mini-bar__fill{height:100%;border-radius:999px;background:var(--brand);transition:width .4s ease}
+    .mgmt-mini-bar__fill--complete{background:var(--success,#10b981)}
     .mgmt-roots-toolbar{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;padding:.7rem 1.15rem;border-bottom:1px solid var(--line);background:var(--bg)}
     .mgmt-roots-toolbar__left,.mgmt-roots-toolbar__right{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}
     .mgmt-roots-toolbar__left{min-width:0}
     .mgmt-roots-toolbar__right{margin-left:auto;justify-content:flex-end}
     .mgmt-toolbar-label{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);white-space:nowrap}
     .mgmt-chip{border-radius:999px;padding:.18rem .5rem;font-size:.66rem;font-weight:800;display:inline-flex;align-items:center;gap:.25rem;border:1px solid rgba(15,23,42,.08);background:rgba(15,23,42,.04);color:var(--muted);white-space:nowrap}
-    .mgmt-chip.is-open{color:#b45309;background:#fffbeb;border-color:#fde68a}
+    .mgmt-chip.is-open{color:var(--brand-dark);background:var(--brand-light);border-color:rgba(32,110,251,.25)}
     .mgmt-chip.is-done{color:#047857;background:#ecfdf5;border-color:#bbf7d0}
     .mgmt-dropdown-wrap{position:relative;display:inline-flex;align-items:center;max-width:100%}
     .mgmt-dropdown-wrap__trigger{border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:.66rem;font-weight:700;font-family:inherit;display:inline-flex;align-items:center;gap:.35rem;padding:.32rem .6rem;border-radius:999px;cursor:pointer;white-space:nowrap;transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
@@ -1830,11 +1837,21 @@
           <div class="mgmt-user-meta">
             <div class="mgmt-user-name">${escapeHtml(u.full_name || u.email || '—')}</div>
             <div class="mgmt-user-sub">${escapeHtml(u.position || '—')}${u.email ? ' · ' + escapeHtml(u.email) : ''}</div>
-            <div class="mgmt-metrics">
-              <span>Teilnehmer: <strong>${stats.orgaDoneCount}/${stats.orgaTotal}</strong></span>
-              <span>ROOTS: <strong>${stats.rootsDoneCount}/${stats.rootsTotal}</strong></span>
-              <span>Lernpfad: <strong>${stats.pathDone}/${stats.pathTotal}</strong></span>
-              <span>Projekte: <strong>${stats.projDone}/${stats.projTotal}</strong></span>
+            <div class="mgmt-mini-bars">
+              ${[
+                { label:'Teilnehmer', done: stats.orgaDoneCount,  total: stats.orgaTotal  },
+                { label:'ROOTS',      done: stats.rootsDoneCount, total: stats.rootsTotal },
+                { label:'Lernpfad',   done: stats.pathDone,       total: stats.pathTotal  },
+                { label:'Projekte',   done: stats.projDone,       total: stats.projTotal  },
+              ].map(({ label, done, total }) => {
+                const pct = total > 0 ? Math.round(done / total * 100) : 0;
+                const complete = done >= total && total > 0;
+                return `<div class="mgmt-mini-bar">
+                  <span class="mgmt-mini-bar__label">${label}</span>
+                  <span class="mgmt-mini-bar__count">${done}/${total}</span>
+                  <div class="mgmt-mini-bar__track"><div class="mgmt-mini-bar__fill${complete ? ' mgmt-mini-bar__fill--complete' : ''}" style="width:${pct}%"></div></div>
+                </div>`;
+              }).join('')}
             </div>
           </div>
         </div>
