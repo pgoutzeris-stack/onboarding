@@ -826,22 +826,40 @@
     .tag-list li{font-size:.72rem;font-weight:600;padding:.22rem .55rem;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
     .tag-list li.is-do{background:#ecfdf5;border-color:#bbf7d0;color:#15803d}
     .tag-list li.is-dont{background:#fef2f2;border-color:#fecaca;color:#b91c1c}
-    .ob-comfort-framework{display:grid;grid-template-columns:minmax(220px,280px) minmax(0,1fr);gap:1.25rem;align-items:center;margin:1.25rem 0;padding:1.15rem 1.25rem;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
-    .ob-comfort-visual{display:flex;flex-direction:column;align-items:center;gap:.5rem}
-    @media (max-width:720px){.ob-comfort-framework{grid-template-columns:1fr}}
-    .ob-comfort-rings{position:relative;width:240px;height:240px;margin:0 auto;border-radius:50%;background:conic-gradient(from 0deg,#fecaca 0 33%,#bbf7d0 33% 66%,#bfdbfe 66% 100%);display:flex;align-items:center;justify-content:center}
-    .ob-comfort-ring{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;border:2px solid rgba(255,255,255,.85)}
-    .ob-comfort-ring:hover,.ob-comfort-ring.is-active{transform:scale(1.02);box-shadow:0 8px 24px rgba(15,23,42,.12)}
-    .ob-comfort-ring--panic{inset:0;background:rgba(254,226,226,.55)}
-    .ob-comfort-ring--growth{inset:28px;background:rgba(220,252,231,.72)}
-    .ob-comfort-ring--comfort{inset:56px;background:rgba(219,234,254,.92);font-size:.72rem;font-weight:700;color:#1e3a8a;padding:.5rem;line-height:1.35}
-    .ob-comfort-ring--growth .ob-comfort-ring__label,.ob-comfort-ring--panic .ob-comfort-ring__label{display:none}
-    .ob-comfort-ring--comfort{font-size:0;color:transparent}
-    .ob-comfort-ring__label{display:none}
-    .ob-comfort-panel{min-height:160px;padding:1rem 1.1rem;border-radius:12px;background:var(--brand-light);border:1px solid rgba(32,110,251,.12)}
-    .ob-comfort-panel h4{margin:0 0 .45rem;font-size:.88rem;color:var(--brand-dark)}
-    .ob-comfort-panel p{margin:0;font-size:.84rem;line-height:1.65;color:var(--ink)}
-    .ob-comfort-hint{margin:.75rem 0 0;font-size:.78rem;color:var(--muted);line-height:1.55}
+    .ob-comfort-framework{display:grid;grid-template-columns:minmax(240px,300px) minmax(0,1fr);gap:1.6rem;align-items:center;margin:1.4rem 0;padding:1.6rem 1.7rem;border:1px solid var(--line);border-radius:20px;background:linear-gradient(155deg,var(--surface) 0%,var(--bg) 100%);box-shadow:0 2px 14px rgba(15,23,42,.04)}
+    .ob-comfort-visual{display:flex;flex-direction:column;align-items:center;gap:1rem}
+    @media (max-width:720px){.ob-comfort-framework{grid-template-columns:1fr;padding:1.3rem}}
+    .ob-comfort-rings{position:relative;width:264px;height:264px;margin:.4rem auto;border-radius:50%;display:flex;align-items:center;justify-content:center}
+    .ob-comfort-ring{position:absolute;border-radius:50%;display:flex;align-items:flex-start;justify-content:center;text-align:center;cursor:pointer;border:2px solid #fff;opacity:0;transform:scale(.45);transition:transform .55s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease,opacity .55s ease,filter .35s ease}
+    .ob-comfort-framework.is-animated .ob-comfort-ring{opacity:1;transform:scale(1)}
+    .ob-comfort-framework.is-animated:not(.is-entered) .ob-comfort-ring--panic{transition-delay:0ms}
+    .ob-comfort-framework.is-animated:not(.is-entered) .ob-comfort-ring--growth{transition-delay:160ms}
+    .ob-comfort-framework.is-animated:not(.is-entered) .ob-comfort-ring--comfort{transition-delay:320ms}
+    .ob-comfort-ring--panic{inset:0;background:#fdeaea}
+    .ob-comfort-ring--growth{inset:36px;background:#dcf6e8}
+    .ob-comfort-ring--comfort{inset:72px;background:var(--brand-light);align-items:center;padding:.5rem;line-height:1.3}
+    .ob-comfort-ring__label{position:absolute;top:10px;left:50%;transform:translateX(-50%);font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;pointer-events:none;transition:opacity .3s ease}
+    .ob-comfort-ring--panic>.ob-comfort-ring__label{color:#c0322f}
+    .ob-comfort-ring--growth>.ob-comfort-ring__label{color:#0a8050}
+    .ob-comfort-ring--comfort>.ob-comfort-ring__label{position:static;transform:none;color:var(--brand-dark);font-size:.7rem}
+    .ob-comfort-ring--comfort{font-size:0}
+    .ob-comfort-ring:hover{filter:brightness(.99)}
+    .ob-comfort-framework.is-animated .ob-comfort-ring.is-active{transform:scale(1.04);z-index:4}
+    .ob-comfort-ring--panic.is-active{box-shadow:0 0 0 3px rgba(220,38,38,.32),0 12px 30px rgba(15,23,42,.16)}
+    .ob-comfort-ring--growth.is-active{box-shadow:0 0 0 3px rgba(5,150,105,.32),0 12px 30px rgba(15,23,42,.16)}
+    .ob-comfort-ring--comfort.is-active{box-shadow:0 0 0 3px rgba(32,110,251,.42),0 12px 30px rgba(15,23,42,.16)}
+    .ob-comfort-framework.is-auto-active .ob-comfort-ring:not(.is-active){filter:saturate(.65)}
+    .ob-comfort-panel{min-height:170px;padding:1.15rem 1.25rem;border-radius:14px;background:var(--brand-light);border:1px solid rgba(32,110,251,.14);transition:background .35s ease,border-color .35s ease}
+    .ob-comfort-panel[data-zone="growth"]{background:#ecfdf5;border-color:#a7f3d0}
+    .ob-comfort-panel[data-zone="panic"]{background:#fef2f2;border-color:#fecaca}
+    @keyframes obZoneFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    .ob-comfort-panel.is-shown{animation:obZoneFade .42s ease}
+    .ob-comfort-panel h4{margin:0 0 .5rem;font-size:.92rem;font-weight:800;color:var(--brand-dark);display:flex;align-items:center;gap:.45rem;transition:color .35s ease}
+    .ob-comfort-panel[data-zone="growth"] h4{color:#047857}
+    .ob-comfort-panel[data-zone="panic"] h4{color:#b91c1c}
+    .ob-comfort-panel h4::before{content:"";width:10px;height:10px;border-radius:50%;background:currentColor;flex-shrink:0}
+    .ob-comfort-panel p{margin:0;font-size:.85rem;line-height:1.68;color:var(--ink)}
+    .ob-comfort-hint{margin:.85rem 0 0;font-size:.78rem;color:var(--muted);line-height:1.55}
     .ob-content-sticker{display:inline-flex;align-items:center;gap:.45rem;margin:0 0 1rem;padding:.45rem .85rem;border-radius:8px;background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;font-size:.78rem;font-weight:700;letter-spacing:.02em;text-transform:none;line-height:1.4}
     .ob-content-sticker i{font-size:.72rem;opacity:.9}
     .ob-content-disclaimer{margin:0 0 1rem;padding:.85rem 1rem;border-radius:12px;border:1px solid #fde68a;background:#fffbeb;color:#92400e;font-size:.84rem;line-height:1.6}
@@ -851,11 +869,11 @@
     .ob-kunden-pill:hover{border-color:var(--brand);color:var(--brand);background:var(--brand-light);transform:translateY(-1px)}
     .ob-kunden-pill.is-soon{opacity:.72;cursor:default;pointer-events:none;background:var(--surface)}
     .ob-kunden-pill small{font-weight:500;color:var(--muted);margin-left:.15rem}
-    .ob-comfort-framework.is-auto-active .ob-comfort-ring.is-active{box-shadow:0 0 0 3px rgba(32,110,251,.35),0 10px 28px rgba(15,23,42,.14)}
-    .ob-comfort-zone-tags{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;margin-top:.85rem}
-    .ob-comfort-zone-tag{display:inline-flex;align-items:center;padding:.35rem .75rem;border-radius:999px;border:1px solid var(--line);background:var(--bg);font-size:.72rem;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s ease}
-    .ob-comfort-zone-tag.is-active{color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(15,23,42,.12)}
-    .ob-comfort-zone-tag[data-zone-label="comfort"].is-active{background:#2563eb}
+    .ob-comfort-zone-tags{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;margin-top:.25rem}
+    .ob-comfort-zone-tag{display:inline-flex;align-items:center;padding:.38rem .8rem;border-radius:999px;border:1px solid var(--line);background:var(--bg);font-size:.72rem;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s ease}
+    .ob-comfort-zone-tag:hover{border-color:rgba(32,110,251,.3);color:var(--ink)}
+    .ob-comfort-zone-tag.is-active{color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(15,23,42,.14)}
+    .ob-comfort-zone-tag[data-zone-label="comfort"].is-active{background:var(--brand)}
     .ob-comfort-zone-tag[data-zone-label="growth"].is-active{background:#059669}
     .ob-comfort-zone-tag[data-zone-label="panic"].is-active{background:#dc2626}
     .mentor-mail-btn{background:var(--bg);color:var(--brand);border:1px solid var(--brand)}
@@ -1881,7 +1899,20 @@
     const card = document.querySelector(`[data-mgmt-user="${userId}"]`);
     const section = card?.querySelector('[data-mgmt-todo-section]');
     if (!section) return;
+    // Offene Abschnitte merken, damit sie beim Re-Render nicht zuklappen
+    const openSections = new Set();
+    section.querySelectorAll('details.mgmt-roots-section[open]').forEach(d => {
+      const title = d.querySelector('.sub-accordion-title')?.textContent;
+      if (title) openSections.add(title);
+    });
     section.innerHTML = renderMgmtTodoSectionInner(userId);
+    // Offene Abschnitte wiederherstellen
+    if (openSections.size) {
+      section.querySelectorAll('details.mgmt-roots-section').forEach(d => {
+        const title = d.querySelector('.sub-accordion-title')?.textContent;
+        if (title && openSections.has(title)) d.setAttribute('open', '');
+      });
+    }
     bindParticipantTodoDnD(userId);
     updateMgmtSummary(mgmtState.users.map(u => {
       const prog = getMgmtProgressRow(u.id);
@@ -2470,9 +2501,9 @@
               <div class="ob-comfort-framework" data-demo="comfort-zones">
                 <div class="ob-comfort-visual">
                   <div class="ob-comfort-rings" aria-label="Komfort-, Wachstums- und Panikzone">
-                    <button type="button" class="ob-comfort-ring ob-comfort-ring--panic" data-zone="panic" aria-label="Panikzone"></button>
-                    <button type="button" class="ob-comfort-ring ob-comfort-ring--growth" data-zone="growth" aria-label="Wachstumszone"></button>
-                    <button type="button" class="ob-comfort-ring ob-comfort-ring--comfort is-active" data-zone="comfort" aria-label="Komfortzone"></button>
+                    <button type="button" class="ob-comfort-ring ob-comfort-ring--panic" data-zone="panic" aria-label="Panikzone"><span class="ob-comfort-ring__label">Panik</span></button>
+                    <button type="button" class="ob-comfort-ring ob-comfort-ring--growth" data-zone="growth" aria-label="Wachstumszone"><span class="ob-comfort-ring__label">Wachstum</span></button>
+                    <button type="button" class="ob-comfort-ring ob-comfort-ring--comfort is-active" data-zone="comfort" aria-label="Komfortzone"><span class="ob-comfort-ring__label">Komfort</span></button>
                   </div>
                   <div class="ob-comfort-zone-tags" role="tablist" aria-label="Zonen">
                     <button type="button" class="ob-comfort-zone-tag is-active" data-zone-label="comfort">Komfortzone</button>
@@ -2480,7 +2511,7 @@
                     <button type="button" class="ob-comfort-zone-tag" data-zone-label="panic">Panikzone</button>
                   </div>
                 </div>
-                <div class="ob-comfort-panel" data-comfort-panel>
+                <div class="ob-comfort-panel" data-comfort-panel data-zone="comfort">
                   <h4>Komfortzone</h4>
                   <p>Hier fühlst du dich sicher: bekannte Aufgaben, klare Anleitung, viel Shadowing. Gut für den Start – aber langfristig zu wenig Wachstum.</p>
                 </div>
@@ -5528,13 +5559,22 @@ Best regards,
     const zones = ['comfort', 'growth', 'panic'];
     let idx = 0;
     let timer = null;
+    let entranceDone = false;
 
-    function setZone(key) {
+    function setZone(key, animate) {
       root.querySelectorAll('[data-zone]').forEach(b => b.classList.toggle('is-active', b.dataset.zone === key));
       root.querySelectorAll('[data-zone-label]').forEach(b => b.classList.toggle('is-active', b.dataset.zoneLabel === key));
       root.classList.add('is-auto-active');
       const copy = COMFORT_ZONE_COPY[key] || COMFORT_ZONE_COPY.comfort;
-      if (panel) panel.innerHTML = `<h4>${copy.title}</h4><p>${copy.text}</p>`;
+      if (panel) {
+        panel.dataset.zone = key;
+        panel.innerHTML = `<h4>${copy.title}</h4><p>${copy.text}</p>`;
+        if (animate) {
+          panel.classList.remove('is-shown');
+          void panel.offsetWidth; // reflow, um die Animation neu zu starten
+          panel.classList.add('is-shown');
+        }
+      }
     }
 
     function bindZoneControl(el) {
@@ -5545,33 +5585,45 @@ Best regards,
         idx = zones.indexOf(key);
         if (idx < 0) idx = 0;
         root.dataset.userPaused = '1';
-        if (timer) { clearInterval(timer); timer = null; }
-        setZone(key);
+        stopAuto();
+        root.classList.add('is-animated');
+        setZone(key, true);
       });
     }
 
     root.querySelectorAll('[data-zone], [data-zone-label]').forEach(bindZoneControl);
-    setZone('comfort');
+    setZone('comfort', false);
 
     const startAuto = () => {
       if (root.dataset.userPaused === '1' || timer) return;
       timer = setInterval(() => {
         idx = (idx + 1) % zones.length;
-        setZone(zones[idx]);
-      }, 3200);
+        setZone(zones[idx], true);
+      }, 3000);
     };
     const stopAuto = () => { if (timer) { clearInterval(timer); timer = null; } };
+
+    // Beim ersten Sichtbarwerden: Kreise gestaffelt einblenden, dann durch die Zonen cyclen
+    const runEntrance = () => {
+      if (root.dataset.userPaused === '1') { startAuto(); return; }
+      if (entranceDone) { startAuto(); return; }
+      entranceDone = true;
+      idx = 0;
+      root.classList.add('is-animated');
+      setZone('comfort', true);
+      setTimeout(() => { root.classList.add('is-entered'); startAuto(); }, 1100);
+    };
 
     if ('IntersectionObserver' in window) {
       const obs = new IntersectionObserver(entries => {
         entries.forEach(en => {
-          if (en.isIntersecting) startAuto();
+          if (en.isIntersecting) runEntrance();
           else stopAuto();
         });
-      }, { threshold: 0.4, root: root.closest('.modal-scroll, .module-tab-panel') || null });
+      }, { threshold: 0.35, root: root.closest('.modal-scroll, .module-tab-panel') || null });
       obs.observe(root);
     } else {
-      startAuto();
+      runEntrance();
     }
   }
 
