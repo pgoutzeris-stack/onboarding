@@ -319,6 +319,13 @@
     .roots-sync-wrap{display:flex;align-items:center;justify-content:flex-end;min-height:28px}
     .roots-sync-pill{display:inline-flex;align-items:center;gap:.35rem;padding:.28rem .6rem;border-radius:999px;border:1px solid rgba(32,110,251,.14);background:#fff;color:var(--brand-dark);font-size:.66rem;font-weight:700;white-space:nowrap}
     .roots-sync-pill--live i{font-size:.45rem;color:#10b981}
+    /* autosave badge — SOP tool style */
+    .autosave-badge{display:none;align-items:center;gap:.4rem;height:32px;padding:0 .75rem;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--muted);font-size:.72rem;font-weight:500;white-space:nowrap;transition:color .2s,border-color .2s}
+    .autosave-badge.is-visible{display:inline-flex}
+    .autosave-badge i{font-size:.72rem}
+    .autosave-badge.is-saving{color:var(--brand);border-color:rgba(32,110,251,.3)}
+    .autosave-badge.is-saved{color:#059669;border-color:#bbf7d0}
+    .autosave-badge.is-error{color:#dc2626;border-color:#fecaca}
     @keyframes livePulse{0%,100%{opacity:1}50%{opacity:.35}}
     body.body-live-preview #dash-view-manage{display:none!important}
     body.body-live-preview #dash-view-personal{display:block!important}
@@ -1083,6 +1090,7 @@
       <span class="header-sub" id="header-sub">Dein persönlicher Einstiegsplan</span>
     </div>
     <div class="header-right">
+      <span id="global-autosave-badge" class="autosave-badge" aria-live="polite"></span>
       <div id="roots-sync-status" class="roots-sync-wrap" aria-live="polite"></div>
     </div>
   </header>
@@ -1580,26 +1588,28 @@
     return labels[changeType] || 'Gespeichert';
   }
 
+  let _autosaveBadgeTimer = null;
   function updateMgmtParticipantTodoSaveIndicator(userId, state) {
-    const el = document.getElementById(`mgmt-save-${userId.slice(0, 8)}`);
+    const el = document.getElementById('global-autosave-badge');
     if (!el) return;
-    el.classList.remove('is-saving', 'is-error');
+    clearTimeout(_autosaveBadgeTimer);
+    el.classList.remove('is-saving', 'is-saved', 'is-error');
+    el.classList.add('is-visible');
     if (state === 'saving') {
-      el.textContent = 'Speichert…';
       el.classList.add('is-saving');
+      el.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Speichert…';
       return;
     }
     if (state === 'error') {
-      el.textContent = 'Speichern fehlgeschlagen';
       el.classList.add('is-error');
+      el.innerHTML = '<i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Speichern fehlgeschlagen';
+      _autosaveBadgeTimer = setTimeout(() => el.classList.remove('is-visible'), 5000);
       return;
     }
     const meta = mgmtParticipantTodoSaveMeta[userId];
-    if (!meta) {
-      el.textContent = 'Autosave aktiv';
-      return;
-    }
-    el.textContent = `Gespeichert · ${meta.name} · ${formatMgmtHistoryTime(meta.at)}`;
+    el.classList.add('is-saved');
+    el.innerHTML = `<i class="fa-solid fa-circle-check" aria-hidden="true"></i> Gespeichert${meta ? ' · ' + escapeHtml(meta.name) : ''}`;
+    _autosaveBadgeTimer = setTimeout(() => el.classList.remove('is-visible'), 4000);
   }
 
   function setMgmtParticipantTodosState(userId, todos, extraFields) {
@@ -1794,9 +1804,6 @@
     const completed = getMgmtRootsCompleted(userId);
     const doneCount = todos.filter(t => completed.includes(t.id)).length;
     const saveId = userId.slice(0, 8);
-    const saveLabel = mgmtParticipantTodoSaveMeta[userId]
-      ? `Gespeichert · ${mgmtParticipantTodoSaveMeta[userId].name}`
-      : 'Autosave aktiv';
     return `<div class="mgmt-roots-toolbar">
       <div class="mgmt-roots-toolbar__left">
         <span class="mgmt-toolbar-label">ROOTS To-do-Liste</span>
@@ -1815,7 +1822,6 @@
             </div>
           </div>
         </div>
-        <span class="mgmt-todo-save" id="mgmt-save-${saveId}">${escapeHtml(saveLabel)}</span>
       </div>
     </div>`;
   }
