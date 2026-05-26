@@ -230,13 +230,18 @@
     .mgmt-metrics{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.45rem}
     .mgmt-metrics span{font-size:.68rem;font-weight:700;color:var(--muted);background:var(--surface-alt);border:1px solid rgba(15,23,42,.08);padding:.16rem .45rem;border-radius:999px;white-space:nowrap}
     .mgmt-metrics strong{color:var(--ink);font-weight:800}
-    .mgmt-mini-bars{display:grid;gap:.28rem;margin-top:.5rem}
-    .mgmt-mini-bar{display:grid;grid-template-columns:5.5rem 2.6rem 1fr;align-items:center;gap:.4rem}
-    .mgmt-mini-bar__label{font-size:.65rem;font-weight:600;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .mgmt-mini-bar__count{font-size:.65rem;font-weight:800;color:var(--ink);text-align:right;white-space:nowrap}
-    .mgmt-mini-bar__track{height:4px;border-radius:999px;background:var(--line);overflow:hidden;min-width:0}
-    .mgmt-mini-bar__fill{height:100%;border-radius:999px;background:var(--brand);transition:width .4s ease}
-    .mgmt-mini-bar__fill--complete{background:var(--success,#10b981)}
+    .mgmt-stat-tiles{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.55rem}
+    .mgmt-stat-tile{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:.1rem;padding:.45rem .6rem .4rem;border-radius:10px;border:1px solid var(--line);background:var(--bg);min-width:4.4rem;cursor:default;transition:border-color .15s,box-shadow .15s}
+    .mgmt-stat-tile:hover{border-color:rgba(32,110,251,.3);box-shadow:0 2px 10px rgba(32,110,251,.08)}
+    .mgmt-stat-tile__label{font-size:.62rem;font-weight:600;color:var(--muted);white-space:nowrap}
+    .mgmt-stat-tile__value{font-size:.95rem;font-weight:800;color:var(--ink);line-height:1.1}
+    .mgmt-stat-tile__bar{width:100%;height:3px;border-radius:999px;background:var(--line);margin-top:.3rem;overflow:hidden}
+    .mgmt-stat-tile__bar-fill{height:100%;border-radius:999px;background:var(--brand);transition:width .4s ease}
+    .mgmt-stat-tile__bar-fill--complete{background:var(--success,#10b981)}
+    /* tooltip */
+    .mgmt-stat-tile__tip{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);white-space:nowrap;background:rgba(15,23,42,.88);color:#fff;font-size:.65rem;font-weight:500;line-height:1.4;padding:.3rem .55rem;border-radius:6px;pointer-events:none;opacity:0;transition:opacity .15s;z-index:20}
+    .mgmt-stat-tile__tip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:4px solid transparent;border-top-color:rgba(15,23,42,.88)}
+    .mgmt-stat-tile:hover .mgmt-stat-tile__tip{opacity:1}
     .mgmt-roots-toolbar{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;padding:.7rem 1.15rem;border-bottom:1px solid var(--line);background:var(--bg)}
     .mgmt-roots-toolbar__left,.mgmt-roots-toolbar__right{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}
     .mgmt-roots-toolbar__left{min-width:0}
@@ -1842,19 +1847,20 @@
           <div class="mgmt-user-meta">
             <div class="mgmt-user-name">${escapeHtml(u.full_name || u.email || '—')}</div>
             <div class="mgmt-user-sub">${escapeHtml(u.position || '—')}${u.email ? ' · ' + escapeHtml(u.email) : ''}</div>
-            <div class="mgmt-mini-bars">
+            <div class="mgmt-stat-tiles">
               ${[
-                { label:'To-dos',     done: stats.orgaDoneCount,  total: stats.orgaTotal  },
-                { label:'ROOTS',      done: stats.rootsDoneCount, total: stats.rootsTotal },
-                { label:'Lernpfad',   done: stats.pathDone,       total: stats.pathTotal  },
-                { label:'Projekte',   done: stats.projDone,       total: stats.projTotal  },
-              ].map(({ label, done, total }) => {
+                { label:'To-dos',   done: stats.orgaDoneCount,  total: stats.orgaTotal,  tip:'Vom Teilnehmer selbst abgehakte Onboarding-Checkboxen' },
+                { label:'ROOTS',    done: stats.rootsDoneCount, total: stats.rootsTotal, tip:'Von ROOTS abgehakte Bearbeiter-Todos (Vorbereitung vor Tag 1)' },
+                { label:'Lernpfad', done: stats.pathDone,       total: stats.pathTotal,  tip:'Abgeschlossene Lernmodule (Welcome, Insight, Modus, Kunden)' },
+                { label:'Projekte', done: stats.projDone,       total: stats.projTotal,  tip:'Abgeschlossene Projektmodule (Kunden Insights, Projektbriefing)' },
+              ].map(({ label, done, total, tip }) => {
                 const pct = total > 0 ? Math.round(done / total * 100) : 0;
                 const complete = done >= total && total > 0;
-                return `<div class="mgmt-mini-bar">
-                  <span class="mgmt-mini-bar__label">${label}</span>
-                  <span class="mgmt-mini-bar__count">${done}/${total}</span>
-                  <div class="mgmt-mini-bar__track"><div class="mgmt-mini-bar__fill${complete ? ' mgmt-mini-bar__fill--complete' : ''}" style="width:${pct}%"></div></div>
+                return `<div class="mgmt-stat-tile">
+                  <span class="mgmt-stat-tile__tip">${tip}</span>
+                  <span class="mgmt-stat-tile__label">${label}</span>
+                  <span class="mgmt-stat-tile__value">${done}/${total}</span>
+                  <div class="mgmt-stat-tile__bar"><div class="mgmt-stat-tile__bar-fill${complete ? ' mgmt-stat-tile__bar-fill--complete' : ''}" style="width:${pct}%"></div></div>
                 </div>`;
               }).join('')}
             </div>
