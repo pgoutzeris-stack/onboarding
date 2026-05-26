@@ -830,33 +830,32 @@
     .ob-comfort-visual{display:flex;flex-direction:column;align-items:center;gap:1rem}
     @media (max-width:720px){.ob-comfort-framework{grid-template-columns:1fr;padding:1.3rem}}
     .ob-comfort-rings{position:relative;width:264px;height:264px;margin:.4rem auto;border-radius:50%;display:flex;align-items:center;justify-content:center}
-    .ob-comfort-ring{position:absolute;border-radius:50%;display:flex;align-items:flex-start;justify-content:center;text-align:center;cursor:pointer;border:2px solid #fff;opacity:0;transform:scale(.45);transition:transform .55s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease,opacity .55s ease,filter .35s ease}
+    .ob-comfort-ring{position:absolute;border-radius:50%;display:flex;align-items:flex-start;justify-content:center;text-align:center;cursor:default;border:2px solid #fff;opacity:0;transform:scale(.45);transition:transform .55s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease,opacity .55s ease,filter .35s ease}
     .ob-comfort-framework.is-animated .ob-comfort-ring{opacity:1;transform:scale(1)}
     .ob-comfort-framework.is-animated:not(.is-entered) .ob-comfort-ring--panic{transition-delay:0ms}
     .ob-comfort-framework.is-animated:not(.is-entered) .ob-comfort-ring--growth{transition-delay:160ms}
     .ob-comfort-framework.is-animated:not(.is-entered) .ob-comfort-ring--comfort{transition-delay:320ms}
-    .ob-comfort-ring--panic{inset:0;background:#fdeaea}
-    .ob-comfort-ring--growth{inset:36px;background:#dcf6e8}
+    .ob-comfort-ring--panic{inset:0;background:#eef2f7}
+    .ob-comfort-ring--growth{inset:36px;background:#d3e3fd}
     .ob-comfort-ring--comfort{inset:72px;background:var(--brand-light);align-items:center;padding:.5rem;line-height:1.3}
     .ob-comfort-ring__label{position:absolute;top:10px;left:50%;transform:translateX(-50%);font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;pointer-events:none;transition:opacity .3s ease}
-    .ob-comfort-ring--panic>.ob-comfort-ring__label{color:#c0322f}
-    .ob-comfort-ring--growth>.ob-comfort-ring__label{color:#0a8050}
+    .ob-comfort-ring--panic>.ob-comfort-ring__label{color:#64748b}
+    .ob-comfort-ring--growth>.ob-comfort-ring__label{color:#2563eb}
     .ob-comfort-ring--comfort>.ob-comfort-ring__label{position:static;transform:none;color:var(--brand-dark);font-size:.7rem}
     .ob-comfort-ring--comfort{font-size:0}
-    .ob-comfort-ring:hover{filter:brightness(.99)}
     .ob-comfort-framework.is-animated .ob-comfort-ring.is-active{transform:scale(1.04);z-index:4}
-    .ob-comfort-ring--panic.is-active{box-shadow:0 0 0 3px rgba(220,38,38,.32),0 12px 30px rgba(15,23,42,.16)}
-    .ob-comfort-ring--growth.is-active{box-shadow:0 0 0 3px rgba(5,150,105,.32),0 12px 30px rgba(15,23,42,.16)}
+    .ob-comfort-ring--panic.is-active{box-shadow:0 0 0 3px rgba(100,116,139,.3),0 12px 30px rgba(15,23,42,.14)}
+    .ob-comfort-ring--growth.is-active{box-shadow:0 0 0 3px rgba(37,99,235,.32),0 12px 30px rgba(15,23,42,.14)}
     .ob-comfort-ring--comfort.is-active{box-shadow:0 0 0 3px rgba(32,110,251,.42),0 12px 30px rgba(15,23,42,.16)}
-    .ob-comfort-framework.is-auto-active .ob-comfort-ring:not(.is-active){filter:saturate(.65)}
+    .ob-comfort-framework.is-auto-active .ob-comfort-ring:not(.is-active){filter:saturate(.7) opacity(.92)}
     .ob-comfort-panel{min-height:170px;padding:1.15rem 1.25rem;border-radius:14px;background:var(--brand-light);border:1px solid rgba(32,110,251,.14);transition:background .35s ease,border-color .35s ease}
-    .ob-comfort-panel[data-zone="growth"]{background:#ecfdf5;border-color:#a7f3d0}
-    .ob-comfort-panel[data-zone="panic"]{background:#fef2f2;border-color:#fecaca}
+    .ob-comfort-panel[data-zone="growth"]{background:#eef4ff;border-color:rgba(37,99,235,.2)}
+    .ob-comfort-panel[data-zone="panic"]{background:#f4f6f9;border-color:var(--line)}
     @keyframes obZoneFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
     .ob-comfort-panel.is-shown{animation:obZoneFade .42s ease}
     .ob-comfort-panel h4{margin:0 0 .5rem;font-size:.92rem;font-weight:800;color:var(--brand-dark);display:flex;align-items:center;gap:.45rem;transition:color .35s ease}
-    .ob-comfort-panel[data-zone="growth"] h4{color:#047857}
-    .ob-comfort-panel[data-zone="panic"] h4{color:#b91c1c}
+    .ob-comfort-panel[data-zone="growth"] h4{color:#2563eb}
+    .ob-comfort-panel[data-zone="panic"] h4{color:#475569}
     .ob-comfort-panel h4::before{content:"";width:10px;height:10px;border-radius:50%;background:currentColor;flex-shrink:0}
     .ob-comfort-panel p{margin:0;font-size:.85rem;line-height:1.68;color:var(--ink)}
     .ob-comfort-hint{margin:.85rem 0 0;font-size:.78rem;color:var(--muted);line-height:1.55}
@@ -870,12 +869,11 @@
     .ob-kunden-pill.is-soon{opacity:.72;cursor:default;pointer-events:none;background:var(--surface)}
     .ob-kunden-pill small{font-weight:500;color:var(--muted);margin-left:.15rem}
     .ob-comfort-zone-tags{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;margin-top:.25rem}
-    .ob-comfort-zone-tag{display:inline-flex;align-items:center;padding:.38rem .8rem;border-radius:999px;border:1px solid var(--line);background:var(--bg);font-size:.72rem;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s ease}
-    .ob-comfort-zone-tag:hover{border-color:rgba(32,110,251,.3);color:var(--ink)}
+    .ob-comfort-zone-tag{display:inline-flex;align-items:center;padding:.38rem .8rem;border-radius:999px;border:1px solid var(--line);background:var(--bg);font-size:.72rem;font-weight:700;color:var(--muted);cursor:default;transition:all .2s ease}
     .ob-comfort-zone-tag.is-active{color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(15,23,42,.14)}
     .ob-comfort-zone-tag[data-zone-label="comfort"].is-active{background:var(--brand)}
-    .ob-comfort-zone-tag[data-zone-label="growth"].is-active{background:#059669}
-    .ob-comfort-zone-tag[data-zone-label="panic"].is-active{background:#dc2626}
+    .ob-comfort-zone-tag[data-zone-label="growth"].is-active{background:#2563eb}
+    .ob-comfort-zone-tag[data-zone-label="panic"].is-active{background:#64748b}
     .mentor-mail-btn{background:var(--bg);color:var(--brand);border:1px solid var(--brand)}
     .mentor-mail-btn:hover{background:var(--brand-light);filter:none}
     .ob-demo{border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden;margin:1rem 0;box-shadow:0 2px 8px rgba(15,23,42,.04)}
@@ -2516,7 +2514,7 @@
                   <p>Hier fühlst du dich sicher: bekannte Aufgaben, klare Anleitung, viel Shadowing. Gut für den Start – aber langfristig zu wenig Wachstum.</p>
                 </div>
               </div>
-              <p class="ob-comfort-hint">Die Zonen wechseln automatisch, wenn du den Abschnitt siehst – oder wähle eine Zone direkt. Dein Mentor hilft dir, bewusst in die Wachstumszone zu kommen – ohne in die Panikzone zu rutschen.</p>
+              <p class="ob-comfort-hint">Die Zonen wechseln automatisch durch. Dein Mentor hilft dir, bewusst in die Wachstumszone zu kommen – ohne in die Panikzone zu rutschen.</p>
             ` }
           ]},
           { id:'w-wishes', tab:'Deine Wünsche', sections:[
@@ -5577,25 +5575,10 @@ Best regards,
       }
     }
 
-    function bindZoneControl(el) {
-      el.addEventListener('click', e => {
-        e.stopPropagation();
-        const key = el.dataset.zone || el.dataset.zoneLabel;
-        if (!key) return;
-        idx = zones.indexOf(key);
-        if (idx < 0) idx = 0;
-        root.dataset.userPaused = '1';
-        stopAuto();
-        root.classList.add('is-animated');
-        setZone(key, true);
-      });
-    }
-
-    root.querySelectorAll('[data-zone], [data-zone-label]').forEach(bindZoneControl);
     setZone('comfort', false);
 
     const startAuto = () => {
-      if (root.dataset.userPaused === '1' || timer) return;
+      if (timer) return;
       timer = setInterval(() => {
         idx = (idx + 1) % zones.length;
         setZone(zones[idx], true);
@@ -5603,9 +5586,8 @@ Best regards,
     };
     const stopAuto = () => { if (timer) { clearInterval(timer); timer = null; } };
 
-    // Beim ersten Sichtbarwerden: Kreise gestaffelt einblenden, dann durch die Zonen cyclen
+    // Beim ersten Sichtbarwerden: Kreise gestaffelt einblenden, dann automatisch durch die Zonen cyclen
     const runEntrance = () => {
-      if (root.dataset.userPaused === '1') { startAuto(); return; }
       if (entranceDone) { startAuto(); return; }
       entranceDone = true;
       idx = 0;
@@ -5620,8 +5602,14 @@ Best regards,
           if (en.isIntersecting) runEntrance();
           else stopAuto();
         });
-      }, { threshold: 0.35, root: root.closest('.modal-scroll, .module-tab-panel') || null });
+      }, { threshold: 0.25 });
       obs.observe(root);
+      // Fallback: falls der Abschnitt bereits sichtbar ist, aber kein IO-Event feuert
+      setTimeout(() => {
+        if (entranceDone) return;
+        const r = root.getBoundingClientRect();
+        if (r.top < (window.innerHeight || 0) && r.bottom > 0) runEntrance();
+      }, 1200);
     } else {
       runEntrance();
     }
