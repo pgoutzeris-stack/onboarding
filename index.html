@@ -3490,50 +3490,13 @@ Best regards,
       },
       {
         id:'projektbriefing', icon:'fa-solid fa-clipboard-list', title:'Projektbriefing',
-        sub:'Dein erstes Projekt bei ROOTS',
-        submodules:[
-          { id:'pb-intro', tab:'Überblick', sections:[
-            { title:'Projektbriefing', open:true, content:`
-              <div class="highlight"><p><i class="fa-solid fa-wrench" aria-hidden="true"></i> Dieses Modul wird von deinem Projektlead individuell befüllt – je nach dem Projekt, auf dem du eingesetzt wirst.</p></div>
-              <p>Ein gutes Briefing gibt dir Orientierung für Situation, Ziele, Team und nächste Schritte.</p>
-            ` }
-          ]},
-          { id:'pb-situation', tab:'Situation', sections:[
-            { title:'Situation des Kunden', open:true, content:`<p class="placeholder">Platzhalter: Wo steht der Kunde? Was ist das Problem oder die Chance?</p>` }
-          ]},
-          { id:'pb-objectives', tab:'Objectives', sections:[
-            { title:'Projekt Objectives', open:true, content:`<p class="placeholder">Platzhalter: Was soll am Ende des Projekts erreicht sein?</p>` }
-          ]},
-          { id:'pb-team', tab:'Team', sections:[
-            { title:'Projektteam', open:true, content:`<p class="placeholder">Platzhalter: Wer macht was? Wer ist Lead?</p>` }
-          ]},
-          { id:'pb-zeitplan', tab:'Zeitplan', sections:[
-            { title:'Zeitplan & Status', open:true, content:`<p class="placeholder">Platzhalter: Meilensteine und aktuelle Phase.</p>` }
-          ]},
-          { id:'pb-stand', tab:'Arbeitsstand', sections:[
-            { title:'Aktueller Arbeitsstand', open:true, content:`<p class="placeholder">Platzhalter: Was wurde bisher erarbeitet?</p>` },
-            { title:'Deine Vorbereitung', content:`
-              <ul class="learn-list">
-                <li>Relevante Decks auf dem SharePoint ansehen</li>
-                <li>Kunden recherchieren: Website, LinkedIn, Presse, Geschäftsbericht</li>
-                <li>Fragen vorbereiten und stellen</li>
-              </ul>
-              <div class="highlight"><p><i class="fa-solid fa-comment" aria-hidden="true"></i> Selbstvorstellung: kurz, konkret, vertrauensbildend – Rolle bei ROOTS und dein Beitrag im Projekt.</p></div>
-            ` }
-          ]},
-          { id:'pb-bauhaus', tab:'Bauhaus', sections:[
-            { title:'Bauhaus', open:true, content:`
-              <div class="ob-mod-panel">
-              <div class="ob-content-section">
-                <div class="ob-content-section__head"><i class="fa-solid fa-building"></i><h3>Bauhaus</h3></div>
-                <div class="ob-content-section__body">
-                  <div class="highlight"><p><i class="fa-solid fa-clock" aria-hidden="true"></i> Projektinfos folgen – dieses Briefing wird von deinem Projektlead befüllt.</p></div>
-                </div>
-              </div>
-              </div>
-            ` }
-          ]}
-        ]
+        sub:'Aktuelle Projekte',
+        content:`
+          <p>Intro-Briefings zu den laufenden Projekten – du wirst von deinem Projektlead eingeführt.</p>
+          <div class="ob-kunden-pills">
+            <span class="ob-kunden-pill is-soon"><i class="fa-solid fa-building" aria-hidden="true"></i> Bauhaus<small>(folgt)</small></span>
+          </div>
+        `
       },
       {
         id:'organigramm', icon:'fa-solid fa-sitemap', title:'Organigramm',
