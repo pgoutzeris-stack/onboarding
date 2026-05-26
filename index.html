@@ -2019,7 +2019,12 @@
         if (!row?.user_id || !mgmtState.users.some(u => u.id === row.user_id)) return;
         if (payload.new) mgmtState.progressByUser[row.user_id] = { ...getMgmtProgressRow(row.user_id), ...payload.new };
         const user = mgmtState.users.find(u => u.id === row.user_id);
-        refreshMgmtFromState();
+        // Echo des eigenen Speicherns ignorieren – sonst klappt die Liste beim Tippen/Hinzufügen zu
+        const selfEcho = Date.now() < (mgmtState.selfWriteUntil?.[row.user_id] || 0);
+        if (selfEcho) return;
+        // Während aktiv ein To-do-Text bearbeitet wird, kein destruktives Re-Render
+        const isEditing = !!document.activeElement?.classList?.contains?.('mgmt-pt-text');
+        if (!isEditing) refreshMgmtFromState();
         if (payload.eventType === 'UPDATE' && user && payload.new?.user_id !== currentUserId) {
           const oldRow = payload.old || {};
           const newRow = payload.new || {};
@@ -2040,6 +2045,9 @@
   }
 
   async function persistMgmtProgressFields(userId, fields) {
+    // Fenster setzen, damit das Realtime-Echo des eigenen Schreibens kein Re-Render auslöst
+    mgmtState.selfWriteUntil = mgmtState.selfWriteUntil || {};
+    mgmtState.selfWriteUntil[userId] = Date.now() + 4000;
     const payload = { ...fields, updated_at: new Date().toISOString() };
     const { data: existing, error: readErr } = await sb.schema('onboarding').from('user_progress')
       .select('user_id')
