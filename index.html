@@ -1444,8 +1444,13 @@
     const totalUnits = orgaTotal + rootsTotal + learnTotal;
     const doneUnits = orgaDoneCount + rootsDoneCount + learnDone;
     const pct = totalUnits > 0 ? Math.round(doneUnits / totalUnits * 100) : 0;
+    /* Participant-only progress: orga todos + learning modules (excludes ROOTS bearbeiter todos) */
+    const participantTotal = orgaTotal + learnTotal;
+    const participantDone  = orgaDoneCount + learnDone;
+    const participantPct   = participantTotal > 0 ? Math.round(participantDone / participantTotal * 100) : 0;
     return {
       pct,
+      participantPct,
       orgaDoneCount,
       orgaTotal,
       orgaPct,
@@ -1839,7 +1844,7 @@
             <div class="mgmt-user-sub">${escapeHtml(u.position || '—')}${u.email ? ' · ' + escapeHtml(u.email) : ''}</div>
             <div class="mgmt-mini-bars">
               ${[
-                { label:'Teilnehmer', done: stats.orgaDoneCount,  total: stats.orgaTotal  },
+                { label:'To-dos',     done: stats.orgaDoneCount,  total: stats.orgaTotal  },
                 { label:'ROOTS',      done: stats.rootsDoneCount, total: stats.rootsTotal },
                 { label:'Lernpfad',   done: stats.pathDone,       total: stats.pathTotal  },
                 { label:'Projekte',   done: stats.projDone,       total: stats.projTotal  },
@@ -1860,10 +1865,10 @@
             <i class="fa-solid fa-signal" aria-hidden="true"></i> Live-Ansicht
           </button>
           <div class="mgmt-progress-top">
-            <span class="mgmt-progress-pct">${stats.pct}%</span>
-            <span class="mgmt-progress-status">${escapeHtml(stats.status)}</span>
+            <span class="mgmt-progress-pct">${stats.participantPct}%</span>
+            <span class="mgmt-progress-status">Gesamtfortschritt</span>
           </div>
-          <div class="prog-bar-wrap"><div class="prog-bar" style="width:${stats.pct}%"></div></div>
+          <div class="prog-bar-wrap"><div class="prog-bar" style="width:${stats.participantPct}%"></div></div>
         </div>
       </div>
       ${renderMgmtRootsTodoList(u.id)}
