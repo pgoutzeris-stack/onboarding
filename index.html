@@ -4877,6 +4877,40 @@ Best regards,
     }
   }
 
+  /**
+   * Triggers window.print() in a way that works both in a normal browser
+   * tab AND inside a WKWebView-based macOS iframe app.
+   *
+   * In an iframe, window.print() is silently blocked by WKWebView.
+   * Solution: postMessage to the Intranet parent which calls
+   * iframe.contentWindow.print() from the top-level context (allowed).
+   * cleanupFn is called after the print dialog closes / times out.
+   */
+  function triggerPrint(cleanupFn) {
+    const ORIGIN = 'https://pgoutzeris-stack.github.io';
+    const inIframe = window.parent !== window;
+    const cleanup = cleanupFn || (() => {});
+
+    const doCleanup = () => {
+      cleanup();
+      window.removeEventListener('afterprint', doCleanup);
+    };
+
+    if (inIframe) {
+      window.parent.postMessage({ type: 'roots-print-iframe' }, ORIGIN);
+      // afterprint fires when the parent calls iframe.contentWindow.print()
+      window.addEventListener('afterprint', doCleanup, { once: true });
+      // Safety fallback in case afterprint never fires (some WKWebView versions)
+      setTimeout(doCleanup, 8000);
+      return;
+    }
+
+    window.addEventListener('afterprint', doCleanup, { once: true });
+    window.print();
+    // Fallback: if afterprint doesn't fire (e.g. user cancels instantly)
+    setTimeout(doCleanup, 5000);
+  }
+
   async function printGoalAgreementDoc() {
     const el = document.getElementById('goal-agreement-doc');
     if (!el) return;
@@ -4891,7 +4925,12 @@ Best regards,
     })();
     root.innerHTML = '';
     root.appendChild(clone);
-    window.print();
+    document.body.classList.add('body-handover-print');
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+    triggerPrint(() => {
+      document.body.classList.remove('body-handover-print');
+      root.innerHTML = '';
+    });
   }
 
   function initGoalAgreementDocument() {
@@ -5091,11 +5130,10 @@ Best regards,
     printRoot.appendChild(clone);
     document.body.classList.add('body-handover-print');
     await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-    window.print();
-    setTimeout(() => {
+    triggerPrint(() => {
       document.body.classList.remove('body-handover-print');
       printRoot.innerHTML = '';
-    }, 800);
+    });
   }
 
   function renderItCredsPanel(creds) {
