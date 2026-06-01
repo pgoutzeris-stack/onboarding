@@ -4265,6 +4265,8 @@ Best regards,
     'Diensthandy (falls zutreffend)'
   ];
   const HANDOVER_STORAGE_PREFIX = 'roots-handover-doc';
+  const ROOTS_LOGO_URL = 'assets/roots-logo.svg';
+  const ROOTS_LOGO_FALLBACK_URL = 'https://roots-consultants.de/wp-content/uploads/2025/08/1630566728264.jpeg';
   let handoverSaveTimer = null;
   let handoverPads = null;
 
@@ -4358,7 +4360,7 @@ Best regards,
             <div class="handover-doc__brand">ROOTS Brand Strategy Consultants GmbH</div>
             <h3 class="handover-doc__title">Übergabeprotokoll – Arbeitsmittel</h3>
           </div>
-          <img src="https://roots-consultants.de/wp-content/uploads/2025/04/Roots-Brand-Strategy-Consultants-Logo.svg" class="handover-doc__logo" alt="ROOTS" crossorigin="anonymous" onerror="this.onerror=null;this.src='https://roots-consultants.de/wp-content/uploads/2025/08/1630566728264.jpeg'">
+          <img src="${ROOTS_LOGO_URL}" class="handover-doc__logo" alt="ROOTS" onerror="this.onerror=null;this.src='${ROOTS_LOGO_FALLBACK_URL}'">
         </div>
         <div class="handover-doc__meta">
           <div class="handover-field">
@@ -4648,7 +4650,7 @@ Best regards,
             <div class="handover-doc__brand">ROOTS Brand Strategy Consultants GmbH</div>
             <h3 class="handover-doc__title">Zielvereinbarung</h3>
           </div>
-          <img src="https://roots-consultants.de/wp-content/uploads/2025/04/Roots-Brand-Strategy-Consultants-Logo.svg" class="handover-doc__logo" alt="ROOTS" crossorigin="anonymous" onerror="this.onerror=null;this.src='https://roots-consultants.de/wp-content/uploads/2025/08/1630566728264.jpeg'">
+          <img src="${ROOTS_LOGO_URL}" class="handover-doc__logo" alt="ROOTS" onerror="this.onerror=null;this.src='${ROOTS_LOGO_FALLBACK_URL}'">
         </div>
         <div class="handover-doc__meta">
           <div class="handover-field"><label>Mitarbeiter/in</label><input type="text" data-field="ga-employee" autocomplete="name"/></div>
@@ -4756,7 +4758,7 @@ Best regards,
           <div style="font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:${BRAND};margin-bottom:6px">ROOTS Brand Strategy Consultants GmbH</div>
           <div style="font-size:22px;font-weight:700;color:${INK};margin:0;line-height:1.15">Zielvereinbarung</div>
         </div>
-        <img src="https://roots-consultants.de/wp-content/uploads/2025/04/Roots-Brand-Strategy-Consultants-Logo.svg" alt="ROOTS" style="display:block;width:140px;height:auto;flex:0 0 140px;object-fit:contain">
+        <img class="handover-doc__logo" src="${ROOTS_LOGO_URL}" alt="ROOTS" style="display:block;width:140px;height:auto;flex:0 0 140px;object-fit:contain">
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 28px;margin-bottom:18px">
         <div><div style="font-size:9.5px;font-weight:700;color:${MUTED};text-transform:uppercase;margin-bottom:4px">Mitarbeiter/in</div><div style="border-bottom:1px solid ${INK};padding:3px 0;min-height:20px">${(data.employee||'').replace(/</g,'&lt;')}</div></div>
@@ -4790,6 +4792,7 @@ Best regards,
     }
     persistGoalAgreementData(collectGoalAgreementFormData());
     const clone = buildPrintableGoalAgreementClone(el);
+    await embedPrintableLogo(clone);
     clone.style.width = '190mm';
     document.body.appendChild(clone);
     try {
@@ -4809,11 +4812,12 @@ Best regards,
     }
   }
 
-  function printGoalAgreementDoc() {
+  async function printGoalAgreementDoc() {
     const el = document.getElementById('goal-agreement-doc');
     if (!el) return;
     persistGoalAgreementData(collectGoalAgreementFormData());
     const clone = buildPrintableGoalAgreementClone(el);
+    await embedPrintableLogo(clone);
     const root = document.getElementById('handover-print-root') || (() => {
       const n = document.createElement('div');
       n.id = 'handover-print-root';
@@ -4880,6 +4884,12 @@ Best regards,
     });
   }
 
+  async function embedPrintableLogo(root) {
+    const logoImg = root?.querySelector('.handover-doc__logo');
+    if (!logoImg) return;
+    try { logoImg.src = await loadImageAsDataUrl(logoImg.getAttribute('src') || logoImg.src); } catch(_) {}
+  }
+
   function buildPrintableHandoverClone(source) {
     const data = collectHandoverFormData();
     const fmtDate = d => {
@@ -4933,7 +4943,7 @@ Best regards,
           <div style="font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:${BRAND};margin-bottom:6px">ROOTS Brand Strategy Consultants GmbH</div>
           <div style="font-size:22px;font-weight:700;color:${INK};margin:0;line-height:1.15;letter-spacing:-.01em">Übergabeprotokoll – Arbeitsmittel</div>
         </div>
-        <img class="handover-doc__logo" src="https://roots-consultants.de/wp-content/uploads/2025/04/Roots-Brand-Strategy-Consultants-Logo.svg" alt="ROOTS" style="display:block;width:140px;height:auto;flex:0 0 140px;object-fit:contain">
+        <img class="handover-doc__logo" src="${ROOTS_LOGO_URL}" alt="ROOTS" style="display:block;width:140px;height:auto;flex:0 0 140px;object-fit:contain">
       </div>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 28px;margin-bottom:18px">
@@ -4992,10 +5002,7 @@ Best regards,
     if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> PDF wird erstellt…'; }
 
     const clone = buildPrintableHandoverClone(el);
-    const logoImg = clone.querySelector('.handover-doc__logo');
-    if (logoImg) {
-      try { logoImg.src = await loadImageAsDataUrl(logoImg.src); } catch(_) {}
-    }
+    await embedPrintableLogo(clone);
     const wrapper = document.createElement('div');
     wrapper.style.cssText = 'position:fixed;left:-99999px;top:0;width:760px;background:#fff;padding:0;margin:0;border:none;box-shadow:none;z-index:-1';
     wrapper.appendChild(clone);
@@ -5032,6 +5039,7 @@ Best regards,
       document.body.appendChild(printRoot);
     }
     const clone = buildPrintableHandoverClone(source);
+    await embedPrintableLogo(clone);
     printRoot.innerHTML = '';
     printRoot.appendChild(clone);
     document.body.classList.add('body-handover-print');

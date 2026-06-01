@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 402.6 95" role="img" aria-labelledby="title desc">
+  <title id="title">ROOTS Brand Strategy Consultants</title>
+  <desc id="desc">ROOTS wordmark for generated onboarding PDFs.</desc>
+  <style>
+    .ink{fill:#0e0e09}
+    .stroke{fill:none;stroke:#0e0e09;stroke-width:9.5;stroke-linecap:round;stroke-linejoin:round}
+    .small{font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:500;letter-spacing:.2px}
+    .word{font-family:Arial,Helvetica,sans-serif;font-size:58px;font-weight:800;letter-spacing:1px}
+  </style>
+  <text class="ink word" x="18" y="68">R</text>
+  <path class="stroke" d="M84 51c13-17 28-17 41 0s28 17 41 0c-13-17-28-17-41 0s-28 17-41 0z"/>
+  <text class="ink word" x="181" y="68">TS</text>
+  <text class="ink small" x="296" y="34">Brand</text>
+  <text class="ink small" x="296" y="54">Strategy</text>
+  <text class="ink small" x="296" y="74">Consultants</text>
+</svg>
