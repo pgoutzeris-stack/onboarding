@@ -11,7 +11,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" crossorigin="anonymous" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous"></script>
 
   <style>
     :root {
@@ -4784,35 +4785,66 @@ Best regards,
     return wrapper;
   }
 
+  /**
+   * Renders `sourceEl` to an A4 PDF and downloads it.
+   * Uses html2canvas (captures the LIVE visible element — WYSIWYG) +
+   * jsPDF (places the canvas image onto A4 pages).
+   * Multi-page: slices the image across pages automatically.
+   */
+  async function renderElementToPdf(sourceEl, fileName) {
+    if (!sourceEl) throw new Error('Element nicht gefunden');
+    const h2c = window.html2canvas;
+    const { jsPDF } = window.jspdf;
+    if (!h2c || !jsPDF) throw new Error('PDF-Bibliothek nicht geladen');
+
+    // Capture the live element exactly as rendered on screen
+    const canvas = await h2c(sourceEl, {
+      scale: 2,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: '#ffffff',
+      logging: false,
+      imageTimeout: 10000,
+      scrollX: 0,
+      scrollY: -window.scrollY,
+    });
+
+    const imgData = canvas.toDataURL('image/jpeg', 0.97);
+    const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    const pageW  = pdf.internal.pageSize.getWidth();   // 210 mm
+    const pageH  = pdf.internal.pageSize.getHeight();  // 297 mm
+    // Full-bleed: image fills the whole page width; height scales proportionally
+    const imgH   = pageW * (canvas.height / canvas.width);
+
+    let remaining = imgH;
+    let yPos = 0;
+    let page = 0;
+    while (remaining > 0) {
+      if (page > 0) pdf.addPage();
+      // Draw image starting at -yPos so next slice starts at page top
+      pdf.addImage(imgData, 'JPEG', 0, -yPos, pageW, imgH, undefined, 'FAST');
+      yPos      += pageH;
+      remaining -= pageH;
+      page++;
+    }
+    pdf.save(fileName);
+  }
+
   async function downloadGoalAgreementPdf() {
     const el = document.getElementById('goal-agreement-doc');
-    if (!el || typeof html2pdf === 'undefined') {
-      showToast('PDF-Export nicht verfügbar', 'error');
-      return;
-    }
+    if (!el) { showToast('PDF-Export nicht verfügbar', 'error'); return; }
+    const btn = document.getElementById('goal-agreement-download-btn');
+    if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> PDF wird erstellt…'; }
     persistGoalAgreementData(collectGoalAgreementFormData());
-    const clone = buildPrintableGoalAgreementClone(el);
-    await embedPrintableLogo(clone);
-    const safeNameZ = (collectGoalAgreementFormData().employee || 'Zielvereinbarung').replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '_');
-    const wrapperZ = document.createElement('div');
-    wrapperZ.style.cssText = 'position:absolute;left:-9999px;top:0;width:794px;padding:45px 45px 53px 45px;box-sizing:border-box;background:#fff;margin:0;border:none;box-shadow:none;z-index:-1';
-    wrapperZ.appendChild(clone);
-    document.body.appendChild(wrapperZ);
-    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+    const safeName = (collectGoalAgreementFormData().employee || 'Zielvereinbarung').replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '_');
     try {
-      await html2pdf().set({
-        margin: 0,
-        filename: `ROOTS_Zielvereinbarung_${safeNameZ || 'Mitarbeiter'}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', width: 794, windowWidth: 794 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: 'legacy' }
-      }).from(wrapperZ).save();
+      await renderElementToPdf(el, `ROOTS_Zielvereinbarung_${safeName || 'Mitarbeiter'}.pdf`);
       showToast('Zielvereinbarung als PDF gespeichert', 'success');
     } catch (e) {
+      console.error('[ROOTS] PDF export:', e);
       showToast('PDF-Export fehlgeschlagen', 'error');
     } finally {
-      wrapperZ.remove();
+      if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> PDF herunterladen'; }
     }
   }
 
@@ -4994,43 +5026,21 @@ Best regards,
 
   async function downloadHandoverPdf() {
     const el = document.getElementById('handover-doc');
-    if (!el || typeof html2pdf === 'undefined') {
-      showToast('PDF-Export nicht verfügbar', 'error');
-      return;
-    }
+    if (!el) { showToast('PDF-Export nicht verfügbar', 'error'); return; }
     const data = collectHandoverFormData();
     persistHandoverData(data);
     const namePart = (data.employee || 'Mitarbeiter').replace(/[^\wäöüÄÖÜß\-]+/gi, '_').slice(0, 40);
     const fileName = `Uebergabeprotokoll_${namePart}_${data.handoverDate || 'datum'}.pdf`;
     const btn = document.getElementById('handover-download-btn');
     if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> PDF wird erstellt…'; }
-
-    const clone = buildPrintableHandoverClone(el);
-    await embedPrintableLogo(clone);
-    // Wrap in a full-A4-width div (794px @ 96dpi) with baked-in margins.
-    // position:absolute (not fixed) avoids a html2canvas rendering bug.
-    // margin:0 + from(wrapper) prevents double-margin scaling/clipping.
-    const wrapper = document.createElement('div');
-    wrapper.style.cssText = 'position:absolute;left:-9999px;top:0;width:794px;padding:45px 45px 53px 45px;box-sizing:border-box;background:#fff;margin:0;border:none;box-shadow:none;z-index:-1';
-    wrapper.appendChild(clone);
-    document.body.appendChild(wrapper);
-    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-
     try {
-      await html2pdf().set({
-        margin: 0,
-        filename: fileName,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, allowTaint: true, logging: false, imageTimeout: 8000, backgroundColor: '#ffffff', width: 794, windowWidth: 794 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: 'legacy' }
-      }).from(wrapper).save();
+      // Capture the live visible preview element directly — WYSIWYG, no off-screen clone
+      await renderElementToPdf(el, fileName);
       showToast('PDF heruntergeladen', 'success');
     } catch (err) {
       console.error('[ROOTS] PDF export:', err);
       showToast('PDF-Export fehlgeschlagen: ' + (err && err.message || err), 'error');
     } finally {
-      wrapper.remove();
       if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> PDF herunterladen'; }
     }
   }
