@@ -4882,7 +4882,7 @@ Best regards,
    */
   function triggerPrint(cleanupFn) {
     const ORIGIN = 'https://pgoutzeris-stack.github.io';
-    const inIframe = window.parent !== window;
+    const inIframe = window.RootsUserBridge?.IN_MAC_APP ?? (window.parent !== window);
     const cleanup = cleanupFn || (() => {});
 
     const doCleanup = () => {
