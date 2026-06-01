@@ -4793,22 +4793,26 @@ Best regards,
     persistGoalAgreementData(collectGoalAgreementFormData());
     const clone = buildPrintableGoalAgreementClone(el);
     await embedPrintableLogo(clone);
-    clone.style.width = '190mm';
-    document.body.appendChild(clone);
+    const safeNameZ = (collectGoalAgreementFormData().employee || 'Zielvereinbarung').replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '_');
+    const wrapperZ = document.createElement('div');
+    wrapperZ.style.cssText = 'position:absolute;left:-9999px;top:0;width:794px;padding:45px 45px 53px 45px;box-sizing:border-box;background:#fff;margin:0;border:none;box-shadow:none;z-index:-1';
+    wrapperZ.appendChild(clone);
+    document.body.appendChild(wrapperZ);
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
     try {
-      const safeName = (collectGoalAgreementFormData().employee || 'Zielvereinbarung').replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '_');
       await html2pdf().set({
-        margin: [12, 12, 14, 12],
-        filename: `ROOTS_Zielvereinbarung_${safeName || 'Mitarbeiter'}.pdf`,
+        margin: 0,
+        filename: `ROOTS_Zielvereinbarung_${safeNameZ || 'Mitarbeiter'}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
+        html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', width: 794, windowWidth: 794 },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      }).from(clone).save();
+        pagebreak: { mode: 'legacy' }
+      }).from(wrapperZ).save();
       showToast('Zielvereinbarung als PDF gespeichert', 'success');
     } catch (e) {
       showToast('PDF-Export fehlgeschlagen', 'error');
     } finally {
-      clone.remove();
+      wrapperZ.remove();
     }
   }
 
@@ -5003,20 +5007,24 @@ Best regards,
 
     const clone = buildPrintableHandoverClone(el);
     await embedPrintableLogo(clone);
+    // Wrap in a full-A4-width div (794px @ 96dpi) with baked-in margins.
+    // position:absolute (not fixed) avoids a html2canvas rendering bug.
+    // margin:0 + from(wrapper) prevents double-margin scaling/clipping.
     const wrapper = document.createElement('div');
-    wrapper.style.cssText = 'position:fixed;left:-99999px;top:0;width:760px;background:#fff;padding:0;margin:0;border:none;box-shadow:none;z-index:-1';
+    wrapper.style.cssText = 'position:absolute;left:-9999px;top:0;width:794px;padding:45px 45px 53px 45px;box-sizing:border-box;background:#fff;margin:0;border:none;box-shadow:none;z-index:-1';
     wrapper.appendChild(clone);
     document.body.appendChild(wrapper);
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
     try {
       await html2pdf().set({
-        margin: [12, 12, 14, 12],
+        margin: 0,
         filename: fileName,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, allowTaint: true, logging: false, imageTimeout: 8000, backgroundColor: '#ffffff' },
+        html2canvas: { scale: 2, useCORS: true, allowTaint: true, logging: false, imageTimeout: 8000, backgroundColor: '#ffffff', width: 794, windowWidth: 794 },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-      }).from(clone).save();
+        pagebreak: { mode: 'legacy' }
+      }).from(wrapper).save();
       showToast('PDF heruntergeladen', 'success');
     } catch (err) {
       console.error('[ROOTS] PDF export:', err);
