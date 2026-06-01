@@ -4266,8 +4266,8 @@ Best regards,
     'Diensthandy (falls zutreffend)'
   ];
   const HANDOVER_STORAGE_PREFIX = 'roots-handover-doc';
-  const ROOTS_LOGO_URL = 'assets/roots-logo.svg';
-  const ROOTS_LOGO_FALLBACK_URL = 'https://roots-consultants.de/wp-content/uploads/2025/08/1630566728264.jpeg';
+  const ROOTS_LOGO_URL = 'assets/roots-logo.svg';  // real vector logo (local, no CORS)
+  const ROOTS_LOGO_FALLBACK_URL = 'https://roots-consultants.de/wp-content/uploads/2025/04/Roots-Brand-Strategy-Consultants-Logo.svg';
   let handoverSaveTimer = null;
   let handoverPads = null;
 
@@ -5279,7 +5279,7 @@ Best regards,
     const name = userName || 'Dein Name';
     const pos = userPosition || 'Junior Consultant';
     const email = userEmail || 'vorname.nachname@roots-consultants.com';
-    const logo = 'https://roots-consultants.de/wp-content/uploads/2025/08/1630566728264.jpeg';
+    const logo = 'https://roots-consultants.de/wp-content/uploads/2025/04/Roots-Brand-Strategy-Consultants-Logo.svg';
     const logoFallback = 'https://roots-consultants.de/wp-content/uploads/2025/04/Roots-Brand-Strategy-Consultants-Logo.svg';
     const sep = `<span style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;color:#000"><s>${'&nbsp;'.repeat(60)}</s></span>`;
     return `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px"><b>${name}</b></p>`
