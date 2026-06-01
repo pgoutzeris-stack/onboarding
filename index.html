@@ -4844,7 +4844,19 @@ Best regards,
       remaining -= pageH;
       page++;
     }
-    pdf.save(fileName);
+    // Use the bridge helper so downloads work inside the macOS iframe app too
+    const blob = pdf.output('blob');
+    const downloader = window.RootsUserBridge?.downloadBlob;
+    if (downloader) {
+      downloader(blob, fileName);
+    } else {
+      // Fallback for standalone browser tab (bridge not loaded yet)
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = fileName;
+      document.body.appendChild(a); a.click();
+      setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 1500);
+    }
   }
 
   async function downloadGoalAgreementPdf() {
