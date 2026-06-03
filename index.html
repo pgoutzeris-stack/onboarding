@@ -13,6 +13,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous"></script>
+  <script async src="https://pgoutzeris-stack.github.io/ROOTS_Intranet/roots-user-bridge.js?v=20260601-final"></script>
 
   <style>
     :root {
@@ -1424,7 +1425,9 @@
     document.getElementById('header-sub').textContent = 'Onboarding-Fortschritt · Verwaltung';
     const hma = document.getElementById('header-mgmt-actions');
     if (hma) hma.classList.add('is-visible');
-    window.RootsUser._loadAndMount(sb);
+    window.RootsUser._loadAndMount(sb).catch(function(){}).finally(function() {
+      window.RootsUser._mount && window.RootsUser._mount();
+    });
     initManagementView().catch(function (err) {
       console.error(err);
       showError(err && err.message ? err.message : String(err));
@@ -1441,7 +1444,9 @@
     document.getElementById('header-sub').textContent = 'Dein persönlicher Einstiegsplan';
     const hma2 = document.getElementById('header-mgmt-actions');
     if (hma2) hma2.classList.remove('is-visible');
-    window.RootsUser._loadAndMount(sb);
+    window.RootsUser._loadAndMount(sb).catch(function(){}).finally(function() {
+      window.RootsUser._mount && window.RootsUser._mount();
+    });
     initDashboardView().catch(function (err) {
       console.error(err);
       showLoginScreen();
@@ -6314,6 +6319,14 @@ Best regards,
     }
   });
 
+  // Bridge (Intranet iframe): Session kommt via roots-auth-ready Event
+  // Fallback für den Fall dass onAuthStateChange nicht rechtzeitig feuert
+  window.addEventListener('roots-auth-ready', function (e) {
+    if (e.detail && e.detail.session) {
+      queueProfileRoute(e.detail.session, 'roots-auth-ready');
+    }
+  });
+
   document.getElementById('form-login').addEventListener('submit', async (e) => {
     e.preventDefault();
     clearError();
@@ -6421,7 +6434,6 @@ window.RootsUser = window.RootsUser || {
   getProfile(){return this._p}
 };
 </script>
-<script src="https://pgoutzeris-stack.github.io/ROOTS_Intranet/roots-user-bridge.js?v=20260601-final"></script>
 </body>
 </html>
 </user_query>
