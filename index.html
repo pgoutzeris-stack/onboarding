@@ -453,6 +453,22 @@
     .tile-badge.done{background:var(--brand-light);color:var(--brand)}
     .dash-modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(15,23,42,.55);backdrop-filter:blur(4px);align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto}
     .dash-modal-overlay.open{display:flex;animation:fadeIn .2s ease}
+    .ob-confirm-overlay{display:none;position:fixed;inset:0;z-index:9000;background:rgba(15,23,42,.5);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:1.25rem}
+    .ob-confirm-overlay.open{display:flex;animation:fadeIn .2s ease}
+    .ob-confirm-box{background:var(--bg);border-radius:20px;border:1px solid var(--line);box-shadow:0 20px 60px rgba(15,23,42,.2);max-width:360px;width:100%;animation:slideUp .22s cubic-bezier(.22,1,.36,1);overflow:hidden}
+    .ob-confirm-body{text-align:center;padding:1.5rem 1.5rem 1rem}
+    .ob-confirm-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin:0 auto .75rem}
+    .ob-confirm-icon.danger{background:#fef2f2;color:#dc2626}
+    .ob-confirm-icon.warning{background:#fffbeb;color:#d97706}
+    .ob-confirm-title{font-size:1rem;font-weight:700;display:block;margin-bottom:.4rem;color:var(--ink)}
+    .ob-confirm-desc{font-size:.875rem;color:var(--muted);line-height:1.5}
+    .ob-confirm-foot{display:flex;gap:.6rem;justify-content:center;padding:0 1.5rem 1.5rem}
+    .ob-confirm-cancel{flex:1;padding:.7rem 1rem;border:1px solid var(--line);border-radius:10px;background:transparent;font-family:inherit;font-weight:600;font-size:.875rem;color:var(--ink);cursor:pointer;transition:all .15s}
+    .ob-confirm-cancel:hover{border-color:var(--brand);color:var(--brand)}
+    .ob-confirm-ok{flex:1;padding:.7rem 1rem;border:none;border-radius:10px;font-family:inherit;font-weight:600;font-size:.875rem;color:#fff;cursor:pointer;transition:opacity .15s}
+    .ob-confirm-ok:hover{opacity:.88}
+    .ob-confirm-ok.danger{background:#dc2626}
+    .ob-confirm-ok.warning{background:#d97706}
     .dash-modal{background:var(--bg);border-radius:20px;box-shadow:0 24px 64px rgba(0,0,0,.2);width:100%;max-width:720px;margin:auto;animation:slideUp .25s ease}
     .dash-modal-head{padding:1.75rem 2rem 1.25rem;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:1rem}
     .dash-modal-head-icon{width:44px;height:44px;border-radius:12px;background:var(--brand-light);color:var(--brand);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
@@ -2227,10 +2243,46 @@
   }
   window.addMgmtParticipantTodo = addMgmtParticipantTodo;
 
+
+// Promise-based confirm helper
+function obConfirm(opts) {
+  opts = opts || {};
+  return new Promise(function(resolve) {
+    var overlay = document.getElementById('ob-confirm-overlay');
+    if (!overlay) { resolve(window.confirm(opts.desc || opts.title || 'Bestaetigen?')); return; }
+    document.getElementById('ob-confirm-title').textContent = opts.title || 'Wirklich loeschen?';
+    document.getElementById('ob-confirm-desc').textContent  = opts.desc  || 'Diese Aktion kann nicht rueckgaengig gemacht werden.';
+    var icon = document.getElementById('ob-confirm-icon');
+    icon.className = 'ob-confirm-icon ' + (opts.iconClass || 'danger');
+    icon.innerHTML = opts.iconHtml || '<i class="fa-solid fa-trash"></i>';
+    var okBtn = document.getElementById('ob-confirm-ok');
+    okBtn.className = 'ob-confirm-ok ' + (opts.okClass || 'danger');
+    okBtn.textContent = opts.okLabel || 'Loeschen';
+    overlay.classList.add('open');
+    var cancel = document.getElementById('ob-confirm-cancel');
+    function onOk()     { cleanup(); resolve(true);  }
+    function onCancel() { cleanup(); resolve(false); }
+    function onKey(e)   { if (e.key === 'Escape') { cleanup(); resolve(false); } }
+    function onBg(e)    { if (e.target === overlay) { cleanup(); resolve(false); } }
+    function cleanup() {
+      overlay.classList.remove('open');
+      okBtn.removeEventListener('click', onOk);
+      cancel.removeEventListener('click', onCancel);
+      document.removeEventListener('keydown', onKey);
+      overlay.removeEventListener('click', onBg);
+    }
+    okBtn.addEventListener('click', onOk);
+    cancel.addEventListener('click', onCancel);
+    document.addEventListener('keydown', onKey);
+    overlay.addEventListener('click', onBg);
+  });
+}
+
   async function deleteMgmtParticipantTodo(userId, todoId) {
     const item = getMgmtParticipantTodos(userId).find(t => t.id === todoId);
     if (!item) return;
-    if (!confirm(`To-do „${item.text}“ wirklich löschen?`)) return;
+    var _obOk1 = await obConfirm({ title: 'To-do l\u00f6schen', desc: 'To-do \"' + item.text + '\" wirklich l\u00f6schen?', iconHtml: '<i class=\'fa-solid fa-trash\'></i>', okLabel: 'L\u00f6schen' });
+    if (!_obOk1) return;
     const todos = getMgmtParticipantTodos(userId).filter(t => t.id !== todoId);
     const completed = getMgmtRootsCompleted(userId).filter(id => id !== todoId);
     const assignments = { ...getMgmtTodoAssignments(userId) };
@@ -4529,7 +4581,8 @@ Best regards,
     });
     document.getElementById('handover-reset-btn')?.addEventListener('click', e => {
       e.stopPropagation();
-      if (!confirm('Alle Eingaben und Unterschriften zurücksetzen?')) return;
+      var _obOkReset = await obConfirm({ title: 'Zurücksetzen?', desc: 'Alle Eingaben und Unterschriften werden unwiderruflich gelöscht.', iconClass: 'warning', iconHtml: '<i class=\'fa-solid fa-rotate-left\'></i>', okLabel: 'Zurücksetzen', okClass: 'warning' });
+      if (!_obOkReset) return;
       try { localStorage.removeItem(getHandoverStorageKey()); } catch (_) {}
       delete root.dataset.inited;
       handoverPads = null;
@@ -4952,7 +5005,8 @@ Best regards,
     document.getElementById('goal-agreement-print-btn')?.addEventListener('click', e => { e.stopPropagation(); printGoalAgreementDoc(); });
     document.getElementById('goal-agreement-reset-btn')?.addEventListener('click', e => {
       e.stopPropagation();
-      if (!confirm('Alle Eingaben und Unterschriften zurücksetzen?')) return;
+      var _obOkReset = await obConfirm({ title: 'Zurücksetzen?', desc: 'Alle Eingaben und Unterschriften werden unwiderruflich gelöscht.', iconClass: 'warning', iconHtml: '<i class=\'fa-solid fa-rotate-left\'></i>', okLabel: 'Zurücksetzen', okClass: 'warning' });
+      if (!_obOkReset) return;
       try { localStorage.removeItem(getGoalAgreementStorageKey()); } catch (_) {}
       delete root.dataset.inited;
       goalAgreementPads = null;
@@ -5366,7 +5420,22 @@ Best regards,
   }
   async function copySig() {
     const editorEl = document.getElementById('sig-preview-it5');
-    const html = `<html><body>${editorEl ? editorEl.innerHTML : buildSignatureHtml()}</body></html>`;
+    const html = `<html><body>${editorEl ? editorEl.innerHTML : buildSignatureHtml()}
+<!-- Onboarding Confirm Modal -->
+<div class="ob-confirm-overlay" id="ob-confirm-overlay" aria-hidden="true">
+  <div class="ob-confirm-box" role="dialog">
+    <div class="ob-confirm-body">
+      <div class="ob-confirm-icon danger" id="ob-confirm-icon"><i class="fa-solid fa-trash"></i></div>
+      <span class="ob-confirm-title" id="ob-confirm-title">Wirklich loeschen?</span>
+      <p class="ob-confirm-desc" id="ob-confirm-desc">Diese Aktion kann nicht rueckgaengig gemacht werden.</p>
+    </div>
+    <div class="ob-confirm-foot">
+      <button type="button" class="ob-confirm-cancel" id="ob-confirm-cancel">Abbrechen</button>
+      <button type="button" class="ob-confirm-ok danger" id="ob-confirm-ok">Loeschen</button>
+    </div>
+  </div>
+</div>
+</body></html>`;
     try {
       await navigator.clipboard.write([new ClipboardItem({'text/html': new Blob([html], {type:'text/html'})})]);
       showToast('Signatur kopiert – in Outlook mit Cmd+V einfügen', 'success');
