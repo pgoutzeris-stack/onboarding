@@ -4604,7 +4604,7 @@ Best regards,
       e.stopPropagation();
       printHandoverDoc();
     });
-    document.getElementById('handover-reset-btn')?.addEventListener('click', e => {
+    document.getElementById('handover-reset-btn')?.addEventListener('click', async e => {
       e.stopPropagation();
       var _obOkReset = await obConfirm({ title: 'Zurücksetzen?', desc: 'Alle Eingaben und Unterschriften werden unwiderruflich gelöscht.', iconClass: 'warning', iconHtml: '<i class=\'fa-solid fa-rotate-left\'></i>', okLabel: 'Zurücksetzen', okClass: 'warning' });
       if (!_obOkReset) return;
@@ -5028,7 +5028,7 @@ Best regards,
     });
     document.getElementById('goal-agreement-download-btn')?.addEventListener('click', e => { e.stopPropagation(); downloadGoalAgreementPdf(); });
     document.getElementById('goal-agreement-print-btn')?.addEventListener('click', e => { e.stopPropagation(); printGoalAgreementDoc(); });
-    document.getElementById('goal-agreement-reset-btn')?.addEventListener('click', e => {
+    document.getElementById('goal-agreement-reset-btn')?.addEventListener('click', async e => {
       e.stopPropagation();
       var _obOkReset = await obConfirm({ title: 'Zurücksetzen?', desc: 'Alle Eingaben und Unterschriften werden unwiderruflich gelöscht.', iconClass: 'warning', iconHtml: '<i class=\'fa-solid fa-rotate-left\'></i>', okLabel: 'Zurücksetzen', okClass: 'warning' });
       if (!_obOkReset) return;
