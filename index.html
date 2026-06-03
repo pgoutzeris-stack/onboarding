@@ -6278,8 +6278,9 @@ Best regards,
   }
 
   /* ── Routing Logik ────────────────────────────── */
-  let __rootsAuthSeq = 0;
-  let __rootsAuthDone = false;
+  // Einfaches Guard-Flag: verhindert Doppel-Routing, kein Seq/Debounce nötig
+  let __routeInProgress = false;
+  let __routeDone = false;
 
   function hideLoadingOverlay() {
     const el = document.getElementById('roots-auth-loading');
@@ -6290,90 +6291,82 @@ Best regards,
     showLoginScreen();
   }
 
-  async function rootsRouteFromSession(seq, session, source) {
+  async function doRoute(session, source) {
+    // Guard: bereits geroutet oder gerade in Bearbeitung → skip
+    if (__routeDone) return;
+    if (__routeInProgress) return;
+    __routeInProgress = true;
     try {
       if (!session || !session.user || !session.user.id) {
-        if (!__rootsAuthDone) showLoginScreenFromAuth();
+        showLoginScreenFromAuth();
         return;
       }
-      __rootsAuthDone = true;
       currentUserId = session.user.id;
+      console.info('[ROOTS] Route via:', source, '| user:', currentUserId);
 
-      console.info('[ROOTS] Prüfe Rolle für User:', currentUserId, '| source:', source);
       var q = await sb.schema('users').from('profiles')
-        .select('app_role')
-        .eq('id', currentUserId)
-        .maybeSingle();
-
-      if (seq !== __rootsAuthSeq) return;
+        .select('app_role').eq('id', currentUserId).maybeSingle();
 
       if (q.error) {
-        console.error('[ROOTS] DB Fehler beim Profil-Laden:', q.error);
+        console.error('[ROOTS] Profil-Fehler:', q.error);
         showError('Profil konnte nicht geladen werden: ' + q.error.message);
         hideLoadingOverlay();
         return;
       }
 
+      __routeDone = true;
       hideLoadingOverlay();
 
       if (isOnboardingManagerRole(q.data?.app_role)) {
-        console.info('[ROOTS] -> Zeige Onboarding Verwaltung (Admin/Editor)');
+        console.info('[ROOTS] -> Management-Dashboard');
         showManagementDashboard();
-        return;
+      } else {
+        console.info('[ROOTS] -> Persönliches Dashboard');
+        showDashboard();
       }
-
-      console.info('[ROOTS] -> Zeige normales Dashboard');
-      showDashboard();
     } catch (ex) {
-      console.error('[ROOTS] Exception im Routing:', ex);
+      console.error('[ROOTS] Route-Fehler:', ex);
       hideLoadingOverlay();
+    } finally {
+      __routeInProgress = false;
     }
   }
 
-  var __rootsAuthDeb = null;
-  function queueProfileRoute(session, source) {
-    __rootsAuthSeq += 1;
-    var seq = __rootsAuthSeq;
-    clearTimeout(__rootsAuthDeb);
-    __rootsAuthDeb = setTimeout(function () { rootsRouteFromSession(seq, session, source); }, 50);
-  }
-
-  // ── Direkter getSession()-Aufruf beim Start (schnellster Pfad) ────────────
+  // ── Direkter getSession()-Aufruf beim Start ────────────────────────────────
   sb.auth.getSession().then(function(res) {
-    var session = res.data && res.data.session;
+    var session = res && res.data && res.data.session;
     if (session) {
-      queueProfileRoute(session, 'getSession');
+      doRoute(session, 'getSession');
     } else {
       // Kein Session in localStorage – kurz auf Bridge warten, dann Login zeigen
       setTimeout(function() {
-        if (!__rootsAuthDone) showLoginScreenFromAuth();
+        if (!__routeDone && !__routeInProgress) showLoginScreenFromAuth();
       }, 900);
     }
-  }).catch(function() {
-    if (!__rootsAuthDone) showLoginScreenFromAuth();
+  }).catch(function(err) {
+    console.error('[ROOTS] getSession Fehler:', err);
+    if (!__routeDone) showLoginScreenFromAuth();
   });
 
-  // ── onAuthStateChange: SIGNED_IN / USER_UPDATED ────────────────────────────
+  // ── onAuthStateChange ────────────────────────────────────────────────────────
   sb.auth.onAuthStateChange(function (event, session) {
     console.info('[ROOTS] Auth Event:', event);
     if (event === 'SIGNED_OUT') {
-      __rootsAuthSeq += 1;
-      __rootsAuthDone = false;
+      __routeDone = false;
+      __routeInProgress = false;
       hideLoadingOverlay();
       showLoginScreen();
       return;
     }
-    if (event === 'TOKEN_REFRESHED' || event === 'INITIAL_SESSION') return;
+    if (event === 'TOKEN_REFRESHED') return;
     if (!session || !session.user) return;
-    if (event === 'SIGNED_IN' || event === 'USER_UPDATED') {
-      queueProfileRoute(session, event);
-    }
+    doRoute(session, event);
   });
 
   // ── Bridge (Intranet iframe): Session via roots-auth-ready ────────────────
   window.addEventListener('roots-auth-ready', function (e) {
     if (e.detail && e.detail.session) {
-      queueProfileRoute(e.detail.session, 'roots-auth-ready');
+      doRoute(e.detail.session, 'roots-auth-ready');
     }
   });
 
