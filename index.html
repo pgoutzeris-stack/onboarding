@@ -2496,6 +2496,7 @@ function obConfirm(opts) {
   }
 
   const ROOTS_LINKEDIN = 'https://de.linkedin.com/company/roots-brand-strategy-consultants-gmbh';
+  const ROOTS_SIGNATURE_LOGO_URL = 'https://roots-consultants.de/wp-content/uploads/2026/07/ROOTS-square-logo-2.png';
 
   /* ════════════════════════════════════════════════════
      MODULE & TODOS KONFIGURATION
@@ -5419,24 +5420,25 @@ Best regards,
     const name = userName || 'Dein Name';
     const pos = userPosition || 'Junior Consultant';
     const email = userEmail || 'vorname.nachname@roots-consultants.com';
-    const logo = 'https://roots-consultants.de/wp-content/uploads/2025/04/Roots-Brand-Strategy-Consultants-Logo.svg';
-    const logoFallback = 'https://roots-consultants.de/wp-content/uploads/2025/04/Roots-Brand-Strategy-Consultants-Logo.svg';
-    const sep = `<span style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;color:#000"><s>${'&nbsp;'.repeat(60)}</s></span>`;
-    return `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px"><b>${name}</b></p>`
-      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px">${pos}</p>`
-      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px">ROOTS Brand Strategy Consultants GmbH</p>`
-      + `<p style="margin:6px 0 4px"><img src="${logo}" width="88" height="88" alt="ROOTS" style="width:88px;height:88px;max-width:100%" onerror="this.onerror=null;this.src='${logoFallback}'"></p>`
-      + `<p style="margin:2px 0">${sep}</p>`
-      + `<p style="margin:0 0 2px"><a href="tel:[Telefonnummer]" style="color:rgb(0,120,212);font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;text-decoration:none">[Telefonnummer eintragen]</a></p>`
-      + `<p style="margin:0 0 2px"><a href="mailto:${email}" style="color:rgb(0,120,212);font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;text-decoration:none">${email}</a></p>`
-      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px"><a href="https://www.roots-consultants.com/" style="color:#000">Website</a>&nbsp;I <a href="${ROOTS_LINKEDIN}" style="color:#000">LinkedIn</a></p>`
-      + `<p style="margin:2px 0">${sep}</p>`
-      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px"><b>Mehr über ROOTS:</b></p>`
+    const logo = ROOTS_SIGNATURE_LOGO_URL;
+    const p = 'font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px;color:#000000';
+    const link = 'color:rgb(0,120,212);font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;text-decoration:none';
+    const sep = '<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin:4px 0"><tr><td style="border-top:1px solid #000000;font-size:1px;line-height:1px;width:360px">&nbsp;</td></tr></table>';
+    return `<p style="${p}"><b>${name}</b></p>`
+      + `<p style="${p}">${pos}</p>`
+      + `<p style="${p}">ROOTS Brand Strategy Consultants GmbH</p>`
+      + `<p style="margin:6px 0 4px"><img src="${logo}" width="88" height="88" alt="ROOTS" style="display:block;width:88px;height:88px;border:0"></p>`
+      + sep
+      + `<p style="margin:0 0 2px"><a href="tel:[Telefonnummer]" style="${link}">[Telefonnummer eintragen]</a></p>`
+      + `<p style="margin:0 0 2px"><a href="mailto:${email}" style="${link}">${email}</a></p>`
+      + `<p style="${p}"><a href="https://www.roots-consultants.com/" style="color:#000000;text-decoration:none">Website</a>&nbsp;I <a href="${ROOTS_LINKEDIN}" style="color:#000000;text-decoration:none">LinkedIn</a></p>`
+      + sep
+      + `<p style="${p}"><b>Mehr über ROOTS:</b></p>`
       + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:5.5pt;margin:0">&nbsp;</p>`
-      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px">Bereit für den EU AI Act?</p>`
-      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 6px"><b><u><a href="https://www.roots-consultants.com/productivity/ai-governance-marketing/" style="color:#000">Hier</a></u></b>&nbsp;zu AI Governance informieren.</p>`
-      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px">Interesse an frischen Marketing-Impulsen?</p>`
-      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0"><b><u><a href="https://www.roots-consultants.com/newsletter/" style="color:#000">Hier</a></u></b>&nbsp;zum Quarterly-Newsletter anmelden.</p>`;
+      + `<p style="${p}">Bereit für den EU AI Act?</p>`
+      + `<p style="${p};margin:0 0 6px"><b><u><a href="https://www.roots-consultants.com/productivity/ai-governance-marketing/" style="color:#000000;text-decoration:underline">Hier</a></u></b>&nbsp;zu AI Governance informieren.</p>`
+      + `<p style="${p}">Interesse an frischen Marketing-Impulsen?</p>`
+      + `<p style="${p}"><b><u><a href="https://www.roots-consultants.com/newsletter/" style="color:#000000;text-decoration:underline">Hier</a></u></b>&nbsp;zum Quarterly-Newsletter anmelden.</p>`;
   }
   function renderSigPreview() {
     const el = document.getElementById('sig-preview-it5');
@@ -5445,27 +5447,16 @@ Best regards,
   }
   async function copySig() {
     const editorEl = document.getElementById('sig-preview-it5');
-    const html = `<html><body>${editorEl ? editorEl.innerHTML : buildSignatureHtml()}
-<!-- Onboarding Confirm Modal -->
-<div class="ob-confirm-overlay" id="ob-confirm-overlay" aria-hidden="true">
-  <div class="ob-confirm-box" role="dialog">
-    <div class="ob-confirm-body">
-      <div class="ob-confirm-icon danger" id="ob-confirm-icon"><i class="fa-solid fa-trash"></i></div>
-      <span class="ob-confirm-title" id="ob-confirm-title">Wirklich loeschen?</span>
-      <p class="ob-confirm-desc" id="ob-confirm-desc">Diese Aktion kann nicht rueckgaengig gemacht werden.</p>
-    </div>
-    <div class="ob-confirm-foot">
-      <button type="button" class="ob-confirm-cancel" id="ob-confirm-cancel">Abbrechen</button>
-      <button type="button" class="ob-confirm-ok danger" id="ob-confirm-ok">Loeschen</button>
-    </div>
-  </div>
-</div>
-</body></html>`;
+    const bodyHtml = (editorEl ? editorEl.innerHTML : buildSignatureHtml()).trim();
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>${bodyHtml}</body></html>`;
+    const plain = editorEl ? editorEl.innerText.trim() : '';
     try {
-      await navigator.clipboard.write([new ClipboardItem({'text/html': new Blob([html], {type:'text/html'})})]);
+      const items = { 'text/html': new Blob([html], { type: 'text/html' }) };
+      if (plain) items['text/plain'] = new Blob([plain], { type: 'text/plain' });
+      await navigator.clipboard.write([new ClipboardItem(items)]);
       showToast('Signatur kopiert – in Outlook mit Cmd+V einfügen', 'success');
     } catch(e) {
-      try { await navigator.clipboard.writeText(html); showToast('HTML in Zwischenablage kopiert', 'success'); }
+      try { await navigator.clipboard.writeText(plain || bodyHtml); showToast('Signatur in Zwischenablage kopiert', 'success'); }
       catch(e2) { showToast('Kopieren fehlgeschlagen – bitte manuell markieren', 'error'); }
     }
   }
@@ -6477,6 +6468,21 @@ window.RootsUser = window.RootsUser || {
   getProfile(){return this._p}
 };
 </script>
+
+<!-- Onboarding Confirm Modal -->
+<div class="ob-confirm-overlay" id="ob-confirm-overlay" aria-hidden="true">
+  <div class="ob-confirm-box" role="dialog" aria-modal="true" aria-labelledby="ob-confirm-title">
+    <div class="ob-confirm-body">
+      <div class="ob-confirm-icon danger" id="ob-confirm-icon"><i class="fa-solid fa-trash"></i></div>
+      <span class="ob-confirm-title" id="ob-confirm-title">Wirklich loeschen?</span>
+      <p class="ob-confirm-desc" id="ob-confirm-desc">Diese Aktion kann nicht rueckgaengig gemacht werden.</p>
+    </div>
+    <div class="ob-confirm-foot">
+      <button type="button" class="ob-confirm-cancel" id="ob-confirm-cancel">Abbrechen</button>
+      <button type="button" class="ob-confirm-ok danger" id="ob-confirm-ok">Loeschen</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
 </user_query>
