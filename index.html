@@ -7,7 +7,7 @@
   <meta name="referrer" content="no-referrer">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login & Onboarding – ROOTS Brand Strategy Consultants</title>
+  <title>Login & Onboarding - ROOTS Brand Strategy Consultants</title>
 
   <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/circular-std" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
@@ -1106,7 +1106,7 @@
     <!-- VIEW: Passwort vergessen -->
     <div id="view-forgot">
       <h1 class="card-title">Passwort zurücksetzen</h1>
-      <p class="card-sub">Gib deine E-Mail ein – wir schicken dir einen Link.</p>
+      <p class="card-sub">Gib deine E-Mail ein - wir schicken dir einen Link.</p>
 
       <div id="reset-error" class="alert alert-error">
         <i class="fa-solid fa-circle-exclamation"></i><span id="reset-error-text"></span>
@@ -1186,13 +1186,13 @@
     </div>
     <div class="greeting">
       <h1 id="greeting-text">Hallo!</h1>
-      <p>Willkommen bei ROOTS – dein persönlicher Onboarding-Plan. Starte mit den To-do's, arbeite dann den Lernpfad durch und zum Schluss die Module Kunden & Projekte.</p>
+      <p>Willkommen bei ROOTS - dein persönlicher Onboarding-Plan. Starte mit den To-do's, arbeite dann den Lernpfad durch und zum Schluss die Module Kunden & Projekte.</p>
     </div>
 
     <div class="progress-card">
       <div class="prog-info">
         <div class="prog-label">Gesamtfortschritt Onboarding</div>
-        <div class="prog-title" id="prog-status">Du hast gerade erst begonnen – los geht's!</div>
+        <div class="prog-title" id="prog-status">Du hast gerade erst begonnen - los geht's!</div>
         <div class="prog-bar-wrap"><div class="prog-bar" id="overall-bar" style="width:0%"></div></div>
       </div>
       <div class="prog-pct" id="overall-pct">0%</div>
@@ -1227,10 +1227,10 @@
     </div>
     <div id="mgmt-notifications" class="mgmt-notifications" hidden></div>
     <div class="mgmt-summary mgmt-summary--4">
-      <div class="mgmt-stat"><div class="mgmt-stat-label">Mitarbeitende (Lesen)</div><div class="mgmt-stat-value" id="mgmt-count">—</div></div>
-      <div class="mgmt-stat"><div class="mgmt-stat-label">Durchschnittlicher Fortschritt</div><div class="mgmt-stat-value" id="mgmt-avg">—</div></div>
-      <div class="mgmt-stat"><div class="mgmt-stat-label">ROOTS-To-dos offen</div><div class="mgmt-stat-value" id="mgmt-roots-open">—</div></div>
-      <div class="mgmt-stat"><div class="mgmt-stat-label">Abgeschlossen</div><div class="mgmt-stat-value" id="mgmt-done-count">—</div></div>
+      <div class="mgmt-stat"><div class="mgmt-stat-label">Mitarbeitende (Lesen)</div><div class="mgmt-stat-value" id="mgmt-count">-</div></div>
+      <div class="mgmt-stat"><div class="mgmt-stat-label">Durchschnittlicher Fortschritt</div><div class="mgmt-stat-value" id="mgmt-avg">-</div></div>
+      <div class="mgmt-stat"><div class="mgmt-stat-label">ROOTS-To-dos offen</div><div class="mgmt-stat-value" id="mgmt-roots-open">-</div></div>
+      <div class="mgmt-stat"><div class="mgmt-stat-label">Abgeschlossen</div><div class="mgmt-stat-value" id="mgmt-done-count">-</div></div>
     </div>
     <div class="mgmt-page-head">
       <h2 class="mgmt-page-title">Onboarding Status</h2>
@@ -1981,8 +1981,8 @@
         <div class="mgmt-user">
           ${av}
           <div class="mgmt-user-meta">
-            <div class="mgmt-user-name">${escapeHtml(u.full_name || u.email || '—')}</div>
-            <div class="mgmt-user-sub">${escapeHtml(u.position || '—')}${u.email ? ' · ' + escapeHtml(u.email) : ''}</div>
+            <div class="mgmt-user-name">${escapeHtml(u.full_name || u.email || '-')}</div>
+            <div class="mgmt-user-sub">${escapeHtml(u.position || '-')}${u.email ? ' · ' + escapeHtml(u.email) : ''}</div>
           </div>
         </div>
         <div class="mgmt-progress-wrap">
@@ -2022,7 +2022,7 @@
     const doneCount = rows.filter(r => r.stats.pct >= 100).length;
     const rootsOpen = rows.reduce((sum, r) => sum + (r.stats.rootsTotal - r.stats.rootsDoneCount), 0);
     document.getElementById('mgmt-count').textContent = String(rows.length);
-    document.getElementById('mgmt-avg').textContent = rows.length ? avg + '%' : '—';
+    document.getElementById('mgmt-avg').textContent = rows.length ? avg + '%' : '-';
     document.getElementById('mgmt-roots-open').textContent = String(rootsOpen);
     document.getElementById('mgmt-done-count').textContent = String(doneCount);
   }
@@ -2418,7 +2418,7 @@ function obConfirm(opts) {
         return;
       }
       const assigneeName = getMgmtTeamMemberName(assigneeId).split(' ')[0] || 'Teammitglied';
-      showToast(`An ${assigneeName} zugewiesen — Intranet-Benachrichtigung gesendet`, 'success');
+      showToast(`An ${assigneeName} zugewiesen - Intranet-Benachrichtigung gesendet`, 'success');
       return;
     }
     if (!assigneeId && prevAssignee) showToast('Zuweisung entfernt', 'info');
@@ -2489,7 +2489,7 @@ function obConfirm(opts) {
     if (!mgmtState.users.length) {
       listEl.innerHTML = '<div class="mgmt-empty">Keine Mitarbeitenden mit Leserechten gefunden.</div>';
       document.getElementById('mgmt-count').textContent = '0';
-      document.getElementById('mgmt-avg').textContent = '—';
+      document.getElementById('mgmt-avg').textContent = '-';
       document.getElementById('mgmt-roots-open').textContent = '0';
       document.getElementById('mgmt-done-count').textContent = '0';
       renderMgmtNotifications([]);
@@ -2550,7 +2550,7 @@ function obConfirm(opts) {
                 <div class="learn-321__item"><strong>~20%</strong><span>Über andere</span></div>
                 <div class="learn-321__item"><strong>~10%</strong><span>Formale Trainings</span></div>
               </div>
-              <p>In den ersten Wochen werden wir dich stärker betreuen und du wirst Kollegen in Kundentermine shadowen. Danach gehen wir schnell in den Regelbetrieb über. Eine gewisse Unsicherheit ist normal – dafür wird deine Lernkurve steil verlaufen.</p>
+              <p>In den ersten Wochen werden wir dich stärker betreuen und du wirst Kollegen in Kundentermine shadowen. Danach gehen wir schnell in den Regelbetrieb über. Eine gewisse Unsicherheit ist normal - dafür wird deine Lernkurve steil verlaufen.</p>
               <p><strong>Die nächsten Wochen gestalten sich wie folgt:</strong></p>
             ` },
             { title:'Woche 1: Ankommen und Orientieren', content:`
@@ -2578,13 +2578,13 @@ function obConfirm(opts) {
               </div>
             ` },
             { title:'Woche 3: Wie geht\'s weiter?', content:`
-              <p>Dein Einstieg ist der Anfang. Die folgenden Meilensteine sind Richtwerte – dein Tempo hängt von Projekt, Rolle und Entwicklung ab.</p>
+              <p>Dein Einstieg ist der Anfang. Die folgenden Meilensteine sind Richtwerte - dein Tempo hängt von Projekt, Rolle und Entwicklung ab.</p>
               <div class="ob-timeline-wrap">
                 <div class="ob-timeline" data-timeline>
                   <div class="ob-timeline-progress"></div>
-                  <div class="ob-timeline-step"><div class="ob-timeline-step__title">Ab 3 Wochen · Erste Erfahrung in Kundenprojekten</div><p class="ob-timeline-step__desc">Du sammelst erste praktische Erfahrung in Kundenprojekten – zunächst begleitet, mit wachsendem Eigenanteil.</p></div>
+                  <div class="ob-timeline-step"><div class="ob-timeline-step__title">Ab 3 Wochen · Erste Erfahrung in Kundenprojekten</div><p class="ob-timeline-step__desc">Du sammelst erste praktische Erfahrung in Kundenprojekten - zunächst begleitet, mit wachsendem Eigenanteil.</p></div>
                   <div class="ob-timeline-step"><div class="ob-timeline-step__title">Ab 6 Monaten · Übernahme von Workstreams</div><p class="ob-timeline-step__desc">Du übernimmst einzelne Workstreams eigenständig und trägst Verantwortung für Deliverables in deinem Bereich.</p></div>
-                  <div class="ob-timeline-step"><div class="ob-timeline-step__title">Mehr als ein Jahr · Teilprojektleitung / Workstreamleitung</div><p class="ob-timeline-step__desc">Je nach Entwicklung und Projekt übernimmst du eine Teilprojekt- oder Workstreamleitung – intern wie beim Kunden.</p></div>
+                  <div class="ob-timeline-step"><div class="ob-timeline-step__title">Mehr als ein Jahr · Teilprojektleitung / Workstreamleitung</div><p class="ob-timeline-step__desc">Je nach Entwicklung und Projekt übernimmst du eine Teilprojekt- oder Workstreamleitung - intern wie beim Kunden.</p></div>
                 </div>
               </div>
               <hr class="md-hr">
@@ -2605,10 +2605,10 @@ function obConfirm(opts) {
                 </div>
                 <div class="ob-comfort-panel" data-comfort-panel data-zone="comfort">
                   <h4>Komfortzone</h4>
-                  <p>Hier fühlst du dich sicher: bekannte Aufgaben, klare Anleitung, viel Shadowing. Gut für den Start – aber langfristig zu wenig Wachstum.</p>
+                  <p>Hier fühlst du dich sicher: bekannte Aufgaben, klare Anleitung, viel Shadowing. Gut für den Start - aber langfristig zu wenig Wachstum.</p>
                 </div>
               </div>
-              <p class="ob-comfort-hint">Die Zonen wechseln automatisch durch. Dein Mentor hilft dir, bewusst in die Wachstumszone zu kommen – ohne in die Panikzone zu rutschen.</p>
+              <p class="ob-comfort-hint">Die Zonen wechseln automatisch durch. Dein Mentor hilft dir, bewusst in die Wachstumszone zu kommen - ohne in die Panikzone zu rutschen.</p>
             ` }
           ]},
           { id:'w-wishes', tab:'Deine Wünsche', sections:[
@@ -2632,16 +2632,16 @@ function obConfirm(opts) {
         submodules:[
           { id:'i-ident', tab:'Geschichte & Vision', sections:[
             { title:'Woher wir kommen', open:true, content:`
-              <p>ROOTS wurde 2016 in Düsseldorf gegründet – mit der Überzeugung, dass Marketing-Beratung praxisnah, direkt und mit echtem unternehmerischem Verstand funktionieren muss. Unser Team bringt langjährige Managementerfahrung auf Kundenseite mit – u.&nbsp;a. aus Stationen bei Coca-Cola, OBI und Montblanc.</p>
+              <p>ROOTS wurde 2016 in Düsseldorf gegründet - mit der Überzeugung, dass Marketing-Beratung praxisnah, direkt und mit echtem unternehmerischem Verstand funktionieren muss. Unser Team bringt langjährige Managementerfahrung auf Kundenseite mit - u.&nbsp;a. aus Stationen bei Coca-Cola, OBI und Montblanc.</p>
               <div class="highlight"><p><i class="fa-solid fa-quote-left" aria-hidden="true"></i> Wir beginnen, wo McKinsey aufhört. Wir hören auf, wo Kreativagenturen beginnen.</p></div>
             ` },
             { title:'Wohin wir gehen', content:`
-              <p>Unsere Vision ist klar: Wir wollen in der Champions League der Marketingberatung spielen – als die führende Boutique für Marketing-Exzellenz in Deutschland.</p>
+              <p>Unsere Vision ist klar: Wir wollen in der Champions League der Marketingberatung spielen - als die führende Boutique für Marketing-Exzellenz in Deutschland.</p>
               <div class="highlight"><p><i class="fa-solid fa-bullseye" aria-hidden="true"></i> <strong>Purpose:</strong> Helping You Outperform The Market.</p></div>
-              <p>Unser Anspruch: die „Go-To"-Beratung für Topmarken werden – das McKinsey des Marketings. Wir helfen Marketingentscheidern, die Wirksamkeit ihres Marketings messbar zu steigern und sichtbar zu machen.</p>
+              <p>Unser Anspruch: die „Go-To"-Beratung für Topmarken werden - das McKinsey des Marketings. Wir helfen Marketingentscheidern, die Wirksamkeit ihres Marketings messbar zu steigern und sichtbar zu machen.</p>
             ` },
             { title:'Wie wir arbeiten', content:`
-              <p>Wir sind eine agile Boutique – klein, vernetzt, fokussiert. Was uns auszeichnet:</p>
+              <p>Wir sind eine agile Boutique - klein, vernetzt, fokussiert. Was uns auszeichnet:</p>
               <ul class="learn-list">
                 <li><strong>Erfahrene Praktiker</strong> – Wir kennen die Kundenseite aus eigener Erfahrung.</li>
                 <li><strong>Analytisch & outside-in</strong> – Wir denken konsequent aus Kundenperspektive.</li>
@@ -2649,7 +2649,7 @@ function obConfirm(opts) {
                 <li><strong>Digital & tech-savvy</strong> – KI und MarTech sind fester Teil unserer Arbeit.</li>
                 <li><strong>Umsetzungsbegleitung</strong> – Wir bleiben auch als PMO an Bord, wenn es drauf ankommt.</li>
               </ul>
-              <p>Unser <strong>Champions Playbook</strong> definiert, wie wir täglich „Exzellent", „Führend" und „Nahbar" leben – mit konkreten Dos & Don'ts für den Alltag.</p>
+              <p>Unser <strong>Champions Playbook</strong> definiert, wie wir täglich „Exzellent", „Führend" und „Nahbar" leben - mit konkreten Dos & Don'ts für den Alltag.</p>
             ` }
           ]},
           { id:'i-business', tab:'Business & Markt', sections:[
@@ -2664,7 +2664,7 @@ function obConfirm(opts) {
               <p style="margin-top:.75rem">Unsere wichtigsten Partner: spezialisierte Freelancer sowie ausgewählte Agenturen.</p>
             ` },
             { title:'Wen wir beraten', content:`
-              <p>Wir arbeiten mit Marketingentscheidern – primär in zwei Profilen:</p>
+              <p>Wir arbeiten mit Marketingentscheidern - primär in zwei Profilen:</p>
               <ul class="learn-list">
                 <li><strong>CMO / Marketingleiter</strong> – strategische Entscheider, die ihren Wertbeitrag sichern und skalieren wollen.</li>
                 <li><strong>Marketing / Brand Manager</strong> – operative Führungskräfte, die liefern wollen und dabei wachsen.</li>
@@ -2672,7 +2672,7 @@ function obConfirm(opts) {
               <p>Unser Branchenschwerpunkt: <strong>Konsumgüter & Handel</strong> – mit Ausdehnung auf alle markenorientierten Unternehmen. Unsere Bestandskunden: Beiersdorf, Danone, Lidl.</p>
             ` },
             { title:'Wettbewerb & Positionierung', content:`
-              <p>Wir bewegen uns zwischen zwei Polen – und das bewusst:</p>
+              <p>Wir bewegen uns zwischen zwei Polen - und das bewusst:</p>
               <div class="highlight"><p><i class="fa-solid fa-arrow-right-arrow-left" aria-hidden="true"></i> Strategie-Beratungen (z.&nbsp;B. McKinsey) liefern Konzepte ohne Umsetzung. Kreativagenturen setzen um ohne Strategie. Wir tun beides.</p></div>
               <p><strong>Unsere Stärken:</strong> Erfahrene Praktiker, starke FMCG/Handel-Expertise, Topkunden als Referenzen, KI-Integration.<br>
               <strong>Unser Fokus:</strong> Boutiquen-Qualität mit Consulting-Rigor – nah, verbindlich, messbar.</p>
@@ -2688,7 +2688,7 @@ function obConfirm(opts) {
                 <li><strong>CRM</strong> – Lead-Tracking und Pipeline-Management via Brevo</li>
               </ul>
             ` },
-            { title:'Die 6Ps – unser Leistungsmodell', content:`
+            { title:'Die 6Ps - unser Leistungsmodell', content:`
               <p>Alle unsere Leistungen ordnen sich in das <strong>ROOTS 6P-Modell</strong> ein:</p>
               <table>
                 <tr><th>P</th><th>Bereich</th><th>Kernleistungen</th></tr>
@@ -2704,13 +2704,13 @@ function obConfirm(opts) {
               <p>Wir positionieren uns als führende KI-Beratung für das Marketing. Unser <strong>ROOTS AI House</strong> steht auf drei Säulen:</p>
               <ul class="learn-list">
                 <li><strong>Intern</strong> – KI effizient, effektiv und verantwortungsvoll im Alltag einsetzen</li>
-                <li><strong>Beratung</strong> – marktorientierte KI-Beratungsangebote unter „ROOTS AI for Impact"</li>
+                <li><strong>Beratung</strong> - marktorientierte KI-Beratungsangebote unter „ROOTS AI for Impact"</li>
                 <li><strong>Produkt</strong> – ein marketingnatives KI-Tool (in Entwicklung)</li>
               </ul>
               <p><strong>ROOTS AI for Impact</strong> umfasst vier Bereiche: Strategy, Process, Ethics & Compliance sowie People – vom AI Maturity Assessment bis zu KI-Schulungen.</p>
             ` },
             { title:'Offsite', content:`
-              <p>Regelmäßige Offsites sind bei uns fester Bestandteil der Strategiearbeit – für Team-Alignment, Kultur und Fokus. Datum und Ort des nächsten Offsites werden intern kommuniziert.</p>
+              <p>Regelmäßige Offsites sind bei uns fester Bestandteil der Strategiearbeit - für Team-Alignment, Kultur und Fokus. Datum und Ort des nächsten Offsites werden intern kommuniziert.</p>
             ` }
           ]}
         ]
@@ -2742,7 +2742,7 @@ function obConfirm(opts) {
               <ul class="learn-list">
                 <li>Es gilt das, was im Vertrag vereinbart ist (Urlaubstage und Beantragungsfristen).</li>
                 <li>Urlaube sollten möglichst früh im Vorfeld beantragt werden, um eine gute Projektplanung sicherstellen zu können</li>
-                <li>Der 24.12. ist ein von ROOTS geschenkter halber freier Tag – er wird automatisch im Team-Kalender eingetragen</li>
+                <li>Der 24.12. ist ein von ROOTS geschenkter halber freier Tag - er wird automatisch im Team-Kalender eingetragen</li>
                 <li>Die Werktage zwischen Weihnachten und Neujahr sind Betriebsferien, werden für alle automatisch im Team-Kalender eingetragen und von deinen Urlaubstagen abgezogen</li>
                 <li>Weitere Urlaubstage beantragst du über die Urlaubsplanung; nach Genehmigung erscheinen sie ebenfalls im Team-Kalender</li>
               </ul>
@@ -2796,14 +2796,14 @@ Best regards,
                 <li>Zeitraum auf deinen Urlaub setzen (Start- und Enddatum)</li>
                 <li>Vorlage oben mit <strong>Vorlage kopieren</strong> übernehmen und ins Feld für externe Absender einfügen (<strong>Cmd+V</strong>)</li>
                 <li>Optional: gekürzte Version für interne Absender hinterlegen</li>
-                <li>Speichern – die Notiz läuft automatisch im gewählten Zeitraum</li>
+                <li>Speichern - die Notiz läuft automatisch im gewählten Zeitraum</li>
               </ol>
             ` }
           ]},
           { id:'m-ki', tab:'KI', sections:[
             { title:'KI Nutzung', open:true, content:`
               <div class="ob-mod-panel">
-              <p class="ob-mod-lead">Verbindliche AI Rules für Rechtssicherheit — KI macht uns schneller, nicht schlauer. Verantwortung bleibt bei uns.</p>
+              <p class="ob-mod-lead">Verbindliche AI Rules für Rechtssicherheit - KI macht uns schneller, nicht schlauer. Verantwortung bleibt bei uns.</p>
 
               <div class="ob-content-section">
                 <div class="ob-content-section__head"><i class="fa-solid fa-layer-group"></i><h3>1. Drei Zonen und Aufgaben</h3></div>
@@ -2819,7 +2819,7 @@ Best regards,
               <div class="ob-content-section">
                 <div class="ob-content-section__head"><i class="fa-solid fa-shield-halved"></i><h3>2. Nur freigegebene Zonen — andere Tools nicht</h3></div>
                 <div class="ob-content-section__body">
-                  <p>Für das Drei-Zonen-Setup haben wir Blanket Approvals (BDF erteilt, weitere Kunden in Vorbereitung). Jedes andere Tool ist genehmigungspflichtig — neue Anbieter, neue AI-Features in bekannten Plattformen und Erweiterungen des Tool-Stacks. Freigabe durch Richard.</p>
+                  <p>Für das Drei-Zonen-Setup haben wir Blanket Approvals (BDF erteilt, weitere Kunden in Vorbereitung). Jedes andere Tool ist genehmigungspflichtig - neue Anbieter, neue AI-Features in bekannten Plattformen und Erweiterungen des Tool-Stacks. Freigabe durch Richard.</p>
                 </div>
               </div>
 
@@ -2861,7 +2861,7 @@ Best regards,
               </div>
             ` },
             { title:'Live-Übung: Welche KI-Zone?', open:true, content:`
-              <p class="ob-mod-lead">5 Alltagsfälle aus der ROOTS-Beratung — wähle pro Fall die richtige Zone. Erst raten, dann die Antwort prüfen.</p>
+              <p class="ob-mod-lead">5 Alltagsfälle aus der ROOTS-Beratung - wähle pro Fall die richtige Zone. Erst raten, dann die Antwort prüfen.</p>
               <div class="ob-content-section">
                 <div class="ob-content-section__head"><i class="fa-solid fa-gamepad"></i><h3>KI-Zonen-Quiz</h3></div>
                 <div class="ob-content-section__body">
@@ -2880,7 +2880,7 @@ Best regards,
                     </div>
                     <div class="ob-zone-card" data-zone-q data-answer="zone2" data-explain="Interne, anonymisierte Meeting-Notizen ohne Kundennamen → Zone 2 (Copilot / Notion).">
                       <div class="ob-zone-card__num">Fall 2 · Intern</div>
-                      <p class="ob-zone-card__text">Du fasst die Montags-OKR-Highlights aus dem Team-Meeting zusammen — ohne Kundennamen, nur interne Projekt-Codes.</p>
+                      <p class="ob-zone-card__text">Du fasst die Montags-OKR-Highlights aus dem Team-Meeting zusammen - ohne Kundennamen, nur interne Projekt-Codes.</p>
                       <div class="ob-zone-card__choices">
                         <button type="button" class="ob-zone-pick" data-zone-pick="zone1">Zone 1</button>
                         <button type="button" class="ob-zone-pick" data-zone-pick="zone2">Zone 2</button>
@@ -2891,7 +2891,7 @@ Best regards,
                     </div>
                     <div class="ob-zone-card" data-zone-q data-answer="zone3" data-explain="Öffentliche Branchenrecherche ohne Kundendaten → Zone 3 · Perplexity.">
                       <div class="ob-zone-card__num">Fall 3 · Recherche</div>
-                      <p class="ob-zone-card__text">Du recherchierst FMCG-Marketing-Trends in Europa für einen anonymen Pitch-Hintergrund — keine Kundendaten im Prompt.</p>
+                      <p class="ob-zone-card__text">Du recherchierst FMCG-Marketing-Trends in Europa für einen anonymen Pitch-Hintergrund - keine Kundendaten im Prompt.</p>
                       <div class="ob-zone-card__choices">
                         <button type="button" class="ob-zone-pick" data-zone-pick="zone1">Zone 1</button>
                         <button type="button" class="ob-zone-pick" data-zone-pick="zone2">Zone 2</button>
@@ -2902,7 +2902,7 @@ Best regards,
                     </div>
                     <div class="ob-zone-card" data-zone-q data-answer="zone3" data-explain="Visual-/Marketingtexte ohne Kundendaten → Zone 3 · Gemini.">
                       <div class="ob-zone-card__num">Fall 4 · Visual</div>
-                      <p class="ob-zone-card__text">Du erstellst ein Moodboard-Visual und Headline-Varianten für einen internen ROOTS-Workshop — ohne Kundenbezug.</p>
+                      <p class="ob-zone-card__text">Du erstellst ein Moodboard-Visual und Headline-Varianten für einen internen ROOTS-Workshop - ohne Kundenbezug.</p>
                       <div class="ob-zone-card__choices">
                         <button type="button" class="ob-zone-pick" data-zone-pick="zone1">Zone 1</button>
                         <button type="button" class="ob-zone-pick" data-zone-pick="zone2">Zone 2</button>
@@ -2913,7 +2913,7 @@ Best regards,
                     </div>
                     <div class="ob-zone-card" data-zone-q data-answer="approval" data-explain="Neues KI-Plugin = neues Tool/Feature → genehmigungspflichtig, Freigabe durch Richard.">
                       <div class="ob-zone-card__num">Fall 5 · Neues Tool</div>
-                      <p class="ob-zone-card__text">Ein neues KI-Plugin für PowerPoint verspricht schnellere Chart-Erstellung — du willst es im Mandat testen.</p>
+                      <p class="ob-zone-card__text">Ein neues KI-Plugin für PowerPoint verspricht schnellere Chart-Erstellung - du willst es im Mandat testen.</p>
                       <div class="ob-zone-card__choices">
                         <button type="button" class="ob-zone-pick" data-zone-pick="zone1">Zone 1</button>
                         <button type="button" class="ob-zone-pick" data-zone-pick="zone2">Zone 2</button>
@@ -2957,7 +2957,7 @@ Best regards,
                     <li><strong>Key Results (KR)</strong> – <em>Wie</em> messe ich den Fortschritt? 2–5 messbare Ergebnisse, qualitativ, die zeigen, ob das Objective erreicht wurde.</li>
                   </ul>
                   <p>Die OKRs werden im Team quartalsweise definiert und wöchentlich überprüft. Am Ende des Zyklus wird bewertet, ob die Key Results erreicht wurden.</p>
-                  <p>Dabei gelten 70–100&nbsp;% als erreicht. Wird immer 100&nbsp;% erreicht, sind die Ziele nicht ambitioniert genug. 40–70&nbsp;% gelten als teilweise erreicht und 0–40&nbsp;% als nicht erreicht.</p>
+                  <p>Dabei gelten 70-100&nbsp;% als erreicht. Wird immer 100&nbsp;% erreicht, sind die Ziele nicht ambitioniert genug. 40-70&nbsp;% gelten als teilweise erreicht und 0-40&nbsp;% als nicht erreicht.</p>
                 </div>
               </div>
               </div>
@@ -2965,7 +2965,7 @@ Best regards,
           ]},
           { id:'m-channels', tab:'Kanäle', sections:[
             { title:'Kommunikationskanäle', open:true, content:`
-              <p class="ob-mod-lead">So erreichen wir uns bei ROOTS — je nach Anlass das passende Medium wählen.</p>
+              <p class="ob-mod-lead">So erreichen wir uns bei ROOTS - je nach Anlass das passende Medium wählen.</p>
               <div class="content-cards">
                 <div class="content-card content-card--channel"><div class="content-card__icon"><i class="fa-solid fa-comments"></i></div><strong>Direkt:</strong><p>Im Office kommunizieren wir meistens direkt über den Schreibtisch oder setzen uns kurz zu Spontanmeetings zusammen.</p></div>
                 <div class="content-card content-card--channel"><div class="content-card__icon"><i class="fa-solid fa-envelope"></i></div><strong>E-Mail:</strong><p>ist das Hauptmedium unserer schriftlichen Kommunikation. Wir nutzen sie auch für kurze Austausche, die in anderen Unternehmen typischerweise auf MS Teams laufen. Wundere dich also nicht über sehr kurze, informelle E-Mails.</p></div>
@@ -3007,7 +3007,7 @@ Best regards,
               <div class="ob-content-section">
                 <div class="ob-content-section__head"><i class="fa-solid fa-diagram-project"></i><h3>60-Sekunden-Framework</h3></div>
                 <div class="ob-content-section__body">
-                  <p style="margin:0 0 .85rem;font-size:.84rem;color:var(--muted)">Klick auf eine Phase — Details scrollen direkt darunter rein.</p>
+                  <p style="margin:0 0 .85rem;font-size:.84rem;color:var(--muted)">Klick auf eine Phase - Details scrollen direkt darunter rein.</p>
                   <div class="fm-framework" data-demo="fm-framework" aria-label="First-Minute Framework">
                     <div class="fm-framework__shell">
                       <div class="fm-framework__ribbon">
@@ -3066,7 +3066,7 @@ Best regards,
               <div class="ob-content-section ob-content-section--fm1 is-highlighted" id="fm-step-1">
                 <div class="ob-content-section__head"><i class="fa-solid fa-clock"></i><h3>1. Time Check · 15 Sek</h3></div>
                 <div class="ob-content-section__body">
-                  <p>Die häufigste Eröffnung „Hast Du eine Minute?" ist eine Lüge — kaum ein Thema ist in 60 Sekunden inkl. Antwort durch. Stattdessen: Frage nach dem Zeitfenster, das Du wirklich brauchst, oder eher mehr.</p>
+                  <p>Die häufigste Eröffnung „Hast Du eine Minute?" ist eine Lüge - kaum ein Thema ist in 60 Sekunden inkl. Antwort durch. Stattdessen: Frage nach dem Zeitfenster, das Du wirklich brauchst, oder eher mehr.</p>
                   <ul class="fm-bullet-list">
                     <li>„Hast Du 10 Minuten für eine Entscheidung zum Projekt X?"</li>
                     <li>„Brauche kurz 5 Minuten für ein FYI."</li>
@@ -3081,7 +3081,7 @@ Best regards,
                   <ul class="fm-bullet-list">
                     <li><strong>Context</strong> — Worum geht es? (Projekt, Kunde, Prozess benennen)</li>
                     <li><strong>Intent</strong> — Was will ich vom Gegenüber? (Entscheidung, Input, Genehmigung, FYI)</li>
-                    <li><strong>Key Message</strong> — Was ist die Kernaussage in einem Satz? (Muss den „Na und?"-Test bestehen)</li>
+                    <li><strong>Key Message</strong> - Was ist die Kernaussage in einem Satz? (Muss den „Na und?"-Test bestehen)</li>
                   </ul>
                   <p>Beispiel:</p>
                   <div class="fm-example">
@@ -3115,14 +3115,14 @@ Best regards,
                     <li>„Hast Du jetzt Zeit, das zu besprechen?"</li>
                     <li>„Hast Du Fragen zu dem, was ich gerade beschrieben habe?"</li>
                   </ul>
-                  <p>Ohne Checkpoint riskierst Du, jemandem 10 Minuten zu erklären, was sie sowieso nicht entscheiden können — oder jemanden festzuhalten, der gerade auf dem Weg ins nächste Meeting ist.</p>
+                  <p>Ohne Checkpoint riskierst Du, jemandem 10 Minuten zu erklären, was sie sowieso nicht entscheiden können - oder jemanden festzuhalten, der gerade auf dem Weg ins nächste Meeting ist.</p>
                 </div>
               </div>
               </div>
             ` },
             { title:'Structured Summary', open:true, content:`
               <div class="ob-mod-panel">
-              <p class="ob-mod-lead">GPS (Goal · Problem · Solution) in drei Sätzen — das Herzstück der First Minute.</p>
+              <p class="ob-mod-lead">GPS (Goal · Problem · Solution) in drei Sätzen - das Herzstück der First Minute.</p>
 
               <div class="ob-content-section">
                 <div class="ob-content-section__head"><i class="fa-solid fa-list-check"></i><h3>Drei Situationen — drei Solution-Typen</h3></div>
@@ -3133,7 +3133,7 @@ Best regards,
                     <li>Du hast ein Problem und schlägst eine Lösung vor. → Solution = Dein Vorschlag.</li>
                     <li>Du hattest ein Problem und es ist gelöst. → Solution = Was Du getan hast und der Status.</li>
                   </ul>
-                  <p>High Performers fragen häufig um Rat, kommen aber meist mit ein bis zwei Lösungsideen — nicht „leer". Der Unterschied zwischen „Mach Du das für mich" und „Was hältst Du davon?" ist signifikant.</p>
+                  <p>High Performers fragen häufig um Rat, kommen aber meist mit ein bis zwei Lösungsideen - nicht „leer". Der Unterschied zwischen „Mach Du das für mich" und „Was hältst Du davon?" ist signifikant.</p>
                 </div>
               </div>
 
@@ -3159,7 +3159,7 @@ Best regards,
                     <li><strong>Problem:</strong> Das All ist schwer zu erreichen, und es gibt 100 Wege dort zu sterben.</li>
                     <li><strong>Solution:</strong> Viel Geld ausgeben, um die Forschenden am Leben zu halten.</li>
                   </ul>
-                  <p>30 Sekunden statt 20 Minuten — und alle haben es verstanden. Jedes Thema lässt sich so reduzieren.</p>
+                  <p>30 Sekunden statt 20 Minuten - und alle haben es verstanden. Jedes Thema lässt sich so reduzieren.</p>
                 </div>
               </div>
 
@@ -3171,7 +3171,7 @@ Best regards,
                     <div class="ob-split-card ob-split-card--dont"><strong>Falsch · Status-Update</strong><blockquote class="md-quote" style="margin:.35rem 0 0">„Wir hatten einen Stillstand wegen blockierter Roller, dann mussten wir die Markierungen neu machen …"</blockquote></div>
                     <div class="ob-split-card ob-split-card--do"><strong>Richtig · Solution-first</strong><blockquote class="md-quote" style="margin:.35rem 0 0">„Wir haben den Roller-Stillstand in 24 Stunden behoben. Produktion läuft wieder. Layout-Doku wird aktualisiert."</blockquote></div>
                   </div>
-                  <p style="margin-top:.75rem">Goal und Problem sind identisch — aber die Solution-Formulierung kippt das Gespräch von „Was ist passiert?" auf „Wie geht es weiter?".</p>
+                  <p style="margin-top:.75rem">Goal und Problem sind identisch - aber die Solution-Formulierung kippt das Gespräch von „Was ist passiert?" auf „Wie geht es weiter?".</p>
                 </div>
               </div>
               </div>
@@ -3212,7 +3212,7 @@ Best regards,
                 <li><strong>EN.</strong> Action, Sign, Info, Decision, Request, to Approve etc.</li>
                 <li>Max. ca. 72 Zeichen, damit auf Mobile nicht abgeschnitten</li>
                 <li>Nie leer lassen</li>
-                <li>Passt die ganze E-Mail in den Betreff → in den Betreff packen (z. B. „Standup verschoben auf 10:00 Uhr morgen — danke!")</li>
+                <li>Passt die ganze E-Mail in den Betreff → in den Betreff packen (z. B. „Standup verschoben auf 10:00 Uhr morgen - danke!")</li>
               </ul>
               <p><strong>Vermeide:</strong></p>
               <ul class="learn-list">
@@ -3233,7 +3233,7 @@ Best regards,
                 <li>Worum geht es?</li>
                 <li>Was soll der/die Empfänger:in tun?</li>
                 <li>Kernbotschaft</li>
-                <li>Bis wann (auch „nicht dringend" explizit nennen — Empfänger überschätzen Dringlichkeit um ~36 %)</li>
+                <li>Bis wann (auch „nicht dringend" explizit nennen - Empfänger überschätzen Dringlichkeit um ~36 %)</li>
                 <li>Wie viele Fragen die E-Mail enthält</li>
               </ol>
               <p><strong>Bei mehreren Themen im Intro:</strong> Anzahl + Namen der Themen nennen, dann mit Headern strukturieren.</p>
@@ -3245,10 +3245,10 @@ Best regards,
                 <div class="ob-content-section__body">
               <h4>Länge &amp; Struktur</h4>
               <ul class="learn-list">
-                <li>So kurz wie möglich — kürzere E-Mails haben &gt; 60 % höhere Antwortrate</li>
+                <li>So kurz wie möglich - kürzere E-Mails haben &gt; 60 % höhere Antwortrate</li>
                 <li>Faustregel: max. 2x Scrollen am Phone</li>
                 <li>Five-Sentence-Rule für Routine-E-Mails</li>
-                <li>Ein E-Mailverlauf pro Thema — an den ersten Verlauf anknüpfen</li>
+                <li>Ein E-Mailverlauf pro Thema - an den ersten Verlauf anknüpfen</li>
                 <li>Bei langen E-Mails: Hauptpunkte in Bullet Points zusammenfassen</li>
                 <li>Whitespace zwischen Absätzen, kurze Absätze (&lt; 4 Zeilen)</li>
                 <li>Punkte statt Paragraphen, sortiert nach Priorität</li>
@@ -3266,24 +3266,24 @@ Best regards,
                 <li>Hyperlinks statt rohe URLs (⌘ K)</li>
                 <li>Hyperlinks im Fließtext platzieren, nicht gesammelt am Ende</li>
                 <li>Anhänge benennen, Grund nennen, Inhalt zusammenfassen</li>
-                <li>Kerninfo in der E-Mail — nicht nur im Anhang</li>
+                <li>Kerninfo in der E-Mail - nicht nur im Anhang</li>
                 <li>Bilder als Anhang, nicht eingebettet (Mobile-Probleme)</li>
                 <li>Grafiken nur, wenn sie Mehrwert bringen</li>
               </ul>
               <h4>Tonalität &amp; Sprache</h4>
               <ul class="learn-list">
-                <li>Tonfall wird oft falsch interpretiert — kontroverse Themen nicht per E-Mail</li>
-                <li>Bei „heiklen" E-Mails: schreiben, Pause, dann senden — ggf. Zweitleser:in</li>
+                <li>Tonfall wird oft falsch interpretiert - kontroverse Themen nicht per E-Mail</li>
+                <li>Bei „heiklen" E-Mails: schreiben, Pause, dann senden - ggf. Zweitleser:in</li>
                 <li>Akronyme beim ersten Mal ausschreiben, besser ganz vermeiden</li>
                 <li>Beim Schreiben in Fremdsprache: kurze Sätze, einfache Worte, ggf. Hinweis ergänzen</li>
                 <li>Emojis je nach Adressat und Kontext (intern eher ja, formal nein)</li>
                 <li>Sarkasmus nur mit Klammer-Hinweis kennzeichnen („I'm joking!")</li>
-                <li>„Bitte" und „Danke" einsetzen — „Thanks!" wirkt oft echter als „Sincerely"</li>
+                <li>„Bitte" und „Danke" einsetzen - „Thanks!" wirkt oft echter als „Sincerely"</li>
               </ul>
               <h4>Reply-Regeln</h4>
               <ul class="learn-list">
                 <li>Betreff in Replies <strong>nicht</strong> ändern (Ausnahme: falsche Tickets/IDs, RE/FW-Müll)</li>
-                <li>Reply nicht mit „Thank you" beginnen — Folgefragen werden sonst übersehen</li>
+                <li>Reply nicht mit „Thank you" beginnen - Folgefragen werden sonst übersehen</li>
                 <li>Bei Diskussionen: <strong>Reply to points</strong> statt Top-Posting; pro Punkt einzeln antworten</li>
                 <li>Reply-All: erst alle eintragen, dann gezielt entfernen, wer nicht mehr nötig ist</li>
                 <li>Antworten zu Fragen anderer wiederholen, damit der Kontext klar ist</li>
@@ -3325,7 +3325,7 @@ Best regards,
               </ul>
 
               <h3 style="margin-top:1.25rem">Beispiel: ROOTS-E-Mail in Outlook</h3>
-              <p>Bearbeite die Mail wie in Outlook. Die Checkliste prüft den ROOTS-Aufbau in professionellem Deutsch – klare Action- und Frage-Labels, sachlicher Ton, kein „Hi/Thanks“.</p>
+              <p>Bearbeite die Mail wie in Outlook. Die Checkliste prüft den ROOTS-Aufbau in professionellem Deutsch - klare Action- und Frage-Labels, sachlicher Ton, kein „Hi/Thanks“.</p>
               <div class="ob-demo" data-demo="email-editor">
                 <div class="ob-demo-head">
                   <strong><i class="fa-brands fa-microsoft"></i> Outlook · Neue Nachricht</strong>
@@ -3393,7 +3393,7 @@ Best regards,
               <ul class="learn-list">
                 <li><strong>Meeting purpose</strong> (one line describing what the meeting is for)</li>
                 <li><strong>Meeting output</strong> (one line stating the expected outcome or output of the meeting)</li>
-                <li><strong>Additional Information</strong> (optional: GPS als ein Satz, z.&nbsp;B. „Goal: Steering-ready Deck bis Fr 17:00 — Problem: KPI-Zeile 14 ungeklärt — Solution: Entscheidung im Call, Julia signiert bis Fr 15:00")</li>
+                <li><strong>Additional Information</strong> (optional: GPS als ein Satz, z.&nbsp;B. „Goal: Steering-ready Deck bis Fr 17:00 - Problem: KPI-Zeile 14 ungeklärt - Solution: Entscheidung im Call, Julia signiert bis Fr 15:00")</li>
                 <li><strong>Slides</strong></li>
               </ul>
               <div class="highlight"><p>Bain-Studie: Manager:innen verbringen 35 % ihres Arbeitstages in Meetings. Ludic-Studie: Nur 1 von 10 Personen versteht immer den Zweck eines Meetings. Klare Einladungen sind kein Nice-to-have.</p></div>
@@ -3404,7 +3404,7 @@ Best regards,
               <div class="ob-content-section">
                 <div class="ob-content-section__head"><i class="fa-solid fa-play"></i><h3>Erste Minute des Meetings</h3></div>
                 <div class="ob-content-section__body">
-              <p>Auch wenn Meeting Purpose und Output in der Einladung stehen — am Anfang des Meetings nochmal vorlesen.</p>
+              <p>Auch wenn Meeting Purpose und Output in der Einladung stehen - am Anfang des Meetings nochmal vorlesen.</p>
               <ul class="learn-list">
                 <li>Nicht alle haben die Einladung gelesen.</li>
                 <li>Wer sie gelesen hat, hat die Details vergessen.</li>
@@ -3426,15 +3426,15 @@ Best regards,
               </ol>
 
               <h4 style="margin-top:1.15rem">Beispiel: Kalendereinladung</h4>
-              <p>So sieht der Einladungstext aus – schlicht wie in Outlook/Teams, ohne Zusatzfarben.</p>
+              <p>So sieht der Einladungstext aus - schlicht wie in Outlook/Teams, ohne Zusatzfarben.</p>
               <div class="ob-meet-invite" data-demo="meeting-invite">
                 <div class="ob-teams-shell">
                   <div class="ob-teams-main">
                     <div class="ob-teams-card">
                       <div class="ob-teams-card__body">
-                        <h4 class="ob-teams-card__title">Danone Q4 Steering – KPI-Freigabe &amp; Deck-Finalisierung</h4>
+                        <h4 class="ob-teams-card__title">Danone Q4 Steering - KPI-Freigabe &amp; Deck-Finalisierung</h4>
                         <div class="ob-teams-meta-grid">
-                          <div class="ob-teams-meta-row"><span>Di, 14. Jan. 2026 · 10:00–10:45 (45 Min.)</span></div>
+                          <div class="ob-teams-meta-row"><span>Di, 14. Jan. 2026 · 10:00-10:45 (45 Min.)</span></div>
                           <div class="ob-teams-meta-row"><span>Microsoft Teams-Besprechung · ROOTS Team-Kalender</span></div>
                         </div>
                         <div class="ob-teams-desc">
@@ -3473,7 +3473,7 @@ Best regards,
           { id:'m-pres', tab:'Präsentationen', sections:[
             { title:'Präsentationen', open:true, content:`
               <div class="ob-mod-panel">
-              <p class="ob-mod-lead">Wer eine gute Präsentation hält, überträgt eine Idee in den Kopf des Zuhörers. Folien, Struktur und Rhetorik sind Mittel — kein Selbstzweck.</p>
+              <p class="ob-mod-lead">Wer eine gute Präsentation hält, überträgt eine Idee in den Kopf des Zuhörers. Folien, Struktur und Rhetorik sind Mittel - kein Selbstzweck.</p>
 
               <div class="ob-content-section">
                 <div class="ob-content-section__head"><i class="fa-solid fa-bullseye"></i><h3>Phase 1: Strategie</h3></div>
@@ -3505,8 +3505,8 @@ Best regards,
               </ul>
               <p><strong>Pyramidenprinzip (McKinsey-Logik):</strong> Bottom-up denken, top-down kommunizieren. Die Struktur folgt immer: Kernaussage oben, darunter 2–5 stützende Argumente (Logical Group oder Logical Chain), darunter die Belege.</p>
               <ul class="learn-list">
-                <li>Logical Group: Mehrere unabhängige Gründe stützen die Aussage ("Warum?") — z.B. drei Vorteile einer Entscheidung. Müssen MECE sein: gegenseitig ausschließend, gemeinsam erschöpfend.</li>
-                <li>Logical Chain: Kausal verknüpfte Argumente ("Wenn A, dann B, deshalb C") — stärker für Empfehlungen.</li>
+                <li>Logical Group: Mehrere unabhängige Gründe stützen die Aussage ("Warum?") - z.B. drei Vorteile einer Entscheidung. Müssen MECE sein: gegenseitig ausschließend, gemeinsam erschöpfend.</li>
+                <li>Logical Chain: Kausal verknüpfte Argumente ("Wenn A, dann B, deshalb C") - stärker für Empfehlungen.</li>
               </ul>
               <p><strong>Folienlogik:</strong> Jede Folie hat eine Kernaussage (kein Gliederungstitel), darunter die Argumente/Analysen als Beleg, optional eine Box für Next Steps oder eine Frage. Storyline zuerst nur mit Kernaussagen skizzieren — Folieninhalte erst danach befüllen.</p>
                 </div>
@@ -3519,13 +3519,13 @@ Best regards,
               <ul class="learn-list">
                 <li>Grafiken und sortierte Argumente statt langer Sätze</li>
                 <li>Kognitive Belastung minimieren: Visuals müssen intuitiv lesbar sein, ohne Erklärung</li>
-                <li>Nicht von der Folie ablesen — über den Folieninhalt hinaus berichten, Anwendungsbeispiele nennen</li>
+                <li>Nicht von der Folie ablesen - über den Folieninhalt hinaus berichten, Anwendungsbeispiele nennen</li>
               </ul>
               <p><strong>Diagrammwahl:</strong></p>
               <ul class="learn-list">
                 <li>Balkendiagramm (vertikal): Für Vergleiche mit zeitlicher Rangfolge.</li>
                 <li>Balkendiagramm (horizontal): Wenn Kategoriebeschriftungen lang sind.</li>
-                <li>Kreisdiagramm: Nur für nominal skalierte Variablen mit wenigen Ausprägungen (max. 2–3). Bei mehr Segmenten: Balken.</li>
+                <li>Kreisdiagramm: Nur für nominal skalierte Variablen mit wenigen Ausprägungen (max. 2-3). Bei mehr Segmenten: Balken.</li>
                 <li>Liniendiagramm: Entwicklungen über Zeit.</li>
                 <li>Keine irreführenden Achsen, keine selektiven Zeiträume, die Scheinkorrelationen erzeugen.</li>
               </ul>
@@ -3538,13 +3538,13 @@ Best regards,
               <p><strong>Die drei Grundprinzipien:</strong></p>
               <ul class="learn-list">
                 <li>Du präsentierst den Inhalt, nicht die Folien.</li>
-                <li>Auf den Punkt kommen: Kernbotschaft prägnant vortragen, Struktur regelmäßig wiederherstellen — besonders nach interaktiven Elementen.</li>
+                <li>Auf den Punkt kommen: Kernbotschaft prägnant vortragen, Struktur regelmäßig wiederherstellen - besonders nach interaktiven Elementen.</li>
                 <li>Authentisch bleiben: Nicht verstellen, das fällt auf. Kleine Versprecher sind kein Problem.</li>
               </ul>
               <p><strong>Vortragsmodus:</strong></p>
               <ul class="learn-list">
                 <li>Frei sprechen ist optimal. Stichpunkte als Backup erlaubt.</li>
-                <li>Nicht vom Skript oder Teleprompter lesen — zerstört die Verbindung zum Publikum sofort.</li>
+                <li>Nicht vom Skript oder Teleprompter lesen - zerstört die Verbindung zum Publikum sofort.</li>
                 <li>Wenn auswendig: Genug üben, bis der Flow automatisch läuft. Der "Valley of Awkwardness" (halb auswendig, halb nicht) ist der schlimmste Zustand.</li>
                 <li>Wenn keine Zeit zum Auswendiglernen: Bullet Points auf Notizzettel, Übergänge zwischen den Punkten kennen.</li>
                 <li>Tipp: Vortrag als Audio aufnehmen und z. B. auf dem Nachhauseweg anhören.</li>
@@ -3639,11 +3639,11 @@ Best regards,
             { title:'Resilienz', open:true, content:`
               <p>Consulting ist ein Hochdruckumfeld. Unsicherheit, enge Deadlines, schnell wechselnde Prioritäten, Reisen, etc., all das zehrt Energie. Jedoch kannst und wirst du schnell deine Resilienz erhöhen. Hier folgen ein paar Tipps, die dir dabei helfen sollen.</p>
               <ul class="learn-list">
-                <li>Setze dir selbst Regeln für Work-Live-Balance – niemand anderes Zieht diese Grenze für dich.</li>
+                <li>Setze dir selbst Regeln für Work-Live-Balance - niemand anderes Zieht diese Grenze für dich.</li>
                 <li>Reflektiere deine Erfahrungen.</li>
-                <li>Pflege dein Netzwerk – gute Kontakte öffnen dir Türen (manchmal im wahrsten Sinne des Wortes).</li>
+                <li>Pflege dein Netzwerk - gute Kontakte öffnen dir Türen (manchmal im wahrsten Sinne des Wortes).</li>
                 <li>Sehe Reisen als Abenteuer und plane Freizeitaktivitäten sein.</li>
-                <li>Trenne Fakten von deinen Interpretationen – deine Reaktion auf ein Ereignis entsteht nicht durch das Ereignis selbst.</li>
+                <li>Trenne Fakten von deinen Interpretationen - deine Reaktion auf ein Ereignis entsteht nicht durch das Ereignis selbst.</li>
                 <li>Beziehe Fehler nicht auf deine Persönlichkeit.</li>
               </ul>
             ` }
@@ -3680,7 +3680,7 @@ Best regards,
           ]},
           { id:'k-projekte', tab:'Aktuelle Projekte', sections:[
             { title:'Aktuelle Projekte', open:true, content:`
-              <p>Intro-Briefings zu den laufenden Projekten – Links führen direkt zur Projektablage im SharePoint.</p>
+              <p>Intro-Briefings zu den laufenden Projekten - Links führen direkt zur Projektablage im SharePoint.</p>
               <div class="ob-kunden-pills">
                 <a class="ob-kunden-pill" href="https://rootsconsultants.sharepoint.com/:f:/s/LIDL/EiLQku2RydNBs7d8K7YmU5sB9ojjTnjl12qgYDgSDBtS8g?e=km090q" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Lidl INT „Global"</a>
                 <a class="ob-kunden-pill" href="https://rootsconsultants.sharepoint.com/:f:/s/DanoneTP20640/EnRDic3JRihNlYuot66oLnwBFGGRyboKc-jWEF4PacX2UA?e=X60Slc" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Danone „D2P"</a>
@@ -3695,7 +3695,7 @@ Best regards,
         id:'projektbriefing', icon:'fa-solid fa-clipboard-list', title:'Projektbriefing',
         sub:'Aktuelle Projekte',
         content:`
-          <p>Intro-Briefings zu den laufenden Projekten – du wirst von deinem Projektlead eingeführt.</p>
+          <p>Intro-Briefings zu den laufenden Projekten - du wirst von deinem Projektlead eingeführt.</p>
           <div class="ob-kunden-pills">
             <span class="ob-kunden-pill is-soon"><i class="fa-solid fa-building" aria-hidden="true"></i> Bauhaus<small>(folgt)</small></span>
           </div>
@@ -3736,9 +3736,9 @@ Best regards,
           <h3>Vier Phasen einer starken Präsentation</h3>
           <div class="pres-phases">
             <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-bullseye"></i> Strategie</div><div class="pres-phase-body"><p>Was weiß der Zuhörer? Was soll er danach denken oder tun? <strong>20-Sekunden-Test:</strong> Kernbotschaft in einem Satz.</p></div></div>
-            <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-route"></i> Storyline</div><div class="pres-phase-body"><p>Problem → Lösungssuche → Aha-Moment. Pyramidenprinzip: Kernaussage oben, 2–5 Argumente, dann Belege (MECE).</p></div></div>
-            <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-chart-column"></i> Visualisierung</div><div class="pres-phase-body"><p>Grafiken statt langer Sätze. Nicht von der Folie ablesen – über den Inhalt hinaus berichten.</p></div></div>
-            <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-microphone"></i> Delivery</div><div class="pres-phase-body"><p>Frei sprechen, authentisch bleiben. Stichpunkte als Backup – nicht vom Skript lesen.</p></div></div>
+            <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-route"></i> Storyline</div><div class="pres-phase-body"><p>Problem → Lösungssuche → Aha-Moment. Pyramidenprinzip: Kernaussage oben, 2-5 Argumente, dann Belege (MECE).</p></div></div>
+            <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-chart-column"></i> Visualisierung</div><div class="pres-phase-body"><p>Grafiken statt langer Sätze. Nicht von der Folie ablesen - über den Inhalt hinaus berichten.</p></div></div>
+            <div class="pres-phase"><div class="pres-phase-head"><i class="fa-solid fa-microphone"></i> Delivery</div><div class="pres-phase-body"><p>Frei sprechen, authentisch bleiben. Stichpunkte als Backup - nicht vom Skript lesen.</p></div></div>
           </div>
           <h3>Chart-Typen & wann welcher</h3>
           <table>
@@ -3752,10 +3752,10 @@ Best regards,
           </table>
           <h3>Tipps</h3>
           <ul>
-            <li>Weniger ist mehr – ein Gedanke pro Chart</li>
-            <li>Farbe hat Bedeutung – nutze sie gezielt</li>
+            <li>Weniger ist mehr - ein Gedanke pro Chart</li>
+            <li>Farbe hat Bedeutung - nutze sie gezielt</li>
             <li>Beschriftungen direkt am Chart, nicht in Legenden</li>
-            <li>Quelle immer angeben – keine irreführenden Achsen</li>
+            <li>Quelle immer angeben - keine irreführenden Achsen</li>
           </ul>
         `
       },
@@ -3798,8 +3798,8 @@ Best regards,
     admin_5: [],
     admin_6: [],
     it_1: [
-      { kind:'link', label:'Authenticator – App Store', url:'https://apps.apple.com/app/microsoft-authenticator/id983156458', button:true },
-      { kind:'link', label:'Authenticator – Google Play', url:'https://play.google.com/store/apps/details?id=com.azure.authenticator', button:true },
+      { kind:'link', label:'Authenticator - App Store', url:'https://apps.apple.com/app/microsoft-authenticator/id983156458', button:true },
+      { kind:'link', label:'Authenticator - Google Play', url:'https://play.google.com/store/apps/details?id=com.azure.authenticator', button:true },
     ],
     it_3: [
       { kind:'link', label:'OneDrive App Store', url:'https://apps.apple.com/app/microsoft-onedrive/id477537958' },
@@ -3883,7 +3883,7 @@ Best regards,
       label: 'Obsidian',
       downloads: [{ label: 'Obsidian herunterladen', url: 'https://obsidian.md/download' }],
       creds: {
-        hint: 'Obsidian ist eine lokale App – kein Account erforderlich.',
+        hint: 'Obsidian ist eine lokale App - kein Account erforderlich.',
         fields: [
           { label: 'Vault', value: 'Eigenen Vault lokal anlegen oder auf OneDrive ablegen' }
         ]
@@ -3910,7 +3910,7 @@ Best regards,
         { label: 'Tools & Zugangsdaten', url: 'https://rootsconsultants.sharepoint.com/sites/ROOTSBrandStrategyConsultantsGmbH/_layouts/15/Doc.aspx?sourcedoc=%7B50BA78A5-2269-4DB4-990E-E2A08E0E68A7%7D&file=Tools%20%26%20Zugangsdaten.xlsx&action=default&mobileredirect=true&DefaultItemOpen=1' }
       ],
       creds: {
-        hint: 'Dein Account wird von Richard angelegt – du erhältst eine Einladungsmail.',
+        hint: 'Dein Account wird von Richard angelegt - du erhältst eine Einladungsmail.',
         fields: [
           { label: 'Login', value: 'Wende dich an deinen Mentor' },
           { label: 'Passwort', value: 'Wende dich an deinen Mentor' }
@@ -3939,7 +3939,7 @@ Best regards,
       intro: `
         <div class="mod-setup-block">
           <h3>Wozu Mangools?</h3>
-          <p>Mangools ist unser SEO-Tool – für Keyword-Recherche, Ranking-Tracking und Wettbewerbsanalyse.</p>
+          <p>Mangools ist unser SEO-Tool - für Keyword-Recherche, Ranking-Tracking und Wettbewerbsanalyse.</p>
         </div>
       `,
       downloads: [
@@ -3959,7 +3959,7 @@ Best regards,
       intro: `
         <div class="mod-setup-block">
           <h3>Wozu SimilarWeb?</h3>
-          <p>SimilarWeb nutzen wir für Wettbewerbsanalysen, Traffic-Benchmarks und digitale Markteinblicke – z. B. um Kundenwebsites oder Mitbewerber zu analysieren.</p>
+          <p>SimilarWeb nutzen wir für Wettbewerbsanalysen, Traffic-Benchmarks und digitale Markteinblicke - z. B. um Kundenwebsites oder Mitbewerber zu analysieren.</p>
         </div>
       `,
       downloads: [
@@ -3992,12 +3992,12 @@ Best regards,
         { id:'it_brevo', text:'Brevo CRM', itApps:['brevo'] },
         { id:'it_asana', text:'Asana PM-Tool', itApps:['asana'] },
         { id:'it_mangools', text:'Mangools SEO-Tool', itApps:['mangools'] },
-        { id:'it_similarweb', text:'SimilarWeb – Wettbewerbsanalyse', itApps:['similarweb'] },
+        { id:'it_similarweb', text:'SimilarWeb - Wettbewerbsanalyse', itApps:['similarweb'] },
         { id:'it_google', text:'ROOTS Google-Konto einrichten (Analytics, Search Console)', detail:`
           <p>Melde dich mit der ROOTS Google-Konto-Adresse an, um Zugriff auf Google Analytics und Google Search Console zu erhalten.</p>
           <p>Zugangsdaten erhältst du von Richard.</p>
         ` },
-        { id:'it_noun', text:'Noun Project – Icons & PowerPoint-Plugin einrichten', detail:`
+        { id:'it_noun', text:'Noun Project - Icons & PowerPoint-Plugin einrichten', detail:`
           <div class="mod-setup-block">
             <h3>Web</h3>
             <p>Noun Project ist eine umfangreiche Icon-Bibliothek, die wir für Präsentationen und Designs nutzen.</p>
@@ -4019,7 +4019,7 @@ Best regards,
             <p>Im Plugin direkt nach Icons suchen, Stil & Farbe anpassen und mit einem Klick auf die Folie einfügen.</p>
           </div>
         ` },
-        { id:'it_unsplash', text:'Unsplash – Lizenzfreie Fotos', detail:`
+        { id:'it_unsplash', text:'Unsplash - Lizenzfreie Fotos', detail:`
           <div class="mod-setup-block">
             <h3>Was ist Unsplash?</h3>
             <p>Unsplash bietet hochwertige, lizenzfreie Fotos, die wir für Präsentationen, die Website und Content-Produktion nutzen.</p>
@@ -4102,7 +4102,7 @@ Best regards,
           <li><strong>People_HR</strong> — Recruiting, Onboarding, Mitarbeiterunterlagen</li>
           <li><strong>Wissenshub</strong> — Methoden, Frameworks, Cases, Research, geteiltes Wissen</li>
         </ul>
-        <p>Auch hier gilt: jede Datei einmal, am richtigen Ort. Wer unsicher ist, fragt vor dem Ablegen — nicht danach.</p>
+        <p>Auch hier gilt: jede Datei einmal, am richtigen Ort. Wer unsicher ist, fragt vor dem Ablegen - nicht danach.</p>
       ` },
       ]},
       { id:'it-microsoft', label:'Microsoft & Sync', items:[
@@ -4189,7 +4189,7 @@ Best regards,
         </div>
         <div class="mod-setup-block">
           <h3>Kalender</h3>
-          <p>Arbeitszeit 9:00–17:00. Bookings-with-me-Link in die Signatur. Kategorien für Break, Buffer, Client Meeting, Deep Work, Team Meetings und Travel anlegen.</p>
+          <p>Arbeitszeit 9:00-17:00. Bookings-with-me-Link in die Signatur. Kategorien für Break, Buffer, Client Meeting, Deep Work, Team Meetings und Travel anlegen.</p>
         </div>
       ` },
       { id:'it_10', text:'PowerPoint Setup', detail:`
@@ -4235,7 +4235,7 @@ Best regards,
     ]},
     { section:'Weitere', items:[
       { id:'w_1', text:'ROOTS bei LinkedIn folgen und im Profil hinzufügen' },
-      { id:'w_linkedin_ann', text:'LinkedIn-Vorstellungspost – eigenen Beitrag oder Team-Post koordinieren' },
+      { id:'w_linkedin_ann', text:'LinkedIn-Vorstellungspost - eigenen Beitrag oder Team-Post koordinieren' },
       { id:'w_pvp', text:'Vorstellung überlegen (Personal Value Proposition)', detail:`
         <p>Eine gute Selbstvorstellung vor Kunden sollte kurz, konkret und vertrauensbildend sein.<br>
         Vor allem bei Consulting wirkt es besser, wenn man nicht nur den Titel nennt, sondern direkt erklärt:</p>
@@ -4259,7 +4259,7 @@ Best regards,
         <div class="highlight"><p><i class="fa-solid fa-quote-left" aria-hidden="true"></i> Hello, I am Rod Mitecki, the new Junior Marketing Consultant at ROOTS. With a background in business psychology, I focus on translating customer insights into actionable strategy. During my studies I did a lot of research in e-commerce e.g. AR/VR. In this project I will mainly support with analysis.</p></div>
       ` },
       { id:'w_elevator', text:'ROOTS Elevator Pitch überlegen und auswendig lernen', detail:`
-        <p>Lerne den ROOTS Elevator Pitch auswendig – er ist deine Antwort, wenn jemand fragt, was ROOTS macht:</p>
+        <p>Lerne den ROOTS Elevator Pitch auswendig - er ist deine Antwort, wenn jemand fragt, was ROOTS macht:</p>
         <div class="highlight"><p><i class="fa-solid fa-quote-left" aria-hidden="true"></i> Wir sind ROOTS, eine führende Boutique-Beratung für Marketing. Wir helfen internationalen Household-Brands, wie Beiersdorf, Danone, etc., effektiver, effizienter und schneller zu werden, um ihren Markt zu übertreffen. Das erreichen wir mit AI augmented Brand Strategy und Marketing Operations.</p>
         <p>Uns zeichnet aus, dass wir Berater aus der Praxis sind, keine Theoretiker, sondern selbst im Unternehmen umgesetzt haben.</p></div>
       ` },
@@ -4430,7 +4430,7 @@ Best regards,
         <td class="handover-td-check"><input type="checkbox" data-field="handed-${i}" aria-label="Übergeben: ${label}"/></td>
       </tr>`).join('');
     return `
-      <p class="handover-intro">Protokoll live ausfüllen – Änderungen werden automatisch gespeichert. Danach als PDF herunterladen oder drucken.</p>
+      <p class="handover-intro">Protokoll live ausfüllen - Änderungen werden automatisch gespeichert. Danach als PDF herunterladen oder drucken.</p>
       <div class="handover-toolbar">
         <button type="button" class="handover-btn" id="handover-download-btn"><i class="fa-solid fa-file-pdf"></i> PDF herunterladen</button>
         <button type="button" class="handover-btn handover-btn--ghost" id="handover-print-btn"><i class="fa-solid fa-print"></i> Drucken</button>
@@ -4440,7 +4440,7 @@ Best regards,
         <div class="handover-doc__header">
           <div class="handover-doc__header-text">
             <div class="handover-doc__brand">ROOTS Brand Strategy Consultants GmbH</div>
-            <h3 class="handover-doc__title">Übergabeprotokoll – Arbeitsmittel</h3>
+            <h3 class="handover-doc__title">Übergabeprotokoll - Arbeitsmittel</h3>
           </div>
           <img src="${ROOTS_LOGO_URL}" class="handover-doc__logo" alt="ROOTS" onerror="this.onerror=null;this.src='${ROOTS_LOGO_FALLBACK_URL}'">
         </div>
@@ -4721,7 +4721,7 @@ Best regards,
         <td><input type="text" data-field="ga-deadline-${i}" placeholder="Termin" autocomplete="off"/></td>
       </tr>`).join('');
     return `
-      <p class="handover-intro">Zielvereinbarung live ausfüllen – Änderungen werden automatisch gespeichert. Danach als PDF herunterladen oder drucken.</p>
+      <p class="handover-intro">Zielvereinbarung live ausfüllen - Änderungen werden automatisch gespeichert. Danach als PDF herunterladen oder drucken.</p>
       <div class="handover-toolbar">
         <button type="button" class="handover-btn" id="goal-agreement-download-btn"><i class="fa-solid fa-file-pdf"></i> PDF herunterladen</button>
         <button type="button" class="handover-btn handover-btn--ghost" id="goal-agreement-print-btn"><i class="fa-solid fa-print"></i> Drucken</button>
@@ -4869,7 +4869,7 @@ Best regards,
 
   /**
    * Renders `sourceEl` to an A4 PDF and downloads it.
-   * Uses html2canvas (captures the LIVE visible element — WYSIWYG) +
+   * Uses html2canvas (captures the LIVE visible element - WYSIWYG) +
    * jsPDF (places the canvas image onto A4 pages).
    * Multi-page: slices the image across pages automatically.
    */
@@ -5128,7 +5128,7 @@ Best regards,
       <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:22px;padding-bottom:14px;border-bottom:3px solid ${BRAND}">
         <div style="flex:1;min-width:0">
           <div style="font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:${BRAND};margin-bottom:6px">ROOTS Brand Strategy Consultants GmbH</div>
-          <div style="font-size:22px;font-weight:700;color:${INK};margin:0;line-height:1.15;letter-spacing:-.01em">Übergabeprotokoll – Arbeitsmittel</div>
+          <div style="font-size:22px;font-weight:700;color:${INK};margin:0;line-height:1.15;letter-spacing:-.01em">Übergabeprotokoll - Arbeitsmittel</div>
         </div>
         <img class="handover-doc__logo" src="${ROOTS_LOGO_URL}" alt="ROOTS" style="display:block;width:140px;height:auto;flex:0 0 140px;object-fit:contain">
       </div>
@@ -5185,7 +5185,7 @@ Best regards,
     const btn = document.getElementById('handover-download-btn');
     if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> PDF wird erstellt…'; }
     try {
-      // Capture the live visible preview element directly — WYSIWYG, no off-screen clone
+      // Capture the live visible preview element directly - WYSIWYG, no off-screen clone
       await renderElementToPdf(el, fileName);
       showToast('PDF heruntergeladen', 'success');
     } catch (err) {
@@ -5220,7 +5220,7 @@ Best regards,
   }
 
   function renderItCredsPanel(creds) {
-    if (!creds) return '<p class="placeholder">Zugangsdaten folgen – bei Bedarf Mentor oder IT kontaktieren.</p>';
+    if (!creds) return '<p class="placeholder">Zugangsdaten folgen - bei Bedarf Mentor oder IT kontaktieren.</p>';
     let html = creds.hint ? `<p>${creds.hint}</p>` : '';
     if (creds.fields?.length) {
       html += '<dl class="it-creds-list">' + creds.fields.map(f =>
@@ -5447,8 +5447,8 @@ Best regards,
     const bodyHtml = (editorEl ? editorEl.innerHTML : sig?.html || '').trim();
     const plain = editorEl ? editorEl.innerText.trim() : (sig?.plain || '');
     const ok = window.RootsSignature ? await window.RootsSignature.copy(bodyHtml, plain) : false;
-    if (ok) showToast('Signatur kopiert – in Outlook mit Cmd+V einfügen', 'success');
-    else showToast('Kopieren fehlgeschlagen – bitte manuell markieren', 'error');
+    if (ok) showToast('Signatur kopiert - in Outlook mit Cmd+V einfügen', 'success');
+    else showToast('Kopieren fehlgeschlagen - bitte manuell markieren', 'error');
   }
   async function copyOoo() {
     const el = document.getElementById('ooo-template');
@@ -5459,9 +5459,9 @@ Best regards,
     }
     try {
       await navigator.clipboard.writeText(text);
-      showToast('Abwesenheitsnotiz kopiert – in Outlook einfügen', 'success');
+      showToast('Abwesenheitsnotiz kopiert - in Outlook einfügen', 'success');
     } catch(e) {
-      showToast('Kopieren fehlgeschlagen – bitte manuell markieren', 'error');
+      showToast('Kopieren fehlgeschlagen - bitte manuell markieren', 'error');
     }
   }
   function animateTimeline(tlEl) {
@@ -5543,9 +5543,9 @@ Best regards,
     good: {
       to: 'julia.fraenzel@roots-consultants.com',
       cc: 'rod.mitecki@roots-consultants.com',
-      subject: 'Freigabe Q4-KPI Danone Steering Deck – bitte bis Fr, 15:00 Uhr',
+      subject: 'Freigabe Q4-KPI Danone Steering Deck - bitte bis Fr, 15:00 Uhr',
       bodyHtml: `<p>Hallo Julia,</p>
-<p>ich bitte um Freigabe der Q4-KPIs für das Danone-Steering Deck (Anhang A). Bitte prüfe die Tabellen und gib sie bis Freitag, 15:00 Uhr frei – alternativ markierst du Rückfragen direkt in der Datei.</p>
+<p>ich bitte um Freigabe der Q4-KPIs für das Danone-Steering Deck (Anhang A). Bitte prüfe die Tabellen und gib sie bis Freitag, 15:00 Uhr frei - alternativ markierst du Rückfragen direkt in der Datei.</p>
 <p>Ohne signierte KPIs können wir das Deck nicht finalisieren. Für heute besteht keine Dringlichkeit; maßgeblich ist die Deadline am Freitag, 15:00 Uhr.</p>
 <p>Offene Rückfrage: Entspricht die Organic-Growth-Angabe in Zeile 14 dem Last Read (4,2&nbsp;% vs. 4,8&nbsp;%)?</p>
 <p>Julia gibt die KPIs bis Freitag, 15:00 Uhr frei. Rod aktualisiert das Layout nach Freigabe bis Montag, 10:00 Uhr.</p>
@@ -5568,7 +5568,7 @@ Best regards,
     key: 'Wir liefern einen Monat später als geplant.',
     goal: 'LT-10 pünktlich ausrollen',
     problem: 'Lieferverzug um einen Monat',
-    solution: 'Scope-Reduktion Phase 2 vorschlagen – brauche Dein Go',
+    solution: 'Scope-Reduktion Phase 2 vorschlagen - brauche Dein Go',
     validation: 'Bist Du die richtige Person dafür?',
   };
 
@@ -5646,7 +5646,7 @@ Best regards,
     }
     if (get('validation')) parts.push(`\n✓ Validation: ${get('validation')}`);
     const out = root.querySelector('[data-fm="output"]');
-    if (out) out.textContent = parts.length ? parts.join('\n') : 'Time Check → Framing → GPS → Validation – Felder ausfüllen …';
+    if (out) out.textContent = parts.length ? parts.join('\n') : 'Time Check → Framing → GPS → Validation - Felder ausfüllen …';
   }
 
   function bindFirstMinuteDemo(root) {
@@ -5701,7 +5701,7 @@ Best regards,
           if (feedback) {
             feedback.hidden = false;
             feedback.className = 'ob-zone-card__feedback ' + (isCorrect ? 'is-ok' : 'is-fail');
-            feedback.textContent = (isCorrect ? '✓ Richtig — ' : '✗ Richtig: ' + (KI_ZONE_ANSWERS[correct] || correct) + ' — ') + explain;
+            feedback.textContent = (isCorrect ? '✓ Richtig - ' : '✗ Richtig: ' + (KI_ZONE_ANSWERS[correct] || correct) + ' - ') + explain;
           }
           refreshScore();
         });
@@ -5716,9 +5716,9 @@ Best regards,
   }
 
   const COMFORT_ZONE_COPY = {
-    comfort: { title: 'Komfortzone', text: 'Hier fühlst du dich sicher: bekannte Aufgaben, klare Anleitung, viel Shadowing. Gut für den Start – aber langfristig zu wenig Wachstum.' },
-    growth: { title: 'Wachstumszone', text: 'Neue, herausfordernde Aufgaben mit klarem Support – genau hier entwickelst du dich weiter. Ziel ist es, bewusst Zeit in dieser Zone zu verbringen.' },
-    panic: { title: 'Panikzone', text: 'Zu viel Unbekanntes ohne Vorbereitung oder Backup – Überforderung statt Lernen. Diese Zone versuchen wir aktiv zu vermeiden; sprich früh mit deinem Mentor.' },
+    comfort: { title: 'Komfortzone', text: 'Hier fühlst du dich sicher: bekannte Aufgaben, klare Anleitung, viel Shadowing. Gut für den Start - aber langfristig zu wenig Wachstum.' },
+    growth: { title: 'Wachstumszone', text: 'Neue, herausfordernde Aufgaben mit klarem Support - genau hier entwickelst du dich weiter. Ziel ist es, bewusst Zeit in dieser Zone zu verbringen.' },
+    panic: { title: 'Panikzone', text: 'Zu viel Unbekanntes ohne Vorbereitung oder Backup - Überforderung statt Lernen. Diese Zone versuchen wir aktiv zu vermeiden; sprich früh mit deinem Mentor.' },
   };
 
   function bindComfortZoneDemo(root) {
@@ -5901,7 +5901,7 @@ Best regards,
       el.innerHTML = members.map(u => `
         <div class="team-roster__row">
           <div class="team-roster__avatar">${av(u.avatar_url, u.full_name)}</div>
-          <div class="team-roster__meta"><strong>${escapeHtml(u.full_name)}</strong><span>${escapeHtml(u.position || '—')}</span></div>
+          <div class="team-roster__meta"><strong>${escapeHtml(u.full_name)}</strong><span>${escapeHtml(u.position || '-')}</span></div>
         </div>
       `).join('');
     } catch (_) {
@@ -6042,7 +6042,7 @@ Best regards,
     const pct = total > 0 ? Math.round(done / total * 100) : 0;
     document.getElementById('overall-bar').style.width = pct + '%';
     document.getElementById('overall-pct').textContent = pct + '%';
-    const status = pct === 0 ? "Du hast gerade erst begonnen – los geht's!" : pct < 34 ? 'Guter Start! Weiter so.' : pct < 67 ? 'Du machst großartige Fortschritte.' : pct < 100 ? 'Fast geschafft! Noch ein bisschen.' : 'Onboarding abgeschlossen! Herzlichen Glückwunsch.';
+    const status = pct === 0 ? "Du hast gerade erst begonnen - los geht's!" : pct < 34 ? 'Guter Start! Weiter so.' : pct < 67 ? 'Du machst großartige Fortschritte.' : pct < 100 ? 'Fast geschafft! Noch ein bisschen.' : 'Onboarding abgeschlossen! Herzlichen Glückwunsch.';
     document.getElementById('prog-status').textContent = status;
     const pathMods = getAllDashboardModules().filter(m => MODULE_PATH_IDS.includes(m.id));
     const pathDone = pathMods.filter(m => getActiveCompletedModules().includes(m.id)).length;
@@ -6155,7 +6155,7 @@ Best regards,
   async function markDone() {
     if (!currentModuleId) return;
     if (isDashboardPreviewMode()) {
-      showToast('Nur Leseansicht – der Teilnehmer markiert Module selbst', 'info');
+      showToast('Nur Leseansicht - der Teilnehmer markiert Module selbst', 'info');
       return;
     }
     if (!completedModules.includes(currentModuleId)) {
@@ -6182,7 +6182,7 @@ Best regards,
 
   async function toggleTodoItem(id) {
     if (isDashboardPreviewMode()) {
-      showToast('Nur Leseansicht – der Teilnehmer bearbeitet To-dos selbst', 'info');
+      showToast('Nur Leseansicht - der Teilnehmer bearbeitet To-dos selbst', 'info');
       refreshOrgaModalIfOpen();
       return;
     }
@@ -6319,7 +6319,7 @@ Best regards,
     if (session) {
       doRoute(session, 'getSession');
     } else {
-      // Kein Session in localStorage – kurz auf Bridge warten, dann Login zeigen
+      // Kein Session in localStorage - kurz auf Bridge warten, dann Login zeigen
       setTimeout(function() {
         if (!__routeDone && !__routeInProgress) showLoginScreenFromAuth();
       }, 900);
