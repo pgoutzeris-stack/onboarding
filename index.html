@@ -16,6 +16,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous"></script>
   <script defer src="https://pgoutzeris-stack.github.io/ROOTS_Intranet/roots-user-bridge.js?v=20260728-identity-guard-v1"></script>
+  <script defer src="https://pgoutzeris-stack.github.io/ROOTS_Intranet/roots-signature.js?v=20261002-sig-v1"></script>
 
   <style>
     :root {
@@ -422,6 +423,7 @@
     .handover-sign-block label{display:block;font-size:.72rem;font-weight:600;color:var(--muted);margin-bottom:.35rem}
     .handover-sign-canvas-wrap{position:relative;border:1px solid var(--line);border-radius:4px;background:#fff;height:72px;margin-bottom:.5rem;touch-action:none}
     .sig-copy-wrap{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:1rem}
+    .sig-missing{margin:0 0 .6rem;padding:.55rem .75rem;border-radius:10px;background:#fff7ed;color:#9a3412;font-size:.8rem}
     .sig-preview-frame{padding:1rem 1.25rem;background:#fff;font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;line-height:1.4;max-height:320px;overflow-y:auto;outline:none;cursor:text}
     .sig-preview-frame:focus{box-shadow:inset 0 0 0 2px var(--brand)}
     .sig-preview-frame p{margin:0 0 2px}
@@ -1284,6 +1286,8 @@
   let userName = '';
   let userPosition = '';
   let userEmail = '';
+  let userPhone = '';
+  let userLinkedin = '';
   let currentUserId = null;
   let completedModules = [];
   let completedTodos   = [];
@@ -2499,7 +2503,6 @@ function obConfirm(opts) {
   }
 
   const ROOTS_LINKEDIN = 'https://de.linkedin.com/company/roots-brand-strategy-consultants-gmbh';
-  const ROOTS_SIGNATURE_LOGO_URL = 'https://roots-consultants.de/wp-content/uploads/2026/07/ROOTS-square-logo-2.png';
 
   /* ════════════════════════════════════════════════════
      MODULE & TODOS KONFIGURATION
@@ -4139,13 +4142,14 @@ Best regards,
       ` },
       { id:'it_5', text:'E-Mail Signatur einrichten', detail:`
         <div class="sig-copy-wrap">
+          <div class="sig-missing" id="sig-missing-it5" hidden></div>
           <div class="sig-preview-frame" id="sig-preview-it5" contenteditable="true" spellcheck="false"><em style="color:#aaa;font-size:.85rem">Signatur wird geladen…</em></div>
           <div class="sig-copy-bar">
             <button class="sig-copy-btn" onclick="copySig()"><i class="fa-solid fa-copy" aria-hidden="true"></i> Signatur kopieren</button>
           </div>
         </div>
         <ol>
-          <li>Signatur oben direkt bearbeiten (z.&nbsp;B. Telefonnummer eintragen)</li>
+          <li>Fehlende Angaben direkt in der Vorschau ergänzen</li>
           <li><strong>Signatur kopieren</strong> klicken</li>
           <li>Outlook → <strong>Einstellungen</strong> → <strong>Signaturen</strong> → Neue Signatur anlegen</li>
           <li>In das Signatur-Editor-Feld <strong>Cmd+V</strong> einfügen</li>
@@ -4275,7 +4279,7 @@ Best regards,
 
     // 1. Lade Profile-Daten (HIER ANGEPASST: position)
     const { data: profile } = await sb.schema('users').from('profiles')
-      .select('full_name, email, position').eq('id', currentUserId).maybeSingle();
+      .select('full_name, email, position, phone, linkedin_url').eq('id', currentUserId).maybeSingle();
 
     // 2. Lade Fortschritt-Daten (AUTO-FIX für User ohne Zeile!)
     let { data: progressData, error: progErr } = await sb.schema('onboarding').from('user_progress')
@@ -4308,6 +4312,8 @@ Best regards,
     userName = profile?.full_name || session.user.email.split('@')[0];
     userPosition = profile?.position || '';
     userEmail = session.user.email || '';
+    userPhone = profile?.phone || '';
+    userLinkedin = profile?.linkedin_url || '';
     const initials = userName.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
 
     document.getElementById('greeting-text').textContent = `Hallo, ${userName}`;
@@ -5419,47 +5425,30 @@ Best regards,
       </details>`;
     }).join('');
   }
-  function buildSignatureHtml() {
-    const name = userName || 'Dein Name';
-    const pos = userPosition || 'Junior Consultant';
-    const email = userEmail || 'vorname.nachname@roots-consultants.com';
-    const logo = ROOTS_SIGNATURE_LOGO_URL;
-    const p = 'font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;margin:0 0 2px;color:#000000';
-    const link = 'color:rgb(0,120,212);font-family:Aptos,Arial,Helvetica,sans-serif;font-size:11pt;text-decoration:none';
-    const sep = '<table cellpadding="0" cellspacing="0" border="0" width="400" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;width:400px"><tr><td height="6" style="font-size:0;line-height:0;mso-line-height-rule:exactly">&nbsp;</td></tr><tr><td width="400" height="1" style="border-top:1px solid #000000;font-size:0;line-height:0;mso-line-height-rule:exactly;width:400px;height:1px">&nbsp;</td></tr><tr><td height="6" style="font-size:0;line-height:0;mso-line-height-rule:exactly">&nbsp;</td></tr></table>';
-    return `<p style="${p}"><b>${name}</b></p>`
-      + `<p style="${p}">${pos}</p>`
-      + `<p style="${p}">ROOTS Brand Strategy Consultants GmbH</p>`
-      + `<p style="margin:6px 0 4px"><img src="${logo}" width="88" height="88" alt="ROOTS" style="display:block;width:88px;height:88px;border:0"></p>`
-      + sep
-      + `<p style="margin:0 0 2px"><a href="tel:[Telefonnummer]" style="${link}">[Telefonnummer eintragen]</a></p>`
-      + `<p style="margin:0 0 2px"><a href="mailto:${email}" style="${link}">${email}</a></p>`
-      + `<p style="${p}"><a href="https://www.roots-consultants.com/" style="color:#000000;text-decoration:none">Website</a>&nbsp;I <a href="${ROOTS_LINKEDIN}" style="color:#000000;text-decoration:none">LinkedIn</a></p>`
-      + sep
-      + `<p style="${p}"><b>Mehr über ROOTS:</b></p>`
-      + `<p style="font-family:Aptos,Arial,Helvetica,sans-serif;font-size:5.5pt;margin:0">&nbsp;</p>`
-      + `<p style="${p}">Bereit für den EU AI Act?</p>`
-      + `<p style="${p}"><b><u><a href="https://www.roots-consultants.com/productivity/ai-governance-marketing/" style="color:#000000;text-decoration:underline">Hier</a></u></b>&nbsp;zu AI Governance informieren.</p>`;
+  function currentSignature() {
+    if (!window.RootsSignature) return null;
+    return window.RootsSignature.build({ full_name: userName, email: userEmail, phone: userPhone, linkedin_url: userLinkedin });
   }
   function renderSigPreview() {
     const el = document.getElementById('sig-preview-it5');
     if (!el) return;
-    el.innerHTML = buildSignatureHtml();
+    const sig = currentSignature();
+    if (!sig) { setTimeout(renderSigPreview, 300); return; }
+    el.innerHTML = sig.html;
+    const missingEl = document.getElementById('sig-missing-it5');
+    if (missingEl) {
+      missingEl.textContent = sig.missing.length ? 'Fehlt im Profil: ' + sig.missing.join(', ') : '';
+      missingEl.hidden = !sig.missing.length;
+    }
   }
   async function copySig() {
     const editorEl = document.getElementById('sig-preview-it5');
-    const bodyHtml = (editorEl ? editorEl.innerHTML : buildSignatureHtml()).trim();
-    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>${bodyHtml}</body></html>`;
-    const plain = editorEl ? editorEl.innerText.trim() : '';
-    try {
-      const items = { 'text/html': new Blob([html], { type: 'text/html' }) };
-      if (plain) items['text/plain'] = new Blob([plain], { type: 'text/plain' });
-      await navigator.clipboard.write([new ClipboardItem(items)]);
-      showToast('Signatur kopiert – in Outlook mit Cmd+V einfügen', 'success');
-    } catch(e) {
-      try { await navigator.clipboard.writeText(plain || bodyHtml); showToast('Signatur in Zwischenablage kopiert', 'success'); }
-      catch(e2) { showToast('Kopieren fehlgeschlagen – bitte manuell markieren', 'error'); }
-    }
+    const sig = currentSignature();
+    const bodyHtml = (editorEl ? editorEl.innerHTML : sig?.html || '').trim();
+    const plain = editorEl ? editorEl.innerText.trim() : (sig?.plain || '');
+    const ok = window.RootsSignature ? await window.RootsSignature.copy(bodyHtml, plain) : false;
+    if (ok) showToast('Signatur kopiert – in Outlook mit Cmd+V einfügen', 'success');
+    else showToast('Kopieren fehlgeschlagen – bitte manuell markieren', 'error');
   }
   async function copyOoo() {
     const el = document.getElementById('ooo-template');
